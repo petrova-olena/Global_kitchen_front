@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="calendar.css" />
+    <title>Event Calendar</title>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo">LOGO</div>
+      <nav class="nav">
+        <a href="#">Menu</a>
+        <a href="#">EN</a>
+        <a href="#" class="login-icon">👤</a>
+      </nav>
+    </header>
+    <!-- NEW HEADER SECTION -->
+    <div class="events-header">
+      <h1>Event Calendar</h1>
+
+      <div class="week-info">
+        <h2>This Week's Highlights</h2>
+        <p class="week-description">
+          Weekly overview goes here. Describe special offers, lunch themes,
+          seasonal events or anything happening this week.
+        </p>
+      </div>
+
+      <div class="menu-links">
+        <a href="#" class="menu-btn">Daily Menu</a>
+        <a href="#" class="menu-btn">Weekly Menu</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- LEFT SIDE — YOUR CALENDAR (STATIC) -->
+      <div class="left">
+        <div class="calendar">
+          <div class="month">
+            <i class="fas fa-angle-left"></i>
+            <div class="date">January 2026</div>
+            <i class="fas fa-angle-right"></i>
+          </div>
+
+          <div class="weekdays">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
+          </div>
+
+          <!-- STATIC DAYS (example layout) -->
+          <div class="days">
+            <div class="day prev-date">29</div>
+            <div class="day prev-date">30</div>
+            <div class="day prev-date">31</div>
+
+            <div class="day">1</div>
+            <div class="day">2</div>
+            <div class="day">3</div>
+            <div class="day">4</div>
+            <div class="day">5</div>
+            <div class="day">6</div>
+            <div class="day">7</div>
+
+            <div class="day">8</div>
+            <div class="day">9</div>
+            <div class="day">10</div>
+            <div class="day">11</div>
+            <div class="day">12</div>
+            <div class="day">13</div>
+            <div class="day">14</div>
+
+            <div class="day">15</div>
+            <div class="day">16</div>
+            <div class="day">17</div>
+            <div class="day">18</div>
+            <div class="day">19</div>
+            <div class="day">20</div>
+            <div class="day">21</div>
+
+            <div class="day">22</div>
+            <div class="day">23</div>
+            <div class="day">24</div>
+            <div class="day">25</div>
+            <div class="day">26</div>
+            <div class="day">27</div>
+            <div class="day">28</div>
+
+            <div class="day">29</div>
+            <div class="day">30</div>
+            <div class="day">31</div>
+            <div class="day next-date">1</div>
+            <div class="day next-date">2</div>
+            <div class="day next-date">3</div>
+            <div class="day next-date">4</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE — STATIC EVENTS -->
+      <div class="right">
+        <div class="today-date">
+          <div class="event-day">Sat</div>
+          <div class="event-date">31 January 2026</div>
+        </div>
+
+        <div class="events">
+          <div class="event">
+            <div class="title">
+              <i class="fas fa-circle"></i>
+              <h3 class="event-title">Coffee Tasting</h3>
+            </div>
+            <div class="event-time">12:00 – 14:00</div>
+          </div>
+
+          <div class="event">
+            <div class="title">
+              <i class="fas fa-circle"></i>
+              <h3 class="event-title">Live Music</h3>
+            </div>
+            <div class="event-time">18:00 – 20:00</div>
+          </div>
+
+          <div class="no-event">
+            <h3>No more events today</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
