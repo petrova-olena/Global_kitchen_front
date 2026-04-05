@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f3ece7;
+  font-family: Arial, sans-serif;
+  color: #452209;
+}
+
+/* HEADER */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #4a2c2a;
+  color: white;
+}
+
+.nav a {
+  margin-left: 12px;
+  color: white;
+  text-decoration: none;
+}
+
+/* DAILYHEADER */
+.daily-header {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.daily-header h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.daily-subtitle {
+  font-size: 22px;
+  color: #6b4a32;
+}
+
+/* GRID */
+.daily-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+  padding: 20px;
+}
+
+/* CARD */
+.dish-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: 0.3s;
+}
+
+.dish-card:hover {
+  transform: translateY(-4px);
+}
+
+.dish-img {
+  height: 180px;
+  background: #e0d4cb; /* placeholder */
+}
+
+.dish-info {
+  padding: 20px;
+}
+
+.dish-title {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.dish-desc {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.dish-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #a26a42;
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+  .daily-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .daily-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .daily-header h1 {
+    font-size: 48px;
+  }
+}
