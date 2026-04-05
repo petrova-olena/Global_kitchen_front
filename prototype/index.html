@@ -154,6 +154,29 @@
         <button class="btn full-width">Reserve a Table</button>
       </form>
     </section>
+     <section class="chat-widget">
+      <button class="chat-toggle" aria-label="Open chat">💬</button>
+
+      <div class="chat-box">
+        <div class="chat-header">Chat with us</div>
+        <div class="chat-messages">
+          <div class="message bot">Hi! How can I help you today?</div>
+        </div>
+        <div class="chat-input">
+          <input type="text" placeholder="Type a message..." />
+          <button type="button">Send</button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const chatToggle = document.querySelector('.chat-toggle');
+      const chatWidget = document.querySelector('.chat-widget');
+
+      chatToggle.addEventListener('click', () => {
+        chatWidget.classList.toggle('active');
+      });
+    </script>
 
     <!-- FOOTER -->
     <footer class="footer">
