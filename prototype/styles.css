@@ -68,23 +68,62 @@ h3 {
   margin-bottom: 20px;
 }
 
-/* ABOUT */
+/* ABOUT*/
 .about {
-  padding: 20px;
-  text-align: center;
-  margin-top: 10px;
+  padding: 40px 20px;
 }
 
-.about-content {
+.about-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.about-columns {
   display: flex;
   flex-direction: column;
+  gap: 30px;
 }
 
-.img-small {
+.about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-text {
+  background: #f0e2bf;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.about-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.stat-item {
+  width: 80px;
   height: 80px;
-  background: #c49a6c;
-  margin: 6px 0;
-  border-radius: 6px;
+  background: #f0e2bf;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.img-box {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* MENU PREVIEW */
@@ -202,9 +241,49 @@ input {
     margin: 10px auto;
   }
 
-  .about-content {
+  .about-columns {
     flex-direction: row;
-    gap: 20px;
+    gap: 30px;
+  }
+
+  .about-left {
+    flex: 1;
+  }
+
+  .about-stats {
+    gap: 80px;
+  }
+
+  .about-right {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .img-box {
+    height: 220px;
+  }
+
+  .img1 {
+    transform: translateY(10px);
+  }
+
+  .img2 {
+    transform: translateY(-5px);
+  }
+
+  .img3 {
+    transform: translateY(5px);
+  }
+
+  .img4 {
+    transform: translateY(-10px);
+  }
+
+  .stat-item {
+    width: 90px;
+    height: 90px;
   }
 
   .menu-grid {
@@ -234,6 +313,45 @@ input {
     width: 40%;
     display: block;
     margin: 10px auto;
+  }
+
+  .about-columns {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .about-left {
+    flex: 1;
+  }
+
+  .about-right {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    position: relative;
+  }
+
+  .img1 {
+    transform: translateY(20px);
+  }
+
+  .img2 {
+    transform: translateY(-10px);
+  }
+
+  .img3 {
+    transform: translateY(10px);
+  }
+
+  .img4 {
+    transform: translateY(-20px);
+  }
+
+  .stat-item {
+    width: 110px;
+    height: 110px;
   }
 
   .menu-grid {
