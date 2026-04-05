@@ -1,0 +1,254 @@
+/* GLOBAL */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5e9d3;
+  color: #261413;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 10px;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #4a2c2a;
+  color: white;
+}
+
+.nav a {
+  margin-left: 12px;
+  color: white;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  height: 98vh;
+  background: url("images/finland_banner.jpg") center/cover no-repeat;
+  position: relative;
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: contrast(0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 20px;
+}
+
+.hero-text {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: brightness(1.4);
+  padding: 20px;
+  border-radius: 12px;
+  width: fit-content;
+  margin-top: 10px;
+  margin: 0 auto;
+}
+
+.hero-buttons .btn {
+  display: block;
+  margin: 8px 0;
+  padding: 10px;
+  background: #c49a6c;
+  color: #261413;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+/* ABOUT */
+.about {
+  padding: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-small {
+  height: 80px;
+  background: #c49a6c;
+  margin: 6px 0;
+  border-radius: 6px;
+}
+
+/* MENU PREVIEW */
+.menu-preview {
+  margin-top: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.menu-card {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.img-placeholder {
+  height: 80px;
+  background: #c49a6c;
+  border-radius: 6px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  background: #c49a6c;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.add-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #4a2c2a;
+  color: white;
+  border-radius: 50%;
+}
+
+.btn.btn-menu {
+  display: block;
+  width: 60%;
+  padding: 12px;
+  background: #4a2c2a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin: 0 auto;
+}
+
+/* RESERVATION */
+.reservation {
+  padding: 20px;
+}
+
+.reservation-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.form-wrapper label {
+  text-align: left;
+  margin-left: 20%;
+}
+
+.btn.full-width {
+  width: 60%;
+  padding: 12px;
+  background: #4a2c2a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* FOOTER */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #4a2c2a;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .hero-buttons .btn {
+    width: 40%;
+    display: block;
+    margin: 10px auto;
+  }
+
+  .about-content {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .btn.btn-menu {
+    width: 40%;
+  }
+
+  input {
+    width: 60%;
+  }
+
+  .img-small {
+    width: 100px;
+    height: 100px;
+  }
+
+  .btn.full-width {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-buttons .btn {
+    width: 40%;
+    display: block;
+    margin: 10px auto;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .btn.btn-menu {
+    width: 40%;
+  }
+
+  input {
+    width: 60%;
+  }
+
+  .btn.full-width {
+    width: 40%;
+  }
+}
