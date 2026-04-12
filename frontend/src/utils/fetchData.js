@@ -6,7 +6,8 @@ export const fetchData = async (endpoint, options = {}) => {
       "Content-Type": "application/json",
       ...options.headers,
     },
-    credentials: "include", // if API uses cookies for auth
+    // if API uses cookies for auth, include them in requests
+    credentials: "include",
     ...options,
   });
 
