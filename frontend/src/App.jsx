@@ -4,6 +4,8 @@ import Home from "./views/Home";
 import Calendar from "./views/Calendar";
 import Menu from "./views/Menu";
 import Profile from "./views/Profile";
+import DailyMenu from "./views/DailyMenu";
+import WeeklyMenu from "./views/WeeklyMenu";
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/daily-menu" element={<DailyMenu />} />
+          <Route path="/weekly-menu" element={<WeeklyMenu />} />
         </Route>
       </Routes>
     </BrowserRouter>
