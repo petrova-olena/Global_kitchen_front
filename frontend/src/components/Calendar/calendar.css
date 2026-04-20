@@ -75,6 +75,22 @@
   padding: 10px;
 }
 
+.month .prev,
+.month .next {
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
+  font-size: 40px;
+  padding: 5px 10px;
+  color: #452209;
+  transition: 0.2s ease;
+}
+
+.month .prev:hover,
+.month .next:hover {
+  color: #452209;
+}
+
 .calendar .weekdays {
   display: flex;
   justify-content: space-between;
