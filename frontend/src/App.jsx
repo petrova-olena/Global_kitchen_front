@@ -1,11 +1,12 @@
-import { Route, BrowserRouter, Routes } from "react-router-dom";
-import Layout from "./components/Layout";
-import Home from "./views/Home";
-import Calendar from "./views/Calendar";
-import Menu from "./views/Menu";
-import Profile from "./views/Profile";
-import DailyMenu from "./views/DailyMenu";
-import WeeklyMenu from "./views/WeeklyMenu";
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './views/Home';
+import Calendar from './views/Calendar';
+import Menu from './views/Menu';
+import Profile from './views/Profile';
+import DailyMenu from './views/DailyMenu';
+import WeeklyMenu from './views/WeeklyMenu';
+import Auth from './views/Auth';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/daily-menu" element={<DailyMenu />} />
           <Route path="/weekly-menu" element={<WeeklyMenu />} />
+          <Route path="/auth" element={<Auth />} />
         </Route>
       </Routes>
     </BrowserRouter>

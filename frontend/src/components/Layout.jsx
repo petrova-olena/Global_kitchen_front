@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom';
 
 const Layout = () => {
   return (
@@ -12,7 +12,7 @@ const Layout = () => {
           <Link to="/menu">Menu</Link>
           <Link to="/profile">Profile</Link>
           <Link to="/en">EN</Link>
-          <Link to="/login" className="login-icon">
+          <Link to="/auth" className="login-icon">
             👤
           </Link>
         </nav>
