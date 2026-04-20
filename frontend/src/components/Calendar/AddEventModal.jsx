@@ -3,14 +3,16 @@ import { useState, useEffect } from "react";
 export default function AddEventModal({ addEvent }) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
   // Add event and reset form
   const submit = () => {
-    if (!title || !from || !to) return;
-    addEvent(title, from, to);
+    if (!title || !description || !from || !to) return;
+    addEvent(title, description, from, to);
     setTitle("");
+    setDescription("");
     setFrom("");
     setTo("");
     setOpen(false);
@@ -59,13 +61,20 @@ export default function AddEventModal({ addEvent }) {
 
               <input
                 type="text"
+                placeholder="Event description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+
+              <input
+                type="datetime-local"
                 placeholder="Event time starts"
                 value={from}
                 onChange={(e) => setFrom(e.target.value)}
               />
 
               <input
-                type="text"
+                type="datetime-local"
                 placeholder="Event time ends"
                 value={to}
                 onChange={(e) => setTo(e.target.value)}

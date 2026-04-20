@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import CalendarWidget from "../components/Calendar/Calendar";
+import EventsOverview from "../components/Events/EventsOverview";
 
 export default function CalendarPage() {
   return (
@@ -23,6 +24,7 @@ export default function CalendarPage() {
       </div>
 
       <CalendarWidget />
+      <EventsOverview />
 
       {/* Later will add features here for event details and creation for admins */}
     </>
