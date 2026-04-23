@@ -1,4 +1,10 @@
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+
 const Profile = () => {
+  const { user } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
+
   return (
     <>
       <section className="profile-container">
@@ -7,11 +13,20 @@ const Profile = () => {
           <div className="profile-photo"></div>
 
           <div className="profile-info">
-            <h2 className="profile-name">John Smith</h2>
-            <p className="profile-email">john@example.com</p>
-            <p className="profile-phone">+358 40 123 4567</p>
+            <h2 className="profile-name">{user?.username || 'John Smith'}</h2>
+            <p className="profile-email">
+              {user?.email || 'john426@example.com'}
+            </p>
+            <p className="profile-phone">
+              {user?.phone || '+358 45 123 5274'}{' '}
+            </p>
 
-            <button className="edit-btn">Edit Profile</button>
+            <div className="button-group">
+              <button className="edit-btn">Edit Profile</button>
+              <button className="logout-btn" onClick={logout}>
+                Logout
+              </button>
+            </div>
           </div>
         </div>
 
