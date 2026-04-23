@@ -7,10 +7,6 @@ export function useCalendar() {
   const [year, setYear] = useState(today.getFullYear());
   const [activeDay, setActiveDay] = useState(today.getDate());
 
-  // Local state for events, in format: [{ day, month, year, events: [{ title, time }] }]
-  // TODO: Replace with backend integration
-  const [events, setEvents] = useState([]);
-
   const months = [
     "January",
     "February",
@@ -55,31 +51,6 @@ export function useCalendar() {
     setActiveDay(today.getDate());
   };
 
-  // Add an event to the current active day
-  const addEvent = (title, from, to) => {
-    const newEvent = {
-      day: activeDay,
-      month: month + 1,
-      year,
-      events: [{ title, time: `${from} - ${to}` }],
-    };
-
-    setEvents((prev) => [...prev, newEvent]);
-  };
-
-  // Delete an event by title from the current active day
-  const deleteEvent = (title) => {
-    setEvents((prev) =>
-      prev
-        .map((e) =>
-          e.day === activeDay && e.month === month + 1 && e.year === year
-            ? { ...e, events: e.events.filter((ev) => ev.title !== title) }
-            : e,
-        )
-        .filter((e) => e.events.length > 0),
-    );
-  };
-
   // Go to a specific month and year, validating input
   const goToDate = (m, y) => {
     if (m >= 0 && m <= 11 && Number.isInteger(y)) {
@@ -96,12 +67,9 @@ export function useCalendar() {
     months,
     activeDay,
     setActiveDay,
-    events,
     nextMonth,
     prevMonth,
     goToDate,
     goToToday,
-    addEvent,
-    deleteEvent,
   };
 }

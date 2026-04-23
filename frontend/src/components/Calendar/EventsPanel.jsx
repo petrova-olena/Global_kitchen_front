@@ -1,36 +1,23 @@
-export default function EventsPanel({
-  activeDay,
-  month,
-  year,
-  events,
-  deleteEvent,
-}) {
-  const dayEvents = events.find(
-    (e) => e.day === activeDay && e.month === month + 1 && e.year === year,
-  );
+export default function EventsPanel({ events, activeDay, month, year }) {
+  const selectedDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(
+    activeDay,
+  ).padStart(2, "0")}`;
 
-  // If there are no events for the selected day, show a message
-  if (!dayEvents) {
-    return (
-      <div className="no-event">
-        <h3>No events scheduled</h3>
-      </div>
-    );
-  }
+  const dayEvents = events.filter((e) => e.start_date === selectedDate);
 
   return (
-    <div className="events">
-      {dayEvents.events.map((ev, i) => (
-        <div className="event" key={i}>
-          <div className="title">
-            <i className="fas fa-circle"></i>
-            <h3>{ev.title}</h3>
-          </div>
-          <div className="event-time">{ev.time}</div>
+    <div className="events-panel">
+      <h3>Events for {selectedDate}</h3>
 
-          <button className="delete-btn" onClick={() => deleteEvent(ev.title)}>
-            Delete
-          </button>
+      {dayEvents.length === 0 && <p>No events</p>}
+
+      {dayEvents.map((ev) => (
+        <div key={ev.id} className="event-item">
+          <div className="event-title">{ev.title}</div>
+          <div className="event-time">
+            {ev.start_date} — {ev.end_date}
+          </div>
+          <div className="event-desc">{ev.description}</div>
         </div>
       ))}
     </div>

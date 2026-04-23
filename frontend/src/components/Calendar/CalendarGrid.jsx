@@ -29,9 +29,11 @@ export default function CalendarGrid({
 
   // Days of the current month
   for (let i = 1; i <= lastDate; i++) {
-    const hasEvent = events.some(
-      (e) => e.day === i && e.month === month + 1 && e.year === year,
-    );
+    const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
+
+    const hasEvent = Array.isArray(events)
+      ? events.some((e) => e.start_date.startsWith(dateStr))
+      : false;
 
     days.push(
       <DayCell

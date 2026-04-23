@@ -1,23 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EventsCard from "./EventsCard";
 import ReservationCard from "./ReservationCard";
 
 export default function EventsOverview() {
-  //const user = { id: "user123", role: "user" };
+  const currentUser = { id: "olenatest", role: "user" };
 
+  const [events, setEvents] = useState([]);
+
+  // Load events on component mount
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        const res = await fetch("http://localhost:3000/api/v1/calenderEvent");
+        const data = await res.json();
+        setEvents(data.events || []);
+      } catch (err) {
+        console.error("Failed to load events:", err);
+      }
+    }
+
+    fetchEvents();
+  }, []);
+
+  // Filters
   const [mode, setMode] = useState("week");
   const [customFrom, setCustomFrom] = useState("");
   const [customTo, setCustomTo] = useState("");
 
-  // TODO: Replace with real data fetching and state management
-  const restaurantEvents = []; // global + admin-created events
+  // Event separation
+  const restaurantEvents = events.filter((e) => e.type === "admin");
   const reservations = [];
-  const userEvents = [];
-
-  // TODO: Add filtering logic later
-  const filteredRestaurant = restaurantEvents;
-  const filteredReservations = reservations;
-  const filteredUserEvents = userEvents;
+  const userEvents = events.filter((e) => e.created_by === currentUser.id);
 
   return (
     <div className="events-overview">
@@ -63,14 +76,23 @@ export default function EventsOverview() {
       {/* Restaurant Events */}
       <EventsCard
         title="Restaurant Events"
-        events={filteredRestaurant}
+        events={restaurantEvents}
+        renderItem={(item) => (
+          <div key={item.id} className="event-item">
+            <div className="event-title">{item.title}</div>
+            <div className="event-time">
+              {item.start_date} — {item.end_date}
+            </div>
+            <div className="event-desc">{item.description}</div>
+          </div>
+        )}
         emptyText="No restaurant events for the selected period"
       />
 
       {/* My Events */}
       <EventsCard
         title="My Events"
-        events={[...filteredReservations, ...filteredUserEvents]}
+        events={[...reservations, ...userEvents]}
         renderItem={(item) =>
           item.tableId ? (
             <ReservationCard reservation={item} />
@@ -78,7 +100,7 @@ export default function EventsOverview() {
             <div key={item.id} className="event-item">
               <div className="event-title">{item.title}</div>
               <div className="event-time">
-                {item.from} — {item.to}
+                {item.start_date} — {item.end_date}
               </div>
               <div className="event-desc">{item.description}</div>
             </div>

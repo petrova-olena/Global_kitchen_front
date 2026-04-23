@@ -1,6 +1,6 @@
 import "./calendar.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCalendar } from "./useCalendar";
 import CalendarHeader from "./CalendarHeader";
 import CalendarGrid from "./CalendarGrid";
@@ -10,17 +10,67 @@ import AddEventModal from "./AddEventModal";
 export default function Calendar() {
   const calendar = useCalendar();
 
-  // State for "Go to" inputs and error handling
+  const [events, setEvents] = useState([]);
+
+  // GET events from backend
+  async function loadEvents() {
+    try {
+      const res = await fetch("http://localhost:3000/api/v1/calenderEvent");
+      const data = await res.json();
+      setEvents(data.events || []);
+    } catch (err) {
+      console.error("Failed to load events:", err);
+    }
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    loadEvents();
+  }, []);
+
+  // POST event to backend
+  async function addEvent(title, description, from, to) {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || !user.id) {
+      console.error("User not logged in");
+      return;
+    }
+
+    try {
+      const start_date = from.split("T")[0];
+      const end_date = to.split("T")[0];
+
+      const res = await fetch("http://localhost:3000/api/v1/calenderEvent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: user.role,
+          title,
+          description,
+          start_date,
+          end_date,
+          created_by: user.id,
+        }),
+      });
+
+      if (res.ok) {
+        loadEvents();
+      }
+    } catch (err) {
+      console.error("Failed to create event:", err);
+    }
+  }
+
+  // Go-to inputs
   const [gotoMonth, setGotoMonth] = useState("");
   const [gotoYear, setGotoYear] = useState("");
   const [monthError, setMonthError] = useState(false);
 
-  // Handle "Go to" button click
   const handleGoTo = () => {
     const m = parseInt(gotoMonth, 10) - 1;
     const y = parseInt(gotoYear, 10);
 
-    // Month validation
     if (isNaN(m) || m < 0 || m > 11) {
       setMonthError(true);
       return;
@@ -28,7 +78,6 @@ export default function Calendar() {
 
     setMonthError(false);
 
-    // Year validation
     if (!isNaN(y)) {
       calendar.goToDate(m, y);
       setGotoMonth("");
@@ -52,7 +101,13 @@ export default function Calendar() {
             <div>Su</div>
           </div>
 
-          <CalendarGrid {...calendar} />
+          <CalendarGrid
+            month={calendar.month}
+            year={calendar.year}
+            activeDay={calendar.activeDay}
+            setActiveDay={calendar.setActiveDay}
+            events={events}
+          />
 
           <div className="goto-today">
             <div className="goto">
@@ -90,9 +145,14 @@ export default function Calendar() {
       </div>
 
       <div className="calendar-right">
-        <EventsPanel {...calendar} />
+        <EventsPanel
+          events={events}
+          activeDay={calendar.activeDay}
+          month={calendar.month}
+          year={calendar.year}
+        />
 
-        <AddEventModal addEvent={calendar.addEvent} />
+        <AddEventModal addEvent={addEvent} />
       </div>
     </div>
   );
