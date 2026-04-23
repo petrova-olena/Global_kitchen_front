@@ -21,7 +21,12 @@ const Profile = () => {
               {user?.phone || '+358 45 123 5274'}{' '}
             </p>
 
-            <button className="edit-btn">Edit Profile</button>
+            <div className="button-group">
+              <button className="edit-btn">Edit Profile</button>
+              <button className="logout-btn" onClick={logout}>
+                Logout
+              </button>
+            </div>
           </div>
         </div>
 
@@ -83,7 +88,6 @@ const Profile = () => {
           </div>
         </div>
       </section>
-      <button onClick={logout}>Logout</button>
     </>
   );
 };
