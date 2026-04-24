@@ -1,26 +1,16 @@
 import { useState, useEffect } from "react";
 import EventsCard from "./EventsCard";
 import ReservationCard from "./ReservationCard";
+import { loadEvents } from "../../utils/loadEvents";
 
 export default function EventsOverview() {
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   const [events, setEvents] = useState([]);
 
-  // Load events (can be reused)
-  async function loadEvents() {
-    try {
-      const res = await fetch("http://localhost:3000/api/v1/calenderEvent");
-      const data = await res.json();
-      setEvents(Array.isArray(data) ? data : data.events || []);
-    } catch (err) {
-      console.error("Failed to load events:", err);
-    }
-  }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Load events from backend on mount
   useEffect(() => {
-    loadEvents();
+    loadEvents().then(setEvents);
   }, []);
 
   // Filters

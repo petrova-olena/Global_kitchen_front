@@ -6,6 +6,7 @@ import CalendarHeader from "./CalendarHeader";
 import CalendarGrid from "./CalendarGrid";
 import EventsPanel from "./EventsPanel";
 import AddEventModal from "./AddEventModal";
+import { loadEvents } from "../../utils/loadEvents";
 
 export default function Calendar() {
   const calendar = useCalendar();
@@ -13,20 +14,8 @@ export default function Calendar() {
   const [events, setEvents] = useState([]);
 
   // GET events from backend
-  async function loadEvents() {
-    try {
-      const res = await fetch("http://localhost:3000/api/v1/calenderEvent");
-      const data = await res.json();
-      setEvents(Array.isArray(data) ? data : data.events || []);
-    } catch (err) {
-      console.error("Failed to load events:", err);
-    }
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    loadEvents().then(() => {
-      console.log("EVENTS AFTER LOAD:", events);
-    });
+    loadEvents().then(setEvents);
   }, []);
 
   // POST event to backend
