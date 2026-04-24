@@ -1,9 +1,32 @@
 export default function EventsPanel({ events, activeDay, month, year }) {
+  // Form date in YYYY-MM-DD format
   const selectedDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(
     activeDay,
   ).padStart(2, "0")}`;
 
-  const dayEvents = events.filter((e) => e.start_date === selectedDate);
+  // --- Date and time formatting ---
+  function formatTime(iso) {
+    const d = new Date(iso);
+    return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function formatDate(iso) {
+    const d = new Date(iso);
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    return `${day}.${month}.${year}`;
+  }
+
+  // --- Check if event occurs on the selected day ---
+  function eventOccursOnDay(event, dayStr) {
+    const start = event.start_date.slice(0, 10); // YYYY-MM-DD
+    const end = event.end_date.slice(0, 10);
+    return start <= dayStr && end >= dayStr;
+  }
+
+  // Filter events that occur on the selected day
+  const dayEvents = events.filter((e) => eventOccursOnDay(e, selectedDate));
 
   return (
     <div className="events-panel">
@@ -14,9 +37,24 @@ export default function EventsPanel({ events, activeDay, month, year }) {
       {dayEvents.map((ev) => (
         <div key={ev.id} className="event-item">
           <div className="event-title">{ev.title}</div>
+
           <div className="event-time">
-            {ev.start_date} — {ev.end_date}
+            {/* Date (one or range) */}
+            <div>
+              <span className="event-icon">📅</span>
+              {formatDate(ev.start_date)}
+              {formatDate(ev.start_date) !== formatDate(ev.end_date) && (
+                <> — {formatDate(ev.end_date)}</>
+              )}
+            </div>
+
+            {/* Time */}
+            <div>
+              <span className="event-icon">🕒</span>
+              {formatTime(ev.start_date)} — {formatTime(ev.end_date)}
+            </div>
           </div>
+
           <div className="event-desc">{ev.description}</div>
         </div>
       ))}

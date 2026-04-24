@@ -17,15 +17,16 @@ export default function Calendar() {
     try {
       const res = await fetch("http://localhost:3000/api/v1/calenderEvent");
       const data = await res.json();
-      setEvents(data.events || []);
+      setEvents(Array.isArray(data) ? data : data.events || []);
     } catch (err) {
       console.error("Failed to load events:", err);
     }
   }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    loadEvents();
+    loadEvents().then(() => {
+      console.log("EVENTS AFTER LOAD:", events);
+    });
   }, []);
 
   // POST event to backend
@@ -38,8 +39,8 @@ export default function Calendar() {
     }
 
     try {
-      const start_date = from.split("T")[0];
-      const end_date = to.split("T")[0];
+      const start_date = from.replace("T", " ") + ":00";
+      const end_date = to.replace("T", " ") + ":00";
 
       const res = await fetch("http://localhost:3000/api/v1/calenderEvent", {
         method: "POST",
