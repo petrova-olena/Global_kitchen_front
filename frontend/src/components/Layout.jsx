@@ -1,11 +1,12 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet } from "react-router-dom";
+import logo from "../assets/logotest.png";
 
 const Layout = () => {
   return (
     <>
       {/*-- HEADER --*/}
       <header className="header">
-        <div className="logo">LOGO</div>
+        <img src={logo} alt="Global Kitchen Logo" className="logo" />
         <nav className="nav">
           <Link to="/">Home</Link>
           <Link to="/calendar">Calendar</Link>

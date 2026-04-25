@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default function EventsCard({ title, events, renderItem, emptyText }) {
+export default function EventsCard({
+  title,
+  events,
+  renderItem,
+  emptyText,
+  deleteEvent,
+}) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
   const [isOpen, setIsOpen] = useState(window.innerWidth >= 900);
 
@@ -9,8 +15,6 @@ export default function EventsCard({ title, events, renderItem, emptyText }) {
       const mobile = window.innerWidth < 900;
       setIsMobile(mobile);
 
-      // if we switch to mobile, collapse the card;
-      // but if we switch to desktop, expand it
       if (!mobile) setIsOpen(true);
     };
 
@@ -20,7 +24,6 @@ export default function EventsCard({ title, events, renderItem, emptyText }) {
 
   return (
     <div className={`events-card ${isMobile ? "accordion" : ""}`}>
-      {/* Card Header */}
       <div
         className="events-card-header"
         onClick={() => isMobile && setIsOpen(!isOpen)}
@@ -29,7 +32,6 @@ export default function EventsCard({ title, events, renderItem, emptyText }) {
         {isMobile && <span className="arrow">{isOpen ? "▾" : "▸"}</span>}
       </div>
 
-      {/* Accordion Content */}
       {(!isMobile || isOpen) && (
         <div className="events-card-content">
           {events.length === 0 ? (
@@ -37,7 +39,7 @@ export default function EventsCard({ title, events, renderItem, emptyText }) {
           ) : (
             events.map((ev) =>
               renderItem ? (
-                renderItem(ev)
+                renderItem(ev, deleteEvent)
               ) : (
                 <div key={ev.id} className="event-item">
                   <div className="event-title">{ev.title}</div>

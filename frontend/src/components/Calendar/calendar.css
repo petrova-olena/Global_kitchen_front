@@ -1,11 +1,11 @@
 main {
-  margin: 20px 0 20px 0;
+  margin-bottom: 20px;
 }
 
 /* CALENDAR HEADER */
 .events-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 20px 0 20px 0;
 }
 
 .events-header h1 {

@@ -7,20 +7,23 @@ import CalendarGrid from "./CalendarGrid";
 import EventsPanel from "./EventsPanel";
 import AddEventModal from "./AddEventModal";
 
-export default function Calendar() {
+export default function Calendar({
+  events,
+  deleteEvent,
+  currentUser,
+  addEvent,
+}) {
   const calendar = useCalendar();
 
-  // State for "Go to" inputs and error handling
+  // Go-to inputs
   const [gotoMonth, setGotoMonth] = useState("");
   const [gotoYear, setGotoYear] = useState("");
   const [monthError, setMonthError] = useState(false);
 
-  // Handle "Go to" button click
   const handleGoTo = () => {
     const m = parseInt(gotoMonth, 10) - 1;
     const y = parseInt(gotoYear, 10);
 
-    // Month validation
     if (isNaN(m) || m < 0 || m > 11) {
       setMonthError(true);
       return;
@@ -28,7 +31,6 @@ export default function Calendar() {
 
     setMonthError(false);
 
-    // Year validation
     if (!isNaN(y)) {
       calendar.goToDate(m, y);
       setGotoMonth("");
@@ -38,6 +40,7 @@ export default function Calendar() {
 
   return (
     <div className="calendar-container">
+      {/* LEFT SIDE — calendar grid */}
       <div className="calendar-left">
         <div className="calendar">
           <CalendarHeader {...calendar} />
@@ -52,7 +55,13 @@ export default function Calendar() {
             <div>Su</div>
           </div>
 
-          <CalendarGrid {...calendar} />
+          <CalendarGrid
+            month={calendar.month}
+            year={calendar.year}
+            activeDay={calendar.activeDay}
+            setActiveDay={calendar.setActiveDay}
+            events={events}
+          />
 
           <div className="goto-today">
             <div className="goto">
@@ -90,9 +99,16 @@ export default function Calendar() {
       </div>
 
       <div className="calendar-right">
-        <EventsPanel {...calendar} />
+        <EventsPanel
+          events={events}
+          activeDay={calendar.activeDay}
+          month={calendar.month}
+          year={calendar.year}
+          deleteEvent={deleteEvent}
+          currentUser={currentUser}
+        />
 
-        <AddEventModal addEvent={calendar.addEvent} />
+        <AddEventModal addEvent={addEvent} />
       </div>
     </div>
   );
