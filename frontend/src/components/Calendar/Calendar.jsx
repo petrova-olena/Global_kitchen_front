@@ -1,56 +1,19 @@
 import "./calendar.css";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useCalendar } from "./useCalendar";
 import CalendarHeader from "./CalendarHeader";
 import CalendarGrid from "./CalendarGrid";
 import EventsPanel from "./EventsPanel";
 import AddEventModal from "./AddEventModal";
-import { loadEvents } from "../../utils/loadEvents";
 
-export default function Calendar() {
+export default function Calendar({
+  events,
+  deleteEvent,
+  currentUser,
+  addEvent,
+}) {
   const calendar = useCalendar();
-
-  const [events, setEvents] = useState([]);
-
-  // GET events from backend
-  useEffect(() => {
-    loadEvents().then(setEvents);
-  }, []);
-
-  // POST event to backend
-  async function addEvent(title, description, from, to) {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user || !user.id) {
-      console.error("User not logged in");
-      return;
-    }
-
-    try {
-      const start_date = from.replace("T", " ") + ":00";
-      const end_date = to.replace("T", " ") + ":00";
-
-      const res = await fetch("http://localhost:3000/api/v1/calenderEvent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: user.role,
-          title,
-          description,
-          start_date,
-          end_date,
-          created_by: user.id,
-        }),
-      });
-
-      if (res.ok) {
-        loadEvents();
-      }
-    } catch (err) {
-      console.error("Failed to create event:", err);
-    }
-  }
 
   // Go-to inputs
   const [gotoMonth, setGotoMonth] = useState("");
@@ -77,6 +40,7 @@ export default function Calendar() {
 
   return (
     <div className="calendar-container">
+      {/* LEFT SIDE — calendar grid */}
       <div className="calendar-left">
         <div className="calendar">
           <CalendarHeader {...calendar} />
@@ -140,6 +104,8 @@ export default function Calendar() {
           activeDay={calendar.activeDay}
           month={calendar.month}
           year={calendar.year}
+          deleteEvent={deleteEvent}
+          currentUser={currentUser}
         />
 
         <AddEventModal addEvent={addEvent} />

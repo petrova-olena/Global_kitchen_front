@@ -1,4 +1,11 @@
-export default function EventsPanel({ events, activeDay, month, year }) {
+export default function EventsPanel({
+  events,
+  activeDay,
+  month,
+  year,
+  deleteEvent,
+  currentUser,
+}) {
   // Form date in YYYY-MM-DD format
   const selectedDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(
     activeDay,
@@ -56,6 +63,12 @@ export default function EventsPanel({ events, activeDay, month, year }) {
           </div>
 
           <div className="event-desc">{ev.description}</div>
+          {/* --- DELETE BUTTON LOGIC --- */}
+          {(ev.type === "user" || currentUser.role === "admin") && (
+            <button className="delete-btn" onClick={() => deleteEvent(ev.id)}>
+              Delete event
+            </button>
+          )}
         </div>
       ))}
     </div>
