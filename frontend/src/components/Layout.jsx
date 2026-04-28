@@ -1,21 +1,31 @@
-import { Link, Outlet } from "react-router-dom";
-import logo from "../assets/logotest.png";
+import { Link, Outlet } from 'react-router-dom';
+import { useContext } from 'react';
+import logo from '../assets/logotest.png';
+import { AuthContext } from '../context/AuthContext';
 
 const Layout = () => {
+  const { user } = useContext(AuthContext);
   return (
     <>
       {/*-- HEADER --*/}
       <header className="header">
         <img src={logo} alt="Global Kitchen Logo" className="logo" />
+        <div className="header-center">
+          {user && (
+            <span className="welcome-username">Welcome, {user.username}!</span>
+          )}
+        </div>
         <nav className="nav">
           <Link to="/">Home</Link>
           <Link to="/calendar">Calendar</Link>
           <Link to="/menu">Menu</Link>
-          <Link to="/profile">Profile</Link>
+          {user && <Link to="/profile">Profile</Link>}
           <Link to="/en">EN</Link>
-          <Link to="/auth" className="login-icon">
-            👤
-          </Link>
+          {!user && (
+            <Link to="/auth" className="login-icon">
+              👤
+            </Link>
+          )}
         </nav>
       </header>
 
@@ -27,7 +37,6 @@ const Layout = () => {
       {/*<script>
       const chatToggle = document.querySelector('.chat-toggle');
       const chatWidget = document.querySelector('.chat-widget');
-
       chatToggle.addEventListener('click', () => {
         chatWidget.classList.toggle('active');
       });
