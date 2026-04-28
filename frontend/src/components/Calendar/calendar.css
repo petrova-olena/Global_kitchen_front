@@ -524,6 +524,24 @@ main {
   border-radius: 6px;
 }
 
+/* Admin panel button */
+.admin-panel-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 8px 14px;
+  background: #dcc7b8;
+  color: #333;
+  border: 1px solid #dcc7b8;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.admin-panel-btn:hover {
+  opacity: 1;
+}
+
 @media (min-width: 600px) {
   .calendar .month {
     font-size: 26px;

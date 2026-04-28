@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 export default function EventsPanel({
   events,
   activeDay,
@@ -6,6 +8,8 @@ export default function EventsPanel({
   deleteEvent,
   currentUser,
 }) {
+  const navigate = useNavigate();
+
   // Form date in YYYY-MM-DD format
   const selectedDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(
     activeDay,
@@ -93,6 +97,12 @@ export default function EventsPanel({
           )}
         </div>
       ))}
+
+      {currentUser?.role === "admin" && (
+        <button className="admin-panel-btn" onClick={() => navigate("/admin")}>
+          Admin Panel
+        </button>
+      )}
     </div>
   );
 }

@@ -29,7 +29,7 @@ export default function EventsOverview() {
       const start_date = from.replace("T", " ") + ":00";
       const end_date = to.replace("T", " ") + ":00";
 
-      const res = await fetch("http://localhost:3000/api/v1/calenderEvent", {
+      const res = await fetch("http://localhost:8000/api/v1/calenderEvent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -63,7 +63,7 @@ export default function EventsOverview() {
 
     try {
       await fetch(
-        `http://localhost:3000/api/v1/calenderEvent/${pendingDeleteId}`,
+        `http://localhost:8000/api/v1/calenderEvent/${pendingDeleteId}`,
         {
           method: "DELETE",
         },

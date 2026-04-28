@@ -26,7 +26,7 @@ function sortEvents(events) {
 
 export async function loadEvents() {
   try {
-    const res = await fetch("http://localhost:3000/api/v1/calenderEvent");
+    const res = await fetch("http://localhost:8000/api/v1/calenderEvent");
     const data = await res.json();
     const raw = Array.isArray(data) ? data : data.events || [];
 

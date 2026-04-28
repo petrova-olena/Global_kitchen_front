@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 export default function AddEventModal({ addEvent }) {
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
-  // Хуки — всегда наверху
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -32,9 +31,9 @@ export default function AddEventModal({ addEvent }) {
     return () => window.removeEventListener("keydown", handleKey);
   }, [open]);
 
-  // ❗ Условный рендер — только здесь, после хуков
+  // Conditionally render the button and modal only if user is logged in
   if (!currentUser) {
-    return null; // не показываем кнопку и модалку
+    return null; // don't render anything if no user is logged in
   }
 
   return (
