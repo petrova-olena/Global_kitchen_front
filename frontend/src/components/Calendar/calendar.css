@@ -484,6 +484,46 @@ main {
   color: #555;
 }
 
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel-btn {
+  background: #ccc;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+/* Delete button */
+.delete-btn {
+  background: #d9534f;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
 @media (min-width: 600px) {
   .calendar .month {
     font-size: 26px;

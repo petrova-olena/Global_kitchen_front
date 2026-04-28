@@ -33,7 +33,18 @@ export default function EventsPanel({
   }
 
   // Filter events that occur on the selected day
-  const dayEvents = events.filter((e) => eventOccursOnDay(e, selectedDate));
+  // --- FILTER BY USER ROLE ---
+  const visibleEvents = events.filter((e) => {
+    if (currentUser.role === "admin") return true;
+
+    // user sees only admin events + their own
+    return e.type === "admin" || e.created_by === currentUser.id;
+  });
+
+  // --- FILTER BY SELECTED DAY ---
+  const dayEvents = visibleEvents.filter((e) =>
+    eventOccursOnDay(e, selectedDate),
+  );
 
   return (
     <div className="events-panel">
