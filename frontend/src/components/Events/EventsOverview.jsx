@@ -9,6 +9,10 @@ export default function EventsOverview() {
 
   const [events, setEvents] = useState([]);
 
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
+  const [pendingDeleteId, setPendingDeleteId] = useState(null);
+
   // Load events from backend on mount
   useEffect(() => {
     loadEvents().then(setEvents);
@@ -46,17 +50,38 @@ export default function EventsOverview() {
     }
   }
 
-  // DELETE event
-  async function deleteEvent(id) {
+  // DELETE event: open modal instead of deleting immediately
+  function deleteEvent(id) {
+    console.log("deleteEvent called with id:", id);
+    setPendingDeleteId(id);
+    setShowModal(true);
+  }
+
+  // Confirm deletion: real delete
+  async function confirmDelete() {
+    if (!pendingDeleteId) return;
+
     try {
-      await fetch(`http://localhost:3000/api/v1/calenderEvent/${id}`, {
-        method: "DELETE",
-      });
+      await fetch(
+        `http://localhost:3000/api/v1/calenderEvent/${pendingDeleteId}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       loadEvents().then(setEvents);
     } catch (err) {
       console.error("Failed to delete event:", err);
     }
+
+    setPendingDeleteId(null);
+    setShowModal(false);
+  }
+
+  // Cancel deletion
+  function cancelDelete() {
+    setPendingDeleteId(null);
+    setShowModal(false);
   }
 
   // Filters
@@ -220,7 +245,7 @@ export default function EventsOverview() {
           title="Restaurant Events"
           events={restaurantEvents}
           deleteEvent={deleteEvent}
-          renderItem={(item, deleteEvent) => (
+          renderItem={(item, deleteEventFromProps) => (
             <div key={item.id} className="event-item">
               <div className="event-title">{item.title}</div>
 
@@ -245,7 +270,7 @@ export default function EventsOverview() {
               {currentUser.role === "admin" && (
                 <button
                   className="delete-btn"
-                  onClick={() => deleteEvent(item.id)}
+                  onClick={() => deleteEventFromProps(item.id)}
                 >
                   Delete event
                 </button>
@@ -259,7 +284,7 @@ export default function EventsOverview() {
           title="My Events"
           events={[...reservations, ...userEvents]}
           deleteEvent={deleteEvent}
-          renderItem={(item, deleteEvent) =>
+          renderItem={(item, deleteEventFromProps) =>
             item.tableId ? (
               <ReservationCard reservation={item} />
             ) : (
@@ -287,7 +312,7 @@ export default function EventsOverview() {
                 {item.type === "user" && (
                   <button
                     className="delete-btn"
-                    onClick={() => deleteEvent(item.id)}
+                    onClick={() => deleteEventFromProps(item.id)}
                   >
                     Delete event
                   </button>
@@ -298,6 +323,23 @@ export default function EventsOverview() {
           emptyText="You have no scheduled events for the selected period"
         />
       </div>
+
+      {/* Delete confirmation modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Are you sure you want to delete this event?</h3>
+            <div className="modal-buttons">
+              <button className="cancel-btn" onClick={cancelDelete}>
+                Cancel
+              </button>
+              <button className="delete-btn" onClick={confirmDelete}>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
