@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom";
 import EventsOverview from "../components/Events/EventsOverview";
+import { useTranslation } from 'react-i18next';
 
 export default function CalendarPage() {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="events-header">
-        <h1>Event Calendar</h1>
+        <h1>{t('calendar.title')}</h1>
 
         <div className="week-info">
-          <h2>This Week's Highlights</h2>
-          <p className="week-description">Weekly overview goes here.</p>
+          <h2>{t('calendar.weekHighlights')}</h2>
+          <p className="week-description">{t('calendar.weekDescription')}</p>
         </div>
 
         <div className="menu-links">
           <Link to="/daily-menu" className="menu-btn">
-            Daily Menu
+            {t('calendar.dailyMenu')}
           </Link>
           <Link to="/weekly-menu" className="menu-btn">
-            Weekly Menu
+            {t('calendar.weeklyMenu')}
           </Link>
         </div>
       </div>

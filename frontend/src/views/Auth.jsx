@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../context/AuthContext';
 import '../auth.css';
 import signInImg from '../assets/sign_in.png';
@@ -8,6 +9,7 @@ import { fetchData } from '../utils/fetchData';
 
 const Auth = () => {
   const { setUser, setToken } = useContext(AuthContext);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [isSignIn, setIsSignIn] = useState(true);
@@ -73,12 +75,12 @@ const Auth = () => {
         <div className="auth-form">
           {isSignIn ? (
             <>
-              <h2>Sign In</h2>
+              <h2>{t('auth.signIn')}</h2>
 
               <form onSubmit={handleSignIn}>
                 <input
                   type="text"
-                  placeholder="Username"
+                  placeholder={t('auth.username')}
                   value={signinForm.username}
                   onChange={(e) =>
                     setSigninForm({ ...signinForm, username: e.target.value })
@@ -87,28 +89,28 @@ const Auth = () => {
 
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder={t('auth.password')}
                   value={signinForm.password}
                   onChange={(e) =>
                     setSigninForm({ ...signinForm, password: e.target.value })
                   }
                 />
 
-                <button type="submit">Sign In</button>
+                <button type="submit">{t('auth.signIn')}</button>
               </form>
 
               <p onClick={() => setIsSignIn(false)}>
-                Don't have an account? Sign Up
+                {t('auth.noAccount')} {t('auth.signUp')}
               </p>
             </>
           ) : (
             <>
-              <h2>Sign Up</h2>
+              <h2>{t('auth.signUp')}</h2>
 
               <form onSubmit={handleSignUp}>
                 <input
                   type="text"
-                  placeholder="Username"
+                  placeholder={t('auth.username')}
                   value={signupForm.username}
                   onChange={(e) =>
                     setSignupForm({ ...signupForm, username: e.target.value })
@@ -117,7 +119,7 @@ const Auth = () => {
 
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder={t('auth.email')}
                   value={signupForm.email}
                   onChange={(e) =>
                     setSignupForm({ ...signupForm, email: e.target.value })

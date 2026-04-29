@@ -42,6 +42,35 @@ h3 {
   text-decoration: none;
 }
 
+.language-switcher {
+  display: flex;
+  gap: 8px;
+  margin: 0 12px;
+}
+
+.lang-btn {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.lang-btn.active {
+  background: #ffe0b2;
+  color: #261413;
+  border-color: #ffe0b2;
+}
+
 .logo {
   height: 45px;
   width: auto;

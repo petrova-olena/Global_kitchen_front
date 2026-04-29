@@ -1,25 +1,28 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       {/*-- HERO / BANNER --*/}
       <section className="hero">
         <div className="hero-overlay">
           <div className="hero-text">
-            <h1>Welcome to Finnish Week</h1>
-            <p>Discover the taste of Nordic cuisine</p>
+            <h1>{t('home.title')}</h1>
+            <p>{t('home.subtitle')}</p>
           </div>
 
           <div className="hero-buttons">
-            <Link to="calendar.html" className="btn">
-              Go to Calendar
+            <Link to="/calendar" className="btn">
+              {t('home.goToCalendar')}
             </Link>
-            <Link to="menu.html" className="btn">
-              Menu
+            <Link to="/menu" className="btn">
+              {t('home.goToMenu')}
             </Link>
-            <Link to="booking.html" className="btn">
-              Reserve
+            <Link to="/profile" className="btn">
+              {t('home.makeReservation')}
             </Link>
           </div>
         </div>
@@ -27,22 +30,13 @@ const Home = () => {
 
       {/*-- ABOUT US --*/}
       <section className="about">
-        <h2 className="about-title">About Us</h2>
+        <h2 className="about-title">{t('home.aboutTitle')}</h2>
 
         <div className="about-columns">
           <div className="about-left">
             <div className="about-text">
               <p>
-                Global Kitchen brings world cuisine to your table. Every week we
-                explore a new country through food. Global Kitchen brings world
-                cuisine to your table. Every week we explore a new country
-                through food. Global Kitchen brings world cuisine to your table.
-                Every week we explore a new country through food. Global Kitchen
-                brings world cuisine to your table. Every week we explore a new
-                country through food. Global Kitchen brings world cuisine to
-                your table. Every week we explore a new country through food.
-                Global Kitchen brings world cuisine to your table. Every week we
-                explore a new country through food.
+                {t('home.aboutText')}
               </p>
             </div>
 

@@ -1,0 +1,109 @@
+{
+  "header": {
+    "welcome": "Tervetuloa",
+    "language": "FI"
+  },
+  "nav": {
+    "home": "Koti",
+    "calendar": "Kalenteri",
+    "menu": "Ruokalista",
+    "profile": "Profiili",
+    "logout": "Kirjaudu ulos",
+    "login": "Kirjaudu sisään"
+  },
+  "footer": {
+    "address": "Global Kitchen • Helsinki, Suomi",
+    "contact": "Yhteystiedot: info@globalkitchen.fi"
+  },
+  "home": {
+    "title": "Tervetuloa Suomalaisen viikon juhlistamiseen",
+    "subtitle": "Tutustu pohjoismaisen ruokakulttuurin makuihin",
+    "goToCalendar": "Siirry kalenteriin",
+    "goToMenu": "Ruokalista",
+    "makeReservation": "Varaa pöytä",
+    "aboutTitle": "Tietoa meistä",
+    "aboutText": "Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan. Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan."
+  },
+  "auth": {
+    "signIn": "Kirjaudu sisään",
+    "signUp": "Rekisteröidy",
+    "username": "Käyttäjänimi",
+    "email": "Sähköposti",
+    "password": "Salasana",
+    "confirmPassword": "Vahvista salasana",
+    "loginSuccess": "Kirjautuminen onnistui!",
+    "loginFailed": "Kirjautuminen epäonnistui",
+    "signupSuccess": "Rekisteröityminen onnistui!",
+    "signupFailed": "Rekisteröityminen epäonnistui",
+    "noAccount": "Ei vielä tiliä?",
+    "haveAccount": "Onko sinulla jo tili?"
+  },
+  "calendar": {
+    "title": "Tapahtumakalenteri",
+    "weekHighlights": "Tämän viikon kohokohdat",
+    "weekDescription": "Viikon yleiskatsaus löytyy täältä",
+    "dailyMenu": "Päivän ruokalista",
+    "weeklyMenu": "Viikon ruokalista",
+    "events": "Tapahtumat",
+    "noEvents": "Ei tapahtumia",
+    "addEvent": "Lisää tapahtuma",
+    "eventTitle": "Tapahtuman nimi",
+    "eventDescription": "Kuvaus",
+    "startTime": "Alkamisaika",
+    "endTime": "Päättymisaika"
+  },
+  "menu": {
+    "title": "Ruokalista",
+    "soups": "Keitot",
+    "mainDishes": "Pääruoat",
+    "sideDishes": "Lisäkkeet",
+    "salads": "Salaatit",
+    "desserts": "Jälkiruoat",
+    "drinks": "Juomat",
+    "combos": "Paketit",
+    "details": "Lisätiedot",
+    "price": "Hinta",
+    "vegan": "Vegaani",
+    "glutenFree": "Gluteeniton",
+    "vegetarian": "Vegetaarinen",
+    "addToCart": "Lisää koriin"
+  },
+  "profile": {
+    "title": "Oma profiili",
+    "editProfile": "Muokkaa profiilia",
+    "save": "Tallenna",
+    "cancel": "Peruuta",
+    "profilePicture": "Profiilikuva",
+    "upload": "Lataa",
+    "username": "Käyttäjänimi",
+    "email": "Sähköposti",
+    "settings": "Asetukset",
+    "logout": "Kirjaudu ulos"
+  },
+  "admin": {
+    "title": "Hallintapaneeli",
+    "users": "Käyttäjät",
+    "events": "Tapahtumat",
+    "createEvent": "Luo tapahtuma",
+    "manageUsers": "Hallitse käyttäjiä",
+    "filterByUser": "Suodata käyttäjän mukaan",
+    "filterByDate": "Suodata päivämäärän mukaan",
+    "week": "Viikko",
+    "month": "Kuukausi",
+    "custom": "Mukautettu",
+    "from": "Mistä",
+    "to": "Mihin"
+  },
+  "common": {
+    "yes": "Kyllä",
+    "no": "Ei",
+    "save": "Tallenna",
+    "cancel": "Peruuta",
+    "delete": "Poista",
+    "edit": "Muokkaa",
+    "close": "Sulje",
+    "loading": "Ladataan...",
+    "error": "Virhe",
+    "success": "Onnistui"
+  }
+}

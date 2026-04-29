@@ -1,39 +1,42 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const Menu = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       {/*-- SECONDARY HEADER --*/}
       <section className="menu-header">
-        <h1>Our Menu</h1>
+        <h1>{t('menu.title')}</h1>
 
         <nav className="menu-categories">
-          <button className="category-btn active">Soups</button>
-          <button className="category-btn">Main Dishes</button>
-          <button className="category-btn">Side Dishes</button>
-          <button className="category-btn">Salads</button>
-          <button className="category-btn">Desserts</button>
-          <button className="category-btn">Drinks</button>
-          <button className="category-btn">Combos</button>
+          <button className="category-btn active">{t('menu.soups')}</button>
+          <button className="category-btn">{t('menu.mainDishes')}</button>
+          <button className="category-btn">{t('menu.sideDishes')}</button>
+          <button className="category-btn">{t('menu.salads')}</button>
+          <button className="category-btn">{t('menu.desserts')}</button>
+          <button className="category-btn">{t('menu.drinks')}</button>
+          <button className="category-btn">{t('menu.combos')}</button>
           <Link to="/daily-menu" className="category-btn daily-link">
-            Daily Menu
+            {t('calendar.dailyMenu')}
           </Link>
         </nav>
       </section>
 
       {/*-- MENU GRID --*/}
       <section className="menu-section" id="soups">
-        <h2 className="menu-title">Soups</h2>
+        <h2 className="menu-title">{t('menu.soups')}</h2>
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
             <h3>Tomato Soup</h3>
             <p className="price">6.50€</p>
             <p className="desc">Creamy tomato soup with herbs.</p>
-            <div className="diet">Vegan • Gluten-free</div>
+            <div className="diet">{t('menu.vegan')} • {t('menu.glutenFree')}</div>
             <div className="card-actions">
               <Link to="/menu/soup/tomato" className="btn-small">
-                Details
+                {t('menu.details')}
               </Link>
               <button className="add-btn">+</button>
             </div>

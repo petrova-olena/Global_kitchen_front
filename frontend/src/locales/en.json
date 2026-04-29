@@ -1,0 +1,109 @@
+{
+  "header": {
+    "welcome": "Welcome",
+    "language": "EN"
+  },
+  "nav": {
+    "home": "Home",
+    "calendar": "Calendar",
+    "menu": "Menu",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "footer": {
+    "address": "Global Kitchen • Helsinki, Finland",
+    "contact": "Contact: info@globalkitchen.fi"
+  },
+  "home": {
+    "title": "Welcome to Finnish Week",
+    "subtitle": "Discover the taste of Nordic cuisine",
+    "goToCalendar": "Go to Calendar",
+    "goToMenu": "Menu",
+    "makeReservation": "Reserve",
+    "aboutTitle": "About Us",
+    "aboutText": "Global Kitchen brings world cuisine to your table. Every week we explore a new country through food. Global Kitchen brings world cuisine to your table. Every week we explore a new country through food."
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "loginSuccess": "Login successful!",
+    "loginFailed": "Login failed",
+    "signupSuccess": "Sign up successful!",
+    "signupFailed": "Sign up failed",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
+  },
+  "calendar": {
+    "title": "Event Calendar",
+    "weekHighlights": "This Week's Highlights",
+    "weekDescription": "Weekly overview goes here",
+    "dailyMenu": "Daily Menu",
+    "weeklyMenu": "Weekly Menu",
+    "events": "Events",
+    "noEvents": "No events",
+    "addEvent": "Add Event",
+    "eventTitle": "Event Title",
+    "eventDescription": "Description",
+    "startTime": "Start Time",
+    "endTime": "End Time"
+  },
+  "menu": {
+    "title": "Our Menu",
+    "soups": "Soups",
+    "mainDishes": "Main Dishes",
+    "sideDishes": "Side Dishes",
+    "salads": "Salads",
+    "desserts": "Desserts",
+    "drinks": "Drinks",
+    "combos": "Combos",
+    "details": "Details",
+    "price": "Price",
+    "vegan": "Vegan",
+    "glutenFree": "Gluten-free",
+    "vegetarian": "Vegetarian",
+    "addToCart": "Add to Cart"
+  },
+  "profile": {
+    "title": "My Profile",
+    "editProfile": "Edit Profile",
+    "save": "Save",
+    "cancel": "Cancel",
+    "profilePicture": "Profile Picture",
+    "upload": "Upload",
+    "username": "Username",
+    "email": "Email",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "users": "Users",
+    "events": "Events",
+    "createEvent": "Create Event",
+    "manageUsers": "Manage Users",
+    "filterByUser": "Filter by User",
+    "filterByDate": "Filter by Date",
+    "week": "Week",
+    "month": "Month",
+    "custom": "Custom",
+    "from": "From",
+    "to": "To"
+  },
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  }
+}
