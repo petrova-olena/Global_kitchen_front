@@ -1,3 +1,31 @@
+/* Profile Events Table */
+.events-table-wrapper {
+  overflow-x: auto;
+}
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.events-table th,
+.events-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+.events-table thead tr {
+  background: #f5f5f5;
+}
+.events-table-delete-cell {
+  text-align: center;
+}
+.events-table-delete-btn {
+  padding: 4px 10px;
+  font-size: 0.95em;
+}
+.events-table-empty {
+  text-align: center;
+  padding: 12px;
+}
 .header-center {
   flex: 1;
   display: flex;

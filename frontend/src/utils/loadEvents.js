@@ -1,14 +1,14 @@
-import { fetchData } from "../utils/fetchData";
+import { fetchData } from '../utils/fetchData';
 
 function normalizeToLocal(iso) {
   const d = new Date(iso);
 
   const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  const hours = String(d.getHours()).padStart(2, "0");
-  const minutes = String(d.getMinutes()).padStart(2, "0");
-  const seconds = String(d.getSeconds()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const hours = String(d.getHours()).padStart(2, '0');
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+  const seconds = String(d.getSeconds()).padStart(2, '0');
 
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 }
@@ -27,7 +27,7 @@ function sortEvents(events) {
 
 export async function loadEvents() {
   try {
-    const data = await fetchData("/api/v1/calenderEvent");
+    const data = await fetchData('api/v1/calenderEvent');
 
     const raw = Array.isArray(data) ? data : data.events || [];
 
@@ -39,7 +39,7 @@ export async function loadEvents() {
 
     return sortEvents(normalized);
   } catch (err) {
-    console.error("Failed to load events:", err);
+    console.error('Failed to load events:', err);
     return [];
   }
 }
