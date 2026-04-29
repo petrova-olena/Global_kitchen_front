@@ -18,6 +18,7 @@ export default function AdminPanel() {
   // Users
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [userMap, setUserMap] = useState({});
 
   // Events (result of search)
   const [events, setEvents] = useState([]);
@@ -42,6 +43,13 @@ export default function AdminPanel() {
       .then((data) => {
         const filtered = data.filter((u) => u.role !== "admin");
         setUsers(filtered);
+
+        // Create user ID -> name map for easy lookup when displaying events
+        const map = {};
+        data.forEach((u) => {
+          map[u.id] = u.name || u.username || u.email; // подстраховка
+        });
+        setUserMap(map);
 
         if (filtered.length > 0) {
           setSelectedUserId(filtered[0].id);
@@ -401,6 +409,10 @@ export default function AdminPanel() {
               </div>
 
               <div className="event-desc">{ev.description}</div>
+
+              <div className="event-author">
+                Added by: {userMap[ev.created_by] || "Unknown"}
+              </div>
             </div>
           ))}
       </div>
