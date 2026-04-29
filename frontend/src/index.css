@@ -1,3 +1,16 @@
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-username {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffe0b2;
+  letter-spacing: 0.5px;
+}
 /* GLOBAL */
 body {
   margin: 0;
@@ -502,6 +515,28 @@ input {
   margin: 2px 0;
   font-size: 16px;
 }
+
+.profile-info input.profile-name,
+.profile-info input.profile-email,
+.profile-info input.profile-phone {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border: 1.5px solid #c7a17a;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  background: #fff8f0;
+  color: #4a2c2a;
+  transition: border-color 0.2s;
+}
+
+.profile-info input:focus {
+  outline: none;
+  border-color: #ffb74d;
+  background: #fff3e0;
+}
+
 .button-group {
   display: flex;
   justify-content: space-between;
@@ -979,4 +1014,60 @@ input {
   color: white;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.profile-card {
+  display: grid !important;
+  grid-template-columns: 1fr 3fr !important;
+  align-items: center !important;
+  gap: 24px !important;
+  text-align: left !important;
+}
+
+/* PHOTO */
+.profile-photo {
+  width: 100% !important;
+  max-width: 120px !important;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* INFO */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* BUTTONS */
+.button-group {
+  display: flex !important;
+  gap: 10px !important;
+  flex-wrap: wrap;
+}
+
+/* MOBILE FIX */
+@media (max-width: 600px) {
+  .profile-card {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+  }
+
+  .profile-photo {
+    margin: 0 auto;
+  }
+
+  .button-group {
+    justify-content: center;
+  }
 }
