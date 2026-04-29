@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 
 export default function AddEventModal({ addEvent }) {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
-  // Add event and reset form
   const submit = () => {
     if (!title || !description || !from || !to) return;
     addEvent(title, description, from, to);
@@ -18,7 +19,6 @@ export default function AddEventModal({ addEvent }) {
     setOpen(false);
   };
 
-  // Esc closes the modal
   useEffect(() => {
     const handleKey = (e) => {
       if (e.key === "Escape") setOpen(false);
@@ -30,6 +30,11 @@ export default function AddEventModal({ addEvent }) {
 
     return () => window.removeEventListener("keydown", handleKey);
   }, [open]);
+
+  // Conditionally render the button and modal only if user is logged in
+  if (!currentUser) {
+    return null; // don't render anything if no user is logged in
+  }
 
   return (
     <>

@@ -29,7 +29,7 @@ export default function EventsOverview() {
       const start_date = from.replace("T", " ") + ":00";
       const end_date = to.replace("T", " ") + ":00";
 
-      const res = await fetch("http://localhost:3000/api/v1/calenderEvent", {
+      const res = await fetch("http://localhost:8000/api/v1/calenderEvent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -63,7 +63,7 @@ export default function EventsOverview() {
 
     try {
       await fetch(
-        `http://localhost:3000/api/v1/calenderEvent/${pendingDeleteId}`,
+        `http://localhost:8000/api/v1/calenderEvent/${pendingDeleteId}`,
         {
           method: "DELETE",
         },
@@ -176,9 +176,11 @@ export default function EventsOverview() {
   });
 
   const restaurantEvents = filteredEvents.filter((e) => e.type === "admin");
-  const userEvents = filteredEvents.filter(
-    (e) => e.created_by === currentUser.id,
-  );
+
+  const userEvents = currentUser
+    ? filteredEvents.filter((e) => e.created_by === currentUser.id)
+    : [];
+
   const reservations = [];
 
   // ---------- formatting ----------
@@ -267,7 +269,7 @@ export default function EventsOverview() {
 
               <div className="event-desc">{item.description}</div>
               {/* delete only for admin */}
-              {currentUser.role === "admin" && (
+              {currentUser && currentUser.role === "admin" && (
                 <button
                   className="delete-btn"
                   onClick={() => deleteEventFromProps(item.id)}
@@ -280,48 +282,57 @@ export default function EventsOverview() {
           emptyText="No restaurant events for the selected period"
         />
 
-        <EventsCard
-          title="My Events"
-          events={[...reservations, ...userEvents]}
-          deleteEvent={deleteEvent}
-          renderItem={(item, deleteEventFromProps) =>
-            item.tableId ? (
-              <ReservationCard reservation={item} />
-            ) : (
-              <div key={item.id} className="event-item">
-                <div className="event-title">{item.title}</div>
+        {/* My Events */}
+        {!currentUser ? (
+          <div className="events-card no-events">
+            <h3>My Events</h3>
+            <p>Log in to view available events</p>
+          </div>
+        ) : (
+          <EventsCard
+            title="My Events"
+            events={[...reservations, ...userEvents]}
+            deleteEvent={deleteEvent}
+            renderItem={(item, deleteEventFromProps) =>
+              item.tableId ? (
+                <ReservationCard reservation={item} />
+              ) : (
+                <div key={item.id} className="event-item">
+                  <div className="event-title">{item.title}</div>
 
-                <div className="event-time">
-                  <div>
-                    <span className="event-icon">📅</span>
-                    {formatDate(item.start_date)}
-                    {formatDate(item.start_date) !==
-                      formatDate(item.end_date) && (
-                      <> — {formatDate(item.end_date)}</>
-                    )}
+                  <div className="event-time">
+                    <div>
+                      <span className="event-icon">📅</span>
+                      {formatDate(item.start_date)}
+                      {formatDate(item.start_date) !==
+                        formatDate(item.end_date) && (
+                        <> — {formatDate(item.end_date)}</>
+                      )}
+                    </div>
+
+                    <div>
+                      <span className="event-icon">🕒</span>
+                      {formatTime(item.start_date)} —{" "}
+                      {formatTime(item.end_date)}
+                    </div>
                   </div>
 
-                  <div>
-                    <span className="event-icon">🕒</span>
-                    {formatTime(item.start_date)} — {formatTime(item.end_date)}
-                  </div>
+                  <div className="event-desc">{item.description}</div>
+                  {/* delete only for user events */}
+                  {currentUser && item.type === "user" && (
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteEventFromProps(item.id)}
+                    >
+                      Delete event
+                    </button>
+                  )}
                 </div>
-
-                <div className="event-desc">{item.description}</div>
-                {/* delete only for user events */}
-                {item.type === "user" && (
-                  <button
-                    className="delete-btn"
-                    onClick={() => deleteEventFromProps(item.id)}
-                  >
-                    Delete event
-                  </button>
-                )}
-              </div>
-            )
-          }
-          emptyText="You have no scheduled events for the selected period"
-        />
+              )
+            }
+            emptyText="You have no scheduled events for the selected period"
+          />
+        )}
       </div>
 
       {/* Delete confirmation modal */}

@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 export default function EventsPanel({
   events,
   activeDay,
@@ -6,6 +8,8 @@ export default function EventsPanel({
   deleteEvent,
   currentUser,
 }) {
+  const navigate = useNavigate();
+
   // Form date in YYYY-MM-DD format
   const selectedDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(
     activeDay,
@@ -32,13 +36,24 @@ export default function EventsPanel({
     return start <= dayStr && end >= dayStr;
   }
 
+  if (!currentUser) {
+    return (
+      <div className="events-panel">
+        <h3>Events for {selectedDate}</h3>
+        <p>Log in to view available events</p>
+      </div>
+    );
+  }
+
   // Filter events that occur on the selected day
   // --- FILTER BY USER ROLE ---
   const visibleEvents = events.filter((e) => {
-    if (currentUser.role === "admin") return true;
+    if (currentUser && currentUser.role === "admin") return true;
 
     // user sees only admin events + their own
-    return e.type === "admin" || e.created_by === currentUser.id;
+    return (
+      e.type === "admin" || (currentUser && e.created_by === currentUser.id)
+    );
   });
 
   // --- FILTER BY SELECTED DAY ---
@@ -82,6 +97,12 @@ export default function EventsPanel({
           )}
         </div>
       ))}
+
+      {currentUser?.role === "admin" && (
+        <button className="admin-panel-btn" onClick={() => navigate("/admin")}>
+          Admin Panel
+        </button>
+      )}
     </div>
   );
 }
