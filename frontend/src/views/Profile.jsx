@@ -1,130 +1,156 @@
-import { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { fetchData } from "../utils/fetchData";
 
 const Profile = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const { user, setUser, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Logout ve yönlendirme
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
-  // Edit mode ve form state
+  // Edit mode + form state
   const [editMode, setEditMode] = useState(false);
   const [form, setForm] = useState({
-    username: user?.username || '',
-    email: user?.email || '',
-    phone: user?.phone || '',
+    username: user?.username || "",
+    email: user?.email || "",
+    phone: user?.phone || "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Profil açıldığında güncel user bilgisini backend'den çek
+  // Sync form with user data when user changes (e.g. after update)
+  useEffect(() => {
+    if (!user) return;
+
+    setForm({
+      username: user.username || "",
+      email: user.email || "",
+      phone: user.phone || "",
+    });
+  }, [user]);
+
+  // Load fresh user data on mount
   useEffect(() => {
     const fetchUser = async () => {
       if (!user?.id) return;
+
       try {
-        const res = await fetch(`/api/v1/users/${user.id}`);
-        if (res.ok) {
-          const freshUser = await res.json();
-          setUser(freshUser);
-          localStorage.setItem('user', JSON.stringify(freshUser));
-        }
+        const freshUser = await fetchData(`/api/v1/users/${user.id}`);
+
+        setUser(freshUser);
+        localStorage.setItem("user", JSON.stringify(freshUser));
+
+        // sync form with fresh user
+        setForm({
+          username: freshUser.username || "",
+          email: freshUser.email || "",
+          phone: freshUser.phone || "",
+        });
       } catch (err) {
-        console.error('Error fetching user:', err);
+        console.error("Error fetching user:", err);
       }
     };
+
     fetchUser();
-    // eslint-disable-next-line
   }, []);
 
-  // Edit butonuna basınca inputları aç
+  // Edit button click - enable edit mode and populate form with current user data
   const handleEdit = () => {
     setForm({
-      username: user?.username || '',
-      email: user?.email || '',
-      phone: user?.phone || '',
+      username: user?.username || "",
+      email: user?.email || "",
+      phone: user?.phone || "",
     });
     setEditMode(true);
   };
 
-  // Input değişikliği
+  // Form input change handler
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Kaydet (PUT)
+  // Save button click - send updated data to API
   const handleSave = async () => {
     setLoading(true);
     setError(null);
+
     try {
-      // Sadece username ve email gönder
       const updateData = {
         username: form.username,
         email: form.email,
       };
-      const res = await fetch(`/api/v1/users/${user.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
+      await fetchData(`/api/v1/users/${user.id}`, {
+        method: "PUT",
         body: JSON.stringify(updateData),
       });
-      if (!res.ok) throw new Error('Update failed');
-      const updated = await res.json();
-      setUser(updated);
-      localStorage.setItem('user', JSON.stringify(updated));
+
+      // Get updated user data from API to ensure we have the latest info
+      const updatedUser = await fetchData(`/api/v1/users/${user.id}`);
+
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+
+      // sync form with updated user
       setForm({
-        username: updated.username,
-        email: updated.email,
-        phone: updated.phone || '',
+        username: updatedUser.username,
+        email: updatedUser.email,
+        phone: updatedUser.phone || "",
       });
+
       setEditMode(false);
     } catch (err) {
-      setError('Update failed', err.message);
+      setError(err.message || "Update failed");
     } finally {
       setLoading(false);
     }
   };
 
-  // Profil fotoğrafı yükleme
+  // Profile photo upload state
   const [profilePicFile, setProfilePicFile] = useState(null);
   const [profilePicLoading, setProfilePicLoading] = useState(false);
   const [profilePicError, setProfilePicError] = useState(null);
 
-  // Profil fotoğrafı dosya seçimi
   const onProfilePicChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setProfilePicFile(e.target.files[0]);
     }
   };
 
-  // Profil fotoğrafı yükleme
   const handleProfilePicUpload = async (e) => {
     e.preventDefault();
+
     if (!profilePicFile) return;
+
     setProfilePicLoading(true);
     setProfilePicError(null);
+
     try {
       const formData = new FormData();
-      formData.append('profile_pic', profilePicFile);
+      formData.append("profile_pic", profilePicFile);
+
       const res = await fetch(`/api/v1/users/profile-pic/${user.id}`, {
-        method: 'PUT',
+        method: "PUT",
         body: formData,
       });
-      if (!res.ok) throw new Error('Upload failed');
+
+      if (!res.ok) throw new Error("Upload failed");
+
       const data = await res.json();
-      setUser({ ...user, profile_pic: data.profile_pic });
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ ...user, profile_pic: data.profile_pic })
-      );
+
+      const updatedUser = { ...user, profile_pic: data.profile_pic };
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+
       setProfilePicFile(null);
     } catch {
-      setProfilePicError('Upload failed');
+      setProfilePicError("Upload failed");
     } finally {
       setProfilePicLoading(false);
     }
@@ -139,9 +165,9 @@ const Profile = () => {
             {user?.profile_pic ? (
               <img
                 src={
-                  user.profile_pic.startsWith('http')
+                  user.profile_pic.startsWith("http")
                     ? user.profile_pic
-                    : `http://localhost:8000/uploads/${user.profile_pic}`
+                    : `${API_URL}/uploads/${user.profile_pic}`
                 }
                 alt="Profile"
               />
@@ -167,8 +193,8 @@ const Profile = () => {
               <form
                 onSubmit={handleProfilePicUpload}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
+                  display: "flex",
+                  alignItems: "center",
                   gap: 8,
                   marginBottom: 16,
                 }}
@@ -176,7 +202,7 @@ const Profile = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                   id="profile-pic-input"
                   onChange={onProfilePicChange}
                 />
@@ -193,13 +219,13 @@ const Profile = () => {
                 )}
                 {/* Yükleniyor ve hata mesajı */}
                 {profilePicLoading && (
-                  <span style={{ marginLeft: 8, color: '#555', fontSize: 14 }}>
+                  <span style={{ marginLeft: 8, color: "#555", fontSize: 14 }}>
                     Yükleniyor...
                   </span>
                 )}
                 {profilePicError && (
                   <span
-                    style={{ marginLeft: 8, color: '#b88c00', fontSize: 14 }}
+                    style={{ marginLeft: 8, color: "#b88c00", fontSize: 14 }}
                   >
                     {profilePicError}
                   </span>
@@ -233,13 +259,13 @@ const Profile = () => {
             ) : (
               <>
                 <h2 className="profile-name">
-                  {user?.username || 'John Smith'}
+                  {user?.username || "John Smith"}
                 </h2>
                 <p className="profile-email">
-                  {user?.email || 'john426@example.com'}
+                  {user?.email || "john426@example.com"}
                 </p>
                 <p className="profile-phone">
-                  {user?.phone || '+358 45 123 5274'}
+                  {user?.phone || "+358 45 123 5274"}
                 </p>
               </>
             )}
@@ -252,7 +278,7 @@ const Profile = () => {
                     onClick={handleSave}
                     disabled={loading}
                   >
-                    {loading ? 'Saving...' : 'Save'}
+                    {loading ? "Saving..." : "Save"}
                   </button>
                   <button
                     className="cancel-btn"

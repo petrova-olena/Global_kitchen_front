@@ -2,6 +2,7 @@ import "./admin.css";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchData } from "../../utils/fetchData";
 
 export default function AdminPanel() {
   const navigate = useNavigate();
@@ -37,11 +38,7 @@ export default function AdminPanel() {
 
   // Load all users
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/users")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to load users");
-        return res.json();
-      })
+    fetchData("/api/v1/users")
       .then((data) => {
         const filtered = data.filter((u) => u.role !== "admin");
         setUsers(filtered);
@@ -50,7 +47,7 @@ export default function AdminPanel() {
           setSelectedUserId(filtered[0].id);
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Failed to load users:", err));
   }, []);
 
   // ---------- formatting ----------
@@ -120,35 +117,31 @@ export default function AdminPanel() {
 
   // ---------- API helpers ----------
   const fetchAllEvents = async () => {
-    const res = await fetch("http://localhost:8000/api/v1/calenderEvent");
-    if (!res.ok) {
-      console.error("Failed to load all events");
+    try {
+      const data = await fetchData("/api/v1/calenderEvent");
+
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.data)) return data.data;
+
+      return [];
+    } catch (err) {
+      console.error("Failed to load all events:", err);
       return [];
     }
-    const json = await res.json();
-    if (Array.isArray(json.data)) return json.data;
-    if (Array.isArray(json)) return json;
-    return [];
   };
 
   const fetchUserEvents = async (userId) => {
-    const res = await fetch(
-      `http://localhost:8000/api/v1/calenderEvent/user/${userId}`,
-    );
+    try {
+      const data = await fetchData(`/api/v1/calenderEvent/user/${userId}`);
 
-    if (res.status === 404) {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.data)) return data.data;
+
+      return [];
+    } catch (err) {
+      console.error("Failed to load user events:", err);
       return [];
     }
-
-    if (!res.ok) {
-      console.error("Failed to load user events");
-      return [];
-    }
-
-    const json = await res.json();
-    if (Array.isArray(json.data)) return json.data;
-    if (Array.isArray(json)) return json;
-    return [];
   };
 
   // ---------- search logic ----------
@@ -204,23 +197,18 @@ export default function AdminPanel() {
     };
 
     try {
-      const res = await fetch("http://localhost:8000/api/v1/calenderEvent", {
+      await fetchData("/api/v1/calenderEvent", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
-      if (!res.ok) {
-        console.error("Failed to create admin event");
-        return;
-      }
-
+      // Clear form
       setTitle("");
       setDescription("");
       setFrom("");
       setTo("");
 
-      // Обновим список по текущим фильтрам
+      // Update events list if current filter includes admin events
       await handleSearch();
     } catch (err) {
       console.error("Error creating admin event:", err);

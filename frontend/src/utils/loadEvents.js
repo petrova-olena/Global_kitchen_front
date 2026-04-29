@@ -1,4 +1,5 @@
-// Converts ISO date string to local datetime format (YYYY-MM-DDTHH:mm:ss)
+import { fetchData } from "../utils/fetchData";
+
 function normalizeToLocal(iso) {
   const d = new Date(iso);
 
@@ -26,8 +27,8 @@ function sortEvents(events) {
 
 export async function loadEvents() {
   try {
-    const res = await fetch("http://localhost:8000/api/v1/calenderEvent");
-    const data = await res.json();
+    const data = await fetchData("/api/v1/calenderEvent");
+
     const raw = Array.isArray(data) ? data : data.events || [];
 
     const normalized = raw.map((ev) => ({
