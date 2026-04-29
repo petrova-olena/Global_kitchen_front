@@ -38,6 +38,12 @@ export default function Calendar({
     }
   };
 
+  const visibleEvents = Array.isArray(events)
+    ? events.filter(
+        (ev) => ev.type === "admin" || ev.created_by === currentUser.id,
+      )
+    : [];
+
   return (
     <div className="calendar-container">
       {/* LEFT SIDE — calendar grid */}
@@ -60,7 +66,7 @@ export default function Calendar({
             year={calendar.year}
             activeDay={calendar.activeDay}
             setActiveDay={calendar.setActiveDay}
-            events={events}
+            events={visibleEvents}
           />
 
           <div className="goto-today">

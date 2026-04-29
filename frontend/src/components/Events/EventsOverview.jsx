@@ -34,7 +34,7 @@ export default function EventsOverview() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          type: currentUser.role,
+          type: "user",
           title,
           description,
           start_date,
@@ -173,9 +173,9 @@ export default function EventsOverview() {
 
   const restaurantEvents = filteredEvents.filter((e) => e.type === 'admin');
 
-  const userEvents = currentUser
-    ? filteredEvents.filter((e) => e.created_by === currentUser.id)
-    : [];
+  const userEvents = filteredEvents.filter(
+    (e) => e.type === "user" && e.created_by === currentUser.id,
+  );
 
   const reservations = [];
 
@@ -244,33 +244,35 @@ export default function EventsOverview() {
           events={restaurantEvents}
           deleteEvent={deleteEvent}
           renderItem={(item, deleteEventFromProps) => (
-            <div key={item.id} className="event-item">
-              <div className="event-title">{item.title}</div>
+            <div key={item.id} className="event-item-row">
+              <div className="event-item-left">
+                <div className="event-title">{item.title}</div>
 
-              <div className="event-time">
-                <div>
-                  <span className="event-icon">📅</span>
-                  {formatDate(item.start_date)}
-                  {formatDate(item.start_date) !==
-                    formatDate(item.end_date) && (
-                    <> — {formatDate(item.end_date)}</>
-                  )}
+                <div className="event-time">
+                  <div>
+                    <span className="event-icon">📅</span>
+                    {formatDate(item.start_date)}
+                    {formatDate(item.start_date) !==
+                      formatDate(item.end_date) && (
+                      <> — {formatDate(item.end_date)}</>
+                    )}
+                  </div>
+
+                  <div>
+                    <span className="event-icon">🕒</span>
+                    {formatTime(item.start_date)} — {formatTime(item.end_date)}
+                  </div>
                 </div>
 
-                <div>
-                  <span className="event-icon">🕒</span>
-                  {formatTime(item.start_date)} — {formatTime(item.end_date)}
-                </div>
+                <div className="event-desc">{item.description}</div>
               </div>
 
-              <div className="event-desc">{item.description}</div>
-              {/* delete only for admin */}
-              {currentUser && currentUser.role === 'admin' && (
+              {currentUser?.role === "admin" && (
                 <button
-                  className="delete-btn"
+                  className="delete-btn delete-right"
                   onClick={() => deleteEventFromProps(item.id)}
                 >
-                  Delete event
+                  🗑
                 </button>
               )}
             </div>
@@ -293,34 +295,36 @@ export default function EventsOverview() {
               item.tableId ? (
                 <ReservationCard reservation={item} />
               ) : (
-                <div key={item.id} className="event-item">
-                  <div className="event-title">{item.title}</div>
+                <div key={item.id} className="event-item-row">
+                  <div className="event-item-left">
+                    <div className="event-title">{item.title}</div>
 
-                  <div className="event-time">
-                    <div>
-                      <span className="event-icon">📅</span>
-                      {formatDate(item.start_date)}
-                      {formatDate(item.start_date) !==
-                        formatDate(item.end_date) && (
-                        <> — {formatDate(item.end_date)}</>
-                      )}
+                    <div className="event-time">
+                      <div>
+                        <span className="event-icon">📅</span>
+                        {formatDate(item.start_date)}
+                        {formatDate(item.start_date) !==
+                          formatDate(item.end_date) && (
+                          <> — {formatDate(item.end_date)}</>
+                        )}
+                      </div>
+
+                      <div>
+                        <span className="event-icon">🕒</span>
+                        {formatTime(item.start_date)} —{" "}
+                        {formatTime(item.end_date)}
+                      </div>
                     </div>
 
-                    <div>
-                      <span className="event-icon">🕒</span>
-                      {formatTime(item.start_date)} —{' '}
-                      {formatTime(item.end_date)}
-                    </div>
+                    <div className="event-desc">{item.description}</div>
                   </div>
 
-                  <div className="event-desc">{item.description}</div>
-                  {/* delete only for user events */}
-                  {currentUser && item.type === 'user' && (
+                  {currentUser && item.type === "user" && (
                     <button
-                      className="delete-btn"
+                      className="delete-btn delete-right"
                       onClick={() => deleteEventFromProps(item.id)}
                     >
-                      Delete event
+                      🗑
                     </button>
                   )}
                 </div>
