@@ -3,6 +3,7 @@ import Calendar from "../Calendar/Calendar";
 import EventsCard from "./EventsCard";
 import ReservationCard from "./ReservationCard";
 import { loadEvents } from "../../utils/loadEvents";
+import { fetchData } from "../../utils/fetchData";
 
 export default function EventsOverview() {
   const currentUser = JSON.parse(localStorage.getItem("user"));
@@ -29,7 +30,7 @@ export default function EventsOverview() {
       const start_date = from.replace("T", " ") + ":00";
       const end_date = to.replace("T", " ") + ":00";
 
-      const res = await fetch("http://localhost:8000/api/v1/calenderEvent", {
+      await fetchData("/api/v1/calenderEvent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -42,9 +43,7 @@ export default function EventsOverview() {
         }),
       });
 
-      if (res.ok) {
-        loadEvents().then(setEvents);
-      }
+      loadEvents().then(setEvents);
     } catch (err) {
       console.error("Failed to create event:", err);
     }
@@ -62,12 +61,9 @@ export default function EventsOverview() {
     if (!pendingDeleteId) return;
 
     try {
-      await fetch(
-        `http://localhost:8000/api/v1/calenderEvent/${pendingDeleteId}`,
-        {
-          method: "DELETE",
-        },
-      );
+      await fetchData(`/api/v1/calenderEvent/${pendingDeleteId}`, {
+        method: "DELETE",
+      });
 
       loadEvents().then(setEvents);
     } catch (err) {

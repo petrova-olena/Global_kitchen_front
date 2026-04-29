@@ -3,16 +3,19 @@ import ProfilePhoto from '../components/Profile/ProfilePhoto';
 import ProfileForm from '../components/Profile/ProfileForm';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { fetchData } from '../utils/fetchData';
 
 const Profile = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const { user, setUser, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [editMode, setEditMode] = useState(false);
 
   const [form, setForm] = useState({
-    username: '',
-    email: '',
+    username: user?.username || '',
+    email: user?.email || '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -21,34 +24,33 @@ const Profile = () => {
   const [profilePicFile, setProfilePicFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  // sync user -> form when user changes
+  
   useEffect(() => {
-    if (user) {
-      setForm({
-        username: user.username || '',
-        email: user.email || '',
-      });
-    }
+    if (!user) return;
+    setForm({
+      username: user.username || '',
+      email: user.email || '',
+    });
   }, [user]);
 
-  // refresh user
+  
   useEffect(() => {
     const fetchUser = async () => {
       if (!user?.id) return;
-
       try {
-        const res = await fetch(`/api/v1/users/${user.id}`);
-        if (res.ok) {
-          const fresh = await res.json();
-          setUser(fresh);
-          localStorage.setItem('user', JSON.stringify(fresh));
-        }
+        const freshUser = await fetchData(`/users/${user.id}`);
+        setUser(freshUser);
+        localStorage.setItem('user', JSON.stringify(freshUser));
+        setForm({
+          username: freshUser.username || '',
+          email: freshUser.email || '',
+        });
       } catch (err) {
-        console.error(err);
+        console.error('Error fetching user:', err);
       }
     };
-
     fetchUser();
+    // eslint-disable-next-line
   }, []);
 
   const handleLogout = () => {
@@ -56,7 +58,13 @@ const Profile = () => {
     navigate('/');
   };
 
-  const handleEdit = () => setEditMode(true);
+  const handleEdit = () => {
+    setForm({
+      username: user?.username || '',
+      email: user?.email || '',
+    });
+    setEditMode(true);
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -65,33 +73,35 @@ const Profile = () => {
   const handleCancel = () => {
     setEditMode(false);
     setProfilePicFile(null);
-
     setForm({
-      username: user.username,
-      email: user.email,
+      username: user?.username || '',
+      email: user?.email || '',
     });
   };
 
   const handleSave = async () => {
     setLoading(true);
     setError(null);
-
     try {
-      const res = await fetch(`/api/v1/users/${user.id}`, {
+      const updateData = {
+        username: form.username,
+        email: form.email,
+      };
+      
+      await fetchData(`/users/${user.id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(updateData),
       });
-
-      if (!res.ok) throw new Error('Update failed');
-
-      const updated = await res.json();
-      setUser(updated);
-      localStorage.setItem('user', JSON.stringify(updated));
-
+      const freshUser = await fetchData(`/users/${user.id}`);
+      setUser(freshUser);
+      localStorage.setItem('user', JSON.stringify(freshUser));
+      setForm({
+        username: freshUser.username || '',
+        email: freshUser.email || '',
+      });
       setEditMode(false);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Update failed');
     } finally {
       setLoading(false);
     }
@@ -106,27 +116,23 @@ const Profile = () => {
   const uploadPhoto = async (e) => {
     e.preventDefault();
     if (!profilePicFile) return;
-
     setUploading(true);
-
     try {
       const formData = new FormData();
       formData.append('profile_pic', profilePicFile);
-
-      const res = await fetch(`/api/v1/users/profile-pic/${user.id}`, {
-        method: 'PUT',
-        body: formData,
-      });
-
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/profile-pic/${user.id}`,
+        {
+          method: 'PUT',
+          body: formData,
+        }
+      );
       if (!res.ok) throw new Error('Upload failed');
-
       const data = await res.json();
-
       const updatedUser = {
         ...user,
         profile_pic: data.profile_pic,
       };
-
       setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify(updatedUser));
       setProfilePicFile(null);
@@ -139,7 +145,7 @@ const Profile = () => {
 
   return (
     <section className="profile-container">
-      {/* PROFILE CARD */}
+      
       <div className="profile-card">
         <ProfilePhoto
           user={user}
@@ -163,7 +169,7 @@ const Profile = () => {
         />
       </div>
 
-      {/* ================= OTHER SECTIONS (FULL RESTORE) ================= */}
+
 
       <div className="section-block">
         <h3 className="section-title">My Events</h3>
