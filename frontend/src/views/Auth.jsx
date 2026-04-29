@@ -27,7 +27,7 @@ const Auth = () => {
     e.preventDefault();
 
     try {
-      const data = await fetchData('/auth/login', {
+      const data = await fetchData('api/v1/auth/login', {
         method: 'POST',
         body: JSON.stringify(signinForm),
       });
@@ -48,7 +48,7 @@ const Auth = () => {
     e.preventDefault();
 
     try {
-      await fetchData('/auth/register', {
+      await fetchData('api/v1/auth/register', {
         method: 'POST',
         body: JSON.stringify(signupForm),
       });

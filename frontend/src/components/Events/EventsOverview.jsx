@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import Calendar from "../Calendar/Calendar";
-import EventsCard from "./EventsCard";
-import ReservationCard from "./ReservationCard";
-import { loadEvents } from "../../utils/loadEvents";
-import { fetchData } from "../../utils/fetchData";
+import { useState, useEffect } from 'react';
+import Calendar from '../Calendar/Calendar';
+import EventsCard from './EventsCard';
+import ReservationCard from './ReservationCard';
+import { loadEvents } from '../../utils/loadEvents';
+import { fetchData } from '../../utils/fetchData';
 
 export default function EventsOverview() {
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem('user'));
 
   const [events, setEvents] = useState([]);
 
@@ -22,17 +22,17 @@ export default function EventsOverview() {
   // ADD event
   async function addEvent(title, description, from, to) {
     if (!currentUser || !currentUser.id) {
-      console.error("User not logged in");
+      console.error('User not logged in');
       return;
     }
 
     try {
-      const start_date = from.replace("T", " ") + ":00";
-      const end_date = to.replace("T", " ") + ":00";
+      const start_date = from.replace('T', ' ') + ':00';
+      const end_date = to.replace('T', ' ') + ':00';
 
-      await fetchData("/api/v1/calenderEvent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      await fetchData('api/v1/calenderEvent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           type: "user",
           title,
@@ -45,13 +45,13 @@ export default function EventsOverview() {
 
       loadEvents().then(setEvents);
     } catch (err) {
-      console.error("Failed to create event:", err);
+      console.error('Failed to create event:', err);
     }
   }
 
   // DELETE event: open modal instead of deleting immediately
   function deleteEvent(id) {
-    console.log("deleteEvent called with id:", id);
+    console.log('deleteEvent called with id:', id);
     setPendingDeleteId(id);
     setShowModal(true);
   }
@@ -61,13 +61,13 @@ export default function EventsOverview() {
     if (!pendingDeleteId) return;
 
     try {
-      await fetchData(`/api/v1/calenderEvent/${pendingDeleteId}`, {
-        method: "DELETE",
+      await fetchData(`api/v1/calenderEvent/${pendingDeleteId}`, {
+        method: 'DELETE',
       });
 
       loadEvents().then(setEvents);
     } catch (err) {
-      console.error("Failed to delete event:", err);
+      console.error('Failed to delete event:', err);
     }
 
     setPendingDeleteId(null);
@@ -81,17 +81,17 @@ export default function EventsOverview() {
   }
 
   // Filters
-  const [mode, setMode] = useState("week");
-  const [customFrom, setCustomFrom] = useState("");
-  const [customTo, setCustomTo] = useState("");
+  const [mode, setMode] = useState('week');
+  const [customFrom, setCustomFrom] = useState('');
+  const [customTo, setCustomTo] = useState('');
 
   // Reset custom range when switching modes
   function changeMode(newMode) {
     setMode(newMode);
 
-    if (newMode !== "custom") {
-      setCustomFrom("");
-      setCustomTo("");
+    if (newMode !== 'custom') {
+      setCustomFrom('');
+      setCustomTo('');
     }
   }
 
@@ -102,7 +102,7 @@ export default function EventsOverview() {
   }
 
   function parseDate(dateStr) {
-    const [y, m, d] = dateStr.split("-").map(Number);
+    const [y, m, d] = dateStr.split('-').map(Number);
     return new Date(y, m - 1, d);
   }
 
@@ -110,7 +110,7 @@ export default function EventsOverview() {
     eventStartStr,
     eventEndStr,
     rangeStartStr,
-    rangeEndStr,
+    rangeEndStr
   ) {
     const eventStart = parseDate(eventStartStr);
     const eventEnd = parseDate(eventEndStr);
@@ -141,15 +141,15 @@ export default function EventsOverview() {
     const y = today.getFullYear();
     const m = today.getMonth();
 
-    const monthStartStr = `${y}-${String(m + 1).padStart(2, "0")}-01`;
+    const monthStartStr = `${y}-${String(m + 1).padStart(2, '0')}-01`;
     const lastDay = new Date(y, m + 1, 0).getDate();
-    const monthEndStr = `${y}-${String(m + 1).padStart(2, "0")}-${String(lastDay).padStart(2, "0")}`;
+    const monthEndStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
 
     return rangesOverlapDates(
       eventStartStr,
       eventEndStr,
       monthStartStr,
-      monthEndStr,
+      monthEndStr
     );
   }
 
@@ -164,14 +164,14 @@ export default function EventsOverview() {
     const start = toDateOnly(e.start_date);
     const end = toDateOnly(e.end_date);
 
-    if (mode === "week") return isInCurrentWeek(start, end);
-    if (mode === "month") return isInCurrentMonth(start, end);
-    if (mode === "custom") return isInCustomRange(start, end);
+    if (mode === 'week') return isInCurrentWeek(start, end);
+    if (mode === 'month') return isInCurrentMonth(start, end);
+    if (mode === 'custom') return isInCustomRange(start, end);
 
     return true;
   });
 
-  const restaurantEvents = filteredEvents.filter((e) => e.type === "admin");
+  const restaurantEvents = filteredEvents.filter((e) => e.type === 'admin');
 
   const userEvents = filteredEvents.filter(
     (e) => e.type === "user" && e.created_by === currentUser.id,
@@ -183,12 +183,12 @@ export default function EventsOverview() {
 
   function formatTime(iso) {
     const d = new Date(iso);
-    return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
 
   function formatDate(iso) {
     const d = new Date(iso);
-    return `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}`;
+    return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
   }
 
   return (
@@ -203,28 +203,28 @@ export default function EventsOverview() {
       <div className="events-overview">
         <div className="events-filter">
           <button
-            className={mode === "week" ? "active" : ""}
-            onClick={() => changeMode("week")}
+            className={mode === 'week' ? 'active' : ''}
+            onClick={() => changeMode('week')}
           >
             Current week
           </button>
 
           <button
-            className={mode === "month" ? "active" : ""}
-            onClick={() => changeMode("month")}
+            className={mode === 'month' ? 'active' : ''}
+            onClick={() => changeMode('month')}
           >
             Current month
           </button>
 
           <button
-            className={mode === "custom" ? "active" : ""}
-            onClick={() => changeMode("custom")}
+            className={mode === 'custom' ? 'active' : ''}
+            onClick={() => changeMode('custom')}
           >
             Choose period
           </button>
         </div>
 
-        {mode === "custom" && (
+        {mode === 'custom' && (
           <div className="custom-range">
             <input
               type="date"
