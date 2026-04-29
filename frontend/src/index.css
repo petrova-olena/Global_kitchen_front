@@ -1017,23 +1017,29 @@ input {
 }
 
 .profile-card {
-  display: grid !important;
-  grid-template-columns: 1fr 3fr !important;
-  align-items: center !important;
-  gap: 24px !important;
-  text-align: left !important;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  align-items: start;
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* PHOTO */
+/* LEFT SIDE */
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 .profile-photo {
-  width: 100% !important;
-  max-width: 120px !important;
-  aspect-ratio: 1/1;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .profile-photo img {
@@ -1042,32 +1048,46 @@ input {
   object-fit: cover;
 }
 
-/* INFO */
-.profile-info {
+/* RIGHT SIDE */
+.profile-right {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* BUTTONS */
-.button-group {
-  display: flex !important;
-  gap: 10px !important;
-  flex-wrap: wrap;
+.profile-right input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c7a17a;
+  border-radius: 8px;
 }
 
-/* MOBILE FIX */
+/* EDIT PHOTO AREA */
+.profile-pic-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.input-group input {
+  margin: 3px 0;
+}
+
+.password-group {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+/* MOBILE */
 @media (max-width: 600px) {
   .profile-card {
-    grid-template-columns: 1fr !important;
-    text-align: center !important;
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
-  .profile-photo {
-    margin: 0 auto;
-  }
-
-  .button-group {
-    justify-content: center;
+  .profile-right {
+    align-items: center;
   }
 }
