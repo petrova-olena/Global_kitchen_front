@@ -23,8 +23,6 @@ export default function CalendarPage() {
       </div>
 
       <EventsOverview />
-
-      {/* Later will add features here for event details and creation for admins */}
     </>
   );
 }
