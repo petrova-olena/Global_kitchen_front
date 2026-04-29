@@ -20,7 +20,9 @@ export default function DayCell({
 
   return (
     <div className={classes} onClick={onClick}>
-      {day}
+      <span className="day-number">{day}</span>
+
+      {isEvent && <span className="event-dot"></span>}
     </div>
   );
 }

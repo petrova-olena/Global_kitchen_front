@@ -32,7 +32,19 @@ export default function CalendarGrid({
     const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
 
     const hasEvent = Array.isArray(events)
-      ? events.some((e) => e.start_date.startsWith(dateStr))
+      ? events.some((e) => {
+          if (e.start_date.startsWith(dateStr)) return true;
+
+          const start = new Date(e.start_date);
+          const end = new Date(e.end_date);
+          const current = new Date(year, month, i);
+
+          start.setHours(0, 0, 0, 0);
+          end.setHours(23, 59, 59, 999);
+          current.setHours(12, 0, 0, 0);
+
+          return current >= start && current <= end;
+        })
       : false;
 
     days.push(

@@ -119,15 +119,26 @@ main {
   height: 40px;
   font-size: 16px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 1px solid #452209;
   cursor: pointer;
+  position: relative;
 }
 
 .calendar .day.today {
   font-weight: bold;
   font-size: 18px;
+}
+
+.day-number {
+  line-height: 1;
+}
+
+.has-event .day-number {
+  font-weight: 600;
+  color: #a26a42;
 }
 
 .calendar-right .today-date {
