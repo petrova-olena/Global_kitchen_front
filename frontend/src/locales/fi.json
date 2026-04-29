@@ -52,6 +52,25 @@
     "startTime": "Alkamisaika",
     "endTime": "Päättymisaika"
   },
+  "dailyMenu": {
+    "title": "Päivän ruokalista",
+    "subtitle": "Valittu valikoima tämän päivän ruokia — yksi jokaisesta kategoriasta.",
+    "soupOfDay": "Päivän keitto",
+    "soupDesc": "Silkkinen tomaattikeitto basilikalla.",
+    "mainOfDay": "Päivän pääruoka",
+    "mainDesc": "Grillipääty riisillä ja kasviksilla.",
+    "sideOfDay": "Päivän lisäke",
+    "sideDesc": "Yrttiperunat.",
+    "saladOfDay": "Päivän salaatti",
+    "saladDesc": "Tuore puutarhansalaatti vinaigrette-kastikkeella.",
+    "dessertOfDay": "Päivän jälkiruoka",
+    "dessertDesc": "Suklaaakakku kermalla.",
+    "drinkOfDay": "Päivän juoma",
+    "drinkDesc": "Kotitekoinen limonadi."
+  },
+  "weeklyMenu": {
+    "title": "Viikon ruokalista"
+  },
   "menu": {
     "title": "Ruokalista",
     "soups": "Keitot",

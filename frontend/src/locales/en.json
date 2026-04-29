@@ -52,6 +52,25 @@
     "startTime": "Start Time",
     "endTime": "End Time"
   },
+  "dailyMenu": {
+    "title": "Daily Menu",
+    "subtitle": "A curated selection of dishes for today — one from each category.",
+    "soupOfDay": "Soup of the Day",
+    "soupDesc": "Creamy tomato soup with basil.",
+    "mainOfDay": "Main Dish of the Day",
+    "mainDesc": "Grilled chicken with rice and vegetables.",
+    "sideOfDay": "Side Dish of the Day",
+    "sideDesc": "Herb roasted potatoes.",
+    "saladOfDay": "Salad of the Day",
+    "saladDesc": "Fresh garden salad with vinaigrette.",
+    "dessertOfDay": "Dessert of the Day",
+    "dessertDesc": "Chocolate cake with cream.",
+    "drinkOfDay": "Drink of the Day",
+    "drinkDesc": "Homemade lemonade."
+  },
+  "weeklyMenu": {
+    "title": "Weekly Menu"
+  },
   "menu": {
     "title": "Our Menu",
     "soups": "Soups",
