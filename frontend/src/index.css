@@ -1138,3 +1138,12 @@ input {
   cursor: pointer;
   font-size: 18px;
 }
+
+.error-msg {
+  color: #ff4d4f;
+  background: #ffecec;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
