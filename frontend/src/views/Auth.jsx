@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import '../auth.css';
-import signInImg from '../assets/sign_in.png';
-import signUpImg from '../assets/sign_up.png';
-import { fetchData } from '../utils/fetchData';
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import "../auth.css";
+import signInImg from "../assets/sign_in.png";
+import signUpImg from "../assets/sign_up.png";
+import { fetchData } from "../utils/fetchData";
 
 const Auth = () => {
   const { setUser, setToken } = useContext(AuthContext);
@@ -13,34 +13,34 @@ const Auth = () => {
   const [isSignIn, setIsSignIn] = useState(true);
 
   const [signinForm, setSigninForm] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const [signupForm, setSignupForm] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleSignIn = async (e) => {
     e.preventDefault();
 
     try {
-      const data = await fetchData('api/v1/auth/login', {
-        method: 'POST',
+      const data = await fetchData("/api/v1/auth/login", {
+        method: "POST",
         body: JSON.stringify(signinForm),
       });
 
       setUser(data.user);
       setToken(data.token);
 
-      localStorage.setItem('user', JSON.stringify(data.user));
-      localStorage.setItem('token', data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", data.token);
 
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      console.error('Login failed:', err);
+      console.error("Login failed:", err);
     }
   };
 
@@ -48,22 +48,22 @@ const Auth = () => {
     e.preventDefault();
 
     try {
-      await fetchData('api/v1/auth/register', {
-        method: 'POST',
+      await fetchData("api/v1/auth/register", {
+        method: "POST",
         body: JSON.stringify(signupForm),
       });
 
       setIsSignIn(true);
     } catch (err) {
-      console.error('Signup failed:', err);
+      console.error("Signup failed:", err);
     }
   };
 
   return (
     <div className="auth-container">
-      <div className={`auth-card ${isSignIn ? 'left' : 'right'}`}>
+      <div className={`auth-card ${isSignIn ? "left" : "right"}`}>
         <div
-          key={isSignIn ? 'signin' : 'signup'}
+          key={isSignIn ? "signin" : "signup"}
           className="auth-image"
           style={{
             backgroundImage: `url(${isSignIn ? signInImg : signUpImg})`,

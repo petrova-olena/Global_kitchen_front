@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ProfileOverview from './ProfileOverview';
-import fetchData from '../../utils/fetchData';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import ProfileOverview from "./ProfileOverview";
+import { fetchData } from "../../utils/fetchData";
 
 const ProfileContainer = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
   const [editMode, setEditMode] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '' });
+  const [form, setForm] = useState({ name: "", email: "" });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [profilePicFile, setProfilePicFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [events, setEvents] = useState([]);
@@ -19,14 +19,14 @@ const ProfileContainer = () => {
     const fetchProfile = async () => {
       setLoading(true);
       try {
-        const userData = await fetchData('/api/profile');
+        const userData = await fetchData("/api/profile");
         setUser(userData);
         setForm({ name: userData.name, email: userData.email });
 
-        const eventsData = await fetchData('/api/events');
+        const eventsData = await fetchData("/api/events");
         setEvents(eventsData.filter((e) => e.created_by === userData.id));
       } catch {
-        setError('Failed to load profile');
+        setError("Failed to load profile");
       } finally {
         setLoading(false);
       }
@@ -61,7 +61,7 @@ const ProfileContainer = () => {
   };
 
   const handleLogout = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
