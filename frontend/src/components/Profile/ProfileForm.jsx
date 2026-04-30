@@ -10,8 +10,11 @@ const ProfileForm = ({
   handleCancel,
   handleLogout,
   handleEdit,
+  handleDeleteAccount,
   user,
 }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
+
   return (
     <div className="profile-right">
       {editMode ? (
@@ -24,22 +27,21 @@ const ProfileForm = ({
 
           <input name="email" value={form.email} onChange={handleChange} />
 
-          <div className="password-group">
+          <div className="password-wrapper">
             <input
-              name="password_old"
-              type="password"
-              placeholder="Current Password"
-              value={form.password_old || ''}
+              name="newPassword"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="New Password"
+              value={form.newPassword || ''}
               onChange={handleChange}
             />
 
-            <input
-              name="password_new"
-              type="password"
-              placeholder="New Password"
-              value={form.password_new || ''}
-              onChange={handleChange}
-            />
+            <span
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? '👁' : '🙈'}
+            </span>
           </div>
 
           <div className="button-group">
@@ -70,6 +72,13 @@ const ProfileForm = ({
 
             <button type="button" className="action-btn" onClick={handleLogout}>
               Logout
+            </button>
+            <button
+              type="button"
+              className="action-btn delete-btn"
+              onClick={handleDeleteAccount}
+            >
+              Delete Profile
             </button>
           </div>
         </div>

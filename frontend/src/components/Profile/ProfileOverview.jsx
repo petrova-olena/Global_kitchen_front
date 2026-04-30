@@ -21,6 +21,7 @@ const ProfileOverview = ({
   onFileChange,
   uploadPhoto,
   handleLogout,
+  handleDeleteAccount,
 }) => {
   const navigate = useNavigate();
 
@@ -48,6 +49,7 @@ const ProfileOverview = ({
           handleCancel={handleCancel}
           handleLogout={handleLogout}
           handleEdit={handleEdit}
+          handleDeleteAccount={handleDeleteAccount}
           user={user}
         />
       </div>

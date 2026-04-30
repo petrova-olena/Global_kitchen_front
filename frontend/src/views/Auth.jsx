@@ -48,8 +48,8 @@ const Auth = () => {
     e.preventDefault();
 
     try {
-      await fetchData("api/v1/auth/register", {
-        method: "POST",
+      await fetchData('api/v1/users', {
+        method: 'POST',
         body: JSON.stringify(signupForm),
       });
 
