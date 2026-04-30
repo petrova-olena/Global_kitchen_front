@@ -20,6 +20,7 @@ export default function AdminPanel() {
   // Users
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [userMap, setUserMap] = useState({});
 
   // Events (result of search)
   const [events, setEvents] = useState([]);
@@ -40,10 +41,17 @@ export default function AdminPanel() {
 
   // Load all users
   useEffect(() => {
-    fetchData("/api/v1/users")
+    fetchData("/users")
       .then((data) => {
         const filtered = data.filter((u) => u.role !== "admin");
         setUsers(filtered);
+
+        // Create user ID -> name map for easy lookup when displaying events
+        const map = {};
+        data.forEach((u) => {
+          map[u.id] = u.name || u.username || u.email; // подстраховка
+        });
+        setUserMap(map);
 
         if (filtered.length > 0) {
           setSelectedUserId(filtered[0].id);
@@ -120,7 +128,7 @@ export default function AdminPanel() {
   // ---------- API helpers ----------
   const fetchAllEvents = async () => {
     try {
-      const data = await fetchData("/api/v1/calenderEvent");
+      const data = await fetchData("/calenderEvent");
 
       if (Array.isArray(data)) return data;
       if (Array.isArray(data?.data)) return data.data;
@@ -134,7 +142,7 @@ export default function AdminPanel() {
 
   const fetchUserEvents = async (userId) => {
     try {
-      const data = await fetchData(`/api/v1/calenderEvent/user/${userId}`);
+      const data = await fetchData(`/calenderEvent/user/${userId}`);
 
       if (Array.isArray(data)) return data;
       if (Array.isArray(data?.data)) return data.data;
@@ -199,7 +207,7 @@ export default function AdminPanel() {
     };
 
     try {
-      await fetchData("/api/v1/calenderEvent", {
+      await fetchData("/calenderEvent", {
         method: "POST",
         body: JSON.stringify(body),
       });
@@ -403,6 +411,10 @@ export default function AdminPanel() {
               </div>
 
               <div className="event-desc">{ev.description}</div>
+
+              <div className="event-author">
+                Added by: {userMap[ev.created_by] || "Unknown"}
+              </div>
             </div>
           ))}
       </div>

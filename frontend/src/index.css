@@ -1,3 +1,31 @@
+/* Profile Events Table */
+.events-table-wrapper {
+  overflow-x: auto;
+}
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.events-table th,
+.events-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+.events-table thead tr {
+  background: #f5f5f5;
+}
+.events-table-delete-cell {
+  text-align: center;
+}
+.events-table-delete-btn {
+  padding: 4px 10px;
+  font-size: 0.95em;
+}
+.events-table-empty {
+  text-align: center;
+  padding: 12px;
+}
 .header-center {
   flex: 1;
   display: flex;
@@ -89,7 +117,7 @@ h3 {
 /* HERO */
 .hero {
   height: 98vh;
-  background: url('assets/finland_banner.jpg') center/cover no-repeat;
+  background: url("assets/finland_banner.jpg") center/cover no-repeat;
   position: relative;
   text-align: center;
 }
@@ -695,6 +723,17 @@ input {
   background: #452209;
 }
 
+/* RESERVATIONS */
+.reservation-card {
+  padding: 16px;
+  border: 1px solid #452209;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 /* -------------
       TABLET 
    ------------- */
@@ -1129,4 +1168,32 @@ input {
   .profile-right {
     align-items: center;
   }
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.error-msg {
+  color: #ff4d4f;
+  background: #ffecec;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
 }

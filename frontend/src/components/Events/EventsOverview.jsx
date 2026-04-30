@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Calendar from "../Calendar/Calendar";
 import EventsCard from "./EventsCard";
 import ReservationCard from "./ReservationCard";
@@ -16,6 +16,9 @@ export default function EventsOverview() {
   const [showModal, setShowModal] = useState(false);
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
 
+  // Reservation state
+  const [userReservations, setUserReservations] = useState([]);
+
   // Load events from backend on mount
   useEffect(() => {
     loadEvents().then(setEvents);
@@ -32,11 +35,11 @@ export default function EventsOverview() {
       const start_date = from.replace("T", " ") + ":00";
       const end_date = to.replace("T", " ") + ":00";
 
-      await fetchData("/api/v1/calenderEvent", {
+      await fetchData("/calenderEvent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: currentUser.role,
+          type: "user",
           title,
           description,
           start_date,
@@ -53,7 +56,6 @@ export default function EventsOverview() {
 
   // DELETE event: open modal instead of deleting immediately
   function deleteEvent(id) {
-    console.log("deleteEvent called with id:", id);
     setPendingDeleteId(id);
     setShowModal(true);
   }
@@ -63,7 +65,7 @@ export default function EventsOverview() {
     if (!pendingDeleteId) return;
 
     try {
-      await fetchData(`/api/v1/calenderEvent/${pendingDeleteId}`, {
+      await fetchData(`/calenderEvent/${pendingDeleteId}`, {
         method: "DELETE",
       });
 
@@ -175,11 +177,9 @@ export default function EventsOverview() {
 
   const restaurantEvents = filteredEvents.filter((e) => e.type === "admin");
 
-  const userEvents = currentUser
-    ? filteredEvents.filter((e) => e.created_by === currentUser.id)
-    : [];
-
-  const reservations = [];
+  const userEvents = filteredEvents.filter(
+    (e) => e.type === "user" && e.created_by === currentUser.id,
+  );
 
   // ---------- formatting ----------
 
@@ -192,6 +192,39 @@ export default function EventsOverview() {
     const d = new Date(iso);
     return `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}`;
   }
+
+  // ----------- mapping reservation to event format for calendar display -----------
+  useEffect(() => {
+    if (!currentUser?.id) return;
+
+    async function loadUserReservations() {
+      try {
+        const data = await fetchData(`/reservation/${currentUser.id}`);
+        setUserReservations(data);
+      } catch (err) {
+        console.error("Failed to load user reservations:", err);
+      }
+    }
+
+    loadUserReservations();
+  }, [currentUser]);
+
+  function mapReservationToEvent(res) {
+    return {
+      id: res.id,
+      tableId: res.table_id,
+      from: res.reservation_time,
+      to: res.expires_at,
+      guests: res.number_of_people,
+      notes: `Table #${res.table_id}`,
+      type: "reservation",
+    };
+  }
+
+  const myReservations = useMemo(
+    () => userReservations.map(mapReservationToEvent),
+    [userReservations],
+  );
 
   return (
     <>
@@ -246,33 +279,35 @@ export default function EventsOverview() {
           events={restaurantEvents}
           deleteEvent={deleteEvent}
           renderItem={(item, deleteEventFromProps) => (
-            <div key={item.id} className="event-item">
-              <div className="event-title">{item.title}</div>
+            <div key={item.id} className="event-item-row">
+              <div className="event-item-left">
+                <div className="event-title">{item.title}</div>
 
-              <div className="event-time">
-                <div>
-                  <span className="event-icon">📅</span>
-                  {formatDate(item.start_date)}
-                  {formatDate(item.start_date) !==
-                    formatDate(item.end_date) && (
-                    <> — {formatDate(item.end_date)}</>
-                  )}
+                <div className="event-time">
+                  <div>
+                    <span className="event-icon">📅</span>
+                    {formatDate(item.start_date)}
+                    {formatDate(item.start_date) !==
+                      formatDate(item.end_date) && (
+                      <> — {formatDate(item.end_date)}</>
+                    )}
+                  </div>
+
+                  <div>
+                    <span className="event-icon">🕒</span>
+                    {formatTime(item.start_date)} — {formatTime(item.end_date)}
+                  </div>
                 </div>
 
-                <div>
-                  <span className="event-icon">🕒</span>
-                  {formatTime(item.start_date)} — {formatTime(item.end_date)}
-                </div>
+                <div className="event-desc">{item.description}</div>
               </div>
 
-              <div className="event-desc">{item.description}</div>
-              {/* delete only for admin */}
-              {currentUser && currentUser.role === "admin" && (
+              {currentUser?.role === "admin" && (
                 <button
-                  className="delete-btn"
+                  className="delete-btn delete-right"
                   onClick={() => deleteEventFromProps(item.id)}
                 >
-                  Delete event
+                  🗑
                 </button>
               )}
             </div>
@@ -289,40 +324,42 @@ export default function EventsOverview() {
         ) : (
           <EventsCard
             title="My Events"
-            events={[...reservations, ...userEvents]}
+            events={[...myReservations, ...userEvents]}
             deleteEvent={deleteEvent}
             renderItem={(item, deleteEventFromProps) =>
-              item.tableId ? (
-                <ReservationCard reservation={item} />
+              item.type === "reservation" ? (
+                <ReservationCard key={item.id} reservation={item} />
               ) : (
-                <div key={item.id} className="event-item">
-                  <div className="event-title">{item.title}</div>
+                <div key={item.id} className="event-item-row">
+                  <div className="event-item-left">
+                    <div className="event-title">{item.title}</div>
 
-                  <div className="event-time">
-                    <div>
-                      <span className="event-icon">📅</span>
-                      {formatDate(item.start_date)}
-                      {formatDate(item.start_date) !==
-                        formatDate(item.end_date) && (
-                        <> — {formatDate(item.end_date)}</>
-                      )}
+                    <div className="event-time">
+                      <div>
+                        <span className="event-icon">📅</span>
+                        {formatDate(item.start_date)}
+                        {formatDate(item.start_date) !==
+                          formatDate(item.end_date) && (
+                          <> — {formatDate(item.end_date)}</>
+                        )}
+                      </div>
+
+                      <div>
+                        <span className="event-icon">🕒</span>
+                        {formatTime(item.start_date)} —{" "}
+                        {formatTime(item.end_date)}
+                      </div>
                     </div>
 
-                    <div>
-                      <span className="event-icon">🕒</span>
-                      {formatTime(item.start_date)} —{" "}
-                      {formatTime(item.end_date)}
-                    </div>
+                    <div className="event-desc">{item.description}</div>
                   </div>
 
-                  <div className="event-desc">{item.description}</div>
-                  {/* delete only for user events */}
                   {currentUser && item.type === "user" && (
                     <button
-                      className="delete-btn"
+                      className="delete-btn delete-right"
                       onClick={() => deleteEventFromProps(item.id)}
                     >
-                      Delete event
+                      🗑
                     </button>
                   )}
                 </div>

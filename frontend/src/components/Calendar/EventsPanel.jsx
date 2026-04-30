@@ -46,14 +46,11 @@ export default function EventsPanel({
   }
 
   // Filter events that occur on the selected day
-  // --- FILTER BY USER ROLE ---
   const visibleEvents = events.filter((e) => {
-    if (currentUser && currentUser.role === "admin") return true;
+    if (e.type === "admin") return true;
 
     // user sees only admin events + their own
-    return (
-      e.type === "admin" || (currentUser && e.created_by === currentUser.id)
-    );
+    return e.type === "user" && e.created_by === currentUser.id;
   });
 
   // --- FILTER BY SELECTED DAY ---
@@ -65,44 +62,56 @@ export default function EventsPanel({
     <div className="events-panel">
       <h3>Events for {selectedDate}</h3>
 
-      {dayEvents.length === 0 && <p>No events</p>}
+      {/* Scrollable area */}
+      <div className="events-scroll">
+        {dayEvents.length === 0 && <p>No events</p>}
 
-      {dayEvents.map((ev) => (
-        <div key={ev.id} className="event-item">
-          <div className="event-title">{ev.title}</div>
+        {dayEvents.map((ev) => (
+          <div key={ev.id} className="event-item-row">
+            <div className="event-item-left">
+              <div className="event-title">{ev.title}</div>
 
-          <div className="event-time">
-            {/* Date (one or range) */}
-            <div>
-              <span className="event-icon">📅</span>
-              {formatDate(ev.start_date)}
-              {formatDate(ev.start_date) !== formatDate(ev.end_date) && (
-                <> — {formatDate(ev.end_date)}</>
-              )}
+              <div className="event-time">
+                <div>
+                  <span className="event-icon">📅</span>
+                  {formatDate(ev.start_date)}
+                  {formatDate(ev.start_date) !== formatDate(ev.end_date) && (
+                    <> — {formatDate(ev.end_date)}</>
+                  )}
+                </div>
+
+                <div>
+                  <span className="event-icon">🕒</span>
+                  {formatTime(ev.start_date)} — {formatTime(ev.end_date)}
+                </div>
+              </div>
+
+              <div className="event-desc">{ev.description}</div>
             </div>
 
-            {/* Time */}
-            <div>
-              <span className="event-icon">🕒</span>
-              {formatTime(ev.start_date)} — {formatTime(ev.end_date)}
-            </div>
+            {(ev.type === "user" || currentUser.role === "admin") && (
+              <button
+                className="delete-btn delete-right"
+                onClick={() => deleteEvent(ev.id)}
+              >
+                🗑
+              </button>
+            )}
           </div>
+        ))}
+      </div>
 
-          <div className="event-desc">{ev.description}</div>
-          {/* --- DELETE BUTTON LOGIC --- */}
-          {(ev.type === "user" || currentUser.role === "admin") && (
-            <button className="delete-btn" onClick={() => deleteEvent(ev.id)}>
-              Delete event
-            </button>
-          )}
-        </div>
-      ))}
-
-      {currentUser?.role === "admin" && (
-        <button className="admin-panel-btn" onClick={() => navigate("/admin")}>
-          Admin Panel
-        </button>
-      )}
+      {/* Footer with buttons */}
+      <div className="events-footer">
+        {currentUser?.role === "admin" && (
+          <button
+            className="admin-panel-btn"
+            onClick={() => navigate("/admin")}
+          >
+            Admin Panel
+          </button>
+        )}
+      </div>
     </div>
   );
 }
