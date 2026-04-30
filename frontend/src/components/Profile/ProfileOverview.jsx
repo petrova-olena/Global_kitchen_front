@@ -2,6 +2,7 @@ import React from 'react';
 import ProfilePhoto from './ProfilePhoto';
 import ProfileForm from './ProfileForm';
 import ProfileEventsTable from './ProfileEventsTable';
+import ProfileReservationsTable from './ProfileReservationsTable';
 import { useNavigate } from 'react-router-dom';
 
 const ProfileOverview = ({
@@ -13,6 +14,8 @@ const ProfileOverview = ({
   profilePicFile,
   uploading,
   events,
+  reservations,
+  handleCancelReservation,
   handleEdit,
   handleChange,
   handleSave,
@@ -68,14 +71,11 @@ const ProfileOverview = ({
 
       <div className="section-block">
         <h3 className="section-title">My Reservations</h3>
-        <ul className="list">
-          <li>
-            Table for 2 — 28.01 — 19:00 <span className="cancel">Cancel</span>
-          </li>
-          <li>
-            Table for 4 — 30.01 — 18:30 <span className="cancel">Cancel</span>
-          </li>
-        </ul>
+
+        <ProfileReservationsTable
+          reservations={reservations}
+          onCancel={handleCancelReservation}
+        />
       </div>
 
       <div className="section-block">

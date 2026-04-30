@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import ProfileOverview from "./ProfileOverview";
-import { fetchData } from "../../utils/fetchData";
-import { AuthContext } from "../../context/AuthContext";
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ProfileOverview from './ProfileOverview';
+import { fetchData } from '../../utils/fetchData';
+import { AuthContext } from '../../context/AuthContext';
 
 const ProfileContainer = () => {
   const navigate = useNavigate();
@@ -12,9 +12,9 @@ const ProfileContainer = () => {
   const [editMode, setEditMode] = useState(false);
 
   const [form, setForm] = useState({
-    username: user?.username || "",
-    email: user?.email || "",
-    newPassword: "",
+    username: user?.username || '',
+    email: user?.email || '',
+    newPassword: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -22,13 +22,14 @@ const ProfileContainer = () => {
   const [profilePicFile, setProfilePicFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [events, setEvents] = useState([]);
+  const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
     if (!user) return;
     setForm((prev) => ({
       ...prev,
-      username: user.username || "",
-      email: user.email || "",
+      username: user.username || '',
+      email: user.email || '',
     }));
   }, [user]);
 
@@ -40,10 +41,15 @@ const ProfileContainer = () => {
       try {
         const freshUser = await fetchData(`/users/${user.id}`);
         setUser(freshUser);
-        localStorage.setItem("user", JSON.stringify(freshUser));
+        localStorage.setItem('user', JSON.stringify(freshUser));
 
         const eventsData = await fetchData(`/calenderEvent`);
         setEvents(eventsData.filter((e) => e.created_by === freshUser.id));
+
+        const reservationsData = await fetchData(`/reservation`);
+        setReservations(
+          reservationsData.filter((r) => r.reserver_id === freshUser.id)
+        );
       } catch {
         setError('Failed to load profile');
       } finally {
@@ -64,15 +70,15 @@ const ProfileContainer = () => {
     setEditMode(false);
     setProfilePicFile(null);
     setForm({
-      username: user?.username || "",
-      email: user?.email || "",
-      newPassword: "",
+      username: user?.username || '',
+      email: user?.email || '',
+      newPassword: '',
     });
   };
 
   const handleSave = async () => {
     setLoading(true);
-    setError("");
+    setError('');
 
     try {
       const updateData = {
@@ -92,18 +98,18 @@ const ProfileContainer = () => {
         });
 
         logout();
-        navigate("/");
+        navigate('/');
 
         return;
       }
 
       const freshUser = await fetchData(`/users/${user.id}`);
       setUser(freshUser);
-      localStorage.setItem("user", JSON.stringify(freshUser));
+      localStorage.setItem('user', JSON.stringify(freshUser));
 
       setEditMode(false);
     } catch (err) {
-      setError(err.message || "Update failed");
+      setError(err.message || 'Update failed');
     } finally {
       setLoading(false);
     }
@@ -111,7 +117,7 @@ const ProfileContainer = () => {
 
   const handleDeleteAccount = async () => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete your account? This action cannot be undone.",
+      'Are you sure you want to delete your account? This action cannot be undone.'
     );
 
     if (!confirmDelete) return;
@@ -122,10 +128,10 @@ const ProfileContainer = () => {
       });
 
       logout();
-      navigate("/");
+      navigate('/');
     } catch (err) {
-      console.error("Account delete failed:", err);
-      setError("Failed to delete account");
+      console.error('Account delete failed:', err);
+      setError('Failed to delete account');
     }
   };
 
@@ -137,7 +143,7 @@ const ProfileContainer = () => {
 
       setEvents(events.filter((e) => e.id !== id));
     } catch (err) {
-      console.error("Delete failed:", err);
+      console.error('Delete failed:', err);
     }
   };
 
@@ -154,23 +160,23 @@ const ProfileContainer = () => {
     setUploading(true);
     try {
       const formData = new FormData();
-      formData.append("profile_pic", profilePicFile);
+      formData.append('profile_pic', profilePicFile);
 
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/users/profile-pic/${user.id}`,
         {
-          method: "PUT",
+          method: 'PUT',
           body: formData,
-        },
+        }
       );
 
-      if (!res.ok) throw new Error("Upload failed");
+      if (!res.ok) throw new Error('Upload failed');
 
       const data = await res.json();
 
       const updatedUser = { ...user, profile_pic: data.profile_pic };
       setUser(updatedUser);
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+      localStorage.setItem('user', JSON.stringify(updatedUser));
 
       setProfilePicFile(null);
     } catch (err) {
@@ -180,9 +186,21 @@ const ProfileContainer = () => {
     }
   };
 
+  const handleCancelReservation = async (id) => {
+    try {
+      await fetchData(`/reservation/${id}`, {
+        method: 'DELETE',
+      });
+
+      setReservations(reservations.filter((r) => r.id !== id));
+    } catch (err) {
+      console.error('Cancel failed:', err);
+    }
+  };
+
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -204,6 +222,8 @@ const ProfileContainer = () => {
       uploadPhoto={uploadPhoto}
       handleLogout={handleLogout}
       handleDeleteAccount={handleDeleteAccount}
+      reservations={reservations}
+      handleCancelReservation={handleCancelReservation}
     />
   );
 };
