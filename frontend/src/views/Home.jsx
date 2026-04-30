@@ -1,25 +1,28 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       {/*-- HERO / BANNER --*/}
       <section className="hero">
         <div className="hero-overlay">
           <div className="hero-text">
-            <h1>Welcome to Finnish Week</h1>
-            <p>Discover the taste of Nordic cuisine</p>
+            <h1>{t('home.title')}</h1>
+            <p>{t('home.subtitle')}</p>
           </div>
 
           <div className="hero-buttons">
-            <Link to="calendar.html" className="btn">
-              Go to Calendar
+            <Link to="/calendar" className="btn">
+              {t('home.goToCalendar')}
             </Link>
-            <Link to="menu.html" className="btn">
-              Menu
+            <Link to="/menu" className="btn">
+              {t('home.goToMenu')}
             </Link>
-            <Link to="booking.html" className="btn">
-              Reserve
+            <Link to="/profile" className="btn">
+              {t('home.makeReservation')}
             </Link>
           </div>
         </div>
@@ -27,29 +30,20 @@ const Home = () => {
 
       {/*-- ABOUT US --*/}
       <section className="about">
-        <h2 className="about-title">About Us</h2>
+        <h2 className="about-title">{t('home.aboutTitle')}</h2>
 
         <div className="about-columns">
           <div className="about-left">
             <div className="about-text">
               <p>
-                Global Kitchen brings world cuisine to your table. Every week we
-                explore a new country through food. Global Kitchen brings world
-                cuisine to your table. Every week we explore a new country
-                through food. Global Kitchen brings world cuisine to your table.
-                Every week we explore a new country through food. Global Kitchen
-                brings world cuisine to your table. Every week we explore a new
-                country through food. Global Kitchen brings world cuisine to
-                your table. Every week we explore a new country through food.
-                Global Kitchen brings world cuisine to your table. Every week we
-                explore a new country through food.
+                {t('home.aboutText')}
               </p>
             </div>
 
             <div className="about-stats">
-              <div className="stat-item">Awards</div>
-              <div className="stat-item">Customers</div>
-              <div className="stat-item">Experience</div>
+              <div className="stat-item">{t('home.awards')}</div>
+              <div className="stat-item">{t('home.customers')}</div>
+              <div className="stat-item">{t('home.experience')}</div>
             </div>
           </div>
 
@@ -64,19 +58,19 @@ const Home = () => {
 
       {/*-- MENU PREVIEW --*/}
       <section className="menu-preview">
-        <h2>Our Menu</h2>
-        <p>Explore this week's dishes</p>
+        <h2>{t('home.ourMenu')}</h2>
+        <p>{t('home.exploreWeek')}</p>
 
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>Dish Name</h3>
+            <h3>{t('menu.dishName')}</h3>
             <p className="price">12.90€</p>
-            <p className="desc">Short description of the dish.</p>
-            <div className="diet">Vegan • Gluten-free</div>
+            <p className="desc">{t('menu.shortDescription')}</p>
+            <div className="diet">{t('menu.vegan')} • {t('menu.glutenFree')}</div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
-                Details
+                {t('menu.details')}
               </Link>
               <button className="add-btn">+</button>
             </div>
@@ -84,13 +78,13 @@ const Home = () => {
 
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>Dish Name</h3>
+            <h3>{t('menu.dishName')}</h3>
             <p className="price">14.50€</p>
-            <p className="desc">Short description of the dish.</p>
-            <div className="diet">Vegetarian</div>
+            <p className="desc">{t('menu.shortDescription')}</p>
+            <div className="diet">{t('menu.vegetarian')}</div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
-                Details
+                {t('menu.details')}
               </Link>
               <button className="add-btn">+</button>
             </div>
@@ -98,10 +92,10 @@ const Home = () => {
 
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>Dish Name</h3>
+            <h3>{t('menu.dishName')}</h3>
             <p className="price">12.90€</p>
-            <p className="desc">Short description of the dish.</p>
-            <div className="diet">Vegan • Gluten-free</div>
+            <p className="desc">{t('menu.shortDescription')}</p>
+            <div className="diet">{t('menu.vegan')} • {t('menu.glutenFree')}</div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
                 Details

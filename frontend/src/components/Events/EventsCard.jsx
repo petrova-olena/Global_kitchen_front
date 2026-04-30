@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function EventsCard({
   title,
@@ -7,6 +8,7 @@ export default function EventsCard({
   emptyText,
   deleteEvent,
 }) {
+  const { t } = useTranslation();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
   const [isOpen, setIsOpen] = useState(window.innerWidth >= 900);
 
@@ -35,7 +37,7 @@ export default function EventsCard({
       {(!isMobile || isOpen) && (
         <div className="events-card-content">
           {events.length === 0 ? (
-            <p className="empty">{emptyText || "No events"}</p>
+            <p className="empty">{emptyText || t('calendar.noEvents')}</p>
           ) : (
             events.map((ev) =>
               renderItem ? (

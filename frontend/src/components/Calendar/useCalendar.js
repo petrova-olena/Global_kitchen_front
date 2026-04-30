@@ -7,20 +7,8 @@ export function useCalendar() {
   const [year, setYear] = useState(today.getFullYear());
   const [activeDay, setActiveDay] = useState(today.getDate());
 
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  // Months will be passed from component level for i18n support
+  const months = [];
 
   // Navigate to next month, adjusting year if needed
   const nextMonth = () => {

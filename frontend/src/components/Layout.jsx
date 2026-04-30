@@ -1,10 +1,18 @@
 import { Link, Outlet } from 'react-router-dom';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import logo from '../assets/logotest.png';
 import { AuthContext } from '../context/AuthContext';
 
 const Layout = () => {
   const { user } = useContext(AuthContext);
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem('language', lng);
+  };
+
   return (
     <>
       {/*-- HEADER --*/}
@@ -12,15 +20,30 @@ const Layout = () => {
         <img src={logo} alt="Global Kitchen Logo" className="logo" />
         <div className="header-center">
           {user && (
-            <span className="welcome-username">Welcome, {user.username}!</span>
+            <span className="welcome-username">{t('header.welcome')}, {user.username}!</span>
           )}
         </div>
         <nav className="nav">
-          <Link to="/">Home</Link>
-          <Link to="/calendar">Calendar</Link>
-          <Link to="/menu">Menu</Link>
-          {user && <Link to="/profile">Profile</Link>}
-          <Link to="/en">EN</Link>
+          <Link to="/">{t('nav.home')}</Link>
+          <Link to="/calendar">{t('nav.calendar')}</Link>
+          <Link to="/menu">{t('nav.menu')}</Link>
+          {user && <Link to="/profile">{t('nav.profile')}</Link>}
+          <div className="language-switcher">
+            <button
+              onClick={() => changeLanguage('en')}
+              className={i18n.language === 'en' ? 'lang-btn active' : 'lang-btn'}
+              title="English"
+            >
+              EN
+            </button>
+            <button
+              onClick={() => changeLanguage('fi')}
+              className={i18n.language === 'fi' ? 'lang-btn active' : 'lang-btn'}
+              title="Suomi"
+            >
+              FI
+            </button>
+          </div>
           {!user && (
             <Link to="/auth" className="login-icon">
               👤
@@ -44,8 +67,8 @@ const Layout = () => {
 
       {/*-- FOOTER --*/}
       <footer className="footer">
-        <p>Global Kitchen • Helsinki, Finland</p>
-        <p>Contact: info@globalkitchen.fi</p>
+        <p>{t('footer.address')}</p>
+        <p>{t('footer.contact')}</p>
       </footer>
     </>
   );

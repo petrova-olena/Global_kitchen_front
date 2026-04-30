@@ -30,14 +30,14 @@ const Auth = () => {
         <div className="auth-form">
           {isSignIn ? (
             <>
-              <h2>Sign In</h2>
+              <h2>{t('auth.signIn')}</h2>
 
               {error && <p className="error-msg">{error}</p>}
 
               <form onSubmit={handleSignIn}>
                 <input
                   type="text"
-                  placeholder="Username"
+                  placeholder={t('auth.username')}
                   value={signinForm.username}
                   onChange={(e) =>
                     setSigninForm({ ...signinForm, username: e.target.value })
@@ -46,30 +46,30 @@ const Auth = () => {
 
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder={t('auth.password')}
                   value={signinForm.password}
                   onChange={(e) =>
                     setSigninForm({ ...signinForm, password: e.target.value })
                   }
                 />
 
-                <button type="submit">Sign In</button>
+                <button type="submit">{t('auth.signIn')}</button>
               </form>
 
               <p onClick={() => setIsSignIn(false)}>
-                Don't have an account? Sign Up
+                {t('auth.noAccount')} {t('auth.signUp')}
               </p>
             </>
           ) : (
             <>
-              <h2>Sign Up</h2>
+              <h2>{t('auth.signUp')}</h2>
 
               {error && <p className="error-msg">{error}</p>}
 
               <form onSubmit={handleSignUp}>
                 <input
                   type="text"
-                  placeholder="Username"
+                  placeholder={t('auth.username')}
                   value={signupForm.username}
                   onChange={(e) =>
                     setSignupForm({ ...signupForm, username: e.target.value })
@@ -78,7 +78,7 @@ const Auth = () => {
 
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder={t('auth.email')}
                   value={signupForm.email}
                   onChange={(e) =>
                     setSignupForm({ ...signupForm, email: e.target.value })
@@ -87,18 +87,18 @@ const Auth = () => {
 
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder={t('auth.password')}
                   value={signupForm.password}
                   onChange={(e) =>
                     setSignupForm({ ...signupForm, password: e.target.value })
                   }
                 />
 
-                <button type="submit">Sign Up</button>
+                <button type="submit">{t('auth.signUp')}</button>
               </form>
 
               <p onClick={() => setIsSignIn(true)}>
-                Already have an account? Sign In
+                {t('auth.haveAccount')} {t('auth.signIn')}
               </p>
             </>
           )}

@@ -9,6 +9,7 @@ function formatDate(iso) {
 }
 
 export default function ReservationCard({ reservation }) {
+  const { t } = useTranslation();
   return (
     <div className="reservation-item-row">
       <div className="reservation-item-left">
