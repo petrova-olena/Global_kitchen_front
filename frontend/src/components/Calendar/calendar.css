@@ -497,6 +497,42 @@ main {
   padding: 6px 0;
 }
 
+/* Reservation cards */
+.reservation-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid #dcc7b8;
+  border-radius: 8px;
+  background: #fff8f0;
+  margin-bottom: 10px;
+}
+
+.reservation-item-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reservation-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.reservation-time {
+  font-size: 14px;
+  color: #666;
+}
+
+.reservation-guests,
+.reservation-notes {
+  font-size: 14px;
+  color: #666;
+}
+
 /* Accordion Header */
 .events-card-header {
   display: flex;
