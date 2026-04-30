@@ -18,7 +18,7 @@ const ProfileContainer = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [profilePicFile, setProfilePicFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [events, setEvents] = useState([]);
@@ -38,14 +38,14 @@ const ProfileContainer = () => {
 
       setLoading(true);
       try {
-        const freshUser = await fetchData(`api/v1/users/${user.id}`);
+        const freshUser = await fetchData(`/users/${user.id}`);
         setUser(freshUser);
         localStorage.setItem("user", JSON.stringify(freshUser));
 
-        const eventsData = await fetchData(`api/v1/calenderEvent`);
+        const eventsData = await fetchData(`/calenderEvent`);
         setEvents(eventsData.filter((e) => e.created_by === freshUser.id));
       } catch {
-        setError("Failed to load profile");
+        setError('Failed to load profile');
       } finally {
         setLoading(false);
       }
@@ -80,14 +80,14 @@ const ProfileContainer = () => {
         email: form.email,
       };
 
-      await fetchData(`api/v1/users/${user.id}`, {
-        method: "PUT",
+      await fetchData(`/users/${user.id}`, {
+        method: 'PUT',
         body: JSON.stringify(updateData),
       });
 
-      if (form.newPassword.trim() !== "") {
-        await fetchData(`api/v1/users/forgetPassword/${user.id}`, {
-          method: "PUT",
+      if (form.newPassword.trim() !== '') {
+        await fetchData(`/users/forgetPassword/${user.id}`, {
+          method: 'PUT',
           body: JSON.stringify({ newPassword: form.newPassword }),
         });
 
@@ -97,7 +97,7 @@ const ProfileContainer = () => {
         return;
       }
 
-      const freshUser = await fetchData(`api/v1/users/${user.id}`);
+      const freshUser = await fetchData(`/users/${user.id}`);
       setUser(freshUser);
       localStorage.setItem("user", JSON.stringify(freshUser));
 
@@ -117,8 +117,8 @@ const ProfileContainer = () => {
     if (!confirmDelete) return;
 
     try {
-      await fetchData(`api/v1/users/${user.id}`, {
-        method: "DELETE",
+      await fetchData(`/users/${user.id}`, {
+        method: 'DELETE',
       });
 
       logout();
@@ -131,8 +131,8 @@ const ProfileContainer = () => {
 
   const handleDeleteEvent = async (id) => {
     try {
-      await fetchData(`api/v1/calenderEvent/${id}`, {
-        method: "DELETE",
+      await fetchData(`/calenderEvent/${id}`, {
+        method: 'DELETE',
       });
 
       setEvents(events.filter((e) => e.id !== id));
@@ -157,7 +157,7 @@ const ProfileContainer = () => {
       formData.append("profile_pic", profilePicFile);
 
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}api/v1/users/profile-pic/${user.id}`,
+        `${import.meta.env.VITE_API_URL}/users/profile-pic/${user.id}`,
         {
           method: "PUT",
           body: formData,
