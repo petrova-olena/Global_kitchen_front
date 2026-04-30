@@ -78,7 +78,7 @@ h3 {
 /* HERO */
 .hero {
   height: 98vh;
-  background: url('assets/finland_banner.jpg') center/cover no-repeat;
+  background: url("assets/finland_banner.jpg") center/cover no-repeat;
   position: relative;
   text-align: center;
 }
@@ -682,6 +682,17 @@ input {
 
 .view-btn {
   background: #452209;
+}
+
+/* RESERVATIONS */
+.reservation-card {
+  padding: 16px;
+  border: 1px solid #452209;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* -------------

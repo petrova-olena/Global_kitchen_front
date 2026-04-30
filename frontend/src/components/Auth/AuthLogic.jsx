@@ -31,7 +31,7 @@ export const useAuthLogic = () => {
     }
 
     try {
-      const data = await fetchData('api/v1/auth/login', {
+      const data = await fetchData('/auth/login', {
         method: 'POST',
         body: JSON.stringify(signinForm),
       });
@@ -73,7 +73,7 @@ export const useAuthLogic = () => {
     }
 
     try {
-      await fetchData('api/v1/users', {
+      await fetchData('/users', {
         method: 'POST',
         body: JSON.stringify(signupForm),
       });
