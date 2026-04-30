@@ -8,6 +8,7 @@ import DailyMenu from "./views/DailyMenu";
 import WeeklyMenu from "./views/WeeklyMenu";
 import Auth from "./views/Auth";
 import AdminPanel from "./components/Admin/AdminPanel";
+import Reservation from "./components/reservation/Reservation";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/weekly-menu" element={<WeeklyMenu />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/reservation" element={<Reservation />} />
         </Route>
       </Routes>
     </BrowserRouter>

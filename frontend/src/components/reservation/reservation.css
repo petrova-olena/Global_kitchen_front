@@ -1,0 +1,97 @@
+.reservation-page {
+  padding: 16px;
+}
+
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #452209;
+  border-radius: 8px;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #452209;
+  gap: 6px;
+}
+
+.form-input {
+  padding: 10px;
+  border: 1px solid #452209;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.form-input:disabled {
+  background: #f0f0f0;
+  opacity: 0.7;
+}
+
+.btn-submit {
+  padding: 12px;
+  background: #452209;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-submit:disabled {
+  background: #b8a79a;
+  cursor: not-allowed;
+}
+
+.no-tables {
+  color: #a00;
+  font-size: 14px;
+  margin-top: -8px;
+}
+
+/* Modal styles */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-card {
+  background: #fff;
+  border: 1px solid #452209;
+  border-radius: 10px;
+  padding: 24px;
+  width: 85%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.modal-text {
+  font-size: 16px;
+  color: #452209;
+  margin-bottom: 20px;
+}
+
+.modal-btn {
+  width: 100%;
+  padding: 12px;
+  background: #452209;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-btn:hover {
+  background: #5a2c0c;
+}

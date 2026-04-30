@@ -18,7 +18,7 @@ const ProfileContainer = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [profilePicFile, setProfilePicFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [events, setEvents] = useState([]);
@@ -45,7 +45,7 @@ const ProfileContainer = () => {
         const eventsData = await fetchData(`api/v1/calenderEvent`);
         setEvents(eventsData.filter((e) => e.created_by === freshUser.id));
       } catch {
-        setError('Failed to load profile');
+        setError("Failed to load profile");
       } finally {
         setLoading(false);
       }

@@ -133,28 +133,16 @@ const Home = () => {
       {/*-- RESERVATION FORM --*/}
       <section className="reservation">
         <h2 className="reservation-title">Make a Reservation</h2>
-        <form className="form-wrapper">
-          <label>Full Name</label>
-          <input type="text" />
 
-          <label>Email</label>
-          <input type="email" />
+        <div className="reservation-card">
+          <p>Book a table online in just a few clicks.</p>
 
-          <label>Phone Number</label>
-          <input type="tel" />
-
-          <label>Number of Guests</label>
-          <input type="number" />
-
-          <label>Reservation Date</label>
-          <input type="date" />
-
-          <label>Reservation Time</label>
-          <input type="time" />
-
-          <button className="btn full-width">Reserve a Table</button>
-        </form>
+          <Link to="/reservation" className="btn full-width">
+            Go to Reservation Form
+          </Link>
+        </div>
       </section>
+
       <section className="chat-widget">
         <button className="chat-toggle" aria-label="Open chat">
           💬
