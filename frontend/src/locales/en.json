@@ -22,7 +22,12 @@
     "goToMenu": "Menu",
     "makeReservation": "Reserve",
     "aboutTitle": "About Us",
-    "aboutText": "Global Kitchen brings world cuisine to your table. Every week we explore a new country through food. Global Kitchen brings world cuisine to your table. Every week we explore a new country through food."
+    "aboutText": "Global Kitchen brings world cuisine to your table. Every week we explore a new country through food. Global Kitchen brings world cuisine to your table. Every week we explore a new country through food.",
+    "ourMenu": "Our Menu",
+    "exploreWeek": "Explore this week's dishes",
+    "awards": "Awards",
+    "customers": "Customers",
+    "experience": "Experience"
   },
   "auth": {
     "signIn": "Sign In",
@@ -187,7 +192,7 @@
     "tableReservation": "Table reservation",
     "deleteConfirm": "Are you sure you want to delete this event?"
   },
-  "calendar": {
+  "calendar_real": {
     "weekdayMo": "Mo",
     "weekdayTu": "Tu",
     "weekdayWe": "We",
@@ -210,14 +215,7 @@
     "goToMonth": "MM",
     "goToYear": "YYYY"
   },
-  "home": {
-    "ourMenu": "Our Menu",
-    "exploreWeek": "Explore this week's dishes",
-    "awards": "Awards",
-    "customers": "Customers",
-    "experience": "Experience"
-  },
-  "menu": {
+  "menu_other": {
     "tomatoSoup": "Tomato Soup",
     "tomatoSoupDesc": "Creamy tomato soup with herbs.",
     "chickenSoup": "Chicken Soup",

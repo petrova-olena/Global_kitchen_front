@@ -22,7 +22,12 @@
     "goToMenu": "Ruokalista",
     "makeReservation": "Varaa pöytä",
     "aboutTitle": "Tietoa meistä",
-    "aboutText": "Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan. Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan."
+    "aboutText": "Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan. Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan.",
+    "ourMenu": "Ruokalista",
+    "exploreWeek": "Tutustu tämän viikon ruoihin",
+    "awards": "Palkinnot",
+    "customers": "Asiakkaat",
+    "experience": "Kokemus"
   },
   "auth": {
     "signIn": "Kirjaudu sisään",
@@ -187,7 +192,7 @@
     "tableReservation": "Pöydän varaus",
     "deleteConfirm": "Oletko varma, että haluat poistaa tämän tapahtuman?"
   },
-  "calendar": {
+  "calendar_real": {
     "weekdayMo": "Ma",
     "weekdayTu": "Ti",
     "weekdayWe": "Ke",
@@ -210,14 +215,7 @@
     "goToMonth": "KK",
     "goToYear": "VVVV"
   },
-  "home": {
-    "ourMenu": "Ruokalista",
-    "exploreWeek": "Tutustu tämän viikon ruoihin",
-    "awards": "Palkinnot",
-    "customers": "Asiakkaat",
-    "experience": "Kokemus"
-  },
-  "menu": {
+  "menu_other": {
     "tomatoSoup": "Tomaattikeitto",
     "tomatoSoupDesc": "Silkkinen tomaattikeitto yrteillä.",
     "chickenSoup": "Kanaruoka",

@@ -19,28 +19,28 @@ export default function Calendar({
   
   // Get month names from translations
   const monthNames = [
-    t('calendar.monthJanuary'),
-    t('calendar.monthFebruary'),
-    t('calendar.monthMarch'),
-    t('calendar.monthApril'),
-    t('calendar.monthMay'),
-    t('calendar.monthJune'),
-    t('calendar.monthJuly'),
-    t('calendar.monthAugust'),
-    t('calendar.monthSeptember'),
-    t('calendar.monthOctober'),
-    t('calendar.monthNovember'),
-    t('calendar.monthDecember'),
+    t('calendar_real.monthJanuary'),
+    t('calendar_real.monthFebruary'),
+    t('calendar_real.monthMarch'),
+    t('calendar_real.monthApril'),
+    t('calendar_real.monthMay'),
+    t('calendar_real.monthJune'),
+    t('calendar_real.monthJuly'),
+    t('calendar_real.monthAugust'),
+    t('calendar_real.monthSeptember'),
+    t('calendar_real.monthOctober'),
+    t('calendar_real.monthNovember'),
+    t('calendar_real.monthDecember'),
   ];
   
   const weekdayNames = [
-    t('calendar.weekdayMo'),
-    t('calendar.weekdayTu'),
-    t('calendar.weekdayWe'),
-    t('calendar.weekdayTh'),
-    t('calendar.weekdayFr'),
-    t('calendar.weekdaySa'),
-    t('calendar.weekdaySu'),
+    t('calendar_real.weekdayMo'),
+    t('calendar_real.weekdayTu'),
+    t('calendar_real.weekdayWe'),
+    t('calendar_real.weekdayTh'),
+    t('calendar_real.weekdayFr'),
+    t('calendar_real.weekdaySa'),
+    t('calendar_real.weekdaySu'),
   ];
 
   // Go-to inputs
@@ -91,7 +91,7 @@ export default function Calendar({
             <div className="goto">
               <input
                 type="number"
-                placeholder={t('calendar.goToMonth')}
+                placeholder={t('calendar_real.goToMonth')}
                 min="1"
                 max="12"
                 className={`date-input ${monthError ? "error" : ""}`}
@@ -104,7 +104,7 @@ export default function Calendar({
 
               <input
                 type="number"
-                placeholder={t('calendar.goToYear')}
+                placeholder={t('calendar_real.goToYear')}
                 className="date-input"
                 value={gotoYear}
                 onChange={(e) => setGotoYear(e.target.value)}
