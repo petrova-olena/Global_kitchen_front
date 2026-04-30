@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Calendar from "../Calendar/Calendar";
 import EventsCard from "./EventsCard";
 import ReservationCard from "./ReservationCard";
@@ -13,6 +13,9 @@ export default function EventsOverview() {
   // Modal state
   const [showModal, setShowModal] = useState(false);
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
+
+  // Reservation state
+  const [userReservations, setUserReservations] = useState([]);
 
   // Load events from backend on mount
   useEffect(() => {
@@ -51,7 +54,6 @@ export default function EventsOverview() {
 
   // DELETE event: open modal instead of deleting immediately
   function deleteEvent(id) {
-    console.log("deleteEvent called with id:", id);
     setPendingDeleteId(id);
     setShowModal(true);
   }
@@ -177,8 +179,6 @@ export default function EventsOverview() {
     (e) => e.type === "user" && e.created_by === currentUser.id,
   );
 
-  const reservations = [];
-
   // ---------- formatting ----------
 
   function formatTime(iso) {
@@ -190,6 +190,39 @@ export default function EventsOverview() {
     const d = new Date(iso);
     return `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}`;
   }
+
+  // ----------- mapping reservation to event format for calendar display -----------
+  useEffect(() => {
+    if (!currentUser?.id) return;
+
+    async function loadUserReservations() {
+      try {
+        const data = await fetchData(`/reservation/${currentUser.id}`);
+        setUserReservations(data);
+      } catch (err) {
+        console.error("Failed to load user reservations:", err);
+      }
+    }
+
+    loadUserReservations();
+  }, [currentUser]);
+
+  function mapReservationToEvent(res) {
+    return {
+      id: res.id,
+      tableId: res.table_id,
+      from: res.reservation_time,
+      to: res.expires_at,
+      guests: res.number_of_people,
+      notes: `Table #${res.table_id}`,
+      type: "reservation",
+    };
+  }
+
+  const myReservations = useMemo(
+    () => userReservations.map(mapReservationToEvent),
+    [userReservations],
+  );
 
   return (
     <>
@@ -289,11 +322,11 @@ export default function EventsOverview() {
         ) : (
           <EventsCard
             title="My Events"
-            events={[...reservations, ...userEvents]}
+            events={[...myReservations, ...userEvents]}
             deleteEvent={deleteEvent}
             renderItem={(item, deleteEventFromProps) =>
-              item.tableId ? (
-                <ReservationCard reservation={item} />
+              item.type === "reservation" ? (
+                <ReservationCard key={item.id} reservation={item} />
               ) : (
                 <div key={item.id} className="event-item-row">
                   <div className="event-item-left">
