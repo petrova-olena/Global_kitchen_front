@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useReservation } from "./useReservation";
 import ReservationForm from "./ReservationForm";
 import SuccessModal from "./SuccessModal";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
-export default function Reservation({ currentUser }) {
+export default function Reservation() {
+  const { user: currentUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [selectedDatetime, setSelectedDatetime] = useState("");
   const [showModal, setShowModal] = useState(false);

@@ -61,6 +61,30 @@ export function useReservation(currentUser) {
     });
   }
 
+  function formatLocalDate(date) {
+    const pad = (n) => String(n).padStart(2, "0");
+
+    return (
+      date.getFullYear() +
+      "-" +
+      pad(date.getMonth() + 1) +
+      "-" +
+      pad(date.getDate()) +
+      " " +
+      pad(date.getHours()) +
+      ":" +
+      pad(date.getMinutes()) +
+      ":" +
+      pad(date.getSeconds())
+    );
+  }
+
+  async function reloadReservations() {
+    const res = await fetch("http://localhost:8000/api/v1/reservation");
+    const data = await res.json();
+    setReservations(data);
+  }
+
   // -------------------------------
   //   CREATE RESERVATION
   // -------------------------------
@@ -81,9 +105,9 @@ export function useReservation(currentUser) {
       const body = {
         userId: currentUser.id,
         tableId: Number(tableId),
-        reservationTime: start.toISOString().slice(0, 19).replace("T", " "),
+        reservationTime: formatLocalDate(start),
         pepole: Number(pepole),
-        expire: expire.toISOString().slice(0, 19).replace("T", " "),
+        expire: formatLocalDate(expire),
       };
 
       const res = await fetch("http://localhost:8000/api/v1/reservation", {
@@ -98,6 +122,8 @@ export function useReservation(currentUser) {
         setError(data.error || "Reservation failed");
         return;
       }
+
+      await reloadReservations();
 
       return { success: true, data };
     } catch (err) {
