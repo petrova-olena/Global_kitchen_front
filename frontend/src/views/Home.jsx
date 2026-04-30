@@ -41,9 +41,9 @@ const Home = () => {
             </div>
 
             <div className="about-stats">
-              <div className="stat-item">Awards</div>
-              <div className="stat-item">Customers</div>
-              <div className="stat-item">Experience</div>
+              <div className="stat-item">{t('home.awards')}</div>
+              <div className="stat-item">{t('home.customers')}</div>
+              <div className="stat-item">{t('home.experience')}</div>
             </div>
           </div>
 
@@ -58,19 +58,19 @@ const Home = () => {
 
       {/*-- MENU PREVIEW --*/}
       <section className="menu-preview">
-        <h2>Our Menu</h2>
-        <p>Explore this week's dishes</p>
+        <h2>{t('home.ourMenu')}</h2>
+        <p>{t('home.exploreWeek')}</p>
 
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>Dish Name</h3>
+            <h3>{t('menu.dishName')}</h3>
             <p className="price">12.90€</p>
-            <p className="desc">Short description of the dish.</p>
-            <div className="diet">Vegan • Gluten-free</div>
+            <p className="desc">{t('menu.shortDescription')}</p>
+            <div className="diet">{t('menu.vegan')} • {t('menu.glutenFree')}</div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
-                Details
+                {t('menu.details')}
               </Link>
               <button className="add-btn">+</button>
             </div>
@@ -78,13 +78,13 @@ const Home = () => {
 
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>Dish Name</h3>
+            <h3>{t('menu.dishName')}</h3>
             <p className="price">14.50€</p>
-            <p className="desc">Short description of the dish.</p>
-            <div className="diet">Vegetarian</div>
+            <p className="desc">{t('menu.shortDescription')}</p>
+            <div className="diet">{t('menu.vegetarian')}</div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
-                Details
+                {t('menu.details')}
               </Link>
               <button className="add-btn">+</button>
             </div>
@@ -92,10 +92,10 @@ const Home = () => {
 
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>Dish Name</h3>
+            <h3>{t('menu.dishName')}</h3>
             <p className="price">12.90€</p>
-            <p className="desc">Short description of the dish.</p>
-            <div className="diet">Vegan • Gluten-free</div>
+            <p className="desc">{t('menu.shortDescription')}</p>
+            <div className="diet">{t('menu.vegan')} • {t('menu.glutenFree')}</div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
                 Details

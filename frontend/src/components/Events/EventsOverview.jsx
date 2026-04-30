@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import Calendar from "../Calendar/Calendar";
 import EventsCard from "./EventsCard";
 import ReservationCard from "./ReservationCard";
+import { useTranslation } from "react-i18next";
 import { loadEvents } from "../../utils/loadEvents";
 import { fetchData } from "../../utils/fetchData";
 
 export default function EventsOverview() {
+  const { t } = useTranslation();
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   const [events, setEvents] = useState([]);
@@ -335,13 +337,13 @@ export default function EventsOverview() {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <h3>Are you sure you want to delete this event?</h3>
+            <h3>{t('modals.deleteConfirm')}</h3>
             <div className="modal-buttons">
               <button className="cancel-btn" onClick={cancelDelete}>
-                Cancel
+                {t('common.cancel')}
               </button>
               <button className="delete-btn" onClick={confirmDelete}>
-                Delete
+                {t('common.delete')}
               </button>
             </div>
           </div>

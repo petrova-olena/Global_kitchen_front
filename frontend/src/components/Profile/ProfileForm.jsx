@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ProfileForm = ({
   form,
@@ -11,7 +12,9 @@ const ProfileForm = ({
   handleLogout,
   handleEdit,
   user,
-}) => (
+}) => {
+  const { t } = useTranslation();
+  return (
   <div className="profile-right">
     {editMode ? (
       <>
@@ -26,27 +29,27 @@ const ProfileForm = ({
             <input
               name="password-old"
               type="password"
-              placeholder="Current Password"
+              placeholder={t('forms.currentPassword')}
               value={form.password_old || ''}
               onChange={handleChange}
             />
             <input
               name="password-new"
               type="password"
-              placeholder="New Password"
+              placeholder={t('forms.newPassword')}
               value={form.password_new || ''}
               onChange={handleChange}
             />
           </div>
           <div className="button-group">
             <button className="action-btn" onClick={handleSave}>
-              {loading ? 'Saving...' : 'Save'}
+              {loading ? t('forms.saving') : t('common.save')}
             </button>
             <button className="action-btn" onClick={handleCancel}>
-              Cancel
+              {t('common.cancel')}
             </button>
             <button className="action-btn" onClick={handleLogout}>
-              Logout
+              {t('nav.logout')}
             </button>
           </div>
           {error && <p className="error-msg">{error}</p>}
@@ -58,15 +61,16 @@ const ProfileForm = ({
         <p>{user?.email}</p>
         <div className="button-group">
           <button className="action-btn" onClick={handleEdit}>
-            Edit Profile
+            {t('profile.editProfile')}
           </button>
           <button className="action-btn" onClick={handleLogout}>
-            Logout
+            {t('nav.logout')}
           </button>
         </div>
       </>
     )}
   </div>
 );
+}
 
 export default ProfileForm;

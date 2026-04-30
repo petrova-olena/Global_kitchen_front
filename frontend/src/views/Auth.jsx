@@ -128,18 +128,18 @@ const Auth = () => {
 
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder={t('auth.password')}
                   value={signupForm.password}
                   onChange={(e) =>
                     setSignupForm({ ...signupForm, password: e.target.value })
                   }
                 />
 
-                <button type="submit">Sign Up</button>
+                <button type="submit">{t('auth.signUp')}</button>
               </form>
 
               <p onClick={() => setIsSignIn(true)}>
-                Already have an account? Sign In
+                {t('auth.haveAccount')} {t('auth.signIn')}
               </p>
             </>
           )}

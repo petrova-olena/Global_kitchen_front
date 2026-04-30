@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function AddEventModal({ addEvent }) {
+  const { t } = useTranslation();
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   const [open, setOpen] = useState(false);
@@ -49,7 +51,7 @@ export default function AddEventModal({ addEvent }) {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="add-event-header">
-              <div className="title">Add Event</div>
+              <div className="title">{t('modals.addEvent')}</div>
               <i
                 className="fas fa-times close"
                 onClick={() => setOpen(false)}
@@ -59,37 +61,37 @@ export default function AddEventModal({ addEvent }) {
             <div className="add-event-body">
               <input
                 type="text"
-                placeholder="Event name"
+                placeholder={t('forms.eventName')}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
 
               <input
                 type="text"
-                placeholder="Event description"
+                placeholder={t('forms.eventDescription')}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
 
               <input
                 type="datetime-local"
-                placeholder="Event time starts"
+                placeholder={t('forms.eventStartTime')}
                 value={from}
                 onChange={(e) => setFrom(e.target.value)}
               />
 
               <input
                 type="datetime-local"
-                placeholder="Event time ends"
+                placeholder={t('forms.eventEndTime')}
                 value={to}
                 onChange={(e) => setTo(e.target.value)}
               />
             </div>
 
             <div className="add-event-footer">
-              <button onClick={submit}>Add Event</button>
+              <button onClick={submit}>{t('modals.addEvent')}</button>
               <button className="cancel-btn" onClick={() => setOpen(false)}>
-                Cancel
+                {t('common.cancel')}
               </button>
             </div>
           </div>

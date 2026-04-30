@@ -2,9 +2,11 @@ import "./admin.css";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { fetchData } from "../../utils/fetchData";
 
 export default function AdminPanel() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
@@ -328,7 +330,7 @@ export default function AdminPanel() {
                 setEvents([]);
               }}
             >
-              Current week
+              {t('admin.currentWeek')}
             </button>
 
             <button
@@ -338,7 +340,7 @@ export default function AdminPanel() {
                 setEvents([]);
               }}
             >
-              Current month
+              {t('admin.currentMonth')}
             </button>
 
             <button
@@ -348,7 +350,7 @@ export default function AdminPanel() {
                 setEvents([]);
               }}
             >
-              Choose period
+              {t('admin.choosePeriod')}
             </button>
           </div>
 
@@ -371,14 +373,14 @@ export default function AdminPanel() {
 
       {/* Search button */}
       <div className="admin-search">
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleSearch}>{t('admin.search')}</button>
       </div>
 
       {/* Events list */}
       <div className="admin-events-list">
-        <h2>Events</h2>
+        <h2>{t('admin.events')}</h2>
 
-        {Array.isArray(events) && events.length === 0 && <p>No events found</p>}
+        {Array.isArray(events) && events.length === 0 && <p>{t('admin.noEventsFound')}</p>}
 
         {Array.isArray(events) &&
           events.map((ev) => (

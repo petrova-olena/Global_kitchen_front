@@ -1,6 +1,7 @@
 import "./calendar.css";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useCalendar } from "./useCalendar";
 import CalendarHeader from "./CalendarHeader";
 import CalendarGrid from "./CalendarGrid";
@@ -13,7 +14,34 @@ export default function Calendar({
   currentUser,
   addEvent,
 }) {
+  const { t } = useTranslation();
   const calendar = useCalendar();
+  
+  // Get month names from translations
+  const monthNames = [
+    t('calendar.monthJanuary'),
+    t('calendar.monthFebruary'),
+    t('calendar.monthMarch'),
+    t('calendar.monthApril'),
+    t('calendar.monthMay'),
+    t('calendar.monthJune'),
+    t('calendar.monthJuly'),
+    t('calendar.monthAugust'),
+    t('calendar.monthSeptember'),
+    t('calendar.monthOctober'),
+    t('calendar.monthNovember'),
+    t('calendar.monthDecember'),
+  ];
+  
+  const weekdayNames = [
+    t('calendar.weekdayMo'),
+    t('calendar.weekdayTu'),
+    t('calendar.weekdayWe'),
+    t('calendar.weekdayTh'),
+    t('calendar.weekdayFr'),
+    t('calendar.weekdaySa'),
+    t('calendar.weekdaySu'),
+  ];
 
   // Go-to inputs
   const [gotoMonth, setGotoMonth] = useState("");
@@ -43,16 +71,12 @@ export default function Calendar({
       {/* LEFT SIDE — calendar grid */}
       <div className="calendar-left">
         <div className="calendar">
-          <CalendarHeader {...calendar} />
+          <CalendarHeader {...calendar} months={monthNames} />
 
           <div className="weekdays">
-            <div>Mo</div>
-            <div>Tu</div>
-            <div>We</div>
-            <div>Th</div>
-            <div>Fr</div>
-            <div>Sa</div>
-            <div>Su</div>
+            {weekdayNames.map((day, idx) => (
+              <div key={idx}>{day}</div>
+            ))}
           </div>
 
           <CalendarGrid
@@ -67,7 +91,7 @@ export default function Calendar({
             <div className="goto">
               <input
                 type="number"
-                placeholder="MM"
+                placeholder={t('calendar.goToMonth')}
                 min="1"
                 max="12"
                 className={`date-input ${monthError ? "error" : ""}`}
@@ -80,19 +104,19 @@ export default function Calendar({
 
               <input
                 type="number"
-                placeholder="YYYY"
+                placeholder={t('calendar.goToYear')}
                 className="date-input"
                 value={gotoYear}
                 onChange={(e) => setGotoYear(e.target.value)}
               />
 
               <button className="goto-btn" onClick={handleGoTo}>
-                Go to
+                {t('buttons.goTo')}
               </button>
             </div>
 
             <button className="today-btn" onClick={calendar.goToToday}>
-              Today
+              {t('buttons.today')}
             </button>
           </div>
         </div>
