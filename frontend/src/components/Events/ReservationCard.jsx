@@ -1,15 +1,15 @@
-function formatTime(iso) {
-  const d = new Date(iso);
-  return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-}
+import { useState } from "react";
+//import { useTranslation } from "react-i18next";
+import {
+  formatDate,
+  formatTime,
+  getUserVisibleEndTime,
+} from "../../utils/dateHelpers";
 
-function formatDate(iso) {
-  const d = new Date(iso);
-  return `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}`;
-}
+export default function ReservationCard({ reservation, onDelete }) {
+  const [showConfirm, setShowConfirm] = useState(false);
+  //const { t } = useTranslation();
 
-export default function ReservationCard({ reservation }) {
-  const { t } = useTranslation();
   return (
     <div className="reservation-item-row">
       <div className="reservation-item-left">
@@ -26,7 +26,7 @@ export default function ReservationCard({ reservation }) {
           <span className="event-icon">🕒</span>
           {formatTime(reservation.from)}
           {" — "}
-          {formatTime(reservation.to)}
+          {formatTime(getUserVisibleEndTime(reservation.to))}
         </div>
 
         <div className="reservation-guests">Guests: {reservation.guests}</div>
@@ -35,6 +35,34 @@ export default function ReservationCard({ reservation }) {
           <div className="reservation-notes">{reservation.notes}</div>
         )}
       </div>
+
+      <button className="delete-btn" onClick={() => setShowConfirm(true)}>
+        🗑️
+      </button>
+
+      {showConfirm && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <p>Are you sure you want to cancel this reservation?</p>
+
+            <div className="modal-buttons">
+              <button
+                className="cancel-btn"
+                onClick={() => setShowConfirm(false)}
+              >
+                Cancel
+              </button>
+
+              <button
+                className="delete-btn"
+                onClick={() => onDelete(reservation.id)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,16 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./reservation.css";
 
 export default function ReservationForm({
   tables,
   onSubmit,
-  disabled,
+  disabledForm,
+  disabledReserve,
   onDatetimeChange,
+  prefillTable,
+  prefillDate,
+  prefillTime,
 }) {
   const [tableId, setTableId] = useState("");
-  const [datetime, setDatetime] = useState("");
   const [pepole, setPepole] = useState(1);
   const [duration, setDuration] = useState(120); // default 2 hours
+  const [datetime, setDatetime] = useState("");
+
+  useEffect(() => {
+    if (prefillDate && prefillTime) {
+      setDatetime(`${prefillDate}T${prefillTime}`);
+    }
+  }, [prefillDate, prefillTime]);
+
+  useEffect(() => {
+    if (prefillTable) {
+      setTableId(String(prefillTable));
+    }
+  }, [prefillTable]);
+
+  // Notify parent when datetime changes
+  useEffect(() => {
+    if (datetime) {
+      onDatetimeChange(datetime);
+    }
+  }, [datetime]);
 
   function handleDatetimeChange(e) {
     const value = e.target.value;
@@ -25,23 +48,26 @@ export default function ReservationForm({
       tableId,
       datetime,
       pepole,
-      duration, // minutes
+      duration,
     });
   }
 
   return (
     <form className="reservation-form" onSubmit={handleSubmit}>
+      {/* DATE & TIME */}
       <label className="form-label">
         Date & Time
         <input
           type="datetime-local"
           value={datetime}
           onChange={handleDatetimeChange}
-          disabled={disabled}
+          disabled={disabledForm}
           className="form-input"
+          required
         />
       </label>
 
+      {/* PEOPLE */}
       <label className="form-label">
         Number of People
         <input
@@ -50,17 +76,19 @@ export default function ReservationForm({
           max="20"
           value={pepole}
           onChange={(e) => setPepole(e.target.value)}
-          disabled={disabled}
+          disabled={disabledForm}
           className="form-input"
+          required
         />
       </label>
 
+      {/* DURATION */}
       <label className="form-label">
         Duration
         <select
           value={duration}
           onChange={(e) => setDuration(Number(e.target.value))}
-          disabled={disabled}
+          disabled={disabledForm}
           className="form-input"
         >
           <option value={60}>1 hour</option>
@@ -71,13 +99,15 @@ export default function ReservationForm({
         </select>
       </label>
 
+      {/* TABLE */}
       <label className="form-label">
         Table
         <select
           value={tableId}
           onChange={(e) => setTableId(e.target.value)}
-          disabled={disabled || tables.length === 0}
+          disabled={disabledForm || tables.length === 0}
           className="form-input"
+          required
         >
           <option value="">Select table</option>
           {tables.map((t) => (
@@ -88,11 +118,17 @@ export default function ReservationForm({
         </select>
       </label>
 
-      {tables.length === 0 && !disabled && (
+      {/* NO TABLES */}
+      {tables.length === 0 && !disabledForm && (
         <p className="no-tables">No free tables for selected time</p>
       )}
 
-      <button type="submit" disabled={disabled} className="btn-submit">
+      {/* SUBMIT */}
+      <button
+        type="submit"
+        disabled={disabledForm || disabledReserve}
+        className="btn-submit"
+      >
         Reserve
       </button>
     </form>

@@ -465,21 +465,6 @@ main {
   gap: 6px;
 }
 
-.delete-right {
-  align-self: flex-start;
-  background: #a26a42;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 24px;
-}
-
-.delete-right:hover {
-  background: #7a4f2f;
-}
-
 .event-title {
   font-weight: 600;
   margin-bottom: 4px;
@@ -594,14 +579,6 @@ main {
   border-radius: 6px;
 }
 
-/* Delete button */
-.delete-btn {
-  background: #d9534f;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 6px;
-}
-
 /* Event footer with buttons */
 .events-footer {
   display: flex;
@@ -700,6 +677,25 @@ main {
 .today-btn:hover {
   background: var(--primary-clr);
   color: #f3ece7;
+}
+
+/* Unified delete button */
+.delete-btn {
+  background: #a26a42;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #7a4f2f;
 }
 
 @media (min-width: 900px) {

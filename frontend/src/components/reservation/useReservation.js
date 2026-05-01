@@ -119,6 +119,20 @@ export function useReservation(currentUser) {
     }
   }
 
+  // -------------------------------
+  //   DELETE RESERVATION
+  // -------------------------------
+  async function deleteReservation(id) {
+    try {
+      await fetchData(`/reservation/${id}`, { method: "DELETE" });
+      await reloadReservations();
+      return true;
+    } catch (err) {
+      setError("Failed to delete reservation: " + err.message);
+      return false;
+    }
+  }
+
   return {
     tables,
     reservations,
@@ -126,5 +140,6 @@ export function useReservation(currentUser) {
     loading,
     error,
     createReservation,
+    deleteReservation,
   };
 }
