@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -10,19 +10,19 @@ const Home = () => {
       <section className="hero">
         <div className="hero-overlay">
           <div className="hero-text">
-            <h1>{t('home.title')}</h1>
-            <p>{t('home.subtitle')}</p>
+            <h1>{t("home.title")}</h1>
+            <p>{t("home.subtitle")}</p>
           </div>
 
           <div className="hero-buttons">
             <Link to="/calendar" className="btn">
-              {t('home.goToCalendar')}
+              {t("home.goToCalendar")}
             </Link>
             <Link to="/menu" className="btn">
-              {t('home.goToMenu')}
+              {t("home.goToMenu")}
             </Link>
-            <Link to="/profile" className="btn">
-              {t('home.makeReservation')}
+            <Link to="/reservation" className="btn">
+              {t("home.makeReservation")}
             </Link>
           </div>
         </div>
@@ -30,20 +30,18 @@ const Home = () => {
 
       {/*-- ABOUT US --*/}
       <section className="about">
-        <h2 className="about-title">{t('home.aboutTitle')}</h2>
+        <h2 className="about-title">{t("home.aboutTitle")}</h2>
 
         <div className="about-columns">
           <div className="about-left">
             <div className="about-text">
-              <p>
-                {t('home.aboutText')}
-              </p>
+              <p>{t("home.aboutText")}</p>
             </div>
 
             <div className="about-stats">
-              <div className="stat-item">{t('home.awards')}</div>
-              <div className="stat-item">{t('home.customers')}</div>
-              <div className="stat-item">{t('home.experience')}</div>
+              <div className="stat-item">{t("home.awards")}</div>
+              <div className="stat-item">{t("home.customers")}</div>
+              <div className="stat-item">{t("home.experience")}</div>
             </div>
           </div>
 
@@ -58,19 +56,21 @@ const Home = () => {
 
       {/*-- MENU PREVIEW --*/}
       <section className="menu-preview">
-        <h2>{t('home.ourMenu')}</h2>
-        <p>{t('home.exploreWeek')}</p>
+        <h2>{t("home.ourMenu")}</h2>
+        <p>{t("home.exploreWeek")}</p>
 
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>{t('menu.dishName')}</h3>
+            <h3>{t("menu.dishName")}</h3>
             <p className="price">12.90€</p>
-            <p className="desc">{t('menu.shortDescription')}</p>
-            <div className="diet">{t('menu.vegan')} • {t('menu.glutenFree')}</div>
+            <p className="desc">{t("menu.shortDescription")}</p>
+            <div className="diet">
+              {t("menu.vegan")} • {t("menu.glutenFree")}
+            </div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
-                {t('menu.details')}
+                {t("menu.details")}
               </Link>
               <button className="add-btn">+</button>
             </div>
@@ -78,13 +78,13 @@ const Home = () => {
 
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>{t('menu.dishName')}</h3>
+            <h3>{t("menu.dishName")}</h3>
             <p className="price">14.50€</p>
-            <p className="desc">{t('menu.shortDescription')}</p>
-            <div className="diet">{t('menu.vegetarian')}</div>
+            <p className="desc">{t("menu.shortDescription")}</p>
+            <div className="diet">{t("menu.vegetarian")}</div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
-                {t('menu.details')}
+                {t("menu.details")}
               </Link>
               <button className="add-btn">+</button>
             </div>
@@ -92,10 +92,12 @@ const Home = () => {
 
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>{t('menu.dishName')}</h3>
+            <h3>{t("menu.dishName")}</h3>
             <p className="price">12.90€</p>
-            <p className="desc">{t('menu.shortDescription')}</p>
-            <div className="diet">{t('menu.vegan')} • {t('menu.glutenFree')}</div>
+            <p className="desc">{t("menu.shortDescription")}</p>
+            <div className="diet">
+              {t("menu.vegan")} • {t("menu.glutenFree")}
+            </div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
                 Details

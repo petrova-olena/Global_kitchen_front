@@ -8,7 +8,7 @@ import DailyMenu from "./views/DailyMenu";
 import WeeklyMenu from "./views/WeeklyMenu";
 import Auth from "./views/Auth";
 import AdminPanel from "./components/Admin/AdminPanel";
-import Reservation from "./components/reservation/Reservation";
+import Reservation from "./components/Reservation/Reservation";
 
 const App = () => {
   return (

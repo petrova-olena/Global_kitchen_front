@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { formatTime } from "../../utils/dateHelpers";
 
 export default function EventsPanel({
   events,
@@ -15,11 +16,7 @@ export default function EventsPanel({
     activeDay,
   ).padStart(2, "0")}`;
 
-  // --- Date and time formatting ---
-  function formatTime(iso) {
-    const d = new Date(iso);
-    return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-  }
+  // --- Date formatting ---
 
   function formatDate(iso) {
     const d = new Date(iso);

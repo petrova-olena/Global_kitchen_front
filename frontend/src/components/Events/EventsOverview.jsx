@@ -5,6 +5,8 @@ import ReservationCard from "./ReservationCard";
 import { useTranslation } from "react-i18next";
 import { loadEvents } from "../../utils/loadEvents";
 import { fetchData } from "../../utils/fetchData";
+import { formatDate, formatTime } from "../../utils/dateHelpers";
+import { useReservation } from "../reservation/useReservation";
 
 export default function EventsOverview() {
   const { t } = useTranslation();
@@ -17,6 +19,7 @@ export default function EventsOverview() {
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
 
   // Reservation state
+  const deleteReservation = useReservation(currentUser).deleteReservation;
   const [userReservations, setUserReservations] = useState([]);
 
   // Load events from backend on mount
@@ -181,18 +184,6 @@ export default function EventsOverview() {
     (e) => e.type === "user" && e.created_by === currentUser.id,
   );
 
-  // ---------- formatting ----------
-
-  function formatTime(iso) {
-    const d = new Date(iso);
-    return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-  }
-
-  function formatDate(iso) {
-    const d = new Date(iso);
-    return `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}`;
-  }
-
   // ----------- mapping reservation to event format for calendar display -----------
   useEffect(() => {
     if (!currentUser?.id) return;
@@ -221,10 +212,11 @@ export default function EventsOverview() {
     };
   }
 
-  const myReservations = useMemo(
-    () => userReservations.map(mapReservationToEvent),
-    [userReservations],
-  );
+  const myReservations = useMemo(() => {
+    return userReservations
+      .map(mapReservationToEvent)
+      .sort((a, b) => new Date(a.from) - new Date(b.from));
+  }, [userReservations]);
 
   return (
     <>
@@ -304,10 +296,10 @@ export default function EventsOverview() {
 
               {currentUser?.role === "admin" && (
                 <button
-                  className="delete-btn delete-right"
+                  className="delete-btn"
                   onClick={() => deleteEventFromProps(item.id)}
                 >
-                  🗑
+                  🗑️
                 </button>
               )}
             </div>
@@ -326,11 +318,16 @@ export default function EventsOverview() {
             title="My Events"
             events={[...myReservations, ...userEvents]}
             deleteEvent={deleteEvent}
+            deleteReservation={deleteReservation}
             renderItem={(item, deleteEventFromProps) =>
               item.type === "reservation" ? (
-                <ReservationCard key={item.id} reservation={item} />
+                <ReservationCard
+                  key={`res-${item.id}`}
+                  reservation={item}
+                  onDelete={deleteReservation}
+                />
               ) : (
-                <div key={item.id} className="event-item-row">
+                <div key={`evt-${item.id}`} className="event-item-row">
                   <div className="event-item-left">
                     <div className="event-title">{item.title}</div>
 
@@ -356,10 +353,10 @@ export default function EventsOverview() {
 
                   {currentUser && item.type === "user" && (
                     <button
-                      className="delete-btn delete-right"
+                      className="delete-btn"
                       onClick={() => deleteEventFromProps(item.id)}
                     >
-                      🗑
+                      🗑️
                     </button>
                   )}
                 </div>
@@ -374,13 +371,13 @@ export default function EventsOverview() {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <h3>{t('modals.deleteConfirm')}</h3>
+            <h3>{t("modals.deleteConfirm")}</h3>
             <div className="modal-buttons">
               <button className="cancel-btn" onClick={cancelDelete}>
-                {t('common.cancel')}
+                {t("common.cancel")}
               </button>
               <button className="delete-btn" onClick={confirmDelete}>
-                {t('common.delete')}
+                {t("common.delete")}
               </button>
             </div>
           </div>
