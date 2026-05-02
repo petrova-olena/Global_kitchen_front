@@ -105,6 +105,9 @@ export default function EventsOverview() {
         end_date,
       });
 
+      console.log("FROM MODAL:", from);
+      console.log("TO MODAL:", to);
+
       loadEvents().then(setEvents);
       setShowEditModal(false);
       setEditingEvent(null);
@@ -259,7 +262,7 @@ export default function EventsOverview() {
       {/* Daily Calendar */}
       <Calendar
         events={events}
-        updateEvent={updateEvent}
+        updateEvent={handleUpdateEvent}
         deleteEvent={deleteEvent}
         currentUser={currentUser}
         addEvent={handleAddEvent}

@@ -156,8 +156,14 @@ export default function Calendar({
         {showEditModal && editingEvent && (
           <EditEventModal
             event={editingEvent}
-            onSave={(title, description, from, to) => {
-              updateEvent(editingEvent.id, title, description, from, to);
+            onSave={(updated) => {
+              updateEvent(
+                editingEvent.id,
+                updated.title,
+                updated.description,
+                updated.from,
+                updated.to,
+              );
               setShowEditModal(false);
             }}
             onCancel={() => setShowEditModal(false)}
