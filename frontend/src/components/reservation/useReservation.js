@@ -120,6 +120,44 @@ export function useReservation(currentUser) {
   }
 
   // -------------------------------
+  //   UPDATE RESERVATION
+  // -------------------------------
+
+  async function updateReservation(
+    id,
+    { tableId, datetime, pepole, duration },
+  ) {
+    try {
+      setLoading(true);
+      setError("");
+
+      const start = new Date(datetime);
+      const end = new Date(start.getTime() + duration * 60000);
+      const expire = new Date(end.getTime() + 60 * 60000);
+
+      const body = {
+        tableId: Number(tableId),
+        reservationTime: formatLocalDate(start),
+        pepole: Number(pepole),
+        expire: formatLocalDate(expire),
+      };
+
+      await fetchData(`/reservation/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(body),
+      });
+
+      await reloadReservations();
+      return true;
+    } catch (err) {
+      setError("Failed to update reservation: " + err.message);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // -------------------------------
   //   DELETE RESERVATION
   // -------------------------------
   async function deleteReservation(id) {
@@ -140,6 +178,7 @@ export function useReservation(currentUser) {
     loading,
     error,
     createReservation,
+    updateReservation,
     deleteReservation,
   };
 }

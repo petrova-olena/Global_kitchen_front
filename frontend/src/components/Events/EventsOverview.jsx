@@ -9,6 +9,7 @@ import { formatDate, formatTime } from "../../utils/dateHelpers";
 import { useReservation } from "../reservation/useReservation";
 import { addEvent, deleteEventById, updateEvent } from "../../services/events";
 import EditEventModal from "./EditEventModal";
+import EditReservationModal from "../Reservation/EditReservationModal";
 
 export default function EventsOverview() {
   const { t } = useTranslation();
@@ -25,7 +26,18 @@ export default function EventsOverview() {
   const [editingEvent, setEditingEvent] = useState(null);
 
   // Reservation state
-  const deleteReservation = useReservation(currentUser).deleteReservation;
+  const {
+    //tables,
+    reservations,
+    getFreeTables,
+    //createReservation,
+    deleteReservation,
+    updateReservation,
+  } = useReservation(currentUser);
+
+  const [editingReservation, setEditingReservation] = useState(null);
+  const [showReservationModal, setShowReservationModal] = useState(false);
+
   const [userReservations, setUserReservations] = useState([]);
 
   // Load events from backend on mount
@@ -104,9 +116,6 @@ export default function EventsOverview() {
         start_date,
         end_date,
       });
-
-      console.log("FROM MODAL:", from);
-      console.log("TO MODAL:", to);
 
       loadEvents().then(setEvents);
       setShowEditModal(false);
@@ -257,6 +266,24 @@ export default function EventsOverview() {
       .sort((a, b) => new Date(a.from) - new Date(b.from));
   }, [userReservations]);
 
+  async function handleUpdateReservation(id, updated) {
+    const success = await updateReservation(id, {
+      tableId: updated.tableId,
+      datetime: updated.from,
+      pepole: updated.guests,
+      duration: updated.duration,
+    });
+
+    if (success) {
+      setShowReservationModal(false);
+      setEditingReservation(null);
+    }
+  }
+
+  if (!currentUser) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       {/* Daily Calendar */}
@@ -376,6 +403,10 @@ export default function EventsOverview() {
                   key={`res-${item.id}`}
                   reservation={item}
                   onDelete={deleteReservation}
+                  onEdit={(res) => {
+                    setEditingReservation(res);
+                    setShowReservationModal(true);
+                  }}
                 />
               ) : (
                 <div key={`evt-${item.id}`} className="event-item-row">
@@ -427,6 +458,7 @@ export default function EventsOverview() {
         )}
       </div>
 
+      {/* Edit event modal */}
       {showEditModal && editingEvent && (
         <EditEventModal
           event={editingEvent}
@@ -440,6 +472,22 @@ export default function EventsOverview() {
             )
           }
           onCancel={cancelEdit}
+        />
+      )}
+
+      {/* Edit reservation modal */}
+      {showReservationModal && editingReservation && (
+        <EditReservationModal
+          reservation={editingReservation}
+          reservations={reservations}
+          getFreeTables={getFreeTables}
+          onSave={(updated) =>
+            handleUpdateReservation(editingReservation.id, updated)
+          }
+          onCancel={() => {
+            setShowReservationModal(false);
+            setEditingReservation(null);
+          }}
         />
       )}
 
