@@ -1,10 +1,12 @@
-import React from 'react';
-import '../auth.css';
-import signInImg from '../assets/sign_in.png';
-import signUpImg from '../assets/sign_up.png';
-import { useAuthLogic } from '../components/Auth/AuthLogic';
+import React from "react";
+import "../auth.css";
+import signInImg from "../assets/sign_in.png";
+import signUpImg from "../assets/sign_up.png";
+import { useAuthLogic } from "../components/Auth/AuthLogic";
+import { useTranslation } from "react-i18next";
 
 const Auth = () => {
+  const { t } = useTranslation();
   const {
     isSignIn,
     setIsSignIn,
@@ -19,7 +21,7 @@ const Auth = () => {
 
   return (
     <div className="auth-container">
-      <div className={`auth-card ${isSignIn ? 'left' : 'right'}`}>
+      <div className={`auth-card ${isSignIn ? "left" : "right"}`}>
         <div
           className="auth-image"
           style={{
@@ -30,14 +32,14 @@ const Auth = () => {
         <div className="auth-form">
           {isSignIn ? (
             <>
-              <h2>{t('auth.signIn')}</h2>
+              <h2>{t("auth.signIn")}</h2>
 
               {error && <p className="error-msg">{error}</p>}
 
               <form onSubmit={handleSignIn}>
                 <input
                   type="text"
-                  placeholder={t('auth.username')}
+                  placeholder={t("auth.username")}
                   value={signinForm.username}
                   onChange={(e) =>
                     setSigninForm({ ...signinForm, username: e.target.value })
@@ -46,30 +48,30 @@ const Auth = () => {
 
                 <input
                   type="password"
-                  placeholder={t('auth.password')}
+                  placeholder={t("auth.password")}
                   value={signinForm.password}
                   onChange={(e) =>
                     setSigninForm({ ...signinForm, password: e.target.value })
                   }
                 />
 
-                <button type="submit">{t('auth.signIn')}</button>
+                <button type="submit">{t("auth.signIn")}</button>
               </form>
 
               <p onClick={() => setIsSignIn(false)}>
-                {t('auth.noAccount')} {t('auth.signUp')}
+                {t("auth.noAccount")} {t("auth.signUp")}
               </p>
             </>
           ) : (
             <>
-              <h2>{t('auth.signUp')}</h2>
+              <h2>{t("auth.signUp")}</h2>
 
               {error && <p className="error-msg">{error}</p>}
 
               <form onSubmit={handleSignUp}>
                 <input
                   type="text"
-                  placeholder={t('auth.username')}
+                  placeholder={t("auth.username")}
                   value={signupForm.username}
                   onChange={(e) =>
                     setSignupForm({ ...signupForm, username: e.target.value })
@@ -78,7 +80,7 @@ const Auth = () => {
 
                 <input
                   type="email"
-                  placeholder={t('auth.email')}
+                  placeholder={t("auth.email")}
                   value={signupForm.email}
                   onChange={(e) =>
                     setSignupForm({ ...signupForm, email: e.target.value })
@@ -87,18 +89,18 @@ const Auth = () => {
 
                 <input
                   type="password"
-                  placeholder={t('auth.password')}
+                  placeholder={t("auth.password")}
                   value={signupForm.password}
                   onChange={(e) =>
                     setSignupForm({ ...signupForm, password: e.target.value })
                   }
                 />
 
-                <button type="submit">{t('auth.signUp')}</button>
+                <button type="submit">{t("auth.signUp")}</button>
               </form>
 
               <p onClick={() => setIsSignIn(true)}>
-                {t('auth.haveAccount')} {t('auth.signIn')}
+                {t("auth.haveAccount")} {t("auth.signIn")}
               </p>
             </>
           )}

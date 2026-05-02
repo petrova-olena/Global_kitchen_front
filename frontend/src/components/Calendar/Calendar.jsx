@@ -1,46 +1,56 @@
 import "./calendar.css";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useCalendar } from "./useCalendar";
 import CalendarHeader from "./CalendarHeader";
 import CalendarGrid from "./CalendarGrid";
 import EventsPanel from "./EventsPanel";
 import AddEventModal from "./AddEventModal";
+import EditEventModal from "../Events/EditEventModal";
 
 export default function Calendar({
   events,
+  updateEvent,
   deleteEvent,
   currentUser,
   addEvent,
 }) {
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingEvent, setEditingEvent] = useState(null);
+
+  function openEditEvent(event) {
+    setEditingEvent(event);
+    setShowEditModal(true);
+  }
+
   const { t } = useTranslation();
   const calendar = useCalendar();
-  
+
   // Get month names from translations
   const monthNames = [
-    t('calendar_real.monthJanuary'),
-    t('calendar_real.monthFebruary'),
-    t('calendar_real.monthMarch'),
-    t('calendar_real.monthApril'),
-    t('calendar_real.monthMay'),
-    t('calendar_real.monthJune'),
-    t('calendar_real.monthJuly'),
-    t('calendar_real.monthAugust'),
-    t('calendar_real.monthSeptember'),
-    t('calendar_real.monthOctober'),
-    t('calendar_real.monthNovember'),
-    t('calendar_real.monthDecember'),
+    t("calendar_real.monthJanuary"),
+    t("calendar_real.monthFebruary"),
+    t("calendar_real.monthMarch"),
+    t("calendar_real.monthApril"),
+    t("calendar_real.monthMay"),
+    t("calendar_real.monthJune"),
+    t("calendar_real.monthJuly"),
+    t("calendar_real.monthAugust"),
+    t("calendar_real.monthSeptember"),
+    t("calendar_real.monthOctober"),
+    t("calendar_real.monthNovember"),
+    t("calendar_real.monthDecember"),
   ];
-  
+
   const weekdayNames = [
-    t('calendar_real.weekdayMo'),
-    t('calendar_real.weekdayTu'),
-    t('calendar_real.weekdayWe'),
-    t('calendar_real.weekdayTh'),
-    t('calendar_real.weekdayFr'),
-    t('calendar_real.weekdaySa'),
-    t('calendar_real.weekdaySu'),
+    t("calendar_real.weekdayMo"),
+    t("calendar_real.weekdayTu"),
+    t("calendar_real.weekdayWe"),
+    t("calendar_real.weekdayTh"),
+    t("calendar_real.weekdayFr"),
+    t("calendar_real.weekdaySa"),
+    t("calendar_real.weekdaySu"),
   ];
 
   // Go-to inputs
@@ -66,11 +76,13 @@ export default function Calendar({
     }
   };
 
-  const visibleEvents = Array.isArray(events)
-    ? events.filter(
-        (ev) => ev.type === "admin" || ev.created_by === currentUser.id,
-      )
-    : [];
+  const visibleEvents = useMemo(() => {
+    return Array.isArray(events)
+      ? events.filter(
+          (ev) => ev.type === "admin" || ev.created_by === currentUser.id,
+        )
+      : [];
+  }, [events, currentUser]);
 
   return (
     <div className="calendar-container">
@@ -97,7 +109,7 @@ export default function Calendar({
             <div className="goto">
               <input
                 type="number"
-                placeholder={t('calendar_real.goToMonth')}
+                placeholder={t("calendar_real.goToMonth")}
                 min="1"
                 max="12"
                 className={`date-input ${monthError ? "error" : ""}`}
@@ -110,19 +122,19 @@ export default function Calendar({
 
               <input
                 type="number"
-                placeholder={t('calendar_real.goToYear')}
+                placeholder={t("calendar_real.goToYear")}
                 className="date-input"
                 value={gotoYear}
                 onChange={(e) => setGotoYear(e.target.value)}
               />
 
               <button className="goto-btn" onClick={handleGoTo}>
-                {t('buttons.goTo')}
+                {t("buttons.goTo")}
               </button>
             </div>
 
             <button className="today-btn" onClick={calendar.goToToday}>
-              {t('buttons.today')}
+              {t("buttons.today")}
             </button>
           </div>
         </div>
@@ -134,11 +146,23 @@ export default function Calendar({
           activeDay={calendar.activeDay}
           month={calendar.month}
           year={calendar.year}
+          openEditEvent={openEditEvent}
+          updateEvent={updateEvent}
           deleteEvent={deleteEvent}
           currentUser={currentUser}
         />
 
         <AddEventModal addEvent={addEvent} />
+        {showEditModal && editingEvent && (
+          <EditEventModal
+            event={editingEvent}
+            onSave={(title, description, from, to) => {
+              updateEvent(editingEvent.id, title, description, from, to);
+              setShowEditModal(false);
+            }}
+            onCancel={() => setShowEditModal(false)}
+          />
+        )}
       </div>
     </div>
   );

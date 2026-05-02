@@ -6,6 +6,7 @@ export default function EventsCard({
   events,
   renderItem,
   emptyText,
+  openEditEvent,
   deleteEvent,
 }) {
   const { t } = useTranslation();
@@ -37,11 +38,11 @@ export default function EventsCard({
       {(!isMobile || isOpen) && (
         <div className="events-card-content">
           {events.length === 0 ? (
-            <p className="empty">{emptyText || t('calendar.noEvents')}</p>
+            <p className="empty">{emptyText || t("calendar.noEvents")}</p>
           ) : (
             events.map((ev) =>
               renderItem ? (
-                renderItem(ev, deleteEvent)
+                renderItem(ev, openEditEvent, deleteEvent)
               ) : (
                 <div key={ev.id} className="event-item">
                   <div className="event-title">{ev.title}</div>

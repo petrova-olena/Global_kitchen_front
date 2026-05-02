@@ -7,6 +7,8 @@ import { loadEvents } from "../../utils/loadEvents";
 import { fetchData } from "../../utils/fetchData";
 import { formatDate, formatTime } from "../../utils/dateHelpers";
 import { useReservation } from "../reservation/useReservation";
+import { addEvent, deleteEventById, updateEvent } from "../../services/events";
+import EditEventModal from "./EditEventModal";
 
 export default function EventsOverview() {
   const { t } = useTranslation();
@@ -18,17 +20,21 @@ export default function EventsOverview() {
   const [showModal, setShowModal] = useState(false);
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
 
+  // Edit event modal state
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingEvent, setEditingEvent] = useState(null);
+
   // Reservation state
   const deleteReservation = useReservation(currentUser).deleteReservation;
   const [userReservations, setUserReservations] = useState([]);
 
   // Load events from backend on mount
   useEffect(() => {
-    loadEvents().then(setEvents);
+    loadEvents().then((data) => setEvents([...data]));
   }, []);
 
   // ADD event
-  async function addEvent(title, description, from, to) {
+  async function handleAddEvent(title, description, from, to) {
     if (!currentUser || !currentUser.id) {
       console.error("User not logged in");
       return;
@@ -38,17 +44,13 @@ export default function EventsOverview() {
       const start_date = from.replace("T", " ") + ":00";
       const end_date = to.replace("T", " ") + ":00";
 
-      await fetchData("/calenderEvent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "user",
-          title,
-          description,
-          start_date,
-          end_date,
-          created_by: currentUser.id,
-        }),
+      await addEvent({
+        type: "user",
+        title,
+        description,
+        start_date,
+        end_date,
+        created_by: currentUser.id,
       });
 
       loadEvents().then(setEvents);
@@ -68,9 +70,7 @@ export default function EventsOverview() {
     if (!pendingDeleteId) return;
 
     try {
-      await fetchData(`/calenderEvent/${pendingDeleteId}`, {
-        method: "DELETE",
-      });
+      await deleteEventById(pendingDeleteId);
 
       loadEvents().then(setEvents);
     } catch (err) {
@@ -85,6 +85,37 @@ export default function EventsOverview() {
   function cancelDelete() {
     setPendingDeleteId(null);
     setShowModal(false);
+  }
+
+  // UPDATE event
+  function openEditEvent(event) {
+    setEditingEvent(event);
+    setShowEditModal(true);
+  }
+
+  async function handleUpdateEvent(id, title, description, from, to) {
+    const start_date = from.replace("T", " ") + ":00";
+    const end_date = to.replace("T", " ") + ":00";
+
+    try {
+      await updateEvent(id, {
+        title,
+        description,
+        start_date,
+        end_date,
+      });
+
+      loadEvents().then(setEvents);
+      setShowEditModal(false);
+      setEditingEvent(null);
+    } catch (err) {
+      console.error("Failed to update event:", err);
+    }
+  }
+
+  function cancelEdit() {
+    setShowEditModal(false);
+    setEditingEvent(null);
   }
 
   // Filters
@@ -193,7 +224,12 @@ export default function EventsOverview() {
         const data = await fetchData(`/reservation/${currentUser.id}`);
         setUserReservations(data);
       } catch (err) {
-        console.error("Failed to load user reservations:", err);
+        if (err.message.includes("404")) {
+          setUserReservations([]);
+          return;
+        } else {
+          console.error("Failed to load user reservations:", err);
+        }
       }
     }
 
@@ -223,9 +259,10 @@ export default function EventsOverview() {
       {/* Daily Calendar */}
       <Calendar
         events={events}
+        updateEvent={updateEvent}
         deleteEvent={deleteEvent}
         currentUser={currentUser}
-        addEvent={addEvent}
+        addEvent={handleAddEvent}
       />
       <div className="events-overview">
         <div className="events-filter">
@@ -269,8 +306,9 @@ export default function EventsOverview() {
         <EventsCard
           title="Restaurant Events"
           events={restaurantEvents}
+          openEditEvent={openEditEvent}
           deleteEvent={deleteEvent}
-          renderItem={(item, deleteEventFromProps) => (
+          renderItem={(item, openEditEventFromProps, deleteEventFromProps) => (
             <div key={item.id} className="event-item-row">
               <div className="event-item-left">
                 <div className="event-title">{item.title}</div>
@@ -295,12 +333,21 @@ export default function EventsOverview() {
               </div>
 
               {currentUser?.role === "admin" && (
-                <button
-                  className="delete-btn"
-                  onClick={() => deleteEventFromProps(item.id)}
-                >
-                  🗑️
-                </button>
+                <div className="event-actions">
+                  <button
+                    className="edit-btn"
+                    onClick={() => openEditEvent(item)}
+                  >
+                    ✏️
+                  </button>
+
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteEventFromProps(item.id)}
+                  >
+                    🗑️
+                  </button>
+                </div>
               )}
             </div>
           )}
@@ -317,9 +364,10 @@ export default function EventsOverview() {
           <EventsCard
             title="My Events"
             events={[...myReservations, ...userEvents]}
+            openEditEvent={openEditEvent}
             deleteEvent={deleteEvent}
             deleteReservation={deleteReservation}
-            renderItem={(item, deleteEventFromProps) =>
+            renderItem={(item, openEditEventFromProps, deleteEventFromProps) =>
               item.type === "reservation" ? (
                 <ReservationCard
                   key={`res-${item.id}`}
@@ -352,12 +400,21 @@ export default function EventsOverview() {
                   </div>
 
                   {currentUser && item.type === "user" && (
-                    <button
-                      className="delete-btn"
-                      onClick={() => deleteEventFromProps(item.id)}
-                    >
-                      🗑️
-                    </button>
+                    <div className="event-actions">
+                      <button
+                        className="edit-btn"
+                        onClick={() => openEditEvent(item)}
+                      >
+                        ✏️
+                      </button>
+
+                      <button
+                        className="delete-btn"
+                        onClick={() => deleteEventFromProps(item.id)}
+                      >
+                        🗑️
+                      </button>
+                    </div>
                   )}
                 </div>
               )
@@ -366,6 +423,22 @@ export default function EventsOverview() {
           />
         )}
       </div>
+
+      {showEditModal && editingEvent && (
+        <EditEventModal
+          event={editingEvent}
+          onSave={(updated) =>
+            handleUpdateEvent(
+              editingEvent.id,
+              updated.title,
+              updated.description,
+              updated.from,
+              updated.to,
+            )
+          }
+          onCancel={cancelEdit}
+        />
+      )}
 
       {/* Delete confirmation modal */}
       {showModal && (
