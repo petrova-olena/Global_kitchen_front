@@ -89,7 +89,7 @@ h3 {
 /* HERO */
 .hero {
   height: 98vh;
-  background: url('assets/finland_banner.jpg') center/cover no-repeat;
+  background: url("assets/finland_banner.jpg") center/cover no-repeat;
   position: relative;
   text-align: center;
 }

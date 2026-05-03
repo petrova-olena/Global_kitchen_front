@@ -36,6 +36,10 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
         )}
       </div>
 
+      {reservation.userName && (
+        <div className="reservation-user">User: {reservation.userName}</div>
+      )}
+
       <div className="event-actions">
         <button className="edit-btn" onClick={() => onEdit(reservation)}>
           ✏️

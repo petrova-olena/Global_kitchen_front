@@ -1,10 +1,11 @@
-import "./admin.css";
+import "../Calendar/calendar.css";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useAdminEvents from "./events/useAdminEvents";
 import EventsTab from "./events/EventsTab";
+import ReservationsTab from "./reservations/ReservationsTab";
 import AdminTabs from "./AdminTabs";
 
 export default function AdminPanel() {
@@ -20,7 +21,7 @@ export default function AdminPanel() {
     }
   }, []);
 
-  const eventsLogic = useAdminEvents(currentUser, t);
+  const eventsLogic = useAdminEvents(currentUser, t, activeTab);
 
   return (
     <div className="admin-panel">
@@ -35,7 +36,7 @@ export default function AdminPanel() {
 
       {activeTab === "events" && <EventsTab {...eventsLogic} t={t} />}
 
-      {activeTab === "reservations" && <div>Reservations tab will be here</div>}
+      {activeTab === "reservations" && <ReservationsTab />}
     </div>
   );
 }

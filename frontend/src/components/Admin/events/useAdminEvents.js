@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../../../utils/fetchData";
+import { loadUsers } from "../../../utils/loadUsers";
 
 export default function useAdminEvents(currentUser, t) {
   // Users
@@ -26,20 +27,13 @@ export default function useAdminEvents(currentUser, t) {
 
   // Load all users
   useEffect(() => {
-    fetchData("/users")
-      .then((data) => {
-        const filtered = data.filter((u) => u.role !== "admin");
-        setUsers(filtered);
+    loadUsers()
+      .then(({ users, userMap }) => {
+        setUsers(users);
+        setUserMap(userMap);
 
-        // Create user ID -> name map for easy lookup when displaying events
-        const map = {};
-        data.forEach((u) => {
-          map[u.id] = u.name || u.username || u.email; // подстраховка
-        });
-        setUserMap(map);
-
-        if (filtered.length > 0) {
-          setSelectedUserId(filtered[0].id);
+        if (users.length > 0) {
+          setSelectedUserId(users[0].id);
         }
       })
       .catch((err) => console.error("Failed to load users:", err));
@@ -110,6 +104,24 @@ export default function useAdminEvents(currentUser, t) {
     });
   };
 
+  function sortEvents(list) {
+    return [...list].sort((a, b) => {
+      const startA = new Date(a.start_date);
+      const startB = new Date(b.start_date);
+
+      if (startA < startB) return -1;
+      if (startA > startB) return 1;
+
+      const endA = new Date(a.end_date);
+      const endB = new Date(b.end_date);
+
+      if (endA < endB) return -1;
+      if (endA > endB) return 1;
+
+      return a.id - b.id;
+    });
+  }
+
   // ---------- API helpers ----------
   const fetchAllEvents = async () => {
     try {
@@ -149,7 +161,7 @@ export default function useAdminEvents(currentUser, t) {
           return;
         }
         const userEvents = await fetchUserEvents(selectedUserId);
-        setEvents(userEvents);
+        setEvents(sortEvents(userEvents));
         return;
       }
 
@@ -157,7 +169,7 @@ export default function useAdminEvents(currentUser, t) {
       if (filterMode === "date") {
         const allEvents = await fetchAllEvents();
         const filtered = filterByDateRange(allEvents);
-        setEvents(filtered);
+        setEvents(sortEvents(filtered));
         return;
       }
 
@@ -169,7 +181,7 @@ export default function useAdminEvents(currentUser, t) {
         }
         const userEvents = await fetchUserEvents(selectedUserId);
         const filtered = filterByDateRange(userEvents);
-        setEvents(filtered);
+        setEvents(sortEvents(filtered));
         return;
       }
     } catch (err) {
@@ -209,6 +221,25 @@ export default function useAdminEvents(currentUser, t) {
       console.error("Error creating admin event:", err);
     }
   };
+
+  useEffect(() => {
+    if (filterMode === "user") {
+      handleSearch();
+      return;
+    }
+
+    if (filterMode === "date" || filterMode === "both") {
+      if (dateMode === "week" || dateMode === "month") {
+        handleSearch();
+        return;
+      }
+
+      if (dateMode === "custom") {
+        setEvents([]);
+        return;
+      }
+    }
+  }, [filterMode, dateMode, selectedUserId]);
 
   return {
     // state

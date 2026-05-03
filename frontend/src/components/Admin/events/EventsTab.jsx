@@ -148,34 +148,46 @@ export default function EventsTab(props) {
           </div>
 
           {dateMode === "custom" && (
-            <div className="custom-range">
-              <input
-                type="date"
-                value={customFrom}
-                onChange={(e) => setCustomFrom(e.target.value)}
-              />
-              <input
-                type="date"
-                value={customTo}
-                onChange={(e) => setCustomTo(e.target.value)}
-              />
-            </div>
+            <>
+              <div className="custom-range">
+                <input
+                  type="date"
+                  value={customFrom}
+                  onChange={(e) => setCustomFrom(e.target.value)}
+                />
+                <input
+                  type="date"
+                  value={customTo}
+                  onChange={(e) => setCustomTo(e.target.value)}
+                />
+              </div>
+
+              <div className="admin-search">
+                <button onClick={handleSearch}>{t("admin.search")}</button>
+              </div>
+            </>
           )}
         </>
       )}
-
-      {/* Search button */}
-      <div className="admin-search">
-        <button onClick={handleSearch}>{t("admin.search")}</button>
-      </div>
 
       {/* Events list */}
       <div className="admin-events-list">
         <h2>{t("admin.events")}</h2>
 
-        {Array.isArray(events) && events.length === 0 && (
-          <p>{t("admin.noEventsFound")}</p>
-        )}
+        {(filterMode === "date" || filterMode === "both") &&
+          dateMode === "custom" &&
+          (!customFrom || !customTo) && (
+            <p>
+              {t("admin.selectPeriod") ||
+                "Please select a period and press Search"}
+            </p>
+          )}
+
+        {Array.isArray(events) &&
+          events.length === 0 &&
+          !(dateMode === "custom" && (!customFrom || !customTo)) && (
+            <p>{t("admin.noEventsFound")}</p>
+          )}
 
         {Array.isArray(events) &&
           events.map((ev) => (
