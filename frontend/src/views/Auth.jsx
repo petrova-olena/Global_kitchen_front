@@ -3,8 +3,10 @@ import '../auth.css';
 import signInImg from '../assets/sign_in.png';
 import signUpImg from '../assets/sign_up.png';
 import { useAuthLogic } from '../components/Auth/AuthLogic';
+import { useTranslation } from 'react-i18next';
 
 const Auth = () => {
+  const { t } = useTranslation();
   const {
     isSignIn,
     setIsSignIn,

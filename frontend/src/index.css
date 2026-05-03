@@ -1,31 +1,3 @@
-/* Profile Events Table */
-.events-table-wrapper {
-  overflow-x: auto;
-}
-.events-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 8px;
-}
-.events-table th,
-.events-table td {
-  padding: 8px;
-  border: 1px solid #ddd;
-}
-.events-table thead tr {
-  background: #f5f5f5;
-}
-.events-table-delete-cell {
-  text-align: center;
-}
-.events-table-delete-btn {
-  padding: 4px 10px;
-  font-size: 0.95em;
-}
-.events-table-empty {
-  text-align: center;
-  padding: 12px;
-}
 .header-center {
   flex: 1;
   display: flex;
@@ -117,7 +89,7 @@ h3 {
 /* HERO */
 .hero {
   height: 98vh;
-  background: url("assets/finland_banner.jpg") center/cover no-repeat;
+  background: url('assets/finland_banner.jpg') center/cover no-repeat;
   position: relative;
   text-align: center;
 }
@@ -544,86 +516,6 @@ input {
   color: #a26a42;
 }
 
-/* --------------------
-      PROFILE STYLES
-   -------------------- */
-/* MAIN CONTAINER */
-.profile-container {
-  padding: 16px;
-}
-
-/* PROFILE CARD */
-.profile-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 12px;
-  background: #ffffff;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  margin-bottom: 20px;
-}
-
-.profile-photo {
-  width: 96px;
-  height: 96px;
-  background: #d8c7b8;
-  border-radius: 50%;
-}
-
-.profile-info h2 {
-  margin: 0 0 4px;
-  font-size: 22px;
-}
-
-.profile-info p {
-  margin: 2px 0;
-  font-size: 16px;
-}
-
-.profile-info input.profile-name,
-.profile-info input.profile-email,
-.profile-info input.profile-phone {
-  display: block;
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 10px 14px;
-  border: 1.5px solid #c7a17a;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  background: #fff8f0;
-  color: #4a2c2a;
-  transition: border-color 0.2s;
-}
-
-.profile-info input:focus {
-  outline: none;
-  border-color: #ffb74d;
-  background: #fff3e0;
-}
-
-.button-group {
-  display: flex;
-  justify-content: space-between;
-}
-
-.edit-btn,
-.logout-btn {
-  margin-top: 8px;
-  padding: 6px 14px;
-  background: #a26a42;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.logout-btn {
-  margin-left: 10px;
-}
-
 /* SECTIONS */
 .section-block {
   background: #ffffff;
@@ -841,23 +733,6 @@ input {
     padding: 30px;
   }
 
-  /* PROFILE */
-  .profile-container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .profile-card {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .profile-photo {
-    width: 120px;
-    height: 120px;
-  }
-
   .section-title {
     font-size: 24px;
   }
@@ -979,23 +854,6 @@ input {
     font-size: 48px;
   }
 
-  /* PROFILE */
-  .profile-container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .profile-card {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .profile-photo {
-    width: 120px;
-    height: 120px;
-  }
-
   .section-title {
     font-size: 24px;
   }
@@ -1094,60 +952,6 @@ input {
   cursor: pointer;
 }
 
-.profile-card {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 24px;
-  align-items: start;
-  background: #fff;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* LEFT SIDE */
-.profile-left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.profile-photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.profile-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* RIGHT SIDE */
-.profile-right {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.profile-right input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #c7a17a;
-  border-radius: 8px;
-}
-
-/* EDIT PHOTO AREA */
-.profile-pic-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-}
-
 .input-group input {
   margin: 3px 0;
 }
@@ -1159,16 +963,6 @@ input {
 }
 
 /* MOBILE */
-@media (max-width: 600px) {
-  .profile-card {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .profile-right {
-    align-items: center;
-  }
-}
 
 .password-wrapper {
   position: relative;

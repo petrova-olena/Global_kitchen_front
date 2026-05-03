@@ -1,0 +1,408 @@
+/* =========================
+   BASE CONTAINER
+========================= */
+
+.profile-container {
+  max-width: 1600px;
+  width: 95%;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background: #f5e9d3;
+}
+
+/* =========================
+   GRID LAYOUT
+========================= */
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 30px;
+}
+
+.left-column,
+.right-column {
+  min-width: 0;
+}
+
+/* =========================
+   LEFT PANEL
+========================= */
+
+.left-column {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* PROFILE PHOTO */
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #d8c7b8;
+  margin: 0 auto;
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-pic-form {
+  margin-top: 10px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.left-column input,
+.left-column textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BUTTON SYSTEM
+========================= */
+
+.btn {
+  all: unset;
+  cursor: pointer;
+
+  padding: 10px 14px;
+  border-radius: 8px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  transition: 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* PRIMARY (SAVE) */
+.btn-primary {
+  background: #452209;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #5a2c0d;
+}
+
+/* SECONDARY (VIEW NOTES) */
+.btn-secondary {
+  background: #f1f1f1;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background: #e5e5e5;
+}
+
+/* DANGER */
+.btn-danger {
+  background: #c0392b;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #a93226;
+}
+
+/* =========================
+   LEFT BUTTON GROUP
+========================= */
+
+.left-column .button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.left-column .btn,
+.left-column .action-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* =========================
+   RIGHT PANEL
+========================= */
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================
+   SECTION BLOCK
+========================= */
+
+.section-block {
+  background: #fff;
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* =========================
+   MY NOTES FIX
+========================= */
+
+.section-block textarea {
+  width: 100%;
+  min-height: 180px;
+  resize: vertical;
+  padding: 10px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.section-block .button-group {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* =========================
+   TABLE (RESERVATIONS)
+========================= */
+
+.events-table-wrapper {
+  overflow-x: auto;
+}
+
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.events-table th,
+.events-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.events-table thead tr {
+  background: #f5f5f5;
+}
+
+/* CANCEL BUTTON CENTER FIX */
+.events-table-delete-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.events-table-delete-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+}
+
+/* EMPTY STATE */
+.events-table-empty {
+  text-align: center;
+  padding: 12px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .section-block .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* =========================
+   COMMENTS SECTION ONLY
+   (NO SIDE EFFECTS)
+========================= */
+
+/* container spacing fix */
+.section-block h3 {
+  margin-bottom: 10px;
+}
+
+/* dropdown spacing */
+.section-block label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* =========================
+   SELECT (SAFE ONLY HERE)
+========================= */
+
+.section-block .form-select {
+  width: 100%;
+  padding: 10px 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  background: #fff;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url("data:image/svg+xml,%3Csvg fill='gray' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7l5 5 5-5H5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+/* focus only in comments */
+.section-block .form-select:focus {
+  outline: none;
+  border-color: #452209;
+  box-shadow: 0 0 0 3px rgba(69, 34, 9, 0.12);
+}
+
+/* =========================
+   COMMENT TEXTAREA (SAFE)
+========================= */
+
+.section-block .comment-textarea {
+  width: 100%;
+  min-height: 120px;
+
+  margin-top: 10px;
+  padding: 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+
+  box-sizing: border-box;
+}
+
+/* =========================
+   BUTTON GROUP (COMMENTS ONLY)
+========================= */
+
+.section-block .button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   COMMENT CARDS
+========================= */
+
+.comment-item {
+  background: #faf7f2;
+  border: 1px solid #eee;
+  border-radius: 12px;
+
+  padding: 14px;
+  margin-top: 12px;
+
+  transition: 0.2s ease;
+}
+
+.comment-item:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+/* text */
+.comment-item p {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.comment-item strong {
+  color: #452209;
+}
+
+/* =========================
+   EDIT MODE TEXTAREA
+========================= */
+
+.comment-item textarea {
+  width: 100%;
+  min-height: 100px;
+
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+
+  margin-top: 8px;
+
+  resize: vertical;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* buttons inside comment */
+.comment-item .btn {
+  margin-top: 8px;
+  margin-right: 6px;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.section-block p {
+  font-size: 14px;
+  color: #666;
+}

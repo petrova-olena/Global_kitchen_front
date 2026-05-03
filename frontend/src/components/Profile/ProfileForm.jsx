@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 const ProfileForm = ({
   form,
@@ -65,7 +64,6 @@ const ProfileForm = ({
         <div className="input-group">
           <h2>{user?.username}</h2>
           <p>{user?.email}</p>
-
           <div className="button-group">
             <button type="button" className="action-btn" onClick={handleEdit}>
               Edit Profile

@@ -6,7 +6,6 @@ import { AuthContext } from '../../context/AuthContext';
 
 const ProfileContainer = () => {
   const navigate = useNavigate();
-
   const { user, setUser, logout } = useContext(AuthContext);
 
   const [editMode, setEditMode] = useState(false);
@@ -24,20 +23,17 @@ const ProfileContainer = () => {
   const [events, setEvents] = useState([]);
   const [reservations, setReservations] = useState([]);
 
-  useEffect(() => {
-    if (!user) return;
-    setForm((prev) => ({
-      ...prev,
-      username: user.username || '',
-      email: user.email || '',
-    }));
-  }, [user]);
+  const [cuisines, setCuisines] = useState([]);
+  const [selectedCuisine, setSelectedCuisine] = useState('');
+  const [comment, setComment] = useState('');
+  const [myComments, setMyComments] = useState([]);
 
   useEffect(() => {
     const fetchProfile = async () => {
       if (!user?.id) return;
 
       setLoading(true);
+
       try {
         const freshUser = await fetchData(`/users/${user.id}`);
         setUser(freshUser);
@@ -58,7 +54,51 @@ const ProfileContainer = () => {
     };
 
     fetchProfile();
+  }, [user?.id, setUser]);
+
+  useEffect(() => {
+    const fetchCuisines = async () => {
+      try {
+        const data = await fetchData('/cuisines');
+        setCuisines(data);
+      } catch (err) {
+        console.error('Failed to load cuisines', err);
+      }
+    };
+
+    fetchCuisines();
   }, []);
+
+  const fetchComments = async () => {
+    try {
+      const data = await fetchData(`/comments/user/${user.id}`);
+
+      if (!Array.isArray(data)) {
+        setMyComments([]);
+        return;
+      }
+
+      setMyComments(data);
+    } catch (err) {
+      console.error('Failed to load comments', err);
+      setMyComments([]);
+    }
+  };
+
+  useEffect(() => {
+    const loadComments = async () => {
+      if (user?.id) {
+        await fetchComments();
+      }
+    };
+    loadComments();
+  }, [user?.id]);
+
+  const refreshUser = async () => {
+    const freshUser = await fetchData(`/users/${user.id}`);
+    setUser(freshUser);
+    localStorage.setItem('user', JSON.stringify(freshUser));
+  };
 
   const handleEdit = () => setEditMode(true);
 
@@ -99,19 +139,53 @@ const ProfileContainer = () => {
 
         logout();
         navigate('/');
-
         return;
       }
 
-      const freshUser = await fetchData(`/users/${user.id}`);
-      setUser(freshUser);
-      localStorage.setItem('user', JSON.stringify(freshUser));
-
+      await refreshUser();
       setEditMode(false);
     } catch (err) {
       setError(err.message || 'Update failed');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const onFileChange = (e) => {
+    if (e.target.files?.[0]) {
+      setProfilePicFile(e.target.files[0]);
+    }
+  };
+
+  const uploadPhoto = async (e) => {
+    e.preventDefault();
+
+    if (!profilePicFile) return;
+
+    setUploading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append('profile_pic', profilePicFile);
+
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/profile-pic/${user.id}`,
+        {
+          method: 'PUT',
+          body: formData,
+        }
+      );
+
+      if (!res.ok) throw new Error('Upload failed');
+
+      await refreshUser();
+
+      setProfilePicFile(null);
+    } catch (err) {
+      console.error(err);
+      setError('Upload failed');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -129,8 +203,7 @@ const ProfileContainer = () => {
 
       logout();
       navigate('/');
-    } catch (err) {
-      console.error('Account delete failed:', err);
+    } catch {
       setError('Failed to delete account');
     }
   };
@@ -141,48 +214,9 @@ const ProfileContainer = () => {
         method: 'DELETE',
       });
 
-      setEvents(events.filter((e) => e.id !== id));
-    } catch (err) {
-      console.error('Delete failed:', err);
-    }
-  };
-
-  const onFileChange = (e) => {
-    if (e.target.files?.[0]) {
-      setProfilePicFile(e.target.files[0]);
-    }
-  };
-
-  const uploadPhoto = async (e) => {
-    e.preventDefault();
-    if (!profilePicFile) return;
-
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append('profile_pic', profilePicFile);
-
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/users/profile-pic/${user.id}`,
-        {
-          method: 'PUT',
-          body: formData,
-        }
-      );
-
-      if (!res.ok) throw new Error('Upload failed');
-
-      const data = await res.json();
-
-      const updatedUser = { ...user, profile_pic: data.profile_pic };
-      setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-
-      setProfilePicFile(null);
+      setEvents(events.filter((e) => e.id !== id && e._id !== id));
     } catch (err) {
       console.error(err);
-    } finally {
-      setUploading(false);
     }
   };
 
@@ -192,15 +226,72 @@ const ProfileContainer = () => {
         method: 'DELETE',
       });
 
-      setReservations(reservations.filter((r) => r.id !== id));
+      setReservations(reservations.filter((r) => r.id !== id && r._id !== id));
     } catch (err) {
-      console.error('Cancel failed:', err);
+      console.error(err);
     }
   };
 
   const handleLogout = () => {
     logout();
     navigate('/');
+  };
+
+  const sendComment = async () => {
+    try {
+      if (!selectedCuisine) {
+        alert('Please select a cuisine first');
+        return;
+      }
+
+      if (!comment.trim()) {
+        alert('Please write a comment');
+        return;
+      }
+
+      const body = {
+        user_id: user.id,
+        cuisine_id: Number(selectedCuisine),
+        comment_text: comment,
+      };
+
+      await fetchData('/comments', {
+        method: 'POST',
+        body: JSON.stringify(body),
+      });
+
+      setComment('');
+      setSelectedCuisine('');
+
+      await fetchComments();
+    } catch (err) {
+      console.error('Error sending comment:', err);
+    }
+  };
+
+  const deleteComment = async (id) => {
+    try {
+      await fetchData(`/comments/${id}`, {
+        method: 'DELETE',
+      });
+
+      await fetchComments();
+    } catch (err) {
+      console.error('Error deleting comment:', err);
+    }
+  };
+
+  const updateComment = async (id, newText) => {
+    try {
+      await fetchData(`/comments/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ comment_text: newText }),
+      });
+
+      await fetchComments();
+    } catch (err) {
+      console.error('Error updating comment:', err);
+    }
   };
 
   return (
@@ -213,6 +304,7 @@ const ProfileContainer = () => {
       profilePicFile={profilePicFile}
       uploading={uploading}
       events={events}
+      reservations={reservations}
       handleEdit={handleEdit}
       handleChange={handleChange}
       handleSave={handleSave}
@@ -222,8 +314,16 @@ const ProfileContainer = () => {
       uploadPhoto={uploadPhoto}
       handleLogout={handleLogout}
       handleDeleteAccount={handleDeleteAccount}
-      reservations={reservations}
       handleCancelReservation={handleCancelReservation}
+      cuisines={cuisines}
+      selectedCuisine={selectedCuisine}
+      setSelectedCuisine={setSelectedCuisine}
+      comment={comment}
+      setComment={setComment}
+      sendComment={sendComment}
+      myComments={myComments}
+      deleteComment={deleteComment}
+      updateComment={updateComment}
     />
   );
 };
