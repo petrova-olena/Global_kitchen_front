@@ -383,6 +383,10 @@ main {
   cursor: default;
 }
 
+/* =========================================================
+   ADMIN + CALENDAR SHARED CARD STYLES
+   ========================================================= */
+
 /* EVENTS OVERVIEW */
 .events-overview {
   width: 93%;
@@ -429,6 +433,14 @@ main {
   font-weight: 600;
 }
 
+.reservation-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 30px;
+}
+
 .event-item,
 .reservation-item {
   padding: 10px 0;
@@ -438,6 +450,11 @@ main {
 .event-item:last-child,
 .reservation-item:last-child {
   border-bottom: none;
+}
+
+.reservation-item-row,
+.event-item-row {
+  width: 100%;
 }
 
 .event-item-row {
@@ -483,6 +500,15 @@ main {
 }
 
 /* Reservation cards */
+.reservations-list {
+  width: 100%;
+}
+
+.reservations-tab {
+  width: 100%;
+  display: block;
+}
+
 .reservation-item-row {
   display: flex;
   justify-content: space-between;
@@ -542,6 +568,184 @@ main {
   padding: 0 16px 16px 16px;
 }
 
+/* --- Admin Panel Layout --- */
+.admin-panel {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+}
+
+/* Back button */
+.back-btn {
+  background: none;
+  border: none;
+  color: #452209;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* --- Create Event Form --- */
+.admin-create-event {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.admin-create-event input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.admin-create-event button {
+  width: 100%;
+  padding: 10px;
+  background: #452209;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* --- Events / Reservations Switcher --- */
+.admin-tabs {
+  width: 100%;
+  display: flex;
+  margin-top: 12px;
+}
+
+.admin-tabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #eee;
+}
+
+.admin-tabs button.active {
+  background: #ccc;
+  font-weight: bold;
+}
+
+/* --- Filter Mode --- */
+.admin-filter-mode {
+  margin: 20px 0;
+  padding: 12px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.admin-filter-mode label {
+  display: block;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+/* --- User Select --- */
+.admin-user-select {
+  margin-bottom: 20px;
+}
+
+.admin-user-select select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* --- Date Filters --- */
+.admin-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.admin-filters button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+  cursor: pointer;
+}
+
+.admin-filters button.active {
+  background: #452209;
+  color: white;
+  border-color: #452209;
+}
+
+.custom-range {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.custom-range input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* --- Search Button --- */
+.admin-search button {
+  width: 100%;
+  padding: 12px;
+  background: #452209;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* --- Events List --- */
+.admin-events-list {
+  margin-top: 30px;
+}
+
+.event-item {
+  background: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 14px;
+}
+
+.event-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.event-time {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.event-icon {
+  margin-right: 6px;
+}
+
+.event-desc {
+  font-size: 14px;
+  color: #666;
+}
+
+.event-author {
+  font-size: 14px;
+  color: #6b4a32;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+/* next styles */
 .arrow {
   font-size: 18px;
   color: #555;
@@ -696,6 +900,189 @@ main {
 
 .delete-btn:hover {
   background: #7a4f2f;
+}
+
+/* UPDATE and DELETE section */
+/* Buttons container */
+.event-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Buttons style */
+.event-actions button {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #a26a42;
+  color: white;
+  border: none;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: #7a4f2f;
+}
+
+/* Hover */
+.event-actions button:hover {
+  background: #452209;
+}
+
+/* Press */
+.event-actions button:active {
+  transform: scale(0.92);
+}
+
+/* UPDATE event section */
+/* --- Overlay --- */
+.edit-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* --- Modal Window --- */
+.edit-modal-window {
+  background: #fff;
+  width: 92%;
+  max-width: 420px;
+  padding: 20px 22px;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: scaleIn 0.22s ease-out;
+}
+
+/* Header */
+.edit-modal-window h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Lables */
+.edit-modal-window label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 6px;
+}
+
+/* Inputs */
+.edit-modal-window input,
+.edit-modal-window textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  font-size: 14px;
+  background: #fafafa;
+  transition: border-color 0.15s ease;
+}
+
+.edit-modal-window input:focus,
+.edit-modal-window textarea:focus {
+  border-color: #888;
+  outline: none;
+}
+
+/* Text field */
+.edit-modal-window textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* Buttons */
+.edit-modal-window .buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.edit-modal-window button {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+/* Save */
+.edit-modal-window button:first-child {
+  background: #a26a42;
+  color: white;
+}
+
+.edit-modal-window button:first-child:hover {
+  background-color: #452209;
+  color: #f3ece7;
+}
+
+/* Cancel */
+.edit-modal-window button:last-child {
+  background: #e0e0e0;
+}
+
+.edit-modal-window button:last-child:hover {
+  background: #d5d5d5;
+}
+
+/* Press effect */
+.edit-modal-window button:active {
+  transform: scale(0.97);
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @media (min-width: 900px) {

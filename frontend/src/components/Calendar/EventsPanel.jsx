@@ -6,6 +6,7 @@ export default function EventsPanel({
   activeDay,
   month,
   year,
+  openEditEvent,
   deleteEvent,
   currentUser,
 }) {
@@ -87,12 +88,18 @@ export default function EventsPanel({
             </div>
 
             {(ev.type === "user" || currentUser.role === "admin") && (
-              <button
-                className="delete-btn delete-right"
-                onClick={() => deleteEvent(ev.id)}
-              >
-                🗑
-              </button>
+              <div className="event-actions">
+                <button className="edit-btn" onClick={() => openEditEvent(ev)}>
+                  ✏️
+                </button>
+
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteEvent(ev.id)}
+                >
+                  🗑️
+                </button>
+              </div>
             )}
           </div>
         ))}

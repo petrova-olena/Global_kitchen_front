@@ -6,7 +6,7 @@ import {
   getUserVisibleEndTime,
 } from "../../utils/dateHelpers";
 
-export default function ReservationCard({ reservation, onDelete }) {
+export default function ReservationCard({ reservation, onDelete, onEdit }) {
   const [showConfirm, setShowConfirm] = useState(false);
   //const { t } = useTranslation();
 
@@ -36,9 +36,19 @@ export default function ReservationCard({ reservation, onDelete }) {
         )}
       </div>
 
-      <button className="delete-btn" onClick={() => setShowConfirm(true)}>
-        🗑️
-      </button>
+      {reservation.userName && (
+        <div className="reservation-user">User: {reservation.userName}</div>
+      )}
+
+      <div className="event-actions">
+        <button className="edit-btn" onClick={() => onEdit(reservation)}>
+          ✏️
+        </button>
+
+        <button className="delete-btn" onClick={() => setShowConfirm(true)}>
+          🗑️
+        </button>
+      </div>
 
       {showConfirm && (
         <div className="modal-overlay">
