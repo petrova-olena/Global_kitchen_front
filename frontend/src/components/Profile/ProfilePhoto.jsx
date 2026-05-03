@@ -10,8 +10,16 @@ const ProfilePhoto = ({
 }) => {
   const fileRef = useRef(null);
 
+  const handleButtonClick = () => {
+    // 👇 Eğer dosya yoksa file picker aç
+    if (!profilePicFile) {
+      fileRef.current.click();
+    }
+  };
+
   return (
     <div className="profile-left">
+      {/* IMAGE */}
       <div className="profile-photo">
         {user?.profile_pic ? (
           <img
@@ -27,8 +35,10 @@ const ProfilePhoto = ({
         )}
       </div>
 
+      {/* EDIT MODE */}
       {editMode && (
         <form onSubmit={uploadPhoto} className="profile-pic-form">
+          {/* HIDDEN INPUT */}
           <input
             ref={fileRef}
             type="file"
@@ -36,19 +46,18 @@ const ProfilePhoto = ({
             onChange={onFileChange}
           />
 
+          {/* SINGLE SMART BUTTON */}
           <button
+            type={profilePicFile ? 'submit' : 'button'}
             className="action-btn"
-            type="button"
-            onClick={() => fileRef.current.click()}
+            onClick={handleButtonClick}
           >
-            Choose Photo
+            {uploading
+              ? 'Uploading...'
+              : profilePicFile
+                ? 'Upload Photo'
+                : 'Choose Photo'}
           </button>
-
-          {profilePicFile && (
-            <button className="action-btn" type="submit">
-              {uploading ? 'Uploading...' : 'Upload'}
-            </button>
-          )}
         </form>
       )}
     </div>
