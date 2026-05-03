@@ -43,6 +43,24 @@
   cursor: pointer;
 }
 
+/* --- Events / Reservations Switcher --- */
+.admin-tabs {
+  display: flex;
+  margin-top: 12px;
+}
+
+.admin-tabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #eee;
+}
+
+.admin-tabs button.active {
+  background: #ccc;
+  font-weight: bold;
+}
+
 /* --- Filter Mode --- */
 .admin-filter-mode {
   margin: 20px 0;

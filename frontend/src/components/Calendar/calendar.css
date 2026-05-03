@@ -720,6 +720,25 @@ main {
   cursor: pointer;
 }
 
+.edit-btn {
+  background: #a26a42;
+  color: white;
+  border: none;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: #7a4f2f;
+}
+
 /* Hover */
 .event-actions button:hover {
   background: #452209;
