@@ -15,6 +15,11 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
       <div className="reservation-item-left">
         <div className="reservation-title">Table reservation</div>
 
+        <div className="reservation-table">
+          <span className="event-icon">🍽️</span>
+          Table: {reservation.table}
+        </div>
+
         <div className="reservation-time">
           <span className="event-icon">📅</span>
           {formatDate(reservation.from)}
@@ -30,10 +35,10 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
         </div>
 
         <div className="reservation-guests">Guests: {reservation.guests}</div>
+      </div>
 
-        {reservation.notes && (
-          <div className="reservation-notes">{reservation.notes}</div>
-        )}
+      <div className="reservation-notes">
+        Notes: {reservation.notes ? reservation.notes : "No notes"}
       </div>
 
       {reservation.userName && (
@@ -65,7 +70,10 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
 
               <button
                 className="delete-btn"
-                onClick={() => onDelete(reservation.id)}
+                onClick={async () => {
+                  await onDelete(reservation.id);
+                  setShowConfirm(false);
+                }}
               >
                 Delete
               </button>

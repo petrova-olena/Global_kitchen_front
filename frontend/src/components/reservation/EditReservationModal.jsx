@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { findAvailabilityForTable } from "../../utils/reservationAvailability";
-// путь подстрой под свой проект
 
 export default function EditReservationModal({
   reservation,
   reservations,
   onSave,
   onCancel,
+  isAdmin = false,
 }) {
   // -----------------------------
   // Helpers
@@ -20,7 +20,6 @@ export default function EditReservationModal({
     const dd = pad(date.getDate());
     const hh = pad(date.getHours());
     const min = pad(date.getMinutes());
-
     return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
   }
 
@@ -31,10 +30,14 @@ export default function EditReservationModal({
   // -----------------------------
   // State
   // -----------------------------
-  const [tableId, setTableId] = useState(reservation.tableId);
+  const [tableId, setTableId] = useState(
+    reservation.tableId ?? reservation.table,
+  );
   const [from, setFrom] = useState(toLocalInputValue(reservation.from));
   const [duration, setDuration] = useState(120);
   const [guests, setGuests] = useState(reservation.guests);
+
+  const [note, setNote] = useState(reservation.notes ?? reservation.note ?? "");
 
   const [checkResult, setCheckResult] = useState(null);
   const [showBusyModal, setShowBusyModal] = useState(false);
@@ -71,15 +74,16 @@ export default function EditReservationModal({
 
   // Save
   function handleSave() {
-    const start = new Date(from);
+    const start = new Date(from + ":00");
     const end = new Date(start.getTime() + duration * 60000);
-    const expire = new Date(end.getTime() + 60 * 60000); // +1 час буфер
+    const expire = new Date(end.getTime() + 60 * 60000); // +1 hour
 
     onSave({
       tableId: Number(tableId),
       reservationTime: start.toISOString(),
       pepole: Number(guests),
       expire: expire.toISOString(),
+      note: isAdmin ? note : null,
     });
   }
 
@@ -124,6 +128,19 @@ export default function EditReservationModal({
           value={guests}
           onChange={(e) => setGuests(e.target.value)}
         />
+
+        {/*  ADMIN-ONLY NOTES FIELD */}
+        {isAdmin && (
+          <>
+            <label>Notes</label>
+            <textarea
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="Enter notes for this reservation"
+              rows={3}
+            />
+          </>
+        )}
 
         {checkResult === "free" && (
           <p style={{ color: "green" }}>Table is available</p>

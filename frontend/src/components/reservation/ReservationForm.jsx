@@ -10,11 +10,13 @@ export default function ReservationForm({
   prefillTable,
   prefillDate,
   prefillTime,
+  isAdmin = false,
 }) {
   const [tableId, setTableId] = useState("");
   const [pepole, setPepole] = useState(1);
   const [duration, setDuration] = useState(120); // default 2 hours
   const [datetime, setDatetime] = useState("");
+  const [note, setNote] = useState("");
 
   useEffect(() => {
     if (prefillDate && prefillTime) {
@@ -49,6 +51,7 @@ export default function ReservationForm({
       datetime,
       pepole,
       duration,
+      note: isAdmin ? note : null,
     });
   }
 
@@ -121,6 +124,20 @@ export default function ReservationForm({
       {/* NO TABLES */}
       {tables.length === 0 && !disabledForm && (
         <p className="no-tables">No free tables for selected time</p>
+      )}
+
+      {/* ADMIN NOTES FIELD */}
+      {isAdmin && (
+        <label className="form-label">
+          Notes
+          <textarea
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            className="form-input"
+            rows={3}
+            placeholder="Enter notes"
+          />
+        </label>
       )}
 
       {/* SUBMIT */}
