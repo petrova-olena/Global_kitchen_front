@@ -1,9 +1,14 @@
+import { useState } from "react";
 import useAdminReservations from "./useAdminReservations";
+import ReservationForm from "./../../Reservation/ReservationForm";
 import ReservationCard from "./../../Events/ReservationCard";
+import EditReservationModal from "./../../Reservation/EditReservationModal";
+import SuccessModal from "./../../Reservation/SuccessModal";
 
 export default function ReservationsTab({
+  createReservation,
   deleteReservation,
-  editReservation,
+  updateReservation,
 }) {
   const {
     reservations,
@@ -15,11 +20,59 @@ export default function ReservationsTab({
     customTo,
     setCustomTo,
     handleSearch,
+    tables,
+    freeTables,
+    handleAdminDatetimeChange,
+    reloadReservationsAdmin,
   } = useAdminReservations();
+
+  const [editing, setEditing] = useState(null);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  async function handleCreate(formData) {
+    try {
+      await createReservation(formData);
+
+      setSuccessMessage("Reservation created successfully!");
+      setShowSuccess(true);
+
+      await reloadReservationsAdmin();
+
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } catch (err) {
+      console.error("Admin create error:", err);
+    }
+  }
+
+  async function handleSaveEdit(updated) {
+    await updateReservation(editing.id, updated);
+    await reloadReservationsAdmin();
+    setSuccessMessage("Reservation updated!");
+    setShowSuccess(true);
+    setEditing(null);
+  }
+
+  async function handleDelete(id) {
+    await deleteReservation(id);
+    await reloadReservationsAdmin();
+    setSuccessMessage("Reservation deleted!");
+    setShowSuccess(true);
+  }
 
   return (
     <div className="reservations-tab">
       <h2>Reservations</h2>
+
+      {/* Reservation adding for admin */}
+      <ReservationForm
+        tables={freeTables}
+        onSubmit={handleCreate}
+        disabledForm={false}
+        disabledReserve={false}
+        onDatetimeChange={handleAdminDatetimeChange}
+        isAdmin={true}
+      />
 
       {/* Date filters */}
       <div className="admin-filters">
@@ -76,7 +129,7 @@ export default function ReservationsTab({
             from: r.reservation_time,
             to: r.expires_at,
             guests: r.number_of_people,
-            notes: r.notes || "",
+            notes: r.note || "",
             table: r.table_id,
             userName: userMap[r.reserver_id], // ← имя пользователя
           };
@@ -85,12 +138,30 @@ export default function ReservationsTab({
             <ReservationCard
               key={r.id}
               reservation={adapted}
-              onDelete={() => deleteReservation(r.id)}
-              onEdit={() => editReservation(r)}
+              onDelete={handleDelete}
+              onEdit={setEditing}
             />
           );
         })}
       </div>
+
+      {showSuccess && (
+        <SuccessModal
+          message={successMessage}
+          onClose={() => setShowSuccess(false)}
+        />
+      )}
+
+      {editing && (
+        <EditReservationModal
+          reservation={editing}
+          reservations={reservations}
+          tables={tables}
+          onSave={handleSaveEdit}
+          onCancel={() => setEditing(null)}
+          isAdmin={true}
+        />
+      )}
     </div>
   );
 }

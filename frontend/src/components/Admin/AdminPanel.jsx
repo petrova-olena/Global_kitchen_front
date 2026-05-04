@@ -11,8 +11,10 @@ import AdminTabs from './AdminTabs';
 export default function AdminPanel() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const currentUser = JSON.parse(localStorage.getItem('user'));
-  const [activeTab, setActiveTab] = useState('events');
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const [activeTab, setActiveTab] = useState("events");
+  const { createReservation, deleteReservation, updateReservation } =
+    useReservation(currentUser);
 
   // Redirect if not admin
   useEffect(() => {
@@ -36,7 +38,14 @@ export default function AdminPanel() {
 
       {activeTab === 'events' && <EventsTab {...eventsLogic} t={t} />}
 
-      {activeTab === 'reservations' && <ReservationsTab />}
+      {activeTab === "reservations" && (
+        <ReservationsTab
+          createReservation={createReservation}
+          deleteReservation={deleteReservation}
+          updateReservation={updateReservation}
+          currentUser={currentUser}
+        />
+      )}
     </div>
   );
 }

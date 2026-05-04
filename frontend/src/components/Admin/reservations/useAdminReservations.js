@@ -6,11 +6,29 @@ export default function useAdminReservations() {
   const [reservations, setReservations] = useState([]);
   const [userMap, setUserMap] = useState({});
 
+  // Tables + freeTables + selected datetime
+  const [tables, setTables] = useState([]);
+  const [freeTables, setFreeTables] = useState([]);
+  const [selectedDateTime, setSelectedDateTime] = useState("");
+
   // Filters
   const [dateMode, setDateMode] = useState("week");
   const [customFrom, setCustomFrom] = useState("");
   const [customTo, setCustomTo] = useState("");
   const [filtered, setFiltered] = useState([]);
+
+  // Load all tables
+  useEffect(() => {
+    async function loadTables() {
+      try {
+        const data = await fetchData("/tables");
+        setTables(data);
+      } catch (err) {
+        console.error("Failed to load tables:", err);
+      }
+    }
+    loadTables();
+  }, []);
 
   // Load all reservations
   const loadReservations = async () => {
@@ -37,6 +55,30 @@ export default function useAdminReservations() {
       })
       .catch((err) => console.error("Failed to load users:", err));
   }, []);
+
+  function getFreeTables(datetime) {
+    if (!datetime) return [];
+
+    const selected = new Date(datetime);
+
+    return tables.filter((table) => {
+      const tableReservations = reservations.filter(
+        (r) => r.table_id === table.id,
+      );
+
+      return tableReservations.every((r) => {
+        const start = new Date(r.reservation_time);
+        const end = new Date(r.expires_at);
+        return selected < start || selected >= end;
+      });
+    });
+  }
+
+  function handleAdminDatetimeChange(datetime) {
+    setSelectedDateTime(datetime);
+    const free = getFreeTables(datetime);
+    setFreeTables(free);
+  }
 
   // Date helpers
   const getDateRange = () => {
@@ -151,6 +193,28 @@ export default function useAdminReservations() {
     setFiltered(result);
   };
 
+  const reloadReservationsAdmin = async () => {
+    await loadReservations();
+
+    // пересчитать filtered
+    if (dateMode === "week" || dateMode === "month") {
+      const { from, to } = getDateRange();
+      const result = reservations.filter((r) => {
+        const start = new Date(r.reservation_time);
+        const end = new Date(r.expires_at);
+        return end >= from && start <= to;
+      });
+      result.sort(
+        (a, b) => new Date(a.reservation_time) - new Date(b.reservation_time),
+      );
+      setFiltered(result);
+    }
+
+    if (dateMode === "custom") {
+      handleSearch();
+    }
+  };
+
   return {
     reservations: filtered,
     userMap,
@@ -161,5 +225,9 @@ export default function useAdminReservations() {
     customTo,
     setCustomTo,
     handleSearch,
+    freeTables,
+    handleAdminDatetimeChange,
+    reloadReservationsAdmin,
+    tables,
   };
 }

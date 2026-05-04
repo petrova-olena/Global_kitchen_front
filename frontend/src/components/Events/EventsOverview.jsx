@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { loadEvents } from "../../utils/loadEvents";
 import { fetchData } from "../../utils/fetchData";
 import { formatDate, formatTime } from "../../utils/dateHelpers";
-import { useReservation } from "../reservation/useReservation";
+import { useReservation } from "../Reservation/useReservation";
 import { addEvent, deleteEventById, updateEvent } from "../../services/events";
 import EditEventModal from "./EditEventModal";
 import EditReservationModal from "../Reservation/EditReservationModal";
@@ -27,9 +27,9 @@ export default function EventsOverview() {
 
   // Reservation state
   const {
-    //tables,
+    tables,
     reservations,
-    getFreeTables,
+    //getFreeTables,
     //createReservation,
     deleteReservation,
     updateReservation,
@@ -269,9 +269,10 @@ export default function EventsOverview() {
   async function handleUpdateReservation(id, updated) {
     const success = await updateReservation(id, {
       tableId: updated.tableId,
-      datetime: updated.from,
-      pepole: updated.guests,
-      duration: updated.duration,
+      reservationTime: updated.reservationTime,
+      pepole: updated.pepole,
+      expire: updated.expire,
+      note: updated.note || null,
     });
 
     if (success) {
@@ -480,7 +481,7 @@ export default function EventsOverview() {
         <EditReservationModal
           reservation={editingReservation}
           reservations={reservations}
-          getFreeTables={getFreeTables}
+          tables={tables}
           onSave={(updated) =>
             handleUpdateReservation(editingReservation.id, updated)
           }

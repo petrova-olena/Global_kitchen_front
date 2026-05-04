@@ -82,7 +82,13 @@ export function useReservation(currentUser) {
   // -------------------------------
   //   CREATE RESERVATION
   // -------------------------------
-  async function createReservation({ tableId, datetime, pepole, duration }) {
+  async function createReservation({
+    tableId,
+    datetime,
+    pepole,
+    duration,
+    note,
+  }) {
     if (!currentUser) {
       setError("You must be logged in");
       return;
@@ -102,6 +108,7 @@ export function useReservation(currentUser) {
         reservationTime: formatLocalDate(start),
         pepole: Number(pepole),
         expire: formatLocalDate(expire),
+        note: note || null,
       };
 
       const data = await fetchData("/reservation", {
@@ -125,21 +132,30 @@ export function useReservation(currentUser) {
 
   async function updateReservation(
     id,
-    { tableId, datetime, pepole, duration },
+    { tableId, reservationTime, pepole, expire, note = null },
   ) {
     try {
       setLoading(true);
       setError("");
 
-      const start = new Date(datetime);
-      const end = new Date(start.getTime() + duration * 60000);
-      const expire = new Date(end.getTime() + 60 * 60000);
+      const formattedStart = formatLocalDate(new Date(reservationTime));
+      const formattedExpire = formatLocalDate(new Date(expire));
+
+      console.log("🟩 UPDATE RESERVATION → sending to backend:", {
+        id,
+        tableId,
+        reservationTime: formattedStart,
+        pepole,
+        expire: formattedExpire,
+        note,
+      });
 
       const body = {
         tableId: Number(tableId),
-        reservationTime: formatLocalDate(start),
+        reservationTime: formattedStart,
         pepole: Number(pepole),
-        expire: formatLocalDate(expire),
+        expire: formattedExpire,
+        note,
       };
 
       await fetchData(`/reservation/${id}`, {
@@ -177,6 +193,7 @@ export function useReservation(currentUser) {
     getFreeTables,
     loading,
     error,
+    reloadReservations,
     createReservation,
     updateReservation,
     deleteReservation,
