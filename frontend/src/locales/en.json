@@ -229,5 +229,81 @@
     "highProtein": "High-protein",
     "dishName": "Dish Name",
     "shortDescription": "Short description of the dish."
+  },
+  "profileContainer": {
+    "selectCuisineFirst": "Please select a cuisine first",
+    "writeComment": "Please write a comment",
+
+    "loadError": "Failed to load profile",
+    "updateError": "Update failed",
+    "uploadError": "Upload failed",
+
+    "confirmDeleteAccountTitle": "Delete Account",
+    "confirmDeleteEventTitle": "Delete Event",
+    "confirmCancelReservationTitle": "Cancel Reservation",
+    "confirmDeleteCommentTitle": "Delete Comment",
+
+    "confirmDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone.",
+    "confirmDeleteEvent": "Are you sure you want to delete this event?",
+    "confirmCancelReservation": "Are you sure you want to cancel this reservation?",
+    "confirmDeleteComment": "Are you sure you want to delete this comment?"
+  },
+  "profileOverview": {
+    "myEvents": "My Events",
+    "addEvent": "Add Event",
+    "myReservations": "My Reservations",
+    "giftCard": "Gift Card",
+    "giftCardText": "Buy a gift card for friends or family.",
+    "buyGiftCard": "Buy Gift Card",
+    "recipeOfDay": "Recipe of the Day",
+    "recipeTitle": "Tomato Basil Pasta",
+    "recipeDesc": "Fresh tomatoes, basil, garlic, olive oil",
+    "saveToNotes": "Save to Notes",
+    "myComments": "My Comments",
+    "selectCuisine": "-- Select Cuisine --",
+    "writeComment": "Write your comment...",
+    "addComment": "Add Comment",
+    "viewComments": "View My Comments",
+    "hideComments": "Hide My Comments",
+    "previousComments": "Your Previous Comments",
+    "noComments": "You have no comments yet.",
+    "unknownCuisine": "Unknown",
+    "cuisine": "Cuisine"
+  },
+  "profileEvents": {
+    "eventTitle": "Event Title",
+    "description": "Description",
+    "start": "Start",
+    "end": "End",
+    "delete": "Delete",
+    "noEvents": "No events found."
+  },
+  "profileForm": {
+    "username": "Username",
+    "email": "Email",
+    "newPassword": "New Password",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "logout": "Logout",
+    "editProfile": "Edit Profile",
+    "deleteProfile": "Delete Profile"
+  },
+  "profilePhoto": {
+    "noImage": "No Image",
+    "uploading": "Uploading...",
+    "uploadPhoto": "Upload Photo",
+    "choosePhoto": "Choose Photo"
+  },
+  "profileReservations": {
+    "table": "Table",
+    "date": "Date",
+    "time": "Time",
+    "people": "People",
+    "cancel": "Cancel"
+  },
+  "confirmModal": {
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   }
 }

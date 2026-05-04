@@ -229,5 +229,86 @@
     "highProtein": "Korkea proteiini",
     "dishName": "Ruoan nimi",
     "shortDescription": "Lyhyt kuvaus ruoasta."
+  },
+  "profileContainer": {
+    "selectCuisineFirst": "Valitse ensin keittiö",
+    "writeComment": "Kirjoita kommentti",
+
+    "loadError": "Profiilin lataaminen epäonnistui",
+    "updateError": "Päivitys epäonnistui",
+    "uploadError": "Lataus epäonnistui",
+
+    "confirmDeleteAccountTitle": "Poista tili",
+    "confirmDeleteEventTitle": "Poista tapahtuma",
+    "confirmCancelReservationTitle": "Peru varaus",
+    "confirmDeleteCommentTitle": "Poista kommentti",
+
+    "confirmDeleteAccount": "Haluatko varmasti poistaa tilisi? Tätä toimintoa ei voi peruuttaa.",
+    "confirmDeleteEvent": "Haluatko varmasti poistaa tämän tapahtuman?",
+    "confirmCancelReservation": "Haluatko varmasti peruuttaa tämän varauksen?",
+    "confirmDeleteComment": "Haluatko varmasti poistaa tämän kommentin?"
+  },
+  "profileOverview": {
+    "myEvents": "Omat tapahtumat",
+    "addEvent": "Lisää tapahtuma",
+
+    "myReservations": "Omat varaukset",
+
+    "giftCard": "Lahjakortti",
+    "giftCardText": "Osta lahjakortti ystäville tai perheelle.",
+    "buyGiftCard": "Osta lahjakortti",
+
+    "recipeOfDay": "Päivän resepti",
+    "recipeTitle": "Tomaatti-basilikapasta",
+    "recipeDesc": "Tuoreita tomaatteja, basilikaa, valkosipulia, oliiviöljyä",
+    "saveToNotes": "Tallenna muistiinpanoihin",
+
+    "myComments": "Omat kommentit",
+    "selectCuisine": "-- Valitse keittiö --",
+    "writeComment": "Kirjoita kommenttisi...",
+    "addComment": "Lisää kommentti",
+    "viewComments": "Näytä kommenttini",
+    "hideComments": "Piilota kommenttini",
+
+    "previousComments": "Aiemmat kommenttisi",
+    "noComments": "Sinulla ei ole vielä kommentteja.",
+    "unknownCuisine": "Tuntematon",
+    "cuisine": "Keittiö"
+  },
+  "profileEvents": {
+    "eventTitle": "Tapahtuman nimi",
+    "description": "Kuvaus",
+    "start": "Alkaa",
+    "end": "Päättyy",
+    "delete": "Poista",
+    "noEvents": "Ei tapahtumia."
+  },
+  "profileForm": {
+    "username": "Käyttäjänimi",
+    "email": "Sähköposti",
+    "newPassword": "Uusi salasana",
+    "save": "Tallenna",
+    "saving": "Tallennetaan...",
+    "cancel": "Peruuta",
+    "logout": "Kirjaudu ulos",
+    "editProfile": "Muokkaa profiilia",
+    "deleteProfile": "Poista profiili"
+  },
+  "profilePhoto": {
+    "noImage": "Ei kuvaa",
+    "uploading": "Ladataan...",
+    "uploadPhoto": "Lataa kuva",
+    "choosePhoto": "Valitse kuva"
+  },
+  "profileReservations": {
+    "table": "Pöytä",
+    "date": "Päivä",
+    "time": "Aika",
+    "people": "Henkilöä",
+    "cancel": "Peruuta"
+  },
+  "confirmModal": {
+    "confirm": "Vahvista",
+    "cancel": "Peruuta"
   }
 }

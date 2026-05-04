@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ProfilePhoto = ({
   user,
@@ -9,9 +10,9 @@ const ProfilePhoto = ({
   uploadPhoto,
 }) => {
   const fileRef = useRef(null);
+  const { t } = useTranslation();
 
   const handleButtonClick = () => {
-    // 👇 Eğer dosya yoksa file picker aç
     if (!profilePicFile) {
       fileRef.current.click();
     }
@@ -31,14 +32,13 @@ const ProfilePhoto = ({
             alt="profile"
           />
         ) : (
-          <div>No Image</div>
+          <div>{t('profilePhoto.noImage')}</div>
         )}
       </div>
 
       {/* EDIT MODE */}
       {editMode && (
         <form onSubmit={uploadPhoto} className="profile-pic-form">
-          {/* HIDDEN INPUT */}
           <input
             ref={fileRef}
             type="file"
@@ -46,17 +46,16 @@ const ProfilePhoto = ({
             onChange={onFileChange}
           />
 
-          {/* SINGLE SMART BUTTON */}
           <button
             type={profilePicFile ? 'submit' : 'button'}
             className="action-btn"
             onClick={handleButtonClick}
           >
             {uploading
-              ? 'Uploading...'
+              ? t('profilePhoto.uploading')
               : profilePicFile
-                ? 'Upload Photo'
-                : 'Choose Photo'}
+                ? t('profilePhoto.uploadPhoto')
+                : t('profilePhoto.choosePhoto')}
           </button>
         </form>
       )}
