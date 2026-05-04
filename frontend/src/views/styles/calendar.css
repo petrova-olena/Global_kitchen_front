@@ -24,11 +24,6 @@ main {
   margin: 0 auto;
 }
 
-.container {
-  background-color: #452209;
-  padding: 20px;
-}
-
 .menu-links {
   display: flex;
   justify-content: center;
@@ -167,7 +162,7 @@ main {
 
 .calendar::before,
 .calendar::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 100%;
@@ -208,7 +203,7 @@ main {
 }
 
 .calendar .day.active::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   box-shadow: 0 0 10px 2px #452209;
@@ -222,7 +217,7 @@ main {
 
 /* Event marker */
 .calendar .day.event::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 10%;
   left: 50%;
@@ -283,7 +278,7 @@ main {
 
 /* Hover effect */
 .events .event::after {
-  content: "✓";
+  content: '✓';
   position: absolute;
   top: 50%;
   right: 0;

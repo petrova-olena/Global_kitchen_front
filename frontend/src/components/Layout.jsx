@@ -1,12 +1,17 @@
-import { Link, Outlet } from 'react-router-dom';
-import { useContext } from 'react';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/logotest.png';
 import { AuthContext } from '../context/AuthContext';
+import '../views/styles/navbar.css';
+import { FiLogIn } from 'react-icons/fi';
 
 const Layout = () => {
   const { user } = useContext(AuthContext);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -15,57 +20,117 @@ const Layout = () => {
 
   return (
     <>
-      {/*-- HEADER --*/}
       <header className="header">
-        <img src={logo} alt="Global Kitchen Logo" className="logo" />
-        <div className="header-center">
-          {user && (
-            <span className="welcome-username">{t('header.welcome')}, {user.username}!</span>
-          )}
-        </div>
-        <nav className="nav">
-          <Link to="/">{t('nav.home')}</Link>
-          <Link to="/calendar">{t('nav.calendar')}</Link>
-          <Link to="/menu">{t('nav.menu')}</Link>
-          {user && <Link to="/profile">{t('nav.profile')}</Link>}
-          <div className="language-switcher">
-            <button
-              onClick={() => changeLanguage('en')}
-              className={i18n.language === 'en' ? 'lang-btn active' : 'lang-btn'}
-              title="English"
-            >
-              EN
-            </button>
-            <button
-              onClick={() => changeLanguage('fi')}
-              className={i18n.language === 'fi' ? 'lang-btn active' : 'lang-btn'}
-              title="Suomi"
-            >
-              FI
-            </button>
+        <div className="container nav-inner ">
+          <div className="header-left">
+            <img src={logo} className="logo" alt="logo" />
           </div>
-          {!user && (
-            <Link to="/auth" className="login-icon">
-              👤
-            </Link>
-          )}
-        </nav>
+
+          <nav className="header-center desktop-only nav">
+            <NavLink to="/" className="nav-link">
+              {t('nav.home')}
+            </NavLink>
+
+            <NavLink to="/menu" className="nav-link">
+              {t('nav.menu')}
+            </NavLink>
+
+            <NavLink to="/calendar" className="nav-link">
+              {t('nav.calendar')}
+            </NavLink>
+          </nav>
+
+          <div className="header-right desktop-only">
+            <div className="language-switcher">
+              <button onClick={() => changeLanguage('en')}>EN</button>
+              <button onClick={() => changeLanguage('fi')}>FI</button>
+            </div>
+
+            {user ? (
+              <img
+                className="header-profile-img"
+                src={
+                  user?.profile_pic?.startsWith('http')
+                    ? user.profile_pic
+                    : `http://localhost:8000/uploads/${user.profile_pic}`
+                }
+                alt="profile"
+                onClick={() => navigate('/profile')}
+              />
+            ) : (
+              <NavLink to="/auth" className="nav-icon">
+                <FiLogIn />
+              </NavLink>
+            )}
+          </div>
+
+          <div
+            className="hamburger mobile-only"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            ☰
+          </div>
+        </div>
       </header>
+
+      {menuOpen && (
+        <div className="mobile-menu mobile-only">
+          <NavLink
+            to="/"
+            onClick={() => setMenuOpen(false)}
+            className="mobile-link"
+          >
+            {t('nav.home')}
+          </NavLink>
+
+          <NavLink
+            to="/menu"
+            onClick={() => setMenuOpen(false)}
+            className="mobile-link"
+          >
+            {t('nav.menu')}
+          </NavLink>
+
+          <NavLink
+            to="/calendar"
+            onClick={() => setMenuOpen(false)}
+            className="mobile-link"
+          >
+            {t('nav.calendar')}
+          </NavLink>
+
+          {user ? (
+            <div
+              className="mobile-profile"
+              onClick={() => {
+                setMenuOpen(false);
+                navigate('/profile');
+              }}
+            >
+              {t('nav.profile')}
+            </div>
+          ) : (
+            <NavLink
+              to="/auth"
+              className="mobile-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {t('nav.login') || 'Login'}
+            </NavLink>
+          )}
+
+          {/* LANGUAGE */}
+          <div className="mobile-lang">
+            <button onClick={() => changeLanguage('en')}>EN</button>
+            <button onClick={() => changeLanguage('fi')}>FI</button>
+          </div>
+        </div>
+      )}
 
       <main>
         <Outlet />
       </main>
 
-      {/*-- CHAT SCRIPT --*/}
-      {/*<script>
-      const chatToggle = document.querySelector('.chat-toggle');
-      const chatWidget = document.querySelector('.chat-widget');
-      chatToggle.addEventListener('click', () => {
-        chatWidget.classList.toggle('active');
-      });
-    </script>*/}
-
-      {/*-- FOOTER --*/}
       <footer className="footer">
         <p>{t('footer.address')}</p>
         <p>{t('footer.contact')}</p>
