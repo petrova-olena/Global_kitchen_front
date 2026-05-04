@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ProfileForm = ({
   form,
@@ -14,6 +15,7 @@ const ProfileForm = ({
   user,
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="profile-right">
@@ -23,15 +25,21 @@ const ProfileForm = ({
             name="username"
             value={form.username}
             onChange={handleChange}
+            placeholder={t('profileForm.username')}
           />
 
-          <input name="email" value={form.email} onChange={handleChange} />
+          <input
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder={t('profileForm.email')}
+          />
 
           <div className="password-wrapper">
             <input
               name="newPassword"
               type={showPassword ? 'text' : 'password'}
-              placeholder="New Password"
+              placeholder={t('profileForm.newPassword')}
               value={form.newPassword || ''}
               onChange={handleChange}
             />
@@ -46,15 +54,15 @@ const ProfileForm = ({
 
           <div className="button-group">
             <button type="button" className="action-btn" onClick={handleSave}>
-              {loading ? 'Saving...' : 'Save'}
+              {loading ? t('profileForm.saving') : t('profileForm.save')}
             </button>
 
             <button type="button" className="action-btn" onClick={handleCancel}>
-              Cancel
+              {t('profileForm.cancel')}
             </button>
 
             <button type="button" className="action-btn" onClick={handleLogout}>
-              Logout
+              {t('profileForm.logout')}
             </button>
           </div>
 
@@ -64,20 +72,22 @@ const ProfileForm = ({
         <div className="input-group">
           <h2>{user?.username}</h2>
           <p>{user?.email}</p>
+
           <div className="button-group">
             <button type="button" className="action-btn" onClick={handleEdit}>
-              Edit Profile
+              {t('profileForm.editProfile')}
             </button>
 
             <button type="button" className="action-btn" onClick={handleLogout}>
-              Logout
+              {t('profileForm.logout')}
             </button>
+
             <button
               type="button"
               className="action-btn delete-btn"
               onClick={handleDeleteAccount}
             >
-              Delete Profile
+              {t('profileForm.deleteProfile')}
             </button>
           </div>
         </div>

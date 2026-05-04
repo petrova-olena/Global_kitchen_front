@@ -1,12 +1,15 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfileOverview from './ProfileOverview';
+import ConfirmModal from './ConfirmModal';
 import { fetchData } from '../../utils/fetchData';
 import { AuthContext } from '../../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const ProfileContainer = () => {
   const navigate = useNavigate();
   const { user, setUser, logout } = useContext(AuthContext);
+  const { t } = useTranslation();
 
   const [editMode, setEditMode] = useState(false);
 
@@ -28,6 +31,34 @@ const ProfileContainer = () => {
   const [comment, setComment] = useState('');
   const [myComments, setMyComments] = useState([]);
 
+  /* -----------------------------
+     CONFIRM MODAL STATE
+  ----------------------------- */
+  const [confirmData, setConfirmData] = useState({
+    open: false,
+    action: null,
+    id: null,
+    title: '',
+    message: '',
+  });
+
+  const openConfirm = (action, id, title, message) => {
+    setConfirmData({
+      open: true,
+      action,
+      id,
+      title,
+      message,
+    });
+  };
+
+  const closeConfirm = () => {
+    setConfirmData({ ...confirmData, open: false });
+  };
+
+  /* -----------------------------
+     FETCH PROFILE
+  ----------------------------- */
   useEffect(() => {
     const fetchProfile = async () => {
       if (!user?.id) return;
@@ -47,15 +78,18 @@ const ProfileContainer = () => {
           reservationsData.filter((r) => r.reserver_id === freshUser.id)
         );
       } catch {
-        setError('Failed to load profile');
+        setError(t('profileContainer.loadError'));
       } finally {
         setLoading(false);
       }
     };
 
     fetchProfile();
-  }, [user?.id, setUser]);
+  }, [user?.id, setUser, t]);
 
+  /* -----------------------------
+     FETCH CUISINES
+  ----------------------------- */
   useEffect(() => {
     const fetchCuisines = async () => {
       try {
@@ -69,6 +103,9 @@ const ProfileContainer = () => {
     fetchCuisines();
   }, []);
 
+  /* -----------------------------
+     FETCH COMMENTS
+  ----------------------------- */
   const fetchComments = async () => {
     try {
       const data = await fetchData(`/comments/user/${user.id}`);
@@ -86,14 +123,18 @@ const ProfileContainer = () => {
   };
 
   useEffect(() => {
-    const loadComments = async () => {
-      if (user?.id) {
-        await fetchComments();
-      }
+    if (!user?.id) return;
+
+    const load = async () => {
+      await fetchComments();
     };
-    loadComments();
+
+    load();
   }, [user?.id]);
 
+  /* -----------------------------
+     PROFILE EDIT
+  ----------------------------- */
   const refreshUser = async () => {
     const freshUser = await fetchData(`/users/${user.id}`);
     setUser(freshUser);
@@ -144,13 +185,16 @@ const ProfileContainer = () => {
 
       await refreshUser();
       setEditMode(false);
-    } catch (err) {
-      setError(err.message || 'Update failed');
+    } catch {
+      setError(t('profileContainer.updateError'));
     } finally {
       setLoading(false);
     }
   };
 
+  /* -----------------------------
+     PHOTO UPLOAD
+  ----------------------------- */
   const onFileChange = (e) => {
     if (e.target.files?.[0]) {
       setProfilePicFile(e.target.files[0]);
@@ -183,69 +227,68 @@ const ProfileContainer = () => {
       setProfilePicFile(null);
     } catch (err) {
       console.error(err);
-      setError('Upload failed');
+      setError(t('profileContainer.uploadError'));
     } finally {
       setUploading(false);
     }
   };
 
-  const handleDeleteAccount = async () => {
-    const confirmDelete = window.confirm(
-      'Are you sure you want to delete your account? This action cannot be undone.'
+  /* -----------------------------
+     DELETE ACCOUNT (MODAL)
+  ----------------------------- */
+  const handleDeleteAccount = () => {
+    openConfirm(
+      'deleteAccount',
+      user.id,
+      t('profileContainer.confirmDeleteAccountTitle'),
+      t('profileContainer.confirmDeleteAccount')
     );
-
-    if (!confirmDelete) return;
-
-    try {
-      await fetchData(`/users/${user.id}`, {
-        method: 'DELETE',
-      });
-
-      logout();
-      navigate('/');
-    } catch {
-      setError('Failed to delete account');
-    }
   };
 
-  const handleDeleteEvent = async (id) => {
-    try {
-      await fetchData(`/calenderEvent/${id}`, {
-        method: 'DELETE',
-      });
-
-      setEvents(events.filter((e) => e.id !== id && e._id !== id));
-    } catch (err) {
-      console.error(err);
-    }
+  /* -----------------------------
+     EVENT DELETE (MODAL)
+  ----------------------------- */
+  const handleDeleteEvent = (id) => {
+    openConfirm(
+      'deleteEvent',
+      id,
+      t('profileContainer.confirmDeleteEventTitle'),
+      t('profileContainer.confirmDeleteEvent')
+    );
   };
 
-  const handleCancelReservation = async (id) => {
-    try {
-      await fetchData(`/reservation/${id}`, {
-        method: 'DELETE',
-      });
-
-      setReservations(reservations.filter((r) => r.id !== id && r._id !== id));
-    } catch (err) {
-      console.error(err);
-    }
+  /* -----------------------------
+     RESERVATION CANCEL (MODAL)
+  ----------------------------- */
+  const handleCancelReservation = (id) => {
+    openConfirm(
+      'cancelReservation',
+      id,
+      t('profileContainer.confirmCancelReservationTitle'),
+      t('profileContainer.confirmCancelReservation')
+    );
   };
 
+  /* -----------------------------
+     LOGOUT
+  ----------------------------- */
   const handleLogout = () => {
     logout();
     navigate('/');
   };
 
+  /* -----------------------------
+     COMMENT ADD
+  ----------------------------- */
   const sendComment = async () => {
     try {
       if (!selectedCuisine) {
-        alert('Please select a cuisine first');
+        alert(t('profileContainer.selectCuisineFirst'));
         return;
       }
 
       if (!comment.trim()) {
-        alert('Please write a comment');
+        alert(t('profileContainer.writeComment'));
         return;
       }
 
@@ -269,18 +312,21 @@ const ProfileContainer = () => {
     }
   };
 
-  const deleteComment = async (id) => {
-    try {
-      await fetchData(`/comments/${id}`, {
-        method: 'DELETE',
-      });
-
-      await fetchComments();
-    } catch (err) {
-      console.error('Error deleting comment:', err);
-    }
+  /* -----------------------------
+     COMMENT DELETE (MODAL)
+  ----------------------------- */
+  const deleteComment = (id) => {
+    openConfirm(
+      'deleteComment',
+      id,
+      t('profileContainer.confirmDeleteCommentTitle'),
+      t('profileContainer.confirmDeleteComment')
+    );
   };
 
+  /* -----------------------------
+     COMMENT UPDATE
+  ----------------------------- */
   const updateComment = async (id, newText) => {
     try {
       await fetchData(`/comments/${id}`, {
@@ -294,37 +340,86 @@ const ProfileContainer = () => {
     }
   };
 
+  /* -----------------------------
+     CONFIRM MODAL ACTION HANDLER
+  ----------------------------- */
+  const handleConfirm = async () => {
+    const { action, id } = confirmData;
+
+    try {
+      if (action === 'deleteEvent') {
+        await fetchData(`/calenderEvent/${id}`, { method: 'DELETE' });
+        setEvents(events.filter((e) => e.id !== id && e._id !== id));
+      }
+
+      if (action === 'cancelReservation') {
+        await fetchData(`/reservation/${id}`, { method: 'DELETE' });
+        setReservations(
+          reservations.filter((r) => r.id !== id && r._id !== id)
+        );
+      }
+
+      if (action === 'deleteComment') {
+        await fetchData(`/comments/${id}`, { method: 'DELETE' });
+        await fetchComments();
+      }
+
+      if (action === 'deleteAccount') {
+        await fetchData(`/users/${id}`, { method: 'DELETE' });
+        logout();
+        navigate('/');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    closeConfirm();
+  };
+
+  /* -----------------------------
+     RETURN
+  ----------------------------- */
   return (
-    <ProfileOverview
-      user={user}
-      editMode={editMode}
-      form={form}
-      loading={loading}
-      error={error}
-      profilePicFile={profilePicFile}
-      uploading={uploading}
-      events={events}
-      reservations={reservations}
-      handleEdit={handleEdit}
-      handleChange={handleChange}
-      handleSave={handleSave}
-      handleCancel={handleCancel}
-      handleDeleteEvent={handleDeleteEvent}
-      onFileChange={onFileChange}
-      uploadPhoto={uploadPhoto}
-      handleLogout={handleLogout}
-      handleDeleteAccount={handleDeleteAccount}
-      handleCancelReservation={handleCancelReservation}
-      cuisines={cuisines}
-      selectedCuisine={selectedCuisine}
-      setSelectedCuisine={setSelectedCuisine}
-      comment={comment}
-      setComment={setComment}
-      sendComment={sendComment}
-      myComments={myComments}
-      deleteComment={deleteComment}
-      updateComment={updateComment}
-    />
+    <>
+      <ConfirmModal
+        open={confirmData.open}
+        title={confirmData.title}
+        message={confirmData.message}
+        onConfirm={handleConfirm}
+        onCancel={closeConfirm}
+      />
+
+      <ProfileOverview
+        user={user}
+        editMode={editMode}
+        form={form}
+        loading={loading}
+        error={error}
+        profilePicFile={profilePicFile}
+        uploading={uploading}
+        events={events}
+        reservations={reservations}
+        handleEdit={handleEdit}
+        handleChange={handleChange}
+        handleSave={handleSave}
+        handleCancel={handleCancel}
+        handleDeleteEvent={handleDeleteEvent}
+        onFileChange={onFileChange}
+        uploadPhoto={uploadPhoto}
+        handleLogout={handleLogout}
+        handleDeleteAccount={handleDeleteAccount}
+        handleCancelReservation={handleCancelReservation}
+        cuisines={cuisines}
+        selectedCuisine={selectedCuisine}
+        setSelectedCuisine={setSelectedCuisine}
+        comment={comment}
+        setComment={setComment}
+        sendComment={sendComment}
+        myComments={myComments}
+        deleteComment={deleteComment}
+        updateComment={updateComment}
+      />
+    </>
   );
 };
 

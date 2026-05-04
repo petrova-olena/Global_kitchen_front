@@ -1,14 +1,17 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ProfileReservationsTable = ({ reservations, onCancel }) => {
+  const { t } = useTranslation();
+
   return (
     <table className="events-table">
       <thead>
         <tr>
-          <th>Table</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>People</th>
+          <th>{t('profileReservations.table')}</th>
+          <th>{t('profileReservations.date')}</th>
+          <th>{t('profileReservations.time')}</th>
+          <th>{t('profileReservations.people')}</th>
           <th></th>
         </tr>
       </thead>
@@ -31,7 +34,7 @@ const ProfileReservationsTable = ({ reservations, onCancel }) => {
 
             <td>
               <button className="action-btn" onClick={() => onCancel(r.id)}>
-                Cancel
+                {t('profileReservations.cancel')}
               </button>
             </td>
           </tr>
