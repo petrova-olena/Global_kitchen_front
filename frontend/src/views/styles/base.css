@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #452209;
+  --secondary: #a26a42;
+  --bg: #f5e9d3;
+  --text: #261413;
+  --white: #ffffff;
+
+  --navbar-height: 80px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  padding-top: var(--navbar-height);
+}
+
+main {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--primary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.container {
+  width: 90%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.section {
+  margin: 40px 0;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.footer {
+  width: 100%;
+  background: #4a2c2a;
+  color: white;
+
+  padding: 24px 16px;
+  text-align: center;
+
+  margin-top: auto;
+}
+
+.footer p {
+  margin: 4px 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  body {
+    /* mobilde daha kompakt */
+    padding-top: var(--navbar-height);
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+}

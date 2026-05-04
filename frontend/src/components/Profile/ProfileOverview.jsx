@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './profile.css';
+import '../../views/styles/profile.css';
 import ProfilePhoto from './ProfilePhoto';
 import ProfileForm from './ProfileForm';
 import ProfileEventsTable from './ProfileEventsTable';

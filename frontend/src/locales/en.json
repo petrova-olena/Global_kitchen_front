@@ -78,6 +78,7 @@
   },
   "menu": {
     "title": "Our Menu",
+    "all": "All",
     "soups": "Soups",
     "mainDishes": "Main Dishes",
     "sideDishes": "Side Dishes",

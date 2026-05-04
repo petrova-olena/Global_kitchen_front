@@ -1,0 +1,240 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #4a2c2a;
+  display: flex;
+  align-items: center;
+
+  min-height: var(--navbar-height);
+}
+
+/* container */
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =========================
+   LAYOUT PARTS
+========================= */
+
+.header-left,
+.header-center,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.header-right {
+  gap: 12px;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+  height: 50px;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+
+.nav {
+  display: flex;
+  gap: 14px;
+}
+
+.nav-link {
+  color: white !important;
+  text-decoration: none !important;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.nav-link:hover {
+  color: #ffe0b2 !important;
+}
+
+.active-link {
+  color: #ffe0b2 !important;
+  font-weight: 600;
+}
+
+/* =========================
+   LANGUAGE
+========================= */
+
+.language-switcher {
+  display: flex;
+  gap: 10px;
+}
+
+.language-switcher button {
+  padding: 6px 12px;
+
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.language-switcher button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* =========================
+   PROFILE + ICON
+========================= */
+
+.header-profile-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav-icon {
+  color: white;
+  font-size: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.nav-icon:hover {
+  color: #ffe0b2;
+  transform: scale(1.1);
+}
+
+/* =========================
+   RESPONSIVE FLAGS
+========================= */
+
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .container-nav {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: flex;
+  }
+
+  .hamburger {
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  /* MOBILE MENU (React controlled) */
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    background: #4a2c2a;
+
+    padding-bottom: 12px;
+
+    animation: slideDown 0.2s ease;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .mobile-link,
+  .mobile-profile {
+    width: 90%;
+    padding: 14px 0;
+
+    text-align: center;
+    color: white;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .mobile-link:hover,
+  .mobile-profile:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffe0b2;
+  }
+
+  /* LANGUAGE */
+  .mobile-lang {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  .mobile-lang button {
+    padding: 6px 12px;
+
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .mobile-lang button.active {
+    background: #ffe0b2;
+    color: #261413;
+    border-color: #ffe0b2;
+  }
+}
