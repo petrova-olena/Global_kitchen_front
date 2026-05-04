@@ -48,7 +48,7 @@ const ProfilePhoto = ({
 
           <button
             type={profilePicFile ? 'submit' : 'button'}
-            className="action-btn"
+            className=" btn btn-primary"
             onClick={handleButtonClick}
           >
             {uploading
