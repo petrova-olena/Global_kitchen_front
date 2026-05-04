@@ -255,7 +255,6 @@ export default function EventsOverview() {
       from: res.reservation_time,
       to: res.expires_at,
       guests: res.number_of_people,
-      notes: `Table #${res.table_id}`,
       type: "reservation",
     };
   }

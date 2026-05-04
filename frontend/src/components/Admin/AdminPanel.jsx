@@ -1,12 +1,13 @@
-import '../../views/styles/calendar.css';
+import "../../views/styles/calendar.css";
 
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import useAdminEvents from './events/useAdminEvents';
-import EventsTab from './events/EventsTab';
-import ReservationsTab from './reservations/ReservationsTab';
-import AdminTabs from './AdminTabs';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import useAdminEvents from "./events/useAdminEvents";
+import EventsTab from "./events/EventsTab";
+import ReservationsTab from "./reservations/ReservationsTab";
+import AdminTabs from "./AdminTabs";
+import { useReservation } from "../Reservation/useReservation";
 
 export default function AdminPanel() {
   const { t } = useTranslation();
@@ -18,8 +19,8 @@ export default function AdminPanel() {
 
   // Redirect if not admin
   useEffect(() => {
-    if (!currentUser || currentUser.role !== 'admin') {
-      navigate('/');
+    if (!currentUser || currentUser.role !== "admin") {
+      navigate("/");
     }
   }, []);
 
@@ -30,13 +31,13 @@ export default function AdminPanel() {
       <h1>Admin Panel</h1>
 
       {/* Back button */}
-      <button className="back-btn" onClick={() => navigate('/calendar')}>
+      <button className="back-btn" onClick={() => navigate("/calendar")}>
         ← Back to Calendar
       </button>
 
       <AdminTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {activeTab === 'events' && <EventsTab {...eventsLogic} t={t} />}
+      {activeTab === "events" && <EventsTab {...eventsLogic} t={t} />}
 
       {activeTab === "reservations" && (
         <ReservationsTab

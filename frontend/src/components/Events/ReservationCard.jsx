@@ -17,7 +17,7 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
 
         <div className="reservation-table">
           <span className="event-icon">🍽️</span>
-          Table: {reservation.table}
+          Table: {reservation.tableId ?? reservation.table}
         </div>
 
         <div className="reservation-time">
@@ -35,15 +35,15 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
         </div>
 
         <div className="reservation-guests">Guests: {reservation.guests}</div>
-      </div>
 
-      <div className="reservation-notes">
-        Notes: {reservation.notes ? reservation.notes : "No notes"}
-      </div>
+        {reservation.notes && (
+          <div className="reservation-notes">Notes: {reservation.notes}</div>
+        )}
 
-      {reservation.userName && (
-        <div className="reservation-user">User: {reservation.userName}</div>
-      )}
+        {reservation.userName && (
+          <div className="reservation-user">User: {reservation.userName}</div>
+        )}
+      </div>
 
       <div className="event-actions">
         <button className="edit-btn" onClick={() => onEdit(reservation)}>
