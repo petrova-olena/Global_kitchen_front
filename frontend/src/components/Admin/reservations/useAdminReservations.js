@@ -228,5 +228,6 @@ export default function useAdminReservations() {
     freeTables,
     handleAdminDatetimeChange,
     reloadReservationsAdmin,
+    tables,
   };
 }

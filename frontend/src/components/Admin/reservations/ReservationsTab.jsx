@@ -8,7 +8,7 @@ import SuccessModal from "./../../Reservation/SuccessModal";
 export default function ReservationsTab({
   createReservation,
   deleteReservation,
-  editReservation,
+  updateReservation,
 }) {
   const {
     reservations,
@@ -20,6 +20,7 @@ export default function ReservationsTab({
     customTo,
     setCustomTo,
     handleSearch,
+    tables,
     freeTables,
     handleAdminDatetimeChange,
     reloadReservationsAdmin,
@@ -42,6 +43,14 @@ export default function ReservationsTab({
     } catch (err) {
       console.error("Admin create error:", err);
     }
+  }
+
+  async function handleSaveEdit(updated) {
+    await updateReservation(editing.id, updated);
+    await reloadReservationsAdmin();
+    setSuccessMessage("Reservation updated!");
+    setShowSuccess(true);
+    setEditing(null);
   }
 
   async function handleDelete(id) {
@@ -130,7 +139,7 @@ export default function ReservationsTab({
               key={r.id}
               reservation={adapted}
               onDelete={handleDelete}
-              onEdit={() => editReservation(r)}
+              onEdit={setEditing}
             />
           );
         })}
@@ -147,10 +156,8 @@ export default function ReservationsTab({
         <EditReservationModal
           reservation={editing}
           reservations={reservations}
-          onSave={(updated) => {
-            editReservation(editing.id, updated);
-            setEditing(null);
-          }}
+          tables={tables}
+          onSave={handleSaveEdit}
           onCancel={() => setEditing(null)}
           isAdmin={true}
         />

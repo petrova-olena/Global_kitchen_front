@@ -27,9 +27,9 @@ export default function EventsOverview() {
 
   // Reservation state
   const {
-    //tables,
+    tables,
     reservations,
-    getFreeTables,
+    //getFreeTables,
     //createReservation,
     deleteReservation,
     updateReservation,
@@ -481,7 +481,7 @@ export default function EventsOverview() {
         <EditReservationModal
           reservation={editingReservation}
           reservations={reservations}
-          getFreeTables={getFreeTables}
+          tables={tables}
           onSave={(updated) =>
             handleUpdateReservation(editingReservation.id, updated)
           }

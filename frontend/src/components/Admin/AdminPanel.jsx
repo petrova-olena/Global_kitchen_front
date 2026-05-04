@@ -14,12 +14,8 @@ export default function AdminPanel() {
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const [activeTab, setActiveTab] = useState("events");
-  const {
-    reloadReservations,
-    createReservation,
-    deleteReservation,
-    editReservation,
-  } = useReservation(currentUser);
+  const { createReservation, deleteReservation, updateReservation } =
+    useReservation(currentUser);
 
   // Redirect if not admin
   useEffect(() => {
@@ -47,8 +43,7 @@ export default function AdminPanel() {
         <ReservationsTab
           createReservation={createReservation}
           deleteReservation={deleteReservation}
-          editReservation={editReservation}
-          reloadReservations={reloadReservations}
+          updateReservation={updateReservation}
           currentUser={currentUser}
         />
       )}

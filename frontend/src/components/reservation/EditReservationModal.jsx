@@ -1,9 +1,12 @@
+import "./editReservations.css";
+
 import { useState } from "react";
 import { findAvailabilityForTable } from "../../utils/reservationAvailability";
 
 export default function EditReservationModal({
   reservation,
   reservations,
+  tables,
   onSave,
   onCancel,
   isAdmin = false,
@@ -90,145 +93,165 @@ export default function EditReservationModal({
   // Render
   return (
     <div className="modal-overlay">
-      <div className="modal">
-        <h3>Edit reservation</h3>
+      <div className="modal-window">
+        <h3 className="modal-title">Edit reservation</h3>
 
-        <label>Table</label>
-        <input
-          type="number"
-          value={tableId}
-          onChange={(e) => setTableId(e.target.value)}
-        />
+        <div className="modal-form">
+          <label className="modal-label">
+            Table
+            <select
+              className="modal-select"
+              value={tableId}
+              onChange={(e) => setTableId(e.target.value)}
+            >
+              {tables.map((t) => (
+                <option key={t.id} value={t.id}>
+                  Table #{t.id}
+                </option>
+              ))}
+            </select>
+          </label>
 
-        <label>Start time</label>
-        <input
-          type="datetime-local"
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
-        />
-
-        <label className="form-label">
-          Duration
-          <select
-            value={duration}
-            onChange={(e) => setDuration(Number(e.target.value))}
-            className="form-input"
-          >
-            <option value={60}>1 hour</option>
-            <option value={90}>1.5 hours</option>
-            <option value={120}>2 hours</option>
-            <option value={150}>2.5 hours</option>
-            <option value={180}>3 hours</option>
-          </select>
-        </label>
-
-        <label>Guests</label>
-        <input
-          type="number"
-          value={guests}
-          onChange={(e) => setGuests(e.target.value)}
-        />
-
-        {/*  ADMIN-ONLY NOTES FIELD */}
-        {isAdmin && (
-          <>
-            <label>Notes</label>
-            <textarea
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              placeholder="Enter notes for this reservation"
-              rows={3}
+          <label className="modal-label">
+            Start time
+            <input
+              type="datetime-local"
+              className="modal-input"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
             />
-          </>
-        )}
+          </label>
 
-        {checkResult === "free" && (
-          <p style={{ color: "green" }}>Table is available</p>
-        )}
+          <label className="modal-label">
+            Duration
+            <select
+              className="modal-select"
+              value={duration}
+              onChange={(e) => setDuration(Number(e.target.value))}
+            >
+              <option value={60}>1 hour</option>
+              <option value={90}>1.5 hours</option>
+              <option value={120}>2 hours</option>
+              <option value={150}>2.5 hours</option>
+              <option value={180}>3 hours</option>
+            </select>
+          </label>
 
-        {checkResult === "busy" && (
-          <p style={{ color: "red" }}>Table is not available</p>
-        )}
+          <label className="modal-label">
+            Guests
+            <input
+              type="number"
+              className="modal-input"
+              value={guests}
+              onChange={(e) => setGuests(e.target.value)}
+            />
+          </label>
 
-        <div className="modal-buttons">
-          <button className="cancel-btn" onClick={onCancel}>
-            Cancel
-          </button>
-
-          <button className="save-btn" onClick={handleCheck}>
-            Check availability
-          </button>
+          {isAdmin && (
+            <label className="modal-label">
+              Notes
+              <textarea
+                className="modal-textarea"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="Enter notes for this reservation"
+                rows={3}
+              />
+            </label>
+          )}
 
           {checkResult === "free" && (
-            <button
-              className="save-btn"
-              onClick={() => setShowConfirmModal(true)}
-            >
-              Save changes
-            </button>
+            <p style={{ color: "green" }}>Table is available</p>
           )}
+
+          {checkResult === "busy" && (
+            <p style={{ color: "red" }}>Table is not available</p>
+          )}
+
+          <div className="modal-buttons">
+            <button className="modal-btn modal-btn-cancel" onClick={onCancel}>
+              Cancel
+            </button>
+
+            <button className="modal-btn modal-btn-save" onClick={handleCheck}>
+              Check availability
+            </button>
+
+            {checkResult === "free" && (
+              <button
+                className="modal-btn modal-btn-save"
+                onClick={() => setShowConfirmModal(true)}
+              >
+                Save changes
+              </button>
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* Busy modal */}
-      {showBusyModal && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h3>Table is busy</h3>
-            <p>Available intervals:</p>
+        {/* Busy modal */}
+        {showBusyModal && (
+          <div className="modal-overlay">
+            <div className="modal-window">
+              <h3 className="modal-title">Table is busy</h3>
 
-            {busyIntervals.map((i, idx) => (
-              <div key={idx}>
-                {i.from.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}{" "}
-                —{" "}
-                {i.to.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+              <p>Available intervals:</p>
+
+              {busyIntervals.map((i, idx) => (
+                <div key={idx}>
+                  {i.from.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}{" "}
+                  —{" "}
+                  {i.to.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
+              ))}
+
+              <div className="modal-buttons">
+                <button
+                  className="modal-btn modal-btn-cancel"
+                  onClick={() => setShowBusyModal(false)}
+                >
+                  Close
+                </button>
               </div>
-            ))}
-
-            <div className="modal-buttons">
-              <button
-                className="cancel-btn"
-                onClick={() => setShowBusyModal(false)}
-              >
-                Close
-              </button>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Confirm modal */}
-      {showConfirmModal && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h3>Confirm changes</h3>
+        {/* Confirm modal */}
+        {showConfirmModal && (
+          <div className="modal-overlay">
+            <div className="modal-window">
+              <h3 className="modal-title">Confirm changes</h3>
 
-            <p>Table: {tableId}</p>
-            <p>Start: {from.replace("T", " ")}</p>
-            <p>Duration: {duration} min</p>
-            <p>Guests: {guests}</p>
+              <p>Table: {tableId}</p>
+              <p>Start: {from.replace("T", " ")}</p>
+              <p>Duration: {duration} min</p>
+              <p>Guests: {guests}</p>
 
-            <div className="modal-buttons">
-              <button
-                className="cancel-btn"
-                onClick={() => setShowConfirmModal(false)}
-              >
-                Cancel
-              </button>
+              <div className="modal-buttons">
+                <button
+                  className="modal-btn modal-btn-cancel"
+                  onClick={() => setShowConfirmModal(false)}
+                >
+                  Cancel
+                </button>
 
-              <button className="save-btn" onClick={handleSave}>
-                Confirm
-              </button>
+                <button
+                  className="modal-btn modal-btn-save"
+                  onClick={handleSave}
+                >
+                  Confirm
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

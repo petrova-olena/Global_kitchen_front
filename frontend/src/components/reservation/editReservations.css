@@ -1,0 +1,97 @@
+/* ===== Overlay ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* ===== Modal Window ===== */
+.modal-window {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid #e5e5e5;
+}
+
+/* ===== Header ===== */
+.modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+/* ===== Form Layout ===== */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 6px;
+}
+
+/* ===== Inputs ===== */
+.modal-input,
+.modal-select,
+.modal-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal-textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* ===== Buttons ===== */
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+}
+
+.modal-btn-save {
+  background: #0078ff;
+  color: white;
+}
+
+.modal-btn-cancel {
+  background: #f2f2f2;
+  color: #333;
+}
+
+/* ===== Mobile tweaks ===== */
+@media (max-width: 480px) {
+  .modal-window {
+    padding: 16px;
+    max-width: 95%;
+  }
+}
