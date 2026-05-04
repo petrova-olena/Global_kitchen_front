@@ -9,24 +9,29 @@ import WeeklyMenu from "./views/WeeklyMenu";
 import Auth from "./views/Auth";
 import AdminPanel from "./components/Admin/AdminPanel";
 import Reservation from "./components/Reservation/Reservation";
+import { ThemeProvider } from "./context/ThemeContext";
+import ThemeDebugger from "./components/ThemeDebugger";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/daily-menu" element={<DailyMenu />} />
-          <Route path="/weekly-menu" element={<WeeklyMenu />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/reservation" element={<Reservation />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/daily-menu" element={<DailyMenu />} />
+            <Route path="/weekly-menu" element={<WeeklyMenu />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/reservation" element={<Reservation />} />
+          </Route>
+        </Routes>
+        <ThemeDebugger />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 };
 
