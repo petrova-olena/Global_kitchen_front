@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import "./reservation.css";
+import { useEffect, useState } from 'react';
+import '../../views/styles/reservation.css';
 
 export default function ReservationForm({
   tables,
@@ -12,7 +12,7 @@ export default function ReservationForm({
   prefillTime,
   isAdmin = false,
 }) {
-  const [tableId, setTableId] = useState("");
+  const [tableId, setTableId] = useState('');
   const [pepole, setPepole] = useState(1);
   const [duration, setDuration] = useState(120); // default 2 hours
   const [datetime, setDatetime] = useState("");

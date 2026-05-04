@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { FaAward, FaUsers, FaUtensils } from 'react-icons/fa';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -10,67 +11,80 @@ const Home = () => {
       <section className="hero">
         <div className="hero-overlay">
           <div className="hero-text">
-            <h1>{t("home.title")}</h1>
-            <p>{t("home.subtitle")}</p>
+            <h1>{t('home.title')}</h1>
+            <p>{t('home.subtitle')}</p>
           </div>
 
-          <div className="hero-buttons">
+          <div className="hero-buttons container">
             <Link to="/calendar" className="btn">
-              {t("home.goToCalendar")}
+              {t('home.goToCalendar')}
             </Link>
             <Link to="/menu" className="btn">
-              {t("home.goToMenu")}
+              {t('home.goToMenu')}
             </Link>
             <Link to="/reservation" className="btn">
-              {t("home.makeReservation")}
+              {t('home.makeReservation')}
             </Link>
           </div>
         </div>
       </section>
 
       {/*-- ABOUT US --*/}
-      <section className="about">
-        <h2 className="about-title">{t("home.aboutTitle")}</h2>
+      <section className="about container">
+        <div className="section">
+          <h2 className="section-title">{t('home.aboutTitle')}</h2>
 
-        <div className="about-columns">
-          <div className="about-left">
-            <div className="about-text">
-              <p>{t("home.aboutText")}</p>
-            </div>
+          <div className="about-columns">
+            <div className="about-left">
+              <div className="about-text">
+                <p>{t('home.aboutText')}</p>
+              </div>
 
-            <div className="about-stats">
-              <div className="stat-item">{t("home.awards")}</div>
-              <div className="stat-item">{t("home.customers")}</div>
-              <div className="stat-item">{t("home.experience")}</div>
+              <div className="about-stats">
+                <div className="stat-item">
+                  <span>{t('home.awards')}</span>
+                  <FaAward />
+                </div>
+
+                <div className="stat-item">
+                  <span>{t('home.customers')}</span>
+                  <FaUsers />
+                </div>
+
+                <div className="stat-item">
+                  <span>{t('home.experience')}</span>
+                  <FaUtensils />
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="about-right">
-            <img src="src/assets/about1.jpg" alt="" className="img-box img1" />
-            <img src="src/assets/about2.jpg" alt="" className="img-box img2" />
-            <img src="src/assets/about3.jpg" alt="" className="img-box img3" />
-            <img src="src/assets/about4.jpg" alt="" className="img-box img4" />
-          </div>
+        </div>
+        <div className="about-right">
+          <img src="src/assets/about1.jpg" alt="" className="img-box img1" />
+          <img src="src/assets/about2.jpg" alt="" className="img-box img2" />
+          <img src="src/assets/about3.jpg" alt="" className="img-box img3" />
+          <img src="src/assets/about4.jpg" alt="" className="img-box img4" />
         </div>
       </section>
 
       {/*-- MENU PREVIEW --*/}
-      <section className="menu-preview">
-        <h2>{t("home.ourMenu")}</h2>
-        <p>{t("home.exploreWeek")}</p>
-
+      <section className="menu-preview container">
+        <div className="section">
+          <h2 className="section-title">{t('home.ourMenu')}</h2>
+          <p>{t('home.exploreWeek')}</p>
+        </div>
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>{t("menu.dishName")}</h3>
+            <h3>{t('menu.dishName')}</h3>
             <p className="price">12.90€</p>
-            <p className="desc">{t("menu.shortDescription")}</p>
+            <p className="desc">{t('menu.shortDescription')}</p>
             <div className="diet">
-              {t("menu.vegan")} • {t("menu.glutenFree")}
+              {t('menu.vegan')} • {t('menu.glutenFree')}
             </div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
-                {t("menu.details")}
+                {t('menu.details')}
               </Link>
               <button className="add-btn">+</button>
             </div>
@@ -78,13 +92,13 @@ const Home = () => {
 
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>{t("menu.dishName")}</h3>
+            <h3>{t('menu.dishName')}</h3>
             <p className="price">14.50€</p>
-            <p className="desc">{t("menu.shortDescription")}</p>
-            <div className="diet">{t("menu.vegetarian")}</div>
+            <p className="desc">{t('menu.shortDescription')}</p>
+            <div className="diet">{t('menu.vegetarian')}</div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
-                {t("menu.details")}
+                {t('menu.details')}
               </Link>
               <button className="add-btn">+</button>
             </div>
@@ -92,11 +106,11 @@ const Home = () => {
 
           <div className="menu-card">
             <div className="img-placeholder"></div>
-            <h3>{t("menu.dishName")}</h3>
+            <h3>{t('menu.dishName')}</h3>
             <p className="price">12.90€</p>
-            <p className="desc">{t("menu.shortDescription")}</p>
+            <p className="desc">{t('menu.shortDescription')}</p>
             <div className="diet">
-              {t("menu.vegan")} • {t("menu.glutenFree")}
+              {t('menu.vegan')} • {t('menu.glutenFree')}
             </div>
             <div className="card-actions">
               <Link to="dish-details.html" className="btn-small">
@@ -127,8 +141,10 @@ const Home = () => {
       </section>
 
       {/*-- RESERVATION FORM --*/}
-      <section className="reservation">
-        <h2 className="reservation-title">Make a Reservation</h2>
+      <section className="reservation container">
+        <div className="section">
+          <h2 className="section-title">Make a Reservation</h2>
+        </div>
 
         <div className="reservation-card">
           <p>Book a table online in just a few clicks.</p>
@@ -139,7 +155,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="chat-widget">
+      <section className="chat-widget container">
         <button className="chat-toggle" aria-label="Open chat">
           💬
         </button>

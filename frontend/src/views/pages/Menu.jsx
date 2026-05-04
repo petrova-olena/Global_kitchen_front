@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const Menu = () => {
@@ -7,11 +7,12 @@ const Menu = () => {
   return (
     <>
       {/*-- SECONDARY HEADER --*/}
-      <section className="menu-header">
+      <section className="menu-header container">
         <h1>{t('menu.title')}</h1>
 
         <nav className="menu-categories">
-          <button className="category-btn active">{t('menu.soups')}</button>
+          <button className="category-btn active">{t('menu.all')}</button>
+          <button className="category-btn">{t('menu.soups')}</button>
           <button className="category-btn">{t('menu.mainDishes')}</button>
           <button className="category-btn">{t('menu.sideDishes')}</button>
           <button className="category-btn">{t('menu.salads')}</button>
@@ -25,15 +26,17 @@ const Menu = () => {
       </section>
 
       {/*-- MENU GRID --*/}
-      <section className="menu-section" id="soups">
-        <h2 className="menu-title">{t('menu.soups')}</h2>
+      <section className="menu-section container" id="soups">
+        <h2 className="section-title">{t('menu.soups')}</h2>
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
             <h3>{t('menu.tomatoSoup')}</h3>
             <p className="price">6.50€</p>
             <p className="desc">{t('menu.tomatoSoupDesc')}</p>
-            <div className="diet">{t('menu.vegan')} • {t('menu.glutenFree')}</div>
+            <div className="diet">
+              {t('menu.vegan')} • {t('menu.glutenFree')}
+            </div>
             <div className="card-actions">
               <Link to="/menu/soup/tomato" className="btn-small">
                 {t('menu.details')}
@@ -58,8 +61,8 @@ const Menu = () => {
         </div>
       </section>
 
-      <section className="menu-section" id="main-dishes">
-        <h2 className="menu-title">{t('menu.mainDishes')}</h2>
+      <section className="menu-section container" id="main-dishes">
+        <h2 className="section-title">{t('menu.mainDishes')}</h2>
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
@@ -91,8 +94,8 @@ const Menu = () => {
         </div>
       </section>
 
-      <section className="menu-section" id="side-dishes">
-        <h2 className="menu-title">{t('menu.sideDishes')}</h2>
+      <section className="menu-section container" id="side-dishes">
+        <h2 className="section-title">{t('menu.sideDishes')}</h2>
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
@@ -124,8 +127,8 @@ const Menu = () => {
         </div>
       </section>
 
-      <section className="menu-section" id="salads">
-        <h2 className="menu-title">{t('menu.salads')}</h2>
+      <section className="menu-section container" id="salads">
+        <h2 className="section-title">{t('menu.salads')}</h2>
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
@@ -157,8 +160,8 @@ const Menu = () => {
         </div>
       </section>
 
-      <section className="menu-section" id="desserts">
-        <h2 className="menu-title">{t('menu.desserts')}</h2>
+      <section className="menu-section container" id="desserts">
+        <h2 className="section-title">{t('menu.desserts')}</h2>
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
@@ -190,8 +193,8 @@ const Menu = () => {
         </div>
       </section>
 
-      <section className="menu-section" id="drinks">
-        <h2 className="menu-title">{t('menu.drinks')}</h2>
+      <section className="menu-section container" id="drinks">
+        <h2 className="section-title">{t('menu.drinks')}</h2>
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
@@ -223,8 +226,8 @@ const Menu = () => {
         </div>
       </section>
 
-      <section className="menu-section" id="combos">
-        <h2 className="menu-title">Combos</h2>
+      <section className="menu-section container" id="combos">
+        <h2 className="section-title">Combos</h2>
         <div className="menu-grid">
           <div className="menu-card">
             <div className="img-placeholder"></div>
