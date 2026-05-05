@@ -140,21 +140,6 @@ const Home = () => {
         </Link>
       </section>
 
-      {/*-- RESERVATION FORM --*/}
-      <section className="reservation container">
-        <div className="section">
-          <h2 className="section-title">Make a Reservation</h2>
-        </div>
-
-        <div className="reservation-card">
-          <p>Book a table online in just a few clicks.</p>
-
-          <Link to="/reservation" className="btn full-width">
-            Go to Reservation Form
-          </Link>
-        </div>
-      </section>
-
       <section className="chat-widget container">
         <button className="chat-toggle" aria-label="Open chat">
           💬
