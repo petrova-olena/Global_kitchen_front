@@ -77,6 +77,7 @@ export const ThemeProvider = ({ children }) => {
     // Real time
     realDate: currentDate,
     isOverrideActive: !!overrideDate,
+    overrideDate,
     
     // Debug
     isDebugMode,

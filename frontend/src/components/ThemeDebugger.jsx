@@ -11,6 +11,7 @@ const ThemeDebugger = () => {
     activeDate,
     realDate,
     isOverrideActive,
+    overrideDate,
     setOverrideDate,
     clearOverride,
     isDebugMode,
