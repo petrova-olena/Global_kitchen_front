@@ -52,20 +52,6 @@ const MenuFilters = ({
           {t("calendar.dailyMenu")}
         </Link>
       </nav>
-
-      <div className="cuisine-filter">
-        {cuisines.map((c) => (
-          <button
-            key={c.id}
-            className={`category-btn ${selectedCuisine?.id === c.id ? "active" : ""}`}
-            onClick={() =>
-              setSelectedCuisine((prev) => (prev?.id === c.id ? null : c))
-            }
-          >
-            {c.name}
-          </button>
-        ))}
-      </div>
     </>
   );
 };

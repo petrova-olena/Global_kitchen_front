@@ -12,22 +12,36 @@ export function useMenu() {
     async function loadData() {
       try {
         setLoading(true);
-        const [cuisinesRes, dishesRes] = await Promise.all([
+
+        const [cuisinesData, dishesData] = await Promise.all([
           fetchData("/cuisines"),
           fetchData("/dishes"),
         ]);
 
-        if (!cuisinesRes.ok || !dishesRes.ok) {
-          throw new Error("Failed to load menu data");
-        }
+        // TODO: replace with switch logic
 
-        const cuisinesData = await cuisinesRes.json();
-        const dishesData = await dishesRes.json();
+        // Here only finnish dishes
+        const finnishCuisines = cuisinesData.filter(
+          (c) => c.origin?.toLowerCase() === "finland",
+        );
 
-        setCuisines(cuisinesData);
-        setDishes(dishesData);
+        // All id for finnish dishes
+        const finnishDishIds = finnishCuisines.flatMap((c) => [
+          c.main_dish_id,
+          c.side_dish_id,
+          c.soup_id,
+        ]);
 
-        const map = Object.fromEntries(dishesData.map((d) => [d.id, d]));
+        // Filter dishes
+        const finnishDishes = dishesData.filter((d) =>
+          finnishDishIds.includes(d.id),
+        );
+
+        // Save only finnish
+        setCuisines(finnishCuisines);
+        setDishes(finnishDishes);
+
+        const map = Object.fromEntries(finnishDishes.map((d) => [d.id, d]));
         setDishById(map);
       } catch (err) {
         console.error(err);

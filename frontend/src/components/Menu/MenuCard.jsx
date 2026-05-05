@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const MenuCard = ({ dish }) => {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ const MenuCard = ({ dish }) => {
     <div className="menu-card">
       {dish.image ? (
         <img
-          src={`/uploads/${dish.image}`}
+          src={getImageUrl(dish.image)}
           alt={dish.name}
           className="menu-img"
         />

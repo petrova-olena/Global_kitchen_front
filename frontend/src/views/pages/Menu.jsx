@@ -11,6 +11,7 @@ const MenuPage = () => {
   const [selectedCuisine, setSelectedCuisine] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
+  // Here selectedCuisine was a button, now it is null
   const filteredDishes = useMemo(() => {
     const base = selectedCuisine ? getCuisineDishes(selectedCuisine) : dishes;
 
