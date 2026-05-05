@@ -20,7 +20,7 @@ const ProfileForm = ({
   return (
     <div className="profile-right">
       {editMode ? (
-        <div className="input-group">
+        <div className="input-group edit-form">
           <input
             name="username"
             value={form.username}
@@ -83,7 +83,6 @@ const ProfileForm = ({
       ) : (
         <div className="input-group">
           <h2>{user?.username}</h2>
-          <p>{user?.email}</p>
 
           <div className="button-group">
             <button
