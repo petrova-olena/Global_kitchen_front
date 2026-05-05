@@ -128,6 +128,65 @@
   cursor: pointer;
 }
 
+/* ================= MENU MODAL ================= */
+
+.menu-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.menu-modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.menu-modal-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.menu-modal-title {
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+
+.menu-modal-price {
+  font-size: 22px;
+  color: #a26a42;
+  margin-bottom: 10px;
+}
+
+.menu-modal-desc {
+  margin-bottom: 12px;
+}
+
+.menu-modal-allergies {
+  font-size: 14px;
+  color: #6b4a32;
+  margin-bottom: 20px;
+}
+
+.menu-modal-close {
+  width: 100%;
+  padding: 10px;
+  background: #452209;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
 /* ================= RESPONSIVE ================= */
 
 @media (min-width: 768px) {
