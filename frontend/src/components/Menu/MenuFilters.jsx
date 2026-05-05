@@ -1,0 +1,73 @@
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+const MenuFilters = ({
+  cuisines,
+  selectedCuisine,
+  setSelectedCuisine,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <nav className="menu-categories">
+        <button
+          className={`category-btn ${selectedCategory === "all" ? "active" : ""}`}
+          onClick={() => setSelectedCategory("all")}
+        >
+          {t("menu.all")}
+        </button>
+
+        <button
+          className={`category-btn ${selectedCategory === "soup" ? "active" : ""}`}
+          onClick={() => setSelectedCategory("soup")}
+        >
+          {t("menu.soups")}
+        </button>
+
+        <button
+          className={`category-btn ${selectedCategory === "main" ? "active" : ""}`}
+          onClick={() => setSelectedCategory("main")}
+        >
+          {t("menu.mainDishes")}
+        </button>
+
+        <button
+          className={`category-btn ${selectedCategory === "side" ? "active" : ""}`}
+          onClick={() => setSelectedCategory("side")}
+        >
+          {t("menu.sideDishes")}
+        </button>
+
+        <button
+          className={`category-btn ${selectedCategory === "dessert" ? "active" : ""}`}
+          onClick={() => setSelectedCategory("dessert")}
+        >
+          {t("menu.desserts")}
+        </button>
+
+        <Link to="/daily-menu" className="category-btn daily-link">
+          {t("calendar.dailyMenu")}
+        </Link>
+      </nav>
+
+      <div className="cuisine-filter">
+        {cuisines.map((c) => (
+          <button
+            key={c.id}
+            className={`category-btn ${selectedCuisine?.id === c.id ? "active" : ""}`}
+            onClick={() =>
+              setSelectedCuisine((prev) => (prev?.id === c.id ? null : c))
+            }
+          >
+            {c.name}
+          </button>
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default MenuFilters;
