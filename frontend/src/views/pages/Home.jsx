@@ -1,9 +1,12 @@
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { FaAward, FaUsers, FaUtensils } from 'react-icons/fa';
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { FaAward, FaUsers, FaUtensils } from "react-icons/fa";
+import MenuGrid from "../../components/Menu/MenuGrid";
+import { useDailyMenu } from "../../components/Menu/useDailyMenu";
 
 const Home = () => {
   const { t } = useTranslation();
+  const dailyDishes = useDailyMenu();
 
   return (
     <>
@@ -11,19 +14,19 @@ const Home = () => {
       <section className="hero">
         <div className="hero-overlay">
           <div className="hero-text">
-            <h1>{t('home.title')}</h1>
-            <p>{t('home.subtitle')}</p>
+            <h1>{t("home.title")}</h1>
+            <p>{t("home.subtitle")}</p>
           </div>
 
           <div className="hero-buttons container">
             <Link to="/calendar" className="btn">
-              {t('home.goToCalendar')}
+              {t("home.goToCalendar")}
             </Link>
             <Link to="/menu" className="btn">
-              {t('home.goToMenu')}
+              {t("home.goToMenu")}
             </Link>
             <Link to="/reservation" className="btn">
-              {t('home.makeReservation')}
+              {t("home.makeReservation")}
             </Link>
           </div>
         </div>
@@ -32,27 +35,27 @@ const Home = () => {
       {/*-- ABOUT US --*/}
       <section className="about container">
         <div className="section">
-          <h2 className="section-title">{t('home.aboutTitle')}</h2>
+          <h2 className="section-title">{t("home.aboutTitle")}</h2>
 
           <div className="about-columns">
             <div className="about-left">
               <div className="about-text">
-                <p>{t('home.aboutText')}</p>
+                <p>{t("home.aboutText")}</p>
               </div>
 
               <div className="about-stats">
                 <div className="stat-item">
-                  <span>{t('home.awards')}</span>
+                  <span>{t("home.awards")}</span>
                   <FaAward />
                 </div>
 
                 <div className="stat-item">
-                  <span>{t('home.customers')}</span>
+                  <span>{t("home.customers")}</span>
                   <FaUsers />
                 </div>
 
                 <div className="stat-item">
-                  <span>{t('home.experience')}</span>
+                  <span>{t("home.experience")}</span>
                   <FaUtensils />
                 </div>
               </div>
@@ -70,73 +73,13 @@ const Home = () => {
       {/*-- MENU PREVIEW --*/}
       <section className="menu-preview container">
         <div className="section">
-          <h2 className="section-title">{t('home.ourMenu')}</h2>
-          <p>{t('home.exploreWeek')}</p>
+          <h2 className="section-title">{t("home.ourMenu")}</h2>
+          <p>{t("home.exploreWeek")}</p>
         </div>
-        <div className="menu-grid">
-          <div className="menu-card">
-            <div className="img-placeholder"></div>
-            <h3>{t('menu.dishName')}</h3>
-            <p className="price">12.90€</p>
-            <p className="desc">{t('menu.shortDescription')}</p>
-            <div className="diet">
-              {t('menu.vegan')} • {t('menu.glutenFree')}
-            </div>
-            <div className="card-actions">
-              <Link to="dish-details.html" className="btn-small">
-                {t('menu.details')}
-              </Link>
-              <button className="add-btn">+</button>
-            </div>
-          </div>
+        <MenuGrid dishes={dailyDishes} />
 
-          <div className="menu-card">
-            <div className="img-placeholder"></div>
-            <h3>{t('menu.dishName')}</h3>
-            <p className="price">14.50€</p>
-            <p className="desc">{t('menu.shortDescription')}</p>
-            <div className="diet">{t('menu.vegetarian')}</div>
-            <div className="card-actions">
-              <Link to="dish-details.html" className="btn-small">
-                {t('menu.details')}
-              </Link>
-              <button className="add-btn">+</button>
-            </div>
-          </div>
-
-          <div className="menu-card">
-            <div className="img-placeholder"></div>
-            <h3>{t('menu.dishName')}</h3>
-            <p className="price">12.90€</p>
-            <p className="desc">{t('menu.shortDescription')}</p>
-            <div className="diet">
-              {t('menu.vegan')} • {t('menu.glutenFree')}
-            </div>
-            <div className="card-actions">
-              <Link to="dish-details.html" className="btn-small">
-                Details
-              </Link>
-              <button className="add-btn">+</button>
-            </div>
-          </div>
-
-          <div className="menu-card">
-            <div className="img-placeholder"></div>
-            <h3>Dish Name</h3>
-            <p className="price">14.50€</p>
-            <p className="desc">Short description of the dish.</p>
-            <div className="diet">Vegetarian</div>
-            <div className="card-actions">
-              <Link to="dish-details.html" className="btn-small">
-                Details
-              </Link>
-              <button className="add-btn">+</button>
-            </div>
-          </div>
-        </div>
-
-        <Link to="menu.html" className="btn btn-menu">
-          See Full Menu
+        <Link to="/menu" className="btn btn-menu">
+          {t("home.seeFullMenu")}
         </Link>
       </section>
 
