@@ -13,7 +13,8 @@ import EditReservationModal from "../Reservation/EditReservationModal";
 
 export default function EventsOverview() {
   const { t } = useTranslation();
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const storedUser = localStorage.getItem("user");
+  const currentUser = storedUser ? JSON.parse(storedUser) : null;
 
   const [events, setEvents] = useState([]);
 
@@ -223,9 +224,11 @@ export default function EventsOverview() {
 
   const restaurantEvents = filteredEvents.filter((e) => e.type === "admin");
 
-  const userEvents = filteredEvents.filter(
-    (e) => e.type === "user" && e.created_by === currentUser.id,
-  );
+  const userEvents = currentUser
+    ? filteredEvents.filter(
+        (e) => e.type === "user" && e.created_by === currentUser.id,
+      )
+    : [];
 
   // ----------- mapping reservation to event format for calendar display -----------
   useEffect(() => {
@@ -280,9 +283,9 @@ export default function EventsOverview() {
     }
   }
 
-  if (!currentUser) {
+  /*if (!currentUser) {
     return <div>Loading...</div>;
-  }
+  }*/
 
   return (
     <>
