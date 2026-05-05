@@ -166,13 +166,17 @@
 
   /* MOBILE MENU (React controlled) */
   .mobile-menu {
+    position: fixed;
+    top: var(--navbar-height, 60px); /* header altı */
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    width: 100%;
     background: #4a2c2a;
-
     padding-bottom: 12px;
 
     animation: slideDown 0.2s ease;

@@ -73,6 +73,7 @@ const Layout = () => {
         </div>
       </header>
 
+      {/* MOBILE MENU */}
       {menuOpen && (
         <div className="mobile-menu mobile-only">
           <NavLink
@@ -119,7 +120,6 @@ const Layout = () => {
             </NavLink>
           )}
 
-          {/* LANGUAGE */}
           <div className="mobile-lang">
             <button onClick={() => changeLanguage('en')}>EN</button>
             <button onClick={() => changeLanguage('fi')}>FI</button>
