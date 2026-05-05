@@ -1,4 +1,4 @@
-import '../../views/styles/reservation.css';
+import "../../views/styles/reservation.css";
 
 export default function SuccessModal({ message, onClose }) {
   return (
