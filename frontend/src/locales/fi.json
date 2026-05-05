@@ -6,6 +6,7 @@
   "nav": {
     "home": "Koti",
     "calendar": "Kalenteri",
+    "reservation": "Varaus",
     "menu": "Ruokalista",
     "profile": "Profiili",
     "logout": "Kirjaudu ulos",
