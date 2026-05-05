@@ -10,7 +10,7 @@
   justify-content: center;
 
   padding: 24px;
-  background: radial-gradient(circle at top, #faf7f5, #f3ebe6);
+  background: var(--bg);
   font-family:
     system-ui,
     -apple-system,

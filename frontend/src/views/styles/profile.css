@@ -47,7 +47,7 @@
   border-radius: 50%;
   overflow: hidden;
   background: #d8c7b8;
-  margin: 0 auto;
+  margin: 0 auto 12px;
 }
 
 .profile-photo img {
@@ -337,7 +337,39 @@
   margin-top: 20px;
   justify-content: flex-end;
 }
+.input-group {
+  width: 100%;
+  text-align: left;
+}
 
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+  z-index: 2;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 /* =========================
    RESPONSIVE
 ========================= */

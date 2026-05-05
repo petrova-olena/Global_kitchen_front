@@ -43,6 +43,10 @@
   padding: 20px 0;
 }
 
+.menu-preview {
+  text-align: center;
+}
+
 /* GRID */
 .menu-grid {
   display: grid;

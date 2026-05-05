@@ -10,16 +10,11 @@ export default function CalendarPage() {
       <div className="events-header">
         <h1>{t('calendar.title')}</h1>
 
-        <div className="week-info">
-          <h2>{t('calendar.weekHighlights')}</h2>
-          <p className="week-description">{t('calendar.weekDescription')}</p>
-        </div>
-
         <div className="menu-links">
           <Link to="/daily-menu" className="menu-btn">
             {t('calendar.dailyMenu')}
           </Link>
-          <Link to="/weekly-menu" className="menu-btn">
+          <Link to="/menu" className="menu-btn">
             {t('calendar.weeklyMenu')}
           </Link>
         </div>
