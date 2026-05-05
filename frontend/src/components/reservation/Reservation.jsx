@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { buildAvailabilityGrid } from "../../utils/reservationAvailability";
-import { useNavigate } from "react-router-dom";
-import { useReservation } from "./useReservation";
-import ReservationForm from "./ReservationForm";
-import SuccessModal from "./SuccessModal";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useState } from 'react';
+import { buildAvailabilityGrid } from '../../utils/reservationAvailability';
+import { useNavigate } from 'react-router-dom';
+import { useReservation } from './useReservation';
+import ReservationForm from './ReservationForm';
+import SuccessModal from './SuccessModal';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Reservation() {
   const { user: currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // datetime from form
-  const [selectedDatetime, setSelectedDatetime] = useState("");
+  const [selectedDatetime, setSelectedDatetime] = useState('');
 
   // success modal
   const [showModal, setShowModal] = useState(false);
@@ -59,14 +59,14 @@ export default function Reservation() {
 
       if (chosen < from) {
         setRangeError(
-          `This table is available starting from ${from.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`,
+          `This table is available starting from ${from.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
         );
         return;
       }
 
       if (to && chosen > to) {
         setRangeError(
-          `This table is available only until ${to.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`,
+          `This table is available only until ${to.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
         );
         return;
       }
@@ -80,15 +80,13 @@ export default function Reservation() {
 
       setTimeout(() => {
         setShowModal(false);
-        navigate("/calendar");
+        navigate('/calendar');
       }, 2000);
     }
   }
 
   return (
     <div className="reservation-page">
-      <h2>Reserve a Table</h2>
-
       {loading && <p>Loading...</p>}
       {error && <p className="error">{error}</p>}
 
@@ -118,7 +116,7 @@ export default function Reservation() {
           message="Your table has been successfully reserved!"
           onClose={() => {
             setShowModal(false);
-            navigate("/calendar");
+            navigate('/calendar');
           }}
         />
       )}
@@ -155,13 +153,13 @@ export default function Reservation() {
                       {slot.intervals.map((interval, idx) => (
                         <div key={idx} className="slot-time">
                           {interval.from.toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
+                            hour: '2-digit',
+                            minute: '2-digit',
                           })}
-                          {" – "}
+                          {' – '}
                           {interval.to.toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
+                            hour: '2-digit',
+                            minute: '2-digit',
                           })}
                         </div>
                       ))}

@@ -83,7 +83,7 @@ const ProfileOverview = ({
               <h3>{t('profileOverview.myEvents')}</h3>
 
               <button className="btn btn-primary" onClick={goToCalendar}>
-                {t('profileOverview.addEvent')}
+                {t('addEvent')}
               </button>
             </div>
 

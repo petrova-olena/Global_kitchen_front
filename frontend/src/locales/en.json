@@ -270,7 +270,9 @@
     "previousComments": "Your Previous Comments",
     "noComments": "You have no comments yet.",
     "unknownCuisine": "Unknown",
-    "cuisine": "Cuisine"
+    "cuisine": "Cuisine",
+    "noEvents": "No events found.",
+    "noReservations": "No reservations found."
   },
   "profileEvents": {
     "eventTitle": "Event Title",

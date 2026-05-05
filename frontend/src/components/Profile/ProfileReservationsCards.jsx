@@ -5,7 +5,7 @@ const ProfileReservationsCards = ({ reservations, onCancel }) => {
   const { t } = useTranslation();
 
   if (!reservations || reservations.length === 0) {
-    return <p>{t('noReservations')}</p>;
+    return <p>{t('profileOverview.noReservations')}</p>;
   }
 
   const formatDate = (dateString) => {
@@ -49,7 +49,7 @@ const ProfileReservationsCards = ({ reservations, onCancel }) => {
             </div>
 
             <div>
-              ⏳ {formatDate(r.expires_at)} | {formatTime(r.expires_at)}
+              ⏳ {formatDate(r.expires_at)} | ⏱ {formatTime(r.expires_at)}
             </div>
           </div>
 

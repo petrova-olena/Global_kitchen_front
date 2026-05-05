@@ -274,7 +274,9 @@
     "previousComments": "Aiemmat kommenttisi",
     "noComments": "Sinulla ei ole vielä kommentteja.",
     "unknownCuisine": "Tuntematon",
-    "cuisine": "Keittiö"
+    "cuisine": "Keittiö",
+    "noEvents": "Ei tapahtumia.",
+    "noReservations": "Ei varauksia."
   },
   "profileEvents": {
     "eventTitle": "Tapahtuman nimi",
