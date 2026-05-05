@@ -26,7 +26,6 @@ const MenuCard = ({ dish }) => {
         <Link to={`/menu/${dish.type}/${dish.id}`} className="btn-small">
           {t("menu.details")}
         </Link>
-        <button className="add-btn">+</button>
       </div>
     </div>
   );
