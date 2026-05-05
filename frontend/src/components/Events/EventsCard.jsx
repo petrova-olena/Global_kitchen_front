@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function EventsCard({
   title,
@@ -21,24 +21,24 @@ export default function EventsCard({
       if (!mobile) setIsOpen(true);
     };
 
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
 
   return (
-    <div className={`events-card ${isMobile ? "accordion" : ""}`}>
+    <div className={`events-card ${isMobile ? 'accordion' : ''}`}>
       <div
         className="events-card-header"
         onClick={() => isMobile && setIsOpen(!isOpen)}
       >
         <h3>{title}</h3>
-        {isMobile && <span className="arrow">{isOpen ? "▾" : "▸"}</span>}
+        {isMobile && <span className="arrow">{isOpen ? '▾' : '▸'}</span>}
       </div>
 
       {(!isMobile || isOpen) && (
         <div className="events-card-content">
           {events.length === 0 ? (
-            <p className="empty">{emptyText || t("calendar.noEvents")}</p>
+            <p className="empty">{emptyText || t('calendar.noEvents')}</p>
           ) : (
             events.map((ev) =>
               renderItem ? (
@@ -51,7 +51,7 @@ export default function EventsCard({
                   </div>
                   <div className="event-desc">{ev.description}</div>
                 </div>
-              ),
+              )
             )
           )}
         </div>
