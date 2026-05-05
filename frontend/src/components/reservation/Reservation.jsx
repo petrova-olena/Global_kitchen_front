@@ -75,13 +75,11 @@ export default function Reservation() {
     // CREATE RESERVATION
     const result = await createReservation(data);
 
-    if (result?.success) {
+    if (
+      result &&
+      (result.success || result.status === 'success' || result.ok)
+    ) {
       setShowModal(true);
-
-      setTimeout(() => {
-        setShowModal(false);
-        navigate('/calendar');
-      }, 2000);
     }
   }
 
@@ -91,16 +89,24 @@ export default function Reservation() {
       {error && <p className="error">{error}</p>}
 
       {/* MAIN FORM */}
-      <ReservationForm
-        tables={freeTables}
-        onSubmit={handleSubmit}
-        disabledForm={!currentUser}
-        disabledReserve={freeTables.length === 0}
-        onDatetimeChange={setSelectedDatetime}
-        prefillTable={prefill?.table}
-        prefillDate={prefill?.date}
-        prefillTime={prefill?.time}
-      />
+      {/* MAIN FORM OR GUEST MESSAGE */}
+      {!currentUser ? (
+        <div className="reservation-guest-message">
+          To reserve a table, please <strong>log in</strong> or call the
+          administrator.
+        </div>
+      ) : (
+        <ReservationForm
+          tables={freeTables}
+          onSubmit={handleSubmit}
+          disabledForm={false}
+          disabledReserve={freeTables.length === 0}
+          onDatetimeChange={setSelectedDatetime}
+          prefillTable={prefill?.table}
+          prefillDate={prefill?.date}
+          prefillTime={prefill?.time}
+        />
+      )}
 
       {/* BUTTON: all tables busy */}
       {freeTables.length === 0 && selectedDatetime && (
