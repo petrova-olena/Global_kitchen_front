@@ -2,10 +2,17 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getImageUrl } from "../../utils/getImageUrl";
 
-const MenuCard = ({ dish }) => {
+const MenuCard = ({ dish, onDetails }) => {
   const { t } = useTranslation();
 
   if (!dish) return null;
+
+  const handleDetailsClick = (e) => {
+    if (onDetails) {
+      e.preventDefault();
+      onDetails(dish);
+    }
+  };
 
   return (
     <div className="menu-card">
@@ -23,9 +30,11 @@ const MenuCard = ({ dish }) => {
       <p className="price">{dish.price}€</p>
 
       <div className="card-actions">
-        <Link to={`/menu/${dish.type}/${dish.id}`} className="btn-small">
-          {t("menu.details")}
-        </Link>
+        {onDetails && (
+          <button className="btn-small" onClick={handleDetailsClick}>
+            {t("menu.details")}
+          </button>
+        )}
       </div>
     </div>
   );
