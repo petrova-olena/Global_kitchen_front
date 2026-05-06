@@ -54,7 +54,7 @@
     "weekHighlights": "This Week's Highlights",
     "weekDescription": "Weekly overview goes here",
     "dailyMenu": "Daily Menu",
-    "weeklyMenu": "Weekly Menu",
+    "menu": "Menu",
     "events": "Events",
     "noEvents": "No events",
     "addEvent": "Add Event",
@@ -78,9 +78,6 @@
     "dessertDesc": "Chocolate cake with cream.",
     "drinkOfDay": "Drink of the Day",
     "drinkDesc": "Homemade lemonade."
-  },
-  "weeklyMenu": {
-    "title": "Weekly Menu"
   },
   "menu": {
     "title": "Our Menu",
