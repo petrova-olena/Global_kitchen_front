@@ -7,9 +7,7 @@ import MenuGrid from "../../components/Menu/MenuGrid";
 const Menu = () => {
   const { t } = useTranslation();
   const { weeklyDishes, loading, error } = useMenu();
-
   const [selectedCategory, setSelectedCategory] = useState("all");
-
   const filteredDishes = useMemo(() => {
     if (selectedCategory === "all") return weeklyDishes;
     return weeklyDishes.filter((d) => d.type === selectedCategory);

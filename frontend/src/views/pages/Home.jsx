@@ -39,11 +39,8 @@ const Home = () => {
           }}
         >
           <div className="hero-text">
-            <div style={{ fontSize: '48px', marginBottom: '16px' }}>
-              {cuisineDetails.emoji}
-            </div>
             <h1>
-              {cuisineDetails.emoji} {currentCuisine} Week
+              {currentCuisine} Week
             </h1>
             <p className="hero-subtitle">
               Week {weekNumber}: {heroContent.subtitle}

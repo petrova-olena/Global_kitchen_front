@@ -27,9 +27,7 @@ export function useMenu(origin = null) {
           (c) => c.origin?.toLowerCase() === ACTIVE_WEEK_ORIGIN.toLowerCase(),
         );
         console.log('[useMenu] Found sets:', activeWeekSets.length, 'for origin:', ACTIVE_WEEK_ORIGIN);
-
         setWeeklySets(activeWeekSets);
-
         // Save all dishes ID from sets
         const allIds = activeWeekSets.flatMap((c) => [
           c.soup_id,

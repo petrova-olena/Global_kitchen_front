@@ -15,8 +15,7 @@ export function useThemeMenu() {
   const origin = getOriginFromCuisine(currentCuisine);
   console.log('[useThemeMenu] Current cuisine:', currentCuisine, 'Origin:', origin);
   // Fetch menu data for this origin
-  const { weeklySets, weeklyDishes, dishById, loading, error } =
-    useMenu(origin);
+  const { weeklySets, weeklyDishes, dishById, loading, error } = useMenu(origin);
   // Get hero content for this cuisine
   const heroContent = getHeroContent(currentCuisine);
   return {
