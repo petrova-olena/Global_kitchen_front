@@ -1,4 +1,5 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
+import ScrollToTop from "./components/common/ScrollToTop";
 import Layout from "./components/Layout";
 import Home from "./views/pages/Home";
 import Calendar from "./views/pages/Calendar";
@@ -12,6 +13,8 @@ import Reservation from "./components/reservation/Reservation";
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
+
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
