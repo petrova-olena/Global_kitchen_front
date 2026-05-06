@@ -54,7 +54,7 @@
     "weekHighlights": "Tämän viikon kohokohdat",
     "weekDescription": "Viikon yleiskatsaus löytyy täältä",
     "dailyMenu": "Päivän ruokalista",
-    "weeklyMenu": "Viikon ruokalista",
+    "menu": "Ruokalista",
     "events": "Tapahtumat",
     "noEvents": "Ei tapahtumia",
     "addEvent": "Lisää tapahtuma",
@@ -78,9 +78,6 @@
     "dessertDesc": "Suklaaakakku kermalla.",
     "drinkOfDay": "Päivän juoma",
     "drinkDesc": "Kotitekoinen limonadi."
-  },
-  "weeklyMenu": {
-    "title": "Viikon ruokalista"
   },
   "menu": {
     "title": "Ruokalista",

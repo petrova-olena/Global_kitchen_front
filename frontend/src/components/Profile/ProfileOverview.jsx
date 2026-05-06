@@ -47,7 +47,7 @@ const ProfileOverview = ({
   const [editingText, setEditingText] = useState('');
 
   return (
-    <section className="profile-container">
+    <section className="profile-container container">
       <div className="profile-grid">
         {/* LEFT */}
         <div className="left-column">
@@ -83,7 +83,7 @@ const ProfileOverview = ({
               <h3>{t('profileOverview.myEvents')}</h3>
 
               <button className="btn btn-primary" onClick={goToCalendar}>
-                {t('addEvent')}
+                {t('profileOverview.addEvent')}
               </button>
             </div>
 
@@ -98,17 +98,6 @@ const ProfileOverview = ({
               reservations={reservations}
               onCancel={handleCancelReservation}
             />
-          </div>
-
-          {/* RECIPE */}
-          <div className="section-block">
-            <h3>{t('profileOverview.recipeOfDay')}</h3>
-            <h4>{t('profileOverview.recipeTitle')}</h4>
-            <p>{t('profileOverview.recipeDesc')}</p>
-
-            <button className="btn btn-primary">
-              {t('profileOverview.saveToNotes')}
-            </button>
           </div>
 
           {/* COMMENTS */}
@@ -186,14 +175,14 @@ const ProfileOverview = ({
                               setEditingId(null);
                             }}
                           >
-                            {t('common.save')}
+                            {t('profileOverview.save')}
                           </button>
 
                           <button
                             className="btn btn-secondary"
                             onClick={() => setEditingId(null)}
                           >
-                            {t('common.cancel')}
+                            {t('profileOverview.cancel')}
                           </button>
                         </>
                       ) : (
@@ -207,14 +196,14 @@ const ProfileOverview = ({
                               setEditingText(c.comment_text);
                             }}
                           >
-                            {t('common.edit')}
+                            {t('profileOverview.edit')}
                           </button>
 
                           <button
                             className="btn btn-danger"
                             onClick={() => deleteComment(c.id)}
                           >
-                            {t('common.delete')}
+                            {t('profileOverview.delete')}
                           </button>
                         </>
                       )}
