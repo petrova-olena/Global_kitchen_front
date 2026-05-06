@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaUserCircle } from 'react-icons/fa';
 
 const ProfilePhoto = ({
   user,
@@ -11,6 +12,7 @@ const ProfilePhoto = ({
 }) => {
   const fileRef = useRef(null);
   const { t } = useTranslation();
+  const [imgError, setImgError] = useState(false);
 
   const handleButtonClick = () => {
     if (!profilePicFile) {
@@ -18,21 +20,24 @@ const ProfilePhoto = ({
     }
   };
 
+  const getImageSrc = () => {
+    if (!user?.profile_pic) return null;
+
+    return user.profile_pic.startsWith('http')
+      ? user.profile_pic
+      : `http://localhost:8000/uploads/${user.profile_pic}`;
+  };
+
+  const imageSrc = getImageSrc();
+
   return (
     <div className="profile-left">
       {/* IMAGE */}
       <div className="profile-photo">
-        {user?.profile_pic ? (
-          <img
-            src={
-              user.profile_pic.startsWith('http')
-                ? user.profile_pic
-                : `http://localhost:8000/uploads/${user.profile_pic}`
-            }
-            alt="profile"
-          />
+        {imageSrc && !imgError ? (
+          <img src={imageSrc} alt="profile" onError={() => setImgError(true)} />
         ) : (
-          <div>{t('profilePhoto.noImage')}</div>
+          <FaUserCircle size={121} color="#999" />
         )}
       </div>
 
@@ -48,7 +53,7 @@ const ProfilePhoto = ({
 
           <button
             type={profilePicFile ? 'submit' : 'button'}
-            className=" btn btn-primary"
+            className="btn btn-primary"
             onClick={handleButtonClick}
           >
             {uploading

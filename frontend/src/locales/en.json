@@ -43,7 +43,11 @@
     "signupSuccess": "Sign up successful!",
     "signupFailed": "Sign up failed",
     "noAccount": "Don't have an account?",
-    "haveAccount": "Already have an account?"
+    "haveAccount": "Already have an account?",
+    "invalidCredentials": "Invalid username or password",
+    "usernameRequired": "Username is required",
+    "passwordRequired": "Password is required",
+    "emailRequired": "Email is required"
   },
   "calendar": {
     "title": "Event Calendar",

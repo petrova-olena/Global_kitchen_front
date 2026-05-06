@@ -46,8 +46,14 @@
   height: 120px;
   border-radius: 50%;
   overflow: hidden;
-  background: #d8c7b8;
+  background: linear-gradient(135deg, #e6d3c2, #d8c7b8);
   margin: 0 auto 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .profile-photo img {
