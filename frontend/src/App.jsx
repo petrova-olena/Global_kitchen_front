@@ -6,7 +6,6 @@ import Calendar from './views/pages/Calendar';
 import Menu from './views/pages/Menu';
 import Profile from './views/pages/Profile';
 import DailyMenu from './views/pages/DailyMenu';
-import WeeklyMenu from './views/pages/WeeklyMenu';
 import Auth from './views/pages/Auth';
 import AdminPanel from './components/Admin/AdminPanel';
 import Reservation from './components/reservation/Reservation';
