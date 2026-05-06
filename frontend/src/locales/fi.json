@@ -43,7 +43,11 @@
     "signupSuccess": "Rekisteröityminen onnistui!",
     "signupFailed": "Rekisteröityminen epäonnistui",
     "noAccount": "Ei vielä tiliä?",
-    "haveAccount": "Onko sinulla jo tili?"
+    "haveAccount": "Onko sinulla jo tili?",
+    "invalidCredentials": "Virheellinen käyttäjänimi tai salasana",
+    "usernameRequired": "Käyttäjänimi vaaditaan",
+    "passwordRequired": "Salasana vaaditaan",
+    "emailRequired": "Sähköposti vaaditaan"
   },
   "calendar": {
     "title": "Tapahtumakalenteri",
