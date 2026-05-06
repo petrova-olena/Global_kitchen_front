@@ -23,6 +23,7 @@ export const ThemeProvider = ({ children }) => {
   const currentCuisine = getCuisineForDate(activeDate);
   const cuisineDetails = getCuisineDetails(currentCuisine);
   const weekNumber = getWeekNumber(activeDate);
+  console.log('[ThemeContext] activeDate:', activeDate.toDateString(), 'cuisine:', currentCuisine, 'week:', weekNumber, 'override active:', !!overrideDate);
 
   // Update current date every minute
   useEffect(() => {

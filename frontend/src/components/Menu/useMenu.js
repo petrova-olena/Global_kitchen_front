@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../../utils/fetchData";
 
-export function useMenu() {
+export function useMenu(origin = null) {
   const [weeklySets, setWeeklySets] = useState([]);
   const [weeklyDishes, setWeeklyDishes] = useState([]);
   const [dishById, setDishById] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Now current week is hard coded
-  const ACTIVE_WEEK_ORIGIN = "finnland";
+  // Allow dynamic origin, fallback to finnland
+  const ACTIVE_WEEK_ORIGIN = origin || "finnland";
 
   useEffect(() => {
     async function loadData() {
       try {
+        console.log('[useMenu] Fetching data for origin:', ACTIVE_WEEK_ORIGIN);
         setLoading(true);
 
         const [cuisinesData, dishesData] = await Promise.all([
@@ -21,10 +22,11 @@ export function useMenu() {
           fetchData("/dishes"),
         ]);
 
-        // Choose active week
+        // Choose active week - case-insensitive comparison
         const activeWeekSets = cuisinesData.filter(
-          (c) => c.origin?.toLowerCase() === ACTIVE_WEEK_ORIGIN,
+          (c) => c.origin?.toLowerCase() === ACTIVE_WEEK_ORIGIN.toLowerCase(),
         );
+        console.log('[useMenu] Found sets:', activeWeekSets.length, 'for origin:', ACTIVE_WEEK_ORIGIN);
 
         setWeeklySets(activeWeekSets);
 
@@ -40,12 +42,12 @@ export function useMenu() {
 
         // Filter dishes
         const filteredDishes = dishesData.filter((d) => allIds.includes(d.id));
-
         setWeeklyDishes(filteredDishes);
-
         // Map id → dish
         const map = Object.fromEntries(filteredDishes.map((d) => [d.id, d]));
         setDishById(map);
+        console.log('[useMenu] Filtered dishes:', filteredDishes.length);
+        console.log('[useMenu] dishById keys:', Object.keys(map).length);
       } catch (err) {
         console.error(err);
         setError(err.message || "Error");
@@ -55,7 +57,7 @@ export function useMenu() {
     }
 
     loadData();
-  }, []);
+  }, [origin]);
 
   return {
     weeklySets,
