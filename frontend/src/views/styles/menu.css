@@ -43,6 +43,33 @@
   padding: 20px 0;
 }
 
+.menu-category-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 3rem 0 2rem;
+  text-align: center;
+  color: #452209;
+  position: relative;
+}
+
+.menu-category-title::before,
+.menu-category-title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: #452209;
+}
+
+.menu-category-title::before {
+  left: 0;
+}
+
+.menu-category-title::after {
+  right: 0;
+}
+
 .menu-preview {
   text-align: center;
 }

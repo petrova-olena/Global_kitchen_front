@@ -15,6 +15,48 @@ const Menu = () => {
     return weeklyDishes.filter((d) => d.type === selectedCategory);
   }, [selectedCategory, weeklyDishes]);
 
+  // Sorting order
+  const order = {
+    soup: 1,
+    main: 2,
+    side: 3,
+    salad: 4,
+    dessert: 5,
+    drink: 6,
+  };
+
+  // Sort dishes
+  const sortedDishes = useMemo(() => {
+    return [...filteredDishes].sort((a, b) => {
+      const typeA = order[a.type] || 999;
+      const typeB = order[b.type] || 999;
+
+      if (typeA !== typeB) return typeA - typeB;
+
+      return a.id - b.id;
+    });
+  }, [filteredDishes]);
+
+  // Group dishes by type
+  const grouped = useMemo(() => {
+    const groups = {};
+    sortedDishes.forEach((dish) => {
+      if (!groups[dish.type]) groups[dish.type] = [];
+      groups[dish.type].push(dish);
+    });
+    return groups;
+  }, [sortedDishes]);
+
+  // English titles for categories
+  const categoryTitles = {
+    soup: "Soups",
+    main: "Main Dishes",
+    side: "Side Dishes",
+    salad: "Salads",
+    dessert: "Desserts",
+    drink: "Drinks",
+  };
+
   if (loading) {
     return (
       <section className="menu-header container">
@@ -44,7 +86,13 @@ const Menu = () => {
         />
       </section>
 
-      <MenuGrid dishes={filteredDishes} />
+      {/* Render grouped categories */}
+      {Object.entries(grouped).map(([type, dishes]) => (
+        <section key={type} className="menu-category-section container">
+          <h2 className="menu-category-title">{categoryTitles[type]}</h2>
+          <MenuGrid dishes={dishes} />
+        </section>
+      ))}
     </>
   );
 };
