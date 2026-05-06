@@ -1,13 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const MenuFilters = ({
-  cuisines,
-  selectedCuisine,
-  setSelectedCuisine,
-  selectedCategory,
-  setSelectedCategory,
-}) => {
+const MenuFilters = ({ selectedCategory, setSelectedCategory }) => {
   const { t } = useTranslation();
 
   return (
@@ -42,10 +36,24 @@ const MenuFilters = ({
         </button>
 
         <button
+          className={`category-btn ${selectedCategory === "salad" ? "active" : ""}`}
+          onClick={() => setSelectedCategory("salad")}
+        >
+          {t("menu.salads")}
+        </button>
+
+        <button
           className={`category-btn ${selectedCategory === "dessert" ? "active" : ""}`}
           onClick={() => setSelectedCategory("dessert")}
         >
           {t("menu.desserts")}
+        </button>
+
+        <button
+          className={`category-btn ${selectedCategory === "drink" ? "active" : ""}`}
+          onClick={() => setSelectedCategory("drink")}
+        >
+          {t("menu.drinks")}
         </button>
 
         <Link to="/daily-menu" className="category-btn daily-link">

@@ -6,7 +6,7 @@ const MenuGrid = ({ dishes }) => {
   const [selectedDish, setSelectedDish] = useState(null);
 
   if (!dishes?.length) {
-    return <p className="empty-text">No dishes found.</p>;
+    return <p className="empty-text">Daily menu is not available yet.</p>;
   }
 
   return (
