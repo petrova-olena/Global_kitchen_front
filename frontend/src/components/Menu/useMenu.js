@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { fetchData } from "../../utils/fetchData";
+import { useEffect, useState } from 'react';
+import { fetchData } from '../../utils/fetchData';
 
 export function useMenu() {
   const [weeklySets, setWeeklySets] = useState([]);
@@ -17,13 +17,13 @@ export function useMenu() {
         setLoading(true);
 
         const [cuisinesData, dishesData] = await Promise.all([
-          fetchData("/cuisines"),
-          fetchData("/dishes"),
+          fetchData('/cuisines'),
+          fetchData('/dishes'),
         ]);
 
         // Choose active week
         const activeWeekSets = cuisinesData.filter(
-          (c) => c.origin?.toLowerCase() === ACTIVE_WEEK_ORIGIN,
+          (c) => c.origin?.toLowerCase() === ACTIVE_WEEK_ORIGIN
         );
 
         setWeeklySets(activeWeekSets);
@@ -48,7 +48,7 @@ export function useMenu() {
         setDishById(map);
       } catch (err) {
         console.error(err);
-        setError(err.message || "Error");
+        setError(err.message || 'Error');
       } finally {
         setLoading(false);
       }
