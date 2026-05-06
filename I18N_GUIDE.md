@@ -1,6 +1,7 @@
 # i18n Setup Guide - Global Kitchen
 
 ## Overview
+
 Your website now supports **English (EN)** and **Finnish (FI)** languages using **i18next** and **react-i18next**.
 
 ## 📁 File Structure
@@ -24,10 +25,12 @@ src/
 ## 🚀 How It Works
 
 ### 1. **Language Persistence**
+
 - Current language is saved to localStorage as `language`
 - When user returns, their language preference is restored
 
 ### 2. **Language Switcher**
+
 - Buttons in the header (EN/FI)
 - Located in `Layout.jsx`
 - Automatically switches all UI text
@@ -35,26 +38,29 @@ src/
 ### 3. **Using Translations in Components**
 
 #### Import and use the hook:
+
 ```javascript
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const MyComponent = () => {
   const { t, i18n } = useTranslation();
-  
-  return <h1>{t('home.title')}</h1>;
+
+  return <h1>{t("home.title")}</h1>;
 };
 ```
 
 #### Access nested keys with dot notation:
+
 ```javascript
-t('home.title')           // "Welcome to Finnish Week" (EN) or "Tervetuloa..." (FI)
-t('menu.soups')           // "Soups" (EN) or "Keitot" (FI)
-t('common.save')          // "Save" (EN) or "Tallenna" (FI)
+t("home.title"); // "Welcome to Finnish Week" (EN) or "Tervetuloa..." (FI)
+t("menu.soups"); // "Soups" (EN) or "Keitot" (FI)
+t("common.save"); // "Save" (EN) or "Tallenna" (FI)
 ```
 
 ## 📝 Translation Files Structure
 
 **en.json** and **fi.json** are organized by section:
+
 - `header` - Header/navigation
 - `nav` - Navigation links
 - `footer` - Footer text
@@ -71,6 +77,7 @@ t('common.save')          // "Save" (EN) or "Tallenna" (FI)
 ### 1. Add to both JSON files
 
 **en.json:**
+
 ```json
 {
   "home": {
@@ -81,6 +88,7 @@ t('common.save')          // "Save" (EN) or "Tallenna" (FI)
 ```
 
 **fi.json:**
+
 ```json
 {
   "home": {
@@ -93,15 +101,15 @@ t('common.save')          // "Save" (EN) or "Tallenna" (FI)
 ### 2. Use in component
 
 ```javascript
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const MyComponent = () => {
   const { t } = useTranslation();
-  
+
   return (
     <>
-      <h1>{t('home.title')}</h1>
-      <p>{t('home.newFeature')}</p>
+      <h1>{t("home.title")}</h1>
+      <p>{t("home.newFeature")}</p>
     </>
   );
 };
@@ -110,29 +118,34 @@ const MyComponent = () => {
 ## 🔄 Common Use Cases
 
 ### Dynamic text
+
 ```javascript
-<h1>{t('menu.title')}</h1>
+<h1>{t("menu.title")}</h1>
 ```
 
 ### Button labels
+
 ```javascript
-<button>{t('common.save')}</button>
+<button>{t("common.save")}</button>
 ```
 
 ### Placeholder text
+
 ```javascript
-<input placeholder={t('auth.username')} />
+<input placeholder={t("auth.username")} />
 ```
 
 ### Combine with variables (interpolation)
+
 ```javascript
 // en.json: "greeting": "Welcome, {{name}}!"
-<p>{t('greeting', { name: 'John' })}</p>
+<p>{t("greeting", { name: "John" })}</p>
 ```
 
 ## 🎯 Current Translation Coverage
 
 The following pages are already translated:
+
 - ✅ Layout (Header, Navigation, Footer)
 - ✅ Home Page
 - ✅ Auth Page (Sign In/Sign Up)
@@ -140,8 +153,8 @@ The following pages are already translated:
 - ✅ Menu Page
 
 **Still need translations:**
+
 - ❌ DailyMenu.jsx
-- ❌ WeeklyMenu.jsx
 - ❌ Profile.jsx
 - ❌ AdminPanel.jsx
 - ❌ Components (Calendar, Events, etc.)
@@ -173,18 +186,21 @@ npm install i18next react-i18next
 ## ⚠️ Common Issues
 
 ### Missing translations?
+
 - Check JSON key spelling matches component usage
 - Ensure both en.json and fi.json have the same keys
 - Use `t('key')` not `t("key")`
 
 ### Translations not updating?
+
 - Restart dev server: `npm run dev`
 - Clear browser cache
 - Check localStorage isn't overriding selection
 
 ### How to debug?
+
 ```javascript
 const { i18n } = useTranslation();
-console.log('Current language:', i18n.language);
-console.log('Loaded resources:', i18n.store.data);
+console.log("Current language:", i18n.language);
+console.log("Loaded resources:", i18n.store.data);
 ```

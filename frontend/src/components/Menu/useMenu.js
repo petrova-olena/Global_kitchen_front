@@ -9,7 +9,7 @@ export function useMenu() {
   const [error, setError] = useState(null);
 
   // Now current week is hard coded
-  const ACTIVE_WEEK_ORIGIN = "finnland";
+  const ACTIVE_WEEK_ORIGIN = "ukraine";
 
   useEffect(() => {
     async function loadData() {
