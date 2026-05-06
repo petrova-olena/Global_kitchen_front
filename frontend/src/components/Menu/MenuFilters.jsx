@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import { AuthContext } from "../../context/AuthContext.js";
+import RecipeOfTheDayButton from "../RecipeOfTheDay/RecipeOfTheDayButton";
 
 const MenuFilters = ({ selectedCategory, setSelectedCategory }) => {
+  const { user } = useContext(AuthContext);
   const { t } = useTranslation();
 
   return (
@@ -59,6 +63,8 @@ const MenuFilters = ({ selectedCategory, setSelectedCategory }) => {
         <Link to="/daily-menu" className="category-btn daily-link">
           {t("calendar.dailyMenu")}
         </Link>
+
+        {user && <RecipeOfTheDayButton />}
       </nav>
     </>
   );
