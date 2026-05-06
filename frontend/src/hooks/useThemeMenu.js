@@ -33,17 +33,11 @@ export function useThemeMenu() {
     // Hero content
     heroContent,
     // Convenience: Get dishes for a specific category
-    getSoupDishes: () =>
-      weeklySets.map((set) => dishById[set.soup_id]).filter(Boolean),
-    getMainDishes: () =>
-      weeklySets.map((set) => dishById[set.main_dish_id]).filter(Boolean),
-    getSideDishes: () =>
-      weeklySets.map((set) => dishById[set.side_dish_id]).filter(Boolean),
-    getSalads: () =>
-      weeklySets.map((set) => dishById[set.salad_id]).filter(Boolean),
-    getDesserts: () =>
-      weeklySets.map((set) => dishById[set.dessert_id]).filter(Boolean),
-    getDrinks: () =>
-      weeklySets.map((set) => dishById[set.drink_id]).filter(Boolean),
+    getSoupDishes: () => weeklySets.map((set) => dishById[set.soup_id]).filter(Boolean),
+    getMainDishes: () => weeklySets.map((set) => dishById[set.main_dish_id]).filter(Boolean),
+    getSideDishes: () =>weeklySets.map((set) => dishById[set.side_dish_id]).filter(Boolean),
+    getSalads: () => weeklySets.map((set) => dishById[set.salad_id]).filter(Boolean),
+    getDesserts: () => weeklySets.map((set) => dishById[set.dessert_id]).filter(Boolean),
+    getDrinks: () => weeklySets.map((set) => dishById[set.drink_id]).filter(Boolean),
   };
 }

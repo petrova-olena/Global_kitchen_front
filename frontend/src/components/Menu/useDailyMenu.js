@@ -1,13 +1,14 @@
 import { useMenu } from "./useMenu";
+import { useTheme } from "../../context/ThemeContext";
+import { getOriginFromCuisine } from "../../utils/cuisineOriginMap";
 
 export function useDailyMenu() {
-  const { weeklySets, weeklyDishes } = useMenu();
-
+  const { currentCuisine } = useTheme(); // Get current cuisine from theme
+  const origin = getOriginFromCuisine(currentCuisine); // Map to backend origin
+  const { weeklySets, weeklyDishes } = useMenu(origin);
   if (!weeklySets?.length || !weeklyDishes?.length) return [];
-
   const today = new Date().getDay(); // 0–6
   const day = today === 0 ? 7 : today; // 7 = Sunday
-
   // Search all sets for the current day
   const sameDaySets = weeklySets.filter((s) => s.day_id === day);
 

@@ -17,14 +17,12 @@ export const ThemeProvider = ({ children }) => {
   const [isDebugMode, setIsDebugMode] = useState(
     () => localStorage.getItem('themeDebugMode') === 'true'
   );
-
   // Use override date if set, otherwise use current date
   const activeDate = overrideDate ? parseOverrideDate(overrideDate) : currentDate;
   const currentCuisine = getCuisineForDate(activeDate);
   const cuisineDetails = getCuisineDetails(currentCuisine);
   const weekNumber = getWeekNumber(activeDate);
   console.log('[ThemeContext] activeDate:', activeDate.toDateString(), 'cuisine:', currentCuisine, 'week:', weekNumber, 'override active:', !!overrideDate);
-
   // Update current date every minute
   useEffect(() => {
     const interval = setInterval(() => {
@@ -74,12 +72,10 @@ export const ThemeProvider = ({ children }) => {
     cuisineDetails,
     weekNumber,
     activeDate,
-    
     // Real time
     realDate: currentDate,
     isOverrideActive: !!overrideDate,
     overrideDate,
-    
     // Debug
     isDebugMode,
     toggleDebugMode,

@@ -3,10 +3,14 @@ import { useTranslation } from "react-i18next";
 import { useMenu } from "../../components/Menu/useMenu";
 import MenuFilters from "../../components/Menu/MenuFilters";
 import MenuGrid from "../../components/Menu/MenuGrid";
+import { useTheme } from "../../context/ThemeContext";
+import { getOriginFromCuisine } from "../../utils/cuisineOriginMap";
 
 const Menu = () => {
   const { t } = useTranslation();
-  const { weeklyDishes, loading, error } = useMenu();
+  const { currentCuisine } = useTheme();
+  const origin = getOriginFromCuisine(currentCuisine);
+  const { weeklyDishes, loading, error } = useMenu(origin);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const filteredDishes = useMemo(() => {
     if (selectedCategory === "all") return weeklyDishes;
