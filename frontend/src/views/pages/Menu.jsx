@@ -4,22 +4,16 @@ import { useMenu } from "../../components/Menu/useMenu";
 import MenuFilters from "../../components/Menu/MenuFilters";
 import MenuGrid from "../../components/Menu/MenuGrid";
 
-const MenuPage = () => {
+const Menu = () => {
   const { t } = useTranslation();
-  const { cuisines, dishes, getCuisineDishes, loading, error } = useMenu();
+  const { weeklyDishes, loading, error } = useMenu();
 
-  const [selectedCuisine, setSelectedCuisine] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  // Here selectedCuisine was a button, now it is null
   const filteredDishes = useMemo(() => {
-    const base = selectedCuisine ? getCuisineDishes(selectedCuisine) : dishes;
-
-    return base.filter((d) => {
-      if (selectedCategory === "all") return true;
-      return d.type === selectedCategory;
-    });
-  }, [selectedCuisine, selectedCategory, dishes, getCuisineDishes]);
+    if (selectedCategory === "all") return weeklyDishes;
+    return weeklyDishes.filter((d) => d.type === selectedCategory);
+  }, [selectedCategory, weeklyDishes]);
 
   if (loading) {
     return (
@@ -45,9 +39,6 @@ const MenuPage = () => {
         <h1>{t("menu.title")}</h1>
 
         <MenuFilters
-          cuisines={cuisines}
-          selectedCuisine={selectedCuisine}
-          setSelectedCuisine={setSelectedCuisine}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
@@ -58,4 +49,4 @@ const MenuPage = () => {
   );
 };
 
-export default MenuPage;
+export default Menu;

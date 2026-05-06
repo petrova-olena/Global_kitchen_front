@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { fetchData } from "../../utils/fetchData";
 
 export function useMenu() {
-  const [cuisines, setCuisines] = useState([]);
-  const [dishes, setDishes] = useState([]);
+  const [weeklySets, setWeeklySets] = useState([]);
+  const [weeklyDishes, setWeeklyDishes] = useState([]);
   const [dishById, setDishById] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Now current week is hard coded
+  const ACTIVE_WEEK_ORIGIN = "finnland";
 
   useEffect(() => {
     async function loadData() {
@@ -18,30 +21,30 @@ export function useMenu() {
           fetchData("/dishes"),
         ]);
 
-        // TODO: replace with switch logic
-
-        // Here only finnish dishes
-        const finnishCuisines = cuisinesData.filter(
-          (c) => c.origin?.toLowerCase() === "finland",
+        // Choose active week
+        const activeWeekSets = cuisinesData.filter(
+          (c) => c.origin?.toLowerCase() === ACTIVE_WEEK_ORIGIN,
         );
 
-        // All id for finnish dishes
-        const finnishDishIds = finnishCuisines.flatMap((c) => [
+        setWeeklySets(activeWeekSets);
+
+        // Save all dishes ID from sets
+        const allIds = activeWeekSets.flatMap((c) => [
+          c.soup_id,
           c.main_dish_id,
           c.side_dish_id,
-          c.soup_id,
+          c.salad_id,
+          c.dessert_id,
+          c.drink_id,
         ]);
 
         // Filter dishes
-        const finnishDishes = dishesData.filter((d) =>
-          finnishDishIds.includes(d.id),
-        );
+        const filteredDishes = dishesData.filter((d) => allIds.includes(d.id));
 
-        // Save only finnish
-        setCuisines(finnishCuisines);
-        setDishes(finnishDishes);
+        setWeeklyDishes(filteredDishes);
 
-        const map = Object.fromEntries(finnishDishes.map((d) => [d.id, d]));
+        // Map id → dish
+        const map = Object.fromEntries(filteredDishes.map((d) => [d.id, d]));
         setDishById(map);
       } catch (err) {
         console.error(err);
@@ -54,20 +57,10 @@ export function useMenu() {
     loadData();
   }, []);
 
-  function getCuisineDishes(cuisine) {
-    if (!cuisine) return [];
-    return [
-      dishById[cuisine.main_dish_id],
-      dishById[cuisine.side_dish_id],
-      dishById[cuisine.soup_id],
-    ].filter(Boolean);
-  }
-
   return {
-    cuisines,
-    dishes,
+    weeklySets,
+    weeklyDishes,
     dishById,
-    getCuisineDishes,
     loading,
     error,
   };
