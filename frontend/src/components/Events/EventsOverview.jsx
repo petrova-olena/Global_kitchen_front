@@ -1,19 +1,20 @@
-import { useState, useEffect, useMemo } from "react";
-import Calendar from "../Calendar/Calendar";
-import EventsCard from "./EventsCard";
-import ReservationCard from "./ReservationCard";
-import { useTranslation } from "react-i18next";
-import { loadEvents } from "../../utils/loadEvents";
-import { fetchData } from "../../utils/fetchData";
-import { formatDate, formatTime } from "../../utils/dateHelpers";
-import { useReservation } from "../reservation/useReservation";
-import { addEvent, deleteEventById, updateEvent } from "../../services/events";
-import EditEventModal from "./EditEventModal";
-import EditReservationModal from "../Reservation/EditReservationModal";
+import { useState, useEffect, useMemo } from 'react';
+import Calendar from '../Calendar/Calendar';
+import EventsCard from './EventsCard';
+import ReservationCard from './ReservationCard';
+import { useTranslation } from 'react-i18next';
+import { loadEvents } from '../../utils/loadEvents';
+import { fetchData } from '../../utils/fetchData';
+import { formatDate, formatTime } from '../../utils/dateHelpers';
+import { useReservation } from '../Reservation/useReservation';
+import { addEvent, deleteEventById, updateEvent } from '../../services/events';
+import EditEventModal from './EditEventModal';
+import EditReservationModal from '../Reservation/EditReservationModal';
 
 export default function EventsOverview() {
   const { t } = useTranslation();
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const storedUser = localStorage.getItem('user');
+  const currentUser = storedUser ? JSON.parse(storedUser) : null;
 
   const [events, setEvents] = useState([]);
 
@@ -27,9 +28,9 @@ export default function EventsOverview() {
 
   // Reservation state
   const {
-    //tables,
+    tables,
     reservations,
-    getFreeTables,
+    //getFreeTables,
     //createReservation,
     deleteReservation,
     updateReservation,
@@ -48,16 +49,16 @@ export default function EventsOverview() {
   // ADD event
   async function handleAddEvent(title, description, from, to) {
     if (!currentUser || !currentUser.id) {
-      console.error("User not logged in");
+      console.error('User not logged in');
       return;
     }
 
     try {
-      const start_date = from.replace("T", " ") + ":00";
-      const end_date = to.replace("T", " ") + ":00";
+      const start_date = from.replace('T', ' ') + ':00';
+      const end_date = to.replace('T', ' ') + ':00';
 
       await addEvent({
-        type: "user",
+        type: 'user',
         title,
         description,
         start_date,
@@ -67,7 +68,7 @@ export default function EventsOverview() {
 
       loadEvents().then(setEvents);
     } catch (err) {
-      console.error("Failed to create event:", err);
+      console.error('Failed to create event:', err);
     }
   }
 
@@ -86,7 +87,7 @@ export default function EventsOverview() {
 
       loadEvents().then(setEvents);
     } catch (err) {
-      console.error("Failed to delete event:", err);
+      console.error('Failed to delete event:', err);
     }
 
     setPendingDeleteId(null);
@@ -106,8 +107,8 @@ export default function EventsOverview() {
   }
 
   async function handleUpdateEvent(id, title, description, from, to) {
-    const start_date = from.replace("T", " ") + ":00";
-    const end_date = to.replace("T", " ") + ":00";
+    const start_date = from.replace('T', ' ') + ':00';
+    const end_date = to.replace('T', ' ') + ':00';
 
     try {
       await updateEvent(id, {
@@ -121,7 +122,7 @@ export default function EventsOverview() {
       setShowEditModal(false);
       setEditingEvent(null);
     } catch (err) {
-      console.error("Failed to update event:", err);
+      console.error('Failed to update event:', err);
     }
   }
 
@@ -131,17 +132,17 @@ export default function EventsOverview() {
   }
 
   // Filters
-  const [mode, setMode] = useState("week");
-  const [customFrom, setCustomFrom] = useState("");
-  const [customTo, setCustomTo] = useState("");
+  const [mode, setMode] = useState('week');
+  const [customFrom, setCustomFrom] = useState('');
+  const [customTo, setCustomTo] = useState('');
 
   // Reset custom range when switching modes
   function changeMode(newMode) {
     setMode(newMode);
 
-    if (newMode !== "custom") {
-      setCustomFrom("");
-      setCustomTo("");
+    if (newMode !== 'custom') {
+      setCustomFrom('');
+      setCustomTo('');
     }
   }
 
@@ -152,7 +153,7 @@ export default function EventsOverview() {
   }
 
   function parseDate(dateStr) {
-    const [y, m, d] = dateStr.split("-").map(Number);
+    const [y, m, d] = dateStr.split('-').map(Number);
     return new Date(y, m - 1, d);
   }
 
@@ -160,7 +161,7 @@ export default function EventsOverview() {
     eventStartStr,
     eventEndStr,
     rangeStartStr,
-    rangeEndStr,
+    rangeEndStr
   ) {
     const eventStart = parseDate(eventStartStr);
     const eventEnd = parseDate(eventEndStr);
@@ -191,15 +192,15 @@ export default function EventsOverview() {
     const y = today.getFullYear();
     const m = today.getMonth();
 
-    const monthStartStr = `${y}-${String(m + 1).padStart(2, "0")}-01`;
+    const monthStartStr = `${y}-${String(m + 1).padStart(2, '0')}-01`;
     const lastDay = new Date(y, m + 1, 0).getDate();
-    const monthEndStr = `${y}-${String(m + 1).padStart(2, "0")}-${String(lastDay).padStart(2, "0")}`;
+    const monthEndStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
 
     return rangesOverlapDates(
       eventStartStr,
       eventEndStr,
       monthStartStr,
-      monthEndStr,
+      monthEndStr
     );
   }
 
@@ -214,18 +215,20 @@ export default function EventsOverview() {
     const start = toDateOnly(e.start_date);
     const end = toDateOnly(e.end_date);
 
-    if (mode === "week") return isInCurrentWeek(start, end);
-    if (mode === "month") return isInCurrentMonth(start, end);
-    if (mode === "custom") return isInCustomRange(start, end);
+    if (mode === 'week') return isInCurrentWeek(start, end);
+    if (mode === 'month') return isInCurrentMonth(start, end);
+    if (mode === 'custom') return isInCustomRange(start, end);
 
     return true;
   });
 
-  const restaurantEvents = filteredEvents.filter((e) => e.type === "admin");
+  const restaurantEvents = filteredEvents.filter((e) => e.type === 'admin');
 
-  const userEvents = filteredEvents.filter(
-    (e) => e.type === "user" && e.created_by === currentUser.id,
-  );
+  const userEvents = currentUser
+    ? filteredEvents.filter(
+        (e) => e.type === 'user' && e.created_by === currentUser.id
+      )
+    : [];
 
   // ----------- mapping reservation to event format for calendar display -----------
   useEffect(() => {
@@ -236,11 +239,11 @@ export default function EventsOverview() {
         const data = await fetchData(`/reservation/${currentUser.id}`);
         setUserReservations(data);
       } catch (err) {
-        if (err.message.includes("404")) {
+        if (err.message.includes('404')) {
           setUserReservations([]);
           return;
         } else {
-          console.error("Failed to load user reservations:", err);
+          console.error('Failed to load user reservations:', err);
         }
       }
     }
@@ -255,8 +258,7 @@ export default function EventsOverview() {
       from: res.reservation_time,
       to: res.expires_at,
       guests: res.number_of_people,
-      notes: `Table #${res.table_id}`,
-      type: "reservation",
+      type: 'reservation',
     };
   }
 
@@ -269,9 +271,10 @@ export default function EventsOverview() {
   async function handleUpdateReservation(id, updated) {
     const success = await updateReservation(id, {
       tableId: updated.tableId,
-      datetime: updated.from,
-      pepole: updated.guests,
-      duration: updated.duration,
+      reservationTime: updated.reservationTime,
+      pepole: updated.pepole,
+      expire: updated.expire,
+      note: updated.note || null,
     });
 
     if (success) {
@@ -280,9 +283,9 @@ export default function EventsOverview() {
     }
   }
 
-  if (!currentUser) {
+  /*if (!currentUser) {
     return <div>Loading...</div>;
-  }
+  }*/
 
   return (
     <>
@@ -294,31 +297,31 @@ export default function EventsOverview() {
         currentUser={currentUser}
         addEvent={handleAddEvent}
       />
-      <div className="events-overview">
+      <div className="events-overview container">
         <div className="events-filter">
           <button
-            className={mode === "week" ? "active" : ""}
-            onClick={() => changeMode("week")}
+            className={mode === 'week' ? 'active' : ''}
+            onClick={() => changeMode('week')}
           >
             Current week
           </button>
 
           <button
-            className={mode === "month" ? "active" : ""}
-            onClick={() => changeMode("month")}
+            className={mode === 'month' ? 'active' : ''}
+            onClick={() => changeMode('month')}
           >
             Current month
           </button>
 
           <button
-            className={mode === "custom" ? "active" : ""}
-            onClick={() => changeMode("custom")}
+            className={mode === 'custom' ? 'active' : ''}
+            onClick={() => changeMode('custom')}
           >
             Choose period
           </button>
         </div>
 
-        {mode === "custom" && (
+        {mode === 'custom' && (
           <div className="custom-range">
             <input
               type="date"
@@ -362,7 +365,7 @@ export default function EventsOverview() {
                 <div className="event-desc">{item.description}</div>
               </div>
 
-              {currentUser?.role === "admin" && (
+              {currentUser?.role === 'admin' && (
                 <div className="event-actions">
                   <button
                     className="edit-btn"
@@ -398,7 +401,7 @@ export default function EventsOverview() {
             deleteEvent={deleteEvent}
             deleteReservation={deleteReservation}
             renderItem={(item, openEditEventFromProps, deleteEventFromProps) =>
-              item.type === "reservation" ? (
+              item.type === 'reservation' ? (
                 <ReservationCard
                   key={`res-${item.id}`}
                   reservation={item}
@@ -425,7 +428,7 @@ export default function EventsOverview() {
 
                       <div>
                         <span className="event-icon">🕒</span>
-                        {formatTime(item.start_date)} —{" "}
+                        {formatTime(item.start_date)} —{' '}
                         {formatTime(item.end_date)}
                       </div>
                     </div>
@@ -433,7 +436,7 @@ export default function EventsOverview() {
                     <div className="event-desc">{item.description}</div>
                   </div>
 
-                  {currentUser && item.type === "user" && (
+                  {currentUser && item.type === 'user' && (
                     <div className="event-actions">
                       <button
                         className="edit-btn"
@@ -468,7 +471,7 @@ export default function EventsOverview() {
               updated.title,
               updated.description,
               updated.from,
-              updated.to,
+              updated.to
             )
           }
           onCancel={cancelEdit}
@@ -480,7 +483,7 @@ export default function EventsOverview() {
         <EditReservationModal
           reservation={editingReservation}
           reservations={reservations}
-          getFreeTables={getFreeTables}
+          tables={tables}
           onSave={(updated) =>
             handleUpdateReservation(editingReservation.id, updated)
           }
@@ -495,13 +498,13 @@ export default function EventsOverview() {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <h3>{t("modals.deleteConfirm")}</h3>
+            <h3>{t('modals.deleteConfirm')}</h3>
             <div className="modal-buttons">
               <button className="cancel-btn" onClick={cancelDelete}>
-                {t("common.cancel")}
+                {t('common.cancel')}
               </button>
               <button className="delete-btn" onClick={confirmDelete}>
-                {t("common.delete")}
+                {t('common.delete')}
               </button>
             </div>
           </div>

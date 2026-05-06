@@ -6,9 +6,9 @@ import { fetchData } from '../../utils/fetchData';
 export const useAuthLogic = () => {
   const { setUser, setToken } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [error, setError] = useState('');
 
   const [isSignIn, setIsSignIn] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [signinForm, setSigninForm] = useState({
     username: '',
@@ -21,12 +21,67 @@ export const useAuthLogic = () => {
     password: '',
   });
 
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+    email: '',
+    general: '',
+  });
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // ================= HELPERS =================
+  const clearFieldError = (field) => {
+    setErrors((prev) => ({ ...prev, [field]: '' }));
+  };
+
+  const setAllErrors = (newErrors) => {
+    setErrors({
+      username: newErrors.username || '',
+      password: newErrors.password || '',
+      email: newErrors.email || '',
+      general: newErrors.general || '',
+    });
+  };
+
+  const resetAuthState = () => {
+    setErrors({
+      username: '',
+      password: '',
+      email: '',
+      general: '',
+    });
+
+    setShowPassword(false);
+  };
+
+  const toggleAuthMode = () => {
+    setIsSignIn((prev) => !prev);
+    resetAuthState();
+
+    setSigninForm({ username: '', password: '' });
+    setSignupForm({ username: '', email: '', password: '' });
+  };
+
+  // ================= SIGN IN =================
   const handleSignIn = async (e) => {
     e.preventDefault();
-    setError('');
 
-    if (!signinForm.username.trim() || !signinForm.password.trim()) {
-      setError('Username and password are required');
+    let newErrors = {};
+    let hasError = false;
+
+    if (!signinForm.username.trim()) {
+      newErrors.username = 'auth.usernameRequired';
+      hasError = true;
+    }
+
+    if (!signinForm.password.trim()) {
+      newErrors.password = 'auth.passwordRequired';
+      hasError = true;
+    }
+
+    if (hasError) {
+      setAllErrors(newErrors);
       return;
     }
 
@@ -44,31 +99,42 @@ export const useAuthLogic = () => {
 
       navigate('/');
     } catch {
-      setError('Invalid username or password');
+      setAllErrors({
+        general: 'auth.invalidCredentials',
+      });
     }
   };
 
+  // ================= SIGN UP =================
   const handleSignUp = async (e) => {
     e.preventDefault();
-    setError('');
+
+    let newErrors = {};
+    let hasError = false;
 
     if (!signupForm.username.trim()) {
-      setError('Username is required');
-      return;
+      newErrors.username = 'auth.usernameRequired';
+      hasError = true;
     }
 
     if (!signupForm.email.trim()) {
-      setError('Email is required');
-      return;
+      newErrors.email = 'auth.emailRequired';
+      hasError = true;
+    } else if (!emailRegex.test(signupForm.email)) {
+      newErrors.email = 'auth.invalidEmail';
+      hasError = true;
     }
 
     if (!signupForm.password.trim()) {
-      setError('Password is required');
-      return;
+      newErrors.password = 'auth.passwordRequired';
+      hasError = true;
+    } else if (signupForm.password.length < 6) {
+      newErrors.password = 'auth.passwordTooShort';
+      hasError = true;
     }
 
-    if (signupForm.password.length < 6) {
-      setError('Password must be at least 6 characters');
+    if (hasError) {
+      setAllErrors(newErrors);
       return;
     }
 
@@ -79,21 +145,32 @@ export const useAuthLogic = () => {
       });
 
       setIsSignIn(true);
+      resetAuthState();
     } catch {
-      setError('Signup failed. Username or email may already exist.');
+      setAllErrors({
+        general: 'auth.signupFailed',
+      });
     }
   };
 
   return {
     isSignIn,
     setIsSignIn,
+
+    toggleAuthMode,
+
     signinForm,
     setSigninForm,
     signupForm,
     setSignupForm,
+
     handleSignIn,
     handleSignUp,
-    error,
-    setError,
+
+    errors,
+    clearFieldError,
+
+    showPassword,
+    setShowPassword,
   };
 };

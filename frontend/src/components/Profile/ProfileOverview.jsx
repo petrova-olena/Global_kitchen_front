@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './profile.css';
+import '../../views/styles/profile.css';
 import ProfilePhoto from './ProfilePhoto';
 import ProfileForm from './ProfileForm';
-import ProfileEventsTable from './ProfileEventsTable';
-import ProfileReservationsTable from './ProfileReservationsTable';
+import ProfileEventsCards from './ProfileEventsCards';
+import ProfileReservationsCards from './ProfileReservationsCards';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -77,40 +77,35 @@ const ProfileOverview = ({
 
         {/* RIGHT */}
         <div className="right-column">
-          {/* EVENTS */}
+          {/* EVENTS (CARD SYSTEM) */}
           <div className="section-block">
             <div className="section-header">
               <h3>{t('profileOverview.myEvents')}</h3>
+
               <button className="btn btn-primary" onClick={goToCalendar}>
-                {t('profileOverview.addEvent')}
+                {t('addEvent')}
               </button>
             </div>
-            <ProfileEventsTable events={events} onDelete={handleDeleteEvent} />
+
+            <ProfileEventsCards events={events} onDelete={handleDeleteEvent} />
           </div>
 
-          {/* RESERVATIONS */}
+          {/* RESERVATIONS (TABLE - şimdilik aynı) */}
           <div className="section-block">
             <h3>{t('profileOverview.myReservations')}</h3>
-            <ProfileReservationsTable
+
+            <ProfileReservationsCards
               reservations={reservations}
               onCancel={handleCancelReservation}
             />
           </div>
 
-          {/* GIFT CARD */}
-          <div className="section-block">
-            <h3>{t('profileOverview.giftCard')}</h3>
-            <p>{t('profileOverview.giftCardText')}</p>
-            <button className="btn btn-primary">
-              {t('profileOverview.buyGiftCard')}
-            </button>
-          </div>
-
-          {/* RECIPE OF THE DAY */}
+          {/* RECIPE */}
           <div className="section-block">
             <h3>{t('profileOverview.recipeOfDay')}</h3>
             <h4>{t('profileOverview.recipeTitle')}</h4>
             <p>{t('profileOverview.recipeDesc')}</p>
+
             <button className="btn btn-primary">
               {t('profileOverview.saveToNotes')}
             </button>
@@ -126,6 +121,7 @@ const ProfileOverview = ({
               className="form-select"
             >
               <option value="">{t('profileOverview.selectCuisine')}</option>
+
               {cuisines.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.name}
@@ -155,7 +151,7 @@ const ProfileOverview = ({
               </button>
             </div>
 
-            {/* SHOW COMMENTS */}
+            {/* COMMENTS LIST */}
             {showComments && (
               <>
                 <h4>{t('profileOverview.previousComments')}</h4>
@@ -182,6 +178,7 @@ const ProfileOverview = ({
                             value={editingText}
                             onChange={(e) => setEditingText(e.target.value)}
                           />
+
                           <button
                             className="btn btn-primary"
                             onClick={() => {
@@ -191,6 +188,7 @@ const ProfileOverview = ({
                           >
                             {t('common.save')}
                           </button>
+
                           <button
                             className="btn btn-secondary"
                             onClick={() => setEditingId(null)}

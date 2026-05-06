@@ -20,7 +20,7 @@ const ProfileForm = ({
   return (
     <div className="profile-right">
       {editMode ? (
-        <div className="input-group">
+        <div className="input-group edit-form">
           <input
             name="username"
             value={form.username}
@@ -53,15 +53,27 @@ const ProfileForm = ({
           </div>
 
           <div className="button-group">
-            <button type="button" className="action-btn" onClick={handleSave}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleSave}
+            >
               {loading ? t('profileForm.saving') : t('profileForm.save')}
             </button>
 
-            <button type="button" className="action-btn" onClick={handleCancel}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleCancel}
+            >
               {t('profileForm.cancel')}
             </button>
 
-            <button type="button" className="action-btn" onClick={handleLogout}>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={handleLogout}
+            >
               {t('profileForm.logout')}
             </button>
           </div>
@@ -71,20 +83,27 @@ const ProfileForm = ({
       ) : (
         <div className="input-group">
           <h2>{user?.username}</h2>
-          <p>{user?.email}</p>
 
           <div className="button-group">
-            <button type="button" className="action-btn" onClick={handleEdit}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleEdit}
+            >
               {t('profileForm.editProfile')}
             </button>
 
-            <button type="button" className="action-btn" onClick={handleLogout}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleLogout}
+            >
               {t('profileForm.logout')}
             </button>
 
             <button
               type="button"
-              className="action-btn delete-btn"
+              className="btn btn-danger"
               onClick={handleDeleteAccount}
             >
               {t('profileForm.deleteProfile')}

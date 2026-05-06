@@ -6,6 +6,7 @@
   "nav": {
     "home": "Koti",
     "calendar": "Kalenteri",
+    "reservation": "Varaus",
     "menu": "Ruokalista",
     "profile": "Profiili",
     "logout": "Kirjaudu ulos",
@@ -25,6 +26,7 @@
     "aboutText": "Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan. Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan.",
     "ourMenu": "Ruokalista",
     "exploreWeek": "Tutustu tämän viikon ruoihin",
+    "seeFullMenu": "Näytä Koko Menu",
     "awards": "Palkinnot",
     "customers": "Asiakkaat",
     "experience": "Kokemus"
@@ -41,7 +43,11 @@
     "signupSuccess": "Rekisteröityminen onnistui!",
     "signupFailed": "Rekisteröityminen epäonnistui",
     "noAccount": "Ei vielä tiliä?",
-    "haveAccount": "Onko sinulla jo tili?"
+    "haveAccount": "Onko sinulla jo tili?",
+    "invalidCredentials": "Virheellinen käyttäjänimi tai salasana",
+    "usernameRequired": "Käyttäjänimi vaaditaan",
+    "passwordRequired": "Salasana vaaditaan",
+    "emailRequired": "Sähköposti vaaditaan"
   },
   "calendar": {
     "title": "Tapahtumakalenteri",
@@ -273,7 +279,9 @@
     "previousComments": "Aiemmat kommenttisi",
     "noComments": "Sinulla ei ole vielä kommentteja.",
     "unknownCuisine": "Tuntematon",
-    "cuisine": "Keittiö"
+    "cuisine": "Keittiö",
+    "noEvents": "Ei tapahtumia.",
+    "noReservations": "Ei varauksia."
   },
   "profileEvents": {
     "eventTitle": "Tapahtuman nimi",

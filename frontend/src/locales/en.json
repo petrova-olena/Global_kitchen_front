@@ -6,6 +6,7 @@
   "nav": {
     "home": "Home",
     "calendar": "Calendar",
+    "reservation": "Reservation",
     "menu": "Menu",
     "profile": "Profile",
     "logout": "Logout",
@@ -25,6 +26,7 @@
     "aboutText": "Global Kitchen brings world cuisine to your table. Every week we explore a new country through food. Global Kitchen brings world cuisine to your table. Every week we explore a new country through food.",
     "ourMenu": "Our Menu",
     "exploreWeek": "Explore this week's dishes",
+    "seeFullMenu": "See Full Menu",
     "awards": "Awards",
     "customers": "Customers",
     "experience": "Experience"
@@ -41,7 +43,11 @@
     "signupSuccess": "Sign up successful!",
     "signupFailed": "Sign up failed",
     "noAccount": "Don't have an account?",
-    "haveAccount": "Already have an account?"
+    "haveAccount": "Already have an account?",
+    "invalidCredentials": "Invalid username or password",
+    "usernameRequired": "Username is required",
+    "passwordRequired": "Password is required",
+    "emailRequired": "Email is required"
   },
   "calendar": {
     "title": "Event Calendar",
@@ -78,6 +84,7 @@
   },
   "menu": {
     "title": "Our Menu",
+    "all": "All",
     "soups": "Soups",
     "mainDishes": "Main Dishes",
     "sideDishes": "Side Dishes",
@@ -268,7 +275,9 @@
     "previousComments": "Your Previous Comments",
     "noComments": "You have no comments yet.",
     "unknownCuisine": "Unknown",
-    "cuisine": "Cuisine"
+    "cuisine": "Cuisine",
+    "noEvents": "No events found.",
+    "noReservations": "No reservations found."
   },
   "profileEvents": {
     "eventTitle": "Event Title",

@@ -1,14 +1,15 @@
-import { Route, BrowserRouter, Routes } from "react-router-dom";
-import Layout from "./components/Layout";
-import Home from "./views/Home";
-import Calendar from "./views/Calendar";
-import Menu from "./views/Menu";
-import Profile from "./views/Profile";
-import DailyMenu from "./views/DailyMenu";
-import WeeklyMenu from "./views/WeeklyMenu";
-import Auth from "./views/Auth";
-import AdminPanel from "./components/Admin/AdminPanel";
-import Reservation from "./components/Reservation/Reservation";
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './views/pages/Home';
+import Calendar from './views/pages/Calendar';
+import Menu from './views/pages/Menu';
+import Profile from './views/pages/Profile';
+import DailyMenu from './views/pages/DailyMenu';
+import WeeklyMenu from './views/pages/WeeklyMenu';
+import Auth from './views/pages/Auth';
+import AdminPanel from './components/Admin/AdminPanel';
+//import Reservation from './components/Reservation/Reservation';
+import Reservation from './components/reservation/Reservation';
 import { ThemeProvider } from "./context/ThemeContext";
 import ThemeDebugger from "./components/ThemeDebugger";
 
