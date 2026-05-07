@@ -28,7 +28,7 @@ export default function AdminPanel() {
 
   return (
     <div className="admin-panel">
-      <h1>Admin Panel</h1>
+      <h1>{t("buttons.adminPanel")}</h1>
 
       {/* Back button */}
       <button className="back-btn" onClick={() => navigate("/calendar")}>
