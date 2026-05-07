@@ -123,9 +123,9 @@ export default function ReservationForm({
             required
           >
             <option value="">{t('reservationForm.selectTable')}</option>
-            {tables.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t('reservationForm.tableNumber')}{t.id}
+            {tables.map((table) => (
+              <option key={table.id} value={table.id}>
+                {t('reservationForm.tableNumber')}{table.id}
               </option>
             ))}
           </select>
