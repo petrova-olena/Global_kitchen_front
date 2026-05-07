@@ -11,6 +11,7 @@ import { useReservation } from "../Reservation/useReservation";
 
 export default function AdminPanel() {
   const { t } = useTranslation();
+
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const [activeTab, setActiveTab] = useState("events");
@@ -28,11 +29,11 @@ export default function AdminPanel() {
 
   return (
     <div className="admin-panel">
-      <h1>{t("buttons.adminPanel")}</h1>
+      <h1>{t("admin.title")}</h1>
 
       {/* Back button */}
       <button className="back-btn" onClick={() => navigate("/calendar")}>
-        ← Back to Calendar
+        ← {t("admin.backToCalendar")}
       </button>
 
       <AdminTabs activeTab={activeTab} setActiveTab={setActiveTab} />

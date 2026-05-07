@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import '../../views/styles/reservation.css';
-import reservationImg from '../../assets/reservation.jpg';
+import { useEffect, useState } from "react";
+import "../../views/styles/reservation.css";
+import reservationImg from "../../assets/reservation.jpg";
+import { useTranslation } from "react-i18next";
 
 export default function ReservationForm({
   tables,
@@ -13,11 +14,13 @@ export default function ReservationForm({
   prefillTime,
   isAdmin = false,
 }) {
-  const [tableId, setTableId] = useState('');
+  const { t } = useTranslation();
+
+  const [tableId, setTableId] = useState("");
   const [pepole, setPepole] = useState(1);
   const [duration, setDuration] = useState(120); // default 2 hours
-  const [datetime, setDatetime] = useState('');
-  const [note, setNote] = useState('');
+  const [datetime, setDatetime] = useState("");
+  const [note, setNote] = useState("");
 
   useEffect(() => {
     if (prefillDate && prefillTime) {
@@ -58,7 +61,7 @@ export default function ReservationForm({
 
   return (
     <form className="reservation-form" onSubmit={handleSubmit}>
-      <h2>Reserve a Table</h2>
+      <h2>{t("reservation.reserveAtable")}</h2>
       <div className="form-content">
         <img
           src={reservationImg}
@@ -67,7 +70,7 @@ export default function ReservationForm({
         />
         {/* DATE & TIME */}
         <label className="form-label">
-          Date & Time
+          {t("reservation.dateAndTime")}
           <input
             type="datetime-local"
             value={datetime}
@@ -80,7 +83,7 @@ export default function ReservationForm({
 
         {/* PEOPLE */}
         <label className="form-label">
-          Number of People
+          {t("reservation.numberOfPeople")}
           <input
             type="number"
             min="1"
@@ -95,24 +98,24 @@ export default function ReservationForm({
 
         {/* DURATION */}
         <label className="form-label">
-          Duration
+          {t("reservation.duration")}
           <select
             value={duration}
             onChange={(e) => setDuration(Number(e.target.value))}
             disabled={disabledForm}
             className="form-input"
           >
-            <option value={60}>1 hour</option>
-            <option value={90}>1.5 hours</option>
-            <option value={120}>2 hours</option>
-            <option value={150}>2.5 hours</option>
-            <option value={180}>3 hours</option>
+            <option value={60}>1 {t("reservation.hour")}</option>
+            <option value={90}>1.5 {t("reservation.hours")}</option>
+            <option value={120}>2 {t("reservation.hours")}</option>
+            <option value={150}>2.5 {t("reservation.hours")}</option>
+            <option value={180}>3 {t("reservation.hours")}</option>
           </select>
         </label>
 
         {/* TABLE */}
         <label className="form-label">
-          Table
+          {t("reservation.table")}
           <select
             value={tableId}
             onChange={(e) => setTableId(e.target.value)}
@@ -120,10 +123,11 @@ export default function ReservationForm({
             className="form-input"
             required
           >
-            <option value="">Select table</option>
-            {tables.map((t) => (
-              <option key={t.id} value={t.id}>
-                Table #{t.id}
+            <option value="">{t("reservation.selectTable")}</option>
+            {tables.map((tbl) => (
+              <option key={tbl.id} value={tbl.id}>
+                {t("reservation.table#")}
+                {tbl.id}
               </option>
             ))}
           </select>
@@ -131,19 +135,19 @@ export default function ReservationForm({
 
         {/* NO TABLES */}
         {tables.length === 0 && !disabledForm && (
-          <p className="no-tables">No free tables for selected time</p>
+          <p className="no-tables">{t("reservation.noTables")}</p>
         )}
 
         {/* ADMIN NOTES FIELD */}
         {isAdmin && (
           <label className="form-label">
-            Notes
+            {t("reservation.notes")}
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
               className="form-input"
               rows={3}
-              placeholder="Enter notes"
+              placeholder={t("reservation.enterNotes")}
             />
           </label>
         )}
@@ -154,7 +158,7 @@ export default function ReservationForm({
           disabled={disabledForm || disabledReserve}
           className="btn-submit"
         >
-          Reserve
+          {t("reservation.reserve")}
         </button>
       </div>
     </form>

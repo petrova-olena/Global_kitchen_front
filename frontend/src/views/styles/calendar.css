@@ -162,7 +162,7 @@ main {
 
 .calendar::before,
 .calendar::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 100%;
@@ -203,7 +203,7 @@ main {
 }
 
 .calendar .day.active::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   box-shadow: 0 0 10px 2px #452209;
@@ -217,7 +217,7 @@ main {
 
 /* Event marker */
 .calendar .day.event::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 10%;
   left: 50%;
@@ -278,7 +278,7 @@ main {
 
 /* Hover effect */
 .events .event::after {
-  content: '✓';
+  content: "✓";
   position: absolute;
   top: 50%;
   right: 0;
@@ -495,6 +495,10 @@ main {
   display: block;
 }
 
+.reservations-tab h2 {
+  text-align: center;
+}
+
 .reservation-item-row {
   display: flex;
   justify-content: space-between;
@@ -640,11 +644,14 @@ main {
   flex: 1;
   padding: 10px;
   border: none;
-  background: #eee;
+  border-radius: 8px;
+  background: #a26a42;
+  color: #fff;
 }
 
 .admin-tabs button.active {
-  background: #ccc;
+  background: #452209;
+  color: white;
   font-weight: bold;
 }
 

@@ -1,18 +1,20 @@
-import { useState } from 'react';
-import { buildAvailabilityGrid } from '../../utils/reservationAvailability';
-import { useNavigate } from 'react-router-dom';
-import { useReservation } from './useReservation';
-import ReservationForm from './ReservationForm';
-import SuccessModal from './SuccessModal';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { useState } from "react";
+import { buildAvailabilityGrid } from "../../utils/reservationAvailability";
+import { useNavigate } from "react-router-dom";
+import { useReservation } from "./useReservation";
+import ReservationForm from "./ReservationForm";
+import SuccessModal from "./SuccessModal";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 export default function Reservation() {
   const { user: currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // datetime from form
-  const [selectedDatetime, setSelectedDatetime] = useState('');
+  const [selectedDatetime, setSelectedDatetime] = useState("");
 
   // success modal
   const [showModal, setShowModal] = useState(false);
@@ -59,15 +61,27 @@ export default function Reservation() {
 
       if (chosen < from) {
         setRangeError(
-          `This table is available starting from ${from.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+          t("rangeErrorFrom", {
+            time: from.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+          }),
         );
+
         return;
       }
 
       if (to && chosen > to) {
         setRangeError(
-          `This table is available only until ${to.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+          t("rangeErrorUntil", {
+            time: to.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+          }),
         );
+
         return;
       }
     }
@@ -77,7 +91,7 @@ export default function Reservation() {
 
     if (
       result &&
-      (result.success || result.status === 'success' || result.ok)
+      (result.success || result.status === "success" || result.ok)
     ) {
       setShowModal(true);
     }
@@ -85,15 +99,14 @@ export default function Reservation() {
 
   return (
     <div className="reservation-page">
-      {loading && <p>Loading...</p>}
+      {loading && <p>{t("reservation.loading")}</p>}
       {error && <p className="error">{error}</p>}
 
       {/* MAIN FORM */}
       {/* MAIN FORM OR GUEST MESSAGE */}
       {!currentUser ? (
         <div className="reservation-guest-message">
-          To reserve a table, please <strong>log in</strong> or call the
-          administrator.
+          {t("reservation.guestMessage")}
         </div>
       ) : (
         <ReservationForm
@@ -111,18 +124,17 @@ export default function Reservation() {
       {/* BUTTON: all tables busy */}
       {freeTables.length === 0 && selectedDatetime && (
         <button className="show-options-btn" onClick={openOptionsModal}>
-          Unfortunately, all tables are booked at this time. Would you like to
-          see available options?
+          {t("reservation.allTablesBusy")}
         </button>
       )}
 
       {/* SUCCESS MODAL */}
       {showModal && (
         <SuccessModal
-          message="Your table has been successfully reserved!"
+          message={t("reservation.successReservation")}
           onClose={() => {
             setShowModal(false);
-            navigate('/calendar');
+            navigate("/calendar");
           }}
         />
       )}
@@ -143,12 +155,14 @@ export default function Reservation() {
       {showOptionsModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <h3>Available options</h3>
+            <h3>{t("reservation.availableOptions")}</h3>
 
             <div className="tables-grid">
               {availabilityGrid.map(({ tableId, slot }) => (
                 <div key={tableId} className="table-cell">
-                  <div className="table-number">Table {tableId}</div>
+                  <div className="table-number">
+                    {t("reservation.table")} {tableId}
+                  </div>
 
                   {slot.intervals.length > 0 ? (
                     <>
@@ -159,13 +173,13 @@ export default function Reservation() {
                       {slot.intervals.map((interval, idx) => (
                         <div key={idx} className="slot-time">
                           {interval.from.toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
+                            hour: "2-digit",
+                            minute: "2-digit",
                           })}
-                          {' – '}
+                          {" – "}
                           {interval.to.toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
+                            hour: "2-digit",
+                            minute: "2-digit",
                           })}
                         </div>
                       ))}
@@ -191,11 +205,13 @@ export default function Reservation() {
                           setShowOptionsModal(false);
                         }}
                       >
-                        Reserve
+                        {t("reservation.reserve")}
                       </button>
                     </>
                   ) : (
-                    <div className="slot-unavailable">Not available</div>
+                    <div className="slot-unavailable">
+                      {t("reservation.notAvailable")}
+                    </div>
                   )}
                 </div>
               ))}
@@ -205,7 +221,7 @@ export default function Reservation() {
               className="cancel-btn"
               onClick={() => setShowOptionsModal(false)}
             >
-              Close
+              {t("reservation.close")}
             </button>
           </div>
         </div>

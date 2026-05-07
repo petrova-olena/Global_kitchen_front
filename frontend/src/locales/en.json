@@ -65,6 +65,43 @@
     "restaurantEvents": "Restaurant Events",
     "userEventLogIn": "Log in to view available events"
   },
+  "reservation": {
+    "reserveAtable": "Reserve a Table",
+    "dateAndTime": "Date & Time",
+    "numberOfPeople": "Number of People",
+    "duration": "Duration",
+    "hour": "hour",
+    "hours": "hours",
+    "table": "Table",
+    "selectTable": "Select table",
+    "table#": "Table #",
+    "noTables": "No free tables for selected time",
+    "notes": "Notes",
+    "enterNotes": "Enter notes",
+    "reserve": "Reserve",
+    "loading": "Loading...",
+    "error": "Error",
+    "guestMessage": "To reserve a table, please log in or call the administrator.",
+    "allTablesBusy": "Unfortunately, all tables are booked at this time. Would you like to see available options?",
+    "successReservation": "Your table has been successfully reserved!",
+    "rangeErrorFrom": "This table is available starting from {time}",
+    "rangeErrorUntil": "This table is available only until {time}",
+    "availableOptions": "Available options",
+    "notAvailable": "Not available",
+    "close": "Close"
+  },
+  "reservationCard": {
+    "title": "Table reservation",
+    "table": "Table",
+    "date": "Date",
+    "time": "Time",
+    "guests": "Guests",
+    "notes": "Notes",
+    "user": "User",
+    "confirmCancel": "Are you sure you want to cancel this reservation?",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
   "dailyMenu": {
     "title": "Daily Menu",
     "subtitle": "A curated selection of dishes for today — one from each category.",
@@ -138,6 +175,7 @@
     "title": "Admin Panel",
     "users": "Users",
     "events": "Events",
+    "reservations": "Reservations",
     "createEvent": "Create Event",
     "manageUsers": "Manage Users",
     "filterByUser": "Filter by User",
@@ -159,6 +197,7 @@
     "currentWeek": "Current week",
     "currentMonth": "Current month",
     "noEventsFound": "No events found",
+    "noReservations": "No reservations found for this period",
     "choosePeriod": "Choose period",
     "search": "Search"
   },
@@ -199,7 +238,10 @@
   "modals": {
     "addEvent": "Add Event",
     "tableReservation": "Table reservation",
-    "deleteConfirm": "Are you sure you want to delete this event?"
+    "deleteConfirm": "Are you sure you want to delete this event?",
+    "createEventSuccessMessage": "Reservation created successfully!",
+    "updateEventSuccessMessage": "Reservation updated!",
+    "deleteEventSuccessMessage": "Reservation deleted!"
   },
   "calendar_real": {
     "weekdayMo": "Mo",
