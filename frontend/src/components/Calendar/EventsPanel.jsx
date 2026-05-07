@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { formatTime } from "../../utils/dateHelpers";
+import { useTranslation } from "react-i18next";
 
 export default function EventsPanel({
   events,
@@ -11,6 +12,7 @@ export default function EventsPanel({
   currentUser,
 }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // Form date in YYYY-MM-DD format
   const selectedDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(
@@ -112,7 +114,7 @@ export default function EventsPanel({
             className="admin-panel-btn"
             onClick={() => navigate("/admin")}
           >
-            Admin Panel
+            {t("buttons.adminPanel")}
           </button>
         )}
       </div>

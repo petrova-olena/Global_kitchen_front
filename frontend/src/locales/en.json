@@ -61,7 +61,9 @@
     "eventTitle": "Event Title",
     "eventDescription": "Description",
     "startTime": "Start Time",
-    "endTime": "End Time"
+    "endTime": "End Time",
+    "restaurantEvents": "Restaurant Events",
+    "userEventLogIn": "Log in to view available events"
   },
   "dailyMenu": {
     "title": "Daily Menu",
@@ -191,7 +193,8 @@
     "goTo": "Go to",
     "today": "Today",
     "confirm": "Confirm",
-    "saveAsPdf": "Save As PDF"
+    "saveAsPdf": "Save As PDF",
+    "adminPanel": "Admin Panel"
   },
   "modals": {
     "addEvent": "Add Event",
