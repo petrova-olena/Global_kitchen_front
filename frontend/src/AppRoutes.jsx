@@ -7,7 +7,7 @@ import Profile from "./views/pages/Profile";
 import DailyMenu from "./views/pages/DailyMenu";
 import Auth from "./views/pages/Auth";
 import AdminPanel from "./components/Admin/AdminPanel";
-import Reservation from "./components/reservation/Reservation";
+import Reservation from "./components/Reservation/Reservation";
 
 const AppRoutes = () => {
   return (

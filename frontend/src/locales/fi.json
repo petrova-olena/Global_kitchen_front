@@ -83,7 +83,7 @@
     "loading": "Ladataan…",
     "error": "Virhe",
     "guestMessage": "Pöydän varaamiseksi kirjaudu sisään tai soita ylläpitäjälle.",
-    "allTablesBusy": "Valitettavasti kaikki pöydät ovat varattuja tähän aikaan. Haluatko nähdä vapaat vaihtoehdot?",
+    "allTablesBusy": "Haluatko nähdä vapaat vaihtoehdot?",
     "successReservation": "Pöytäsi on varattu onnistuneesti!",
     "rangeErrorFrom": "Tämä pöytä on saatavilla alkaen klo {time}",
     "rangeErrorUntil": "Tämä pöytä on saatavilla vain klo {time} asti",
