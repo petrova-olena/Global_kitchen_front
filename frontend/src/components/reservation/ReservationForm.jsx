@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import '../../views/styles/reservation.css';
 import reservationImg from '../../assets/reservation.jpg';
 
@@ -13,6 +14,7 @@ export default function ReservationForm({
   prefillTime,
   isAdmin = false,
 }) {
+  const { t } = useTranslation();
   const [tableId, setTableId] = useState('');
   const [pepole, setPepole] = useState(1);
   const [duration, setDuration] = useState(120); // default 2 hours
@@ -58,7 +60,7 @@ export default function ReservationForm({
 
   return (
     <form className="reservation-form" onSubmit={handleSubmit}>
-      <h2>Reserve a Table</h2>
+      <h2>{t('reservationForm.title')}</h2>
       <div className="form-content">
         <img
           src={reservationImg}
@@ -67,7 +69,7 @@ export default function ReservationForm({
         />
         {/* DATE & TIME */}
         <label className="form-label">
-          Date & Time
+          {t('reservationForm.dateTime')}
           <input
             type="datetime-local"
             value={datetime}
@@ -80,7 +82,7 @@ export default function ReservationForm({
 
         {/* PEOPLE */}
         <label className="form-label">
-          Number of People
+          {t('reservationForm.people')}
           <input
             type="number"
             min="1"
@@ -95,24 +97,24 @@ export default function ReservationForm({
 
         {/* DURATION */}
         <label className="form-label">
-          Duration
+          {t('reservationForm.duration')}
           <select
             value={duration}
             onChange={(e) => setDuration(Number(e.target.value))}
             disabled={disabledForm}
             className="form-input"
           >
-            <option value={60}>1 hour</option>
-            <option value={90}>1.5 hours</option>
-            <option value={120}>2 hours</option>
-            <option value={150}>2.5 hours</option>
-            <option value={180}>3 hours</option>
+            <option value={60}>{t('reservationForm.oneHour')}</option>
+            <option value={90}>{t('reservationForm.oneHalfHours')}</option>
+            <option value={120}>{t('reservationForm.twoHours')}</option>
+            <option value={150}>{t('reservationForm.twoHalfHours')}</option>
+            <option value={180}>{t('reservationForm.threeHours')}</option>
           </select>
         </label>
 
         {/* TABLE */}
         <label className="form-label">
-          Table
+          {t('reservationForm.selectTableLabel')}
           <select
             value={tableId}
             onChange={(e) => setTableId(e.target.value)}
@@ -120,10 +122,10 @@ export default function ReservationForm({
             className="form-input"
             required
           >
-            <option value="">Select table</option>
+            <option value="">{t('reservationForm.selectTable')}</option>
             {tables.map((t) => (
               <option key={t.id} value={t.id}>
-                Table #{t.id}
+                {t('reservationForm.tableNumber')}{t.id}
               </option>
             ))}
           </select>
@@ -131,19 +133,19 @@ export default function ReservationForm({
 
         {/* NO TABLES */}
         {tables.length === 0 && !disabledForm && (
-          <p className="no-tables">No free tables for selected time</p>
+          <p className="no-tables">{t('reservationForm.noFreeTables')}</p>
         )}
 
         {/* ADMIN NOTES FIELD */}
         {isAdmin && (
           <label className="form-label">
-            Notes
+            {t('reservationForm.notesLabel')}
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
               className="form-input"
               rows={3}
-              placeholder="Enter notes"
+              placeholder={t('reservationForm.notesPlaceholder')}
             />
           </label>
         )}
@@ -154,7 +156,7 @@ export default function ReservationForm({
           disabled={disabledForm || disabledReserve}
           className="btn-submit"
         >
-          Reserve
+          {t('nav.reservation')}
         </button>
       </div>
     </form>

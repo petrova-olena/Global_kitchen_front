@@ -1,5 +1,4 @@
 import "../../views/styles/calendar.css";
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -32,7 +31,7 @@ export default function AdminPanel() {
 
       {/* Back button */}
       <button className="back-btn" onClick={() => navigate("/calendar")}>
-        ← Back to Calendar
+        ← {t("admin.backToCalendar")}
       </button>
 
       <AdminTabs activeTab={activeTab} setActiveTab={setActiveTab} />
