@@ -90,12 +90,78 @@ const Layout = () => {
           >
             ☰
           </div>
+
+          {menuOpen && (
+            <div className="mobile-menu mobile-only">
+              <NavLink
+                to="/"
+                onClick={() => setMenuOpen(false)}
+                className="mobile-link"
+              >
+                {t('nav.home')}
+              </NavLink>
+
+              <NavLink
+                to="/menu"
+                onClick={() => setMenuOpen(false)}
+                className="mobile-link"
+              >
+                {t('nav.menu')}
+              </NavLink>
+
+              <NavLink
+                to="/calendar"
+                onClick={() => setMenuOpen(false)}
+                className="mobile-link"
+              >
+                {t('nav.calendar')}
+              </NavLink>
+
+              <NavLink
+                to="/reservation"
+                onClick={() => setMenuOpen(false)}
+                className="mobile-link"
+              >
+                {t('nav.reservation')}
+              </NavLink>
+
+              {user ? (
+                <div
+                  className="mobile-profile"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    navigate('/profile');
+                  }}
+                >
+                  {t('nav.profile')}
+                </div>
+              ) : (
+                <NavLink
+                  to="/auth"
+                  className="mobile-link"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {t('nav.login') || 'Login'}
+                </NavLink>
+              )}
+
+              <div className="mobile-lang">
+                <button onClick={() => changeLanguage('en')}>EN</button>
+                <button onClick={() => changeLanguage('fi')}>FI</button>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
       <main>
         <Outlet />
       </main>
+
+      <footer className="footer">
+        <p>{t('footer.address')}</p>
+        <p>{t('footer.contact')}</p>
+      </footer>
     </>
   );
 };
