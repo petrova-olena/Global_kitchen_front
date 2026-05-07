@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { FaAward, FaUsers, FaUtensils } from "react-icons/fa";
 import MenuGrid from "../../components/Menu/MenuGrid";
 import { useDailyMenu } from "../../components/Menu/useDailyMenu";
@@ -40,7 +41,7 @@ const Home = () => {
           <div className="about-columns">
             <div className="about-left">
               <div className="about-text">
-                <p>{t("home.aboutText")}</p>
+                <Trans i18nKey="home.aboutText" components={{ p: <p /> }} />
               </div>
 
               <div className="about-stats">
