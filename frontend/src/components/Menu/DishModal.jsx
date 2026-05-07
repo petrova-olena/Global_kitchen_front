@@ -1,6 +1,8 @@
 import { getImageUrl } from "../../utils/getImageUrl";
+import { useTranslation } from "react-i18next";
 
 const DishModal = ({ dish, onClose }) => {
+  const { t } = useTranslation();
   if (!dish) return null;
 
   return (
@@ -24,7 +26,7 @@ const DishModal = ({ dish, onClose }) => {
         )}
 
         <button className="menu-modal-close" onClick={onClose}>
-          Close
+          {t("common.close")}
         </button>
       </div>
     </div>

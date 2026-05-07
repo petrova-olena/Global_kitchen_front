@@ -51,19 +51,19 @@ const Menu = () => {
 
   // English titles for categories
   const categoryTitles = {
-    soup: "Soups",
-    main: "Main Dishes",
-    side: "Side Dishes",
-    salad: "Salads",
-    dessert: "Desserts",
-    drink: "Drinks",
+    soup: t("menu.soups"),
+    main: t("menu.mainDishes"),
+    side: t("menu.sideDishes"),
+    salad: t("menu.salads"),
+    dessert: t("menu.desserts"),
+    drink: t("menu.drinks"),
   };
 
   if (loading) {
     return (
       <section className="menu-header container">
         <h1>{t("menu.title")}</h1>
-        <p>Loading...</p>
+        <p>{t("menu.loading")}</p>
       </section>
     );
   }
