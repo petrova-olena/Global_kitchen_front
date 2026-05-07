@@ -8,12 +8,35 @@ Global Kitchen is a web application where users can view weekly and daily menus,
 
 ## 🧩 Main Features
 
-- View weekly and daily menus
-- Event calendar and event details
-- Table reservation (for users and admins)
-- User profile and comments
-- Multilingual support (EN/FI)
-- Admin panel: event and reservation management
+### 🍽️ Menu & Recipes
+
+- Weekly and daily menus
+- **Recipe of the Day** (via TheMealDB public API)
+- Recipe modal with **PDF export** (jsPDF)
+
+### 📅 Events & Reservations
+
+- Event calendar
+- Event details
+- Table reservation system
+- Admin tools for managing events and reservations
+
+### 👤 User System
+
+- Login / Register
+- Profile page
+- User reservations and comments
+
+### 🌐 Multilingual Support
+
+- English (EN)
+- Finnish (FI)
+- Language switcher in the UI
+
+### 🔐 Admin Panel
+
+- Manage events
+- Manage reservations
 
 ## 🗂️ Folder Structure (Summary)
 
@@ -54,8 +77,49 @@ frontend/
 - [Vite](https://vitejs.dev/)
 - [React Router 7](https://reactrouter.com/)
 - [i18next & react-i18next](https://react.i18next.com/) (Multilingual support)
+- [jsPDF] (PDF export)
+- [TheMealDB API] (https://www.themealdb.com/api.php) (public, no API key required)
 - [ESLint](https://eslint.org/) (Code quality)
 - [React Icons](https://react-icons.github.io/react-icons/)
+- [Vitest + React Testing Library](unit tests)
+
+## ⭐ Recipe of the Day
+
+The application includes a **Recipe of the Day** feature powered by the public  
+[TheMealDB API](https://www.themealdb.com/api.php):
+
+### Why no API key?
+
+TheMealDB provides a **public free key (`1`)**, which is intended for frontend use.  
+It is safe to commit and does **not** violate GitHub security rules.
+
+---
+
+## 🧾 PDF Export
+
+Recipes can be exported as PDF files using **jsPDF**.
+
+Install manually if needed:
+
+```bash
+npm install jspdf
+```
+
+## 🧪 Testing
+
+The project uses **Vitest** and **React Testing Library** for unit testing.
+
+### Run all tests
+
+```bash
+npm vitest
+```
+
+### Run tests in watch mode
+
+```bash
+npm vitest --watch
+```
 
 ## 🗝️ Pages & Flow
 
