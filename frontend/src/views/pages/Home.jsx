@@ -4,19 +4,45 @@ import { Trans } from "react-i18next";
 import { FaAward, FaUsers, FaUtensils } from "react-icons/fa";
 import MenuGrid from "../../components/Menu/MenuGrid";
 import { useDailyMenu } from "../../components/Menu/useDailyMenu";
+import { useThemeMenu } from "../../hooks/useThemeMenu";
 
 const Home = () => {
   const { t } = useTranslation();
   const dailyDishes = useDailyMenu();
+  
+  // Get themed content - combines theme + menu data
+  const {
+    currentCuisine,
+    cuisineDetails,
+    weekNumber,
+    heroContent,
+    loading: menuLoading,
+    getMainDishes
+  } = useThemeMenu();
+
+  const mainDishes = getMainDishes();
 
   return (
     <>
-      {/*-- HERO / BANNER --*/}
-      <section className="hero">
-        <div className="hero-overlay">
+      {/*-- THEMED HERO / BANNER --*/}
+      <section 
+        className="hero"
+        style={{
+          backgroundImage: `url('${heroContent.heroImage}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div 
+          className="hero-overlay"
+        >
           <div className="hero-text">
-            <h1>{t("home.title")}</h1>
-            <p>{t("home.subtitle")}</p>
+            <h1>
+              {currentCuisine} Week
+            </h1>
+            <p className="hero-description">
+              {heroContent.description}
+            </p>
           </div>
 
           <div className="hero-buttons container">
@@ -30,6 +56,36 @@ const Home = () => {
               {t("home.makeReservation")}
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/*-- CUISINE STORY --*/}
+      <section className="cuisine-story container">
+        <div className="story-content">
+          <h2 style={{ color: cuisineDetails.color }}>
+            {heroContent.title}
+          </h2>
+          <p>{heroContent.cuisineStory}</p>
+          
+          {mainDishes.length > 0 && (
+            <div className="highlighted-dishes">
+              <h3>Featured Dishes This Week:</h3>
+              <div className="dishes-list">
+                {mainDishes.slice(0, 3).map((dish, idx) => (
+                  <div
+                    key={dish?.id || idx}
+                    className="dish-tag"
+                    style={{
+                      borderColor: cuisineDetails.color,
+                      color: cuisineDetails.color,
+                    }}
+                  >
+                    {dish?.name || `Dish ${idx + 1}`}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -74,31 +130,24 @@ const Home = () => {
       {/*-- MENU PREVIEW --*/}
       <section className="menu-preview container">
         <div className="section">
-          <h2 className="section-title">{t("home.ourMenu")}</h2>
+          <h2 
+            className="section-title"
+            style={{ color: cuisineDetails.color }}
+          >
+            {t("home.ourMenu")} - {currentCuisine} Week
+          </h2>
           <p>{t("home.exploreWeek")}</p>
         </div>
-        <MenuGrid dishes={dailyDishes} />
-
-        <Link to="/menu" className="btn btn-menu">
-          {t("home.seeFullMenu")}
-        </Link>
-      </section>
-
-      <section className="chat-widget container">
-        <button className="chat-toggle" aria-label="Open chat">
-          💬
-        </button>
-
-        <div className="chat-box">
-          <div className="chat-header">Chat with us</div>
-          <div className="chat-messages">
-            <div className="message bot">Hi! How can I help you today?</div>
-          </div>
-          <div className="chat-input">
-            <input type="text" placeholder="Type a message..." />
-            <button type="button">Send</button>
-          </div>
-        </div>
+        {!menuLoading && dailyDishes.length > 0 ? (
+          <>
+            <MenuGrid dishes={dailyDishes} />
+            <Link to="/menu" className="btn btn-menu">
+              {t("home.seeFullMenu")}
+            </Link>
+          </>
+        ) : (
+          <p className="loading">{menuLoading ? 'Loading menu...' : 'Menu not available'}</p>
+        )}
       </section>
     </>
   );
