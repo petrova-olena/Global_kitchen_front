@@ -61,7 +61,9 @@
     "eventTitle": "Tapahtuman nimi",
     "eventDescription": "Kuvaus",
     "startTime": "Alkamisaika",
-    "endTime": "Päättymisaika"
+    "endTime": "Päättymisaika",
+    "restaurantEvents": "Ravintolan Tapahtumat",
+    "userEventLogIn": "Kirjaudu sisään nähdäksesi saatavilla olevat tapahtumat"
   },
   "dailyMenu": {
     "title": "Päivän ruokalista",
@@ -190,7 +192,8 @@
     "goTo": "Siirry",
     "today": "Tänään",
     "confirm": "Vahvista",
-    "saveAsPdf": "Tallenna PDF:nä"
+    "saveAsPdf": "Tallenna PDF:nä",
+    "adminPanel": "Ylläpito"
   },
   "modals": {
     "addEvent": "Lisää tapahtuma",

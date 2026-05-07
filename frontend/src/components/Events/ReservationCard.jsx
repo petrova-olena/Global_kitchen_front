@@ -1,5 +1,5 @@
 import { useState } from "react";
-//import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import {
   formatDate,
   formatTime,
@@ -8,12 +8,12 @@ import {
 
 export default function ReservationCard({ reservation, onDelete, onEdit }) {
   const [showConfirm, setShowConfirm] = useState(false);
-  //const { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div className="reservation-item-row">
       <div className="reservation-item-left">
-        <div className="reservation-title">Table reservation</div>
+        <div className="reservation-title">{t("modals.tableReservation")}</div>
 
         <div className="reservation-table">
           <span className="event-icon">🍽️</span>
