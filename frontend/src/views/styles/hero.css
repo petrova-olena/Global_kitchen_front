@@ -34,14 +34,11 @@
 .hero-text {
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(6px);
-
   padding: 20px 24px;
   border-radius: 12px;
-
   max-width: 90%;
   color: #261413;
-
-  margin-bottom: 250px;
+  margin-bottom: 100px;
 }
 
 .hero-text p {
@@ -77,7 +74,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
   gap: 12px;
 }
@@ -89,17 +85,12 @@
 .hero-buttons .btn {
   width: 50%;
   max-width: 500px;
-
   padding: 12px 16px;
-
   background: #c49a6c;
   color: #261413;
-
   text-align: center;
   text-decoration: none;
-
   border-radius: 8px;
-
   transition: 0.2s ease;
 }
 

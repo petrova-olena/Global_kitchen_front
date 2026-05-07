@@ -35,17 +35,11 @@ const Home = () => {
       >
         <div 
           className="hero-overlay"
-          style={{
-            background: `linear-gradient(135deg, ${cuisineDetails.color}80 0%, ${cuisineDetails.color}60 100%)`,
-          }}
         >
           <div className="hero-text">
             <h1>
               {currentCuisine} Week
             </h1>
-            <p className="hero-subtitle">
-              Week {weekNumber}: {heroContent.subtitle}
-            </p>
             <p className="hero-description">
               {heroContent.description}
             </p>
