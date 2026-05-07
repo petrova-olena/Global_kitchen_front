@@ -17,8 +17,7 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
 
         <div className="reservation-table">
           <span className="event-icon">🍽️</span>
-          {t("reservationCard.table")}:{" "}
-          {reservation.tableId ?? reservation.table}
+          {t("reservation.table")} {reservation.tableId ?? reservation.table}
         </div>
 
         <div className="reservation-time">
@@ -35,20 +34,14 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
           {formatTime(getUserVisibleEndTime(reservation.to))}
         </div>
 
-        <div className="reservation-guests">
-          {t("reservationCard.guests")}: {reservation.guests}
-        </div>
+        <div className="reservation-guests">{t("reservation.guests")} {reservation.guests}</div>
 
         {reservation.notes && (
-          <div className="reservation-notes">
-            {t("reservationCard.notes")}: {reservation.notes}
-          </div>
+          <div className="reservation-notes">{t("reservation.notes")} {reservation.notes}</div>
         )}
 
         {reservation.userName && (
-          <div className="reservation-user">
-            {t("reservationCard.user")}: {reservation.userName}
-          </div>
+          <div className="reservation-user">{t("reservation.user")} {reservation.userName}</div>
         )}
       </div>
 
@@ -65,14 +58,14 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
       {showConfirm && (
         <div className="modal-overlay">
           <div className="modal">
-            <p>{t("reservationCard.user")}</p>
+            <p>{t("reservation.confirmCancel")}</p>
 
             <div className="modal-buttons">
               <button
                 className="cancel-btn"
                 onClick={() => setShowConfirm(false)}
               >
-                {t("reservationCard.cancel")}
+                {t("reservation.confirmCancelBtn")}
               </button>
 
               <button
@@ -82,7 +75,7 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
                   setShowConfirm(false);
                 }}
               >
-                {t("reservationCard.delete")}
+                {t("reservation.delete")}
               </button>
             </div>
           </div>

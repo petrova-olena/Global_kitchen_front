@@ -19,7 +19,7 @@ export default function RecipeModal({ meal, onClose }) {
     doc.text(meal.strMeal, 10, 20);
 
     doc.setFontSize(12);
-    doc.text("Ingridients:", 10, 35);
+    doc.text(t('recipe.ingredients') + ':', 10, 35);
 
     let y = 45;
 
@@ -33,7 +33,7 @@ export default function RecipeModal({ meal, onClose }) {
     }
 
     y += 10;
-    doc.text("Instrucgtion:", 10, y);
+    doc.text(t('recipe.instructions') + ':', 10, y);
 
     const splitText = doc.splitTextToSize(meal.strInstructions, 180);
     doc.text(splitText, 10, y + 10);
@@ -55,7 +55,7 @@ export default function RecipeModal({ meal, onClose }) {
 
         <h2 className="recipe-modal-title">{meal.strMeal}</h2>
 
-        <h3>Ingredients</h3>
+        <h3>{t('recipe.ingredients')}</h3>
         <ul>
           {Array.from({ length: 20 }).map((_, i) => {
             const ing = meal[`strIngredient${i + 1}`];
@@ -69,7 +69,7 @@ export default function RecipeModal({ meal, onClose }) {
           })}
         </ul>
 
-        <h3>Instruction</h3>
+        <h3>{t('recipe.instructions')}</h3>
         <div className="recipe-instructions">
           {meal.strInstructions
             .split(/\n+/)

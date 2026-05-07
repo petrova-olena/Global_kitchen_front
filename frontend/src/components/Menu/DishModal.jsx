@@ -15,13 +15,13 @@ const DishModal = ({ dish, onClose }) => {
         />
 
         <h2 className="menu-modal-title">{dish.name}</h2>
-        <p className="menu-modal-price">€{dish.price}</p>
+        <p className="menu-modal-price">{t('dishDetails.currency')}{dish.price}</p>
 
         <p className="menu-modal-desc">{dish.description}</p>
 
         {dish.allergies && (
           <p className="menu-modal-allergies">
-            <strong>Allergens:</strong> {dish.allergies}
+            <strong>{t('recipe.allergens')}</strong> {dish.allergies}
           </p>
         )}
 
