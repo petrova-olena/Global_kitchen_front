@@ -18,8 +18,8 @@ export default function ReservationForm({
   const [tableId, setTableId] = useState('');
   const [pepole, setPepole] = useState(1);
   const [duration, setDuration] = useState(120); // default 2 hours
-  const [datetime, setDatetime] = useState('');
-  const [note, setNote] = useState('');
+  const [datetime, setDatetime] = useState("");
+  const [note, setNote] = useState("");
 
   useEffect(() => {
     if (prefillDate && prefillTime) {

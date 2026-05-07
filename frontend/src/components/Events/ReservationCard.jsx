@@ -13,7 +13,7 @@ export default function ReservationCard({ reservation, onDelete, onEdit }) {
   return (
     <div className="reservation-item-row">
       <div className="reservation-item-left">
-        <div className="reservation-title">{t("modals.tableReservation")}</div>
+        <div className="reservation-title">{t("reservationCard.title")}</div>
 
         <div className="reservation-table">
           <span className="event-icon">🍽️</span>
