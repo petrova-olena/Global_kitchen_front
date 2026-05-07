@@ -23,7 +23,7 @@
     "goToMenu": "Menu",
     "makeReservation": "Reserve",
     "aboutTitle": "About Us",
-    "aboutText": "Global Kitchen brings world cuisine to your table. Every week we explore a new country through food. Global Kitchen brings world cuisine to your table. Every week we explore a new country through food.",
+    "aboutText": "<p>Global Kitchen is your journey around the world through flavor.</p><p>Every week, our restaurant highlights the cuisine of a new country and offers a wide selection of authentic dishes — from traditional favorites to modern interpretations.</p><p>Here you can book a table, explore our restaurant events, join workshops, and enjoy themed evenings.</p><p>Registered users unlock even more features: manage their own events and reservations, view and save the Recipe of the Day, and enjoy a convenient personal profile.</p><p><strong>Global Kitchen — bringing the world of flavors to your table.</strong></p>",
     "ourMenu": "Our Menu",
     "exploreWeek": "Explore this week's dishes",
     "seeFullMenu": "See Full Menu",
@@ -80,6 +80,7 @@
     "drinkDesc": "Homemade lemonade."
   },
   "menu": {
+    "loading": "Loading...",
     "title": "Our Menu",
     "all": "All",
     "soups": "Soups",
@@ -88,7 +89,7 @@
     "salads": "Salads",
     "desserts": "Desserts",
     "drinks": "Drinks",
-    "combos": "Combos",
+    "recipeOfTheDay": "Recipe Of The Day",
     "details": "Details",
     "price": "Price",
     "vegan": "Vegan",
@@ -189,7 +190,8 @@
     "details": "Details",
     "goTo": "Go to",
     "today": "Today",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "saveAsPdf": "Save As PDF"
   },
   "modals": {
     "addEvent": "Add Event",

@@ -47,6 +47,35 @@
   border-color: #a26a42;
 }
 
+/* To Menu Button */
+.btn-menu {
+  display: inline-block;
+  padding: 12px 22px;
+
+  background: #452209;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+}
+
+.btn-menu:hover {
+  background: #5a2c0f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.btn-menu:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
 /* SECTION */
 .menu-section {
   padding: 20px 0;
@@ -272,13 +301,20 @@
 }
 
 .recipe-modal-title {
-  font-size: 26px;
+  font-size: 24px;
   margin-bottom: 5px;
   color: #452209;
 }
 
-.recipe-modal-desc {
-  margin-bottom: 12px;
+.recipe-instructions p {
+  margin: 0 0 14px;
+  line-height: 1.6;
+  color: #3a2a20;
+  text-align: left;
+}
+
+.recipe-instructions p:last-child {
+  margin-bottom: 0;
 }
 
 .daily-recipe-buttons {

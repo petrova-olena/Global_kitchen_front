@@ -1,7 +1,10 @@
 import jsPDF from "jspdf";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function RecipeModal({ meal, onClose }) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -67,12 +70,19 @@ export default function RecipeModal({ meal, onClose }) {
         </ul>
 
         <h3>Instruction</h3>
-        <p className="recipe-modal-desc">{meal.strInstructions}</p>
+        <div className="recipe-instructions">
+          {meal.strInstructions
+            .split(/\n+/)
+            .filter(Boolean)
+            .map((line, index) => (
+              <p key={index}>{line.trim()}</p>
+            ))}
+        </div>
 
         <div className="daily-recipe-buttons">
-          <button onClick={saveAsPDF}>Save as PDF</button>
+          <button onClick={saveAsPDF}>{t("buttons.saveAsPdf")}</button>
           <button className="close-btn" onClick={onClose}>
-            Close
+            {t("common.close")}
           </button>
         </div>
       </div>

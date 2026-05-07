@@ -23,7 +23,7 @@
     "goToMenu": "Ruokalista",
     "makeReservation": "Varaa pöytä",
     "aboutTitle": "Tietoa meistä",
-    "aboutText": "Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan. Global Kitchen tuo maailman ruokakulttuurit pöytääsi. Joka viikko tutustumme uuden maan ruokaan.",
+    "aboutText": "<p>Global Kitchen on makumatka maailman ympäri.</p><p>Joka viikko ravintolamme esittelee uuden maan keittiön ja tarjoaa laajan valikoiman autenttisia ruokia — perinteisistä klassikoista moderneihin tulkintoihin.</p><p>Meillä voit varata pöydän, tutustua ravintolan tapahtumiin, osallistua työpajoihin ja nauttia teemailloista.</p><p>Rekisteröityneet käyttäjät saavat käyttöönsä vielä enemmän ominaisuuksia: omien tapahtumien ja varausten hallinnan, Päivän reseptin katselun ja tallentamisen sekä kätevän henkilökohtaisen profiilin.</p><p><strong>Global Kitchen — tuo maailman maut pöytääsi.</strong></p>",
     "ourMenu": "Ruokalista",
     "exploreWeek": "Tutustu tämän viikon ruoihin",
     "seeFullMenu": "Näytä Koko Menu",
@@ -80,6 +80,7 @@
     "drinkDesc": "Kotitekoinen limonadi."
   },
   "menu": {
+    "loading": "Ladataan...",
     "title": "Ruokalista",
     "soups": "Keitot",
     "mainDishes": "Pääruoat",
@@ -87,7 +88,7 @@
     "salads": "Salaatit",
     "desserts": "Jälkiruoat",
     "drinks": "Juomat",
-    "combos": "Paketit",
+    "recipeOfTheDay": "Päivän Resepti",
     "details": "Lisätiedot",
     "price": "Hinta",
     "vegan": "Vegaani",
@@ -188,7 +189,8 @@
     "details": "Lisätiedot",
     "goTo": "Siirry",
     "today": "Tänään",
-    "confirm": "Vahvista"
+    "confirm": "Vahvista",
+    "saveAsPdf": "Tallenna PDF:nä"
   },
   "modals": {
     "addEvent": "Lisää tapahtuma",
