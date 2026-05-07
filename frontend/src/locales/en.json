@@ -69,6 +69,11 @@
   },
   "reservation": {
     "reserveAtable": "Reserve a Table",
+    "user": "User:",
+    "guests": "Guests:",
+    "confirmCancel": "Are you sure you want to cancel this reservation?",
+    "confirmCancelBtn": "Cancel",
+    "delete": "Delete",
     "dateAndTime": "Date & Time",
     "numberOfPeople": "Number of People",
     "duration": "Duration",
@@ -360,15 +365,6 @@
   "confirmModal": {
     "confirm": "Confirm",
     "cancel": "Cancel"
-  },
-  "reservation": {
-    "table": "Table:",
-    "guests": "Guests:",
-    "notes": "Notes:",
-    "user": "User:",
-    "confirmCancel": "Are you sure you want to cancel this reservation?",
-    "confirmCancelBtn": "Cancel",
-    "delete": "Delete"
   },
   "reservationForm": {
     "title": "Reserve a Table",
