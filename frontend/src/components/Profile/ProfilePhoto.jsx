@@ -16,16 +16,22 @@ const ProfilePhoto = ({
 
   const handleButtonClick = () => {
     if (!profilePicFile) {
-      fileRef.current.click();
+      fileRef.current?.click();
     }
   };
 
   const getImageSrc = () => {
     if (!user?.profile_pic) return null;
 
-    return user.profile_pic.startsWith('http')
-      ? user.profile_pic
-      : `http://localhost:8000/uploads/${user.profile_pic}`;
+    // Eğer full URL ise direkt kullan
+    if (user.profile_pic.startsWith('http')) {
+      return user.profile_pic;
+    }
+
+    // ENV üzerinden uploads base URL
+    const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL;
+
+    return `${UPLOADS_URL}/${user.profile_pic}`;
   };
 
   const imageSrc = getImageSrc();
