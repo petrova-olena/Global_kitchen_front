@@ -4,6 +4,7 @@ import ReservationForm from "./../../Reservation/ReservationForm";
 import ReservationCard from "./../../Events/ReservationCard";
 import EditReservationModal from "./../../Reservation/EditReservationModal";
 import SuccessModal from "./../../Reservation/SuccessModal";
+import { useTranslation } from "react-i18next";
 
 export default function ReservationsTab({
   createReservation,
@@ -26,6 +27,8 @@ export default function ReservationsTab({
     reloadReservationsAdmin,
   } = useAdminReservations();
 
+  const { t } = useTranslation();
+
   const [editing, setEditing] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -34,7 +37,7 @@ export default function ReservationsTab({
     try {
       await createReservation(formData);
 
-      setSuccessMessage("Reservation created successfully!");
+      setSuccessMessage(t("modals.createEventSuccessMessage"));
       setShowSuccess(true);
 
       await reloadReservationsAdmin();
@@ -48,7 +51,7 @@ export default function ReservationsTab({
   async function handleSaveEdit(updated) {
     await updateReservation(editing.id, updated);
     await reloadReservationsAdmin();
-    setSuccessMessage("Reservation updated!");
+    setSuccessMessage(t("modals.updateEventSuccessMessage"));
     setShowSuccess(true);
     setEditing(null);
   }
@@ -56,13 +59,13 @@ export default function ReservationsTab({
   async function handleDelete(id) {
     await deleteReservation(id);
     await reloadReservationsAdmin();
-    setSuccessMessage("Reservation deleted!");
+    setSuccessMessage(t("modals.deleteEventSuccessMessage"));
     setShowSuccess(true);
   }
 
   return (
     <div className="reservations-tab">
-      <h2>Reservations</h2>
+      <h2>{t("admin.reservations")}</h2>
 
       {/* Reservation adding for admin */}
       <ReservationForm
@@ -80,21 +83,21 @@ export default function ReservationsTab({
           className={dateMode === "week" ? "active" : ""}
           onClick={() => setDateMode("week")}
         >
-          Current week
+          {t("admin.currentWeek")}
         </button>
 
         <button
           className={dateMode === "month" ? "active" : ""}
           onClick={() => setDateMode("month")}
         >
-          Current month
+          {t("admin.currentMonth")}
         </button>
 
         <button
           className={dateMode === "custom" ? "active" : ""}
           onClick={() => setDateMode("custom")}
         >
-          Choose period
+          {t("admin.choosePeriod")}
         </button>
       </div>
 
@@ -113,15 +116,13 @@ export default function ReservationsTab({
             />
           </div>
           <div className="admin-search">
-            <button onClick={handleSearch}>Search</button>
+            <button onClick={handleSearch}>{t("admin.search")}</button>
           </div>
         </>
       )}
 
       <div className="reservations-list">
-        {reservations.length === 0 && (
-          <p>No reservations found for this period</p>
-        )}
+        {reservations.length === 0 && <p>{t("admin.noReservations")}</p>}
 
         {reservations.map((r) => {
           const adapted = {

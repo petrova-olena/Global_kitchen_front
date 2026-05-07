@@ -23,13 +23,15 @@
     "goToMenu": "Menu",
     "makeReservation": "Reserve",
     "aboutTitle": "About Us",
-    "aboutText": "<p>Global Kitchen is your journey around the world through flavor.</p><p>Every week, our restaurant highlights the cuisine of a new country and offers a wide selection of authentic dishes — from traditional favorites to modern interpretations.</p><p>Here you can book a table, explore our restaurant events, join workshops, and enjoy themed evenings.</p><p>Registered users unlock even more features: manage their own events and reservations, view and save the Recipe of the Day, and enjoy a convenient personal profile.</p><p><strong>Global Kitchen — bringing the world of flavors to your table.</strong></p>",
+    "aboutText": "Global Kitchen is your journey around the world through flavor.Every week, our restaurant highlights the cuisine of a new country and offers a wide selection of authentic dishes — from traditional favorites to modern interpretations.Here you can book a table, explore our restaurant events, join workshops, and enjoy themed evenings.</p><p>Registered users unlock even more features: manage their own events and reservations, view and save the Recipe of the Day, and enjoy a convenient personal profile.Global Kitchen — bringing the world of flavors to your table.",
     "ourMenu": "Our Menu",
     "exploreWeek": "Explore this week's dishes",
     "seeFullMenu": "See Full Menu",
     "awards": "Awards",
     "customers": "Customers",
-    "experience": "Experience"
+    "experience": "Experience",
+    "featuredDishes": "Featured Dishes This Week:",
+    "dish": "Dish"
   },
   "auth": {
     "signIn": "Sign In",
@@ -64,6 +66,43 @@
     "endTime": "End Time",
     "restaurantEvents": "Restaurant Events",
     "userEventLogIn": "Log in to view available events"
+  },
+  "reservation": {
+    "reserveAtable": "Reserve a Table",
+    "dateAndTime": "Date & Time",
+    "numberOfPeople": "Number of People",
+    "duration": "Duration",
+    "hour": "hour",
+    "hours": "hours",
+    "table": "Table",
+    "selectTable": "Select table",
+    "table#": "Table #",
+    "noTables": "No free tables for selected time",
+    "notes": "Notes",
+    "enterNotes": "Enter notes",
+    "reserve": "Reserve",
+    "loading": "Loading...",
+    "error": "Error",
+    "guestMessage": "To reserve a table, please log in or call the administrator.",
+    "allTablesBusy": "Unfortunately, all tables are booked at this time. Would you like to see available options?",
+    "successReservation": "Your table has been successfully reserved!",
+    "rangeErrorFrom": "This table is available starting from {time}",
+    "rangeErrorUntil": "This table is available only until {time}",
+    "availableOptions": "Available options",
+    "notAvailable": "Not available",
+    "close": "Close"
+  },
+  "reservationCard": {
+    "title": "Table reservation",
+    "table": "Table",
+    "date": "Date",
+    "time": "Time",
+    "guests": "Guests",
+    "notes": "Notes",
+    "user": "User",
+    "confirmCancel": "Are you sure you want to cancel this reservation?",
+    "cancel": "Cancel",
+    "delete": "Delete"
   },
   "dailyMenu": {
     "title": "Daily Menu",
@@ -138,6 +177,7 @@
     "title": "Admin Panel",
     "users": "Users",
     "events": "Events",
+    "reservations": "Reservations",
     "createEvent": "Create Event",
     "manageUsers": "Manage Users",
     "filterByUser": "Filter by User",
@@ -159,6 +199,7 @@
     "currentWeek": "Current week",
     "currentMonth": "Current month",
     "noEventsFound": "No events found",
+    "noReservations": "No reservations found for this period",
     "choosePeriod": "Choose period",
     "search": "Search"
   },
@@ -199,7 +240,10 @@
   "modals": {
     "addEvent": "Add Event",
     "tableReservation": "Table reservation",
-    "deleteConfirm": "Are you sure you want to delete this event?"
+    "deleteConfirm": "Are you sure you want to delete this event?",
+    "createEventSuccessMessage": "Reservation created successfully!",
+    "updateEventSuccessMessage": "Reservation updated!",
+    "deleteEventSuccessMessage": "Reservation deleted!"
   },
   "calendar_real": {
     "weekdayMo": "Mo",
@@ -316,5 +360,40 @@
   "confirmModal": {
     "confirm": "Confirm",
     "cancel": "Cancel"
+  },
+  "reservation": {
+    "table": "Table:",
+    "guests": "Guests:",
+    "notes": "Notes:",
+    "user": "User:",
+    "confirmCancel": "Are you sure you want to cancel this reservation?",
+    "confirmCancelBtn": "Cancel",
+    "delete": "Delete"
+  },
+  "reservationForm": {
+    "title": "Reserve a Table",
+    "dateTime": "Date & Time",
+    "people": "Number of People",
+    "duration": "Duration",
+    "oneHour": "1 hour",
+    "oneHalfHours": "1.5 hours",
+    "twoHours": "2 hours",
+    "twoHalfHours": "2.5 hours",
+    "threeHours": "3 hours",
+    "selectTableLabel": "Table",
+    "selectTable": "Select table",
+    "tableNumber": "Table #",
+    "noFreeTables": "No free tables for selected time",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Enter notes"
+  },
+  "recipe": {
+    "ingredients": "Ingredients",
+    "instructions": "Instructions",
+    "allergens": "Allergens:"
+  },
+  "dishDetails": {
+    "currency": "€",
+    "price": "Price"
   }
 }

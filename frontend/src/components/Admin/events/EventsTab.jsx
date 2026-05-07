@@ -34,18 +34,18 @@ export default function EventsTab(props) {
     <div className="events-tab">
       {/* Create Admin Event */}
       <div className="admin-create-event">
-        <h2>Create Admin Event</h2>
+        <h2>{t("admin.createAdminEvent")}</h2>
 
         <input
           type="text"
-          placeholder="Event title"
+          placeholder={t("admin.eventTitle")}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
         <input
           type="text"
-          placeholder="Event description"
+          placeholder={t("admin.eventDescription")}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
@@ -62,12 +62,14 @@ export default function EventsTab(props) {
           onChange={(e) => setTo(e.target.value)}
         />
 
-        <button onClick={submitAdminEvent}>Create Admin Event</button>
+        <button onClick={submitAdminEvent}>
+          {t("admin.createAdminEvent")}
+        </button>
       </div>
 
       {/* Filter mode */}
       <div className="admin-filter-mode">
-        <h2>Filter events</h2>
+        <h2>{t("admin.filterEvents")}</h2>
         <label>
           <input
             type="radio"
@@ -77,7 +79,7 @@ export default function EventsTab(props) {
               setFilterMode(e.target.value);
             }}
           />
-          By user
+          {t("admin.byUser")}
         </label>
         <label>
           <input
@@ -88,7 +90,7 @@ export default function EventsTab(props) {
               setFilterMode(e.target.value);
             }}
           />
-          By date
+          {t("admin.byDate")}
         </label>
 
         <label>
@@ -100,14 +102,14 @@ export default function EventsTab(props) {
               setFilterMode(e.target.value);
             }}
           />
-          Both
+          {t("admin.both")}
         </label>
       </div>
 
       {/* User selection */}
       {(filterMode === "user" || filterMode === "both") && (
         <div className="admin-user-select">
-          <label>Select user:</label>
+          <label>{t("admin.selectUser")}</label>
           <select
             value={selectedUserId || ""}
             onChange={(e) => setSelectedUserId(e.target.value)}
@@ -178,7 +180,7 @@ export default function EventsTab(props) {
           dateMode === "custom" &&
           (!customFrom || !customTo) && (
             <p>
-              {t("admin.selectPeriod") ||
+              {t("admin.choosePeriod") ||
                 "Please select a period and press Search"}
             </p>
           )}

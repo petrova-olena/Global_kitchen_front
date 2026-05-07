@@ -23,13 +23,15 @@
     "goToMenu": "Ruokalista",
     "makeReservation": "Varaa pöytä",
     "aboutTitle": "Tietoa meistä",
-    "aboutText": "<p>Global Kitchen on makumatka maailman ympäri.</p><p>Joka viikko ravintolamme esittelee uuden maan keittiön ja tarjoaa laajan valikoiman autenttisia ruokia — perinteisistä klassikoista moderneihin tulkintoihin.</p><p>Meillä voit varata pöydän, tutustua ravintolan tapahtumiin, osallistua työpajoihin ja nauttia teemailloista.</p><p>Rekisteröityneet käyttäjät saavat käyttöönsä vielä enemmän ominaisuuksia: omien tapahtumien ja varausten hallinnan, Päivän reseptin katselun ja tallentamisen sekä kätevän henkilökohtaisen profiilin.</p><p><strong>Global Kitchen — tuo maailman maut pöytääsi.</strong></p>",
+    "aboutText": "Global Kitchen on makumatka maailman ympäri. Joka viikko ravintolamme esittelee uuden maan keittiön ja tarjoaa laajan valikoiman autenttisia ruokia — perinteisistä klassikoista moderneihin tulkintoihin.Meillä voit varata pöydän, tutustua ravintolan tapahtumiin, osallistua työpajoihin ja nauttia teemailloista.</p><p>Rekisteröityneet käyttäjät saavat käyttöönsä vielä enemmän ominaisuuksia: omien tapahtumien ja varausten hallinnan, Päivän reseptin katselun ja tallentamisen sekä kätevän henkilökohtaisen profiilin.Global Kitchen — tuo maailman maut pöytääsi.",
     "ourMenu": "Ruokalista",
     "exploreWeek": "Tutustu tämän viikon ruoihin",
     "seeFullMenu": "Näytä Koko Menu",
     "awards": "Palkinnot",
     "customers": "Asiakkaat",
-    "experience": "Kokemus"
+    "experience": "Kokemus",
+    "featuredDishes": "Tämän viikon korostetut ruoat:",
+    "dish": "Ruoka"
   },
   "auth": {
     "signIn": "Kirjaudu sisään",
@@ -64,6 +66,44 @@
     "endTime": "Päättymisaika",
     "restaurantEvents": "Ravintolan Tapahtumat",
     "userEventLogIn": "Kirjaudu sisään nähdäksesi saatavilla olevat tapahtumat"
+  },
+
+  "reservation": {
+    "reserveAtable": "Varaa pöytä",
+    "dateAndTime": "Päivä & aika",
+    "numberOfPeople": "Henkilömäärä",
+    "duration": "Kesto",
+    "hour": "tunti",
+    "hours": "tuntia",
+    "table": "Pöytä",
+    "selectTable": "Valitse pöytä",
+    "table#": "Pöytä #",
+    "noTables": "Ei vapaita pöytiä valittuna aikana",
+    "notes": "Huomautukset",
+    "enterNotes": "Kirjoita huomautukset",
+    "reserve": "Varaa",
+    "loading": "Ladataan…",
+    "error": "Virhe",
+    "guestMessage": "Pöydän varaamiseksi kirjaudu sisään tai soita ylläpitäjälle.",
+    "allTablesBusy": "Valitettavasti kaikki pöydät ovat varattuja tähän aikaan. Haluatko nähdä vapaat vaihtoehdot?",
+    "successReservation": "Pöytäsi on varattu onnistuneesti!",
+    "rangeErrorFrom": "Tämä pöytä on saatavilla alkaen klo {time}",
+    "rangeErrorUntil": "Tämä pöytä on saatavilla vain klo {time} asti",
+    "availableOptions": "Vapaat vaihtoehdot",
+    "notAvailable": "Ei saatavilla",
+    "close": "Sulje"
+  },
+  "reservationCard": {
+    "title": "Pöytävaraus",
+    "table": "Pöytä",
+    "date": "Päivämäärä",
+    "time": "Aika",
+    "guests": "Vieraat",
+    "notes": "Huomautukset",
+    "user": "Käyttäjä",
+    "confirmCancel": "Haluatko varmasti peruuttaa tämän varauksen?",
+    "cancel": "Peruuta",
+    "delete": "Poista"
   },
   "dailyMenu": {
     "title": "Päivän ruokalista",
@@ -137,6 +177,7 @@
     "title": "Hallintapaneeli",
     "users": "Käyttäjät",
     "events": "Tapahtumat",
+    "reservations": "Varaukset",
     "createEvent": "Luo tapahtuma",
     "manageUsers": "Hallitse käyttäjiä",
     "filterByUser": "Suodata käyttäjän mukaan",
@@ -158,6 +199,7 @@
     "currentWeek": "Nykyinen viikko",
     "currentMonth": "Nykyinen kuukausi",
     "noEventsFound": "Tapahtumia ei löytynyt",
+    "noReservations": "Tälle ajanjaksolle ei löytynyt varauksia",
     "choosePeriod": "Valitse aikajakso",
     "search": "Hae"
   },
@@ -198,7 +240,10 @@
   "modals": {
     "addEvent": "Lisää tapahtuma",
     "tableReservation": "Pöydän varaus",
-    "deleteConfirm": "Oletko varma, että haluat poistaa tämän tapahtuman?"
+    "deleteConfirm": "Oletko varma, että haluat poistaa tämän tapahtuman?",
+    "createEventSuccessMessage": "Varaus luotiin onnistuneesti!",
+    "updateEventSuccessMessage": "Varaus päivitetty!",
+    "deleteEventSuccessMessage": "Varaus poistettu!"
   },
   "calendar_real": {
     "weekdayMo": "Ma",
@@ -320,5 +365,40 @@
   "confirmModal": {
     "confirm": "Vahvista",
     "cancel": "Peruuta"
+  },
+  "reservation": {
+    "table": "Pöytä:",
+    "guests": "Vieraita:",
+    "notes": "Muistiinpanot:",
+    "user": "Käyttäjä:",
+    "confirmCancel": "Haluatko varmasti peruuttaa tämän varauksen?",
+    "confirmCancelBtn": "Peruuta",
+    "delete": "Poista"
+  },
+  "reservationForm": {
+    "title": "Varaa pöytä",
+    "dateTime": "Päivämäärä ja aika",
+    "people": "Henkilöiden lukumäärä",
+    "duration": "Kesto",
+    "oneHour": "1 tunti",
+    "oneHalfHours": "1,5 tuntia",
+    "twoHours": "2 tuntia",
+    "twoHalfHours": "2,5 tuntia",
+    "threeHours": "3 tuntia",
+    "selectTableLabel": "Pöytä",
+    "selectTable": "Valitse pöytä",
+    "tableNumber": "Pöytä #",
+    "noFreeTables": "Ei vapaita pöytiä valittuun aikaan",
+    "notesLabel": "Muistiinpanot",
+    "notesPlaceholder": "Kirjoita muistiinpanot"
+  },
+  "recipe": {
+    "ingredients": "Ainesosat",
+    "instructions": "Ohjeet",
+    "allergens": "Allergeenit:"
+  },
+  "dishDetails": {
+    "currency": "€",
+    "price": "Hinta"
   }
 }
