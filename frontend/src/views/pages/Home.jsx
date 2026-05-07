@@ -69,7 +69,7 @@ const Home = () => {
           
           {mainDishes.length > 0 && (
             <div className="highlighted-dishes">
-              <h3>Featured Dishes This Week:</h3>
+              <h3>{t('home.featuredDishes')}</h3>
               <div className="dishes-list">
                 {mainDishes.slice(0, 3).map((dish, idx) => (
                   <div
@@ -80,7 +80,7 @@ const Home = () => {
                       color: cuisineDetails.color,
                     }}
                   >
-                    {dish?.name || `Dish ${idx + 1}`}
+                    {dish?.name || `${t('home.dish')} ${idx + 1}`}
                   </div>
                 ))}
               </div>
