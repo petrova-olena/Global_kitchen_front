@@ -70,6 +70,8 @@
 
   "reservation": {
     "reserveAtable": "Varaa pöytä",
+    "user": "Käyttäjä:",
+    "guests": "Vieraita:",
     "dateAndTime": "Päivä & aika",
     "numberOfPeople": "Henkilömäärä",
     "duration": "Kesto",
