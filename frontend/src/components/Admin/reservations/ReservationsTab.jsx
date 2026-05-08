@@ -65,8 +65,6 @@ export default function ReservationsTab({
 
   return (
     <div className="reservations-tab">
-      <h2>{t("admin.reservations")}</h2>
-
       {/* Reservation adding for admin */}
       <ReservationForm
         tables={freeTables}
@@ -120,6 +118,8 @@ export default function ReservationsTab({
           </div>
         </>
       )}
+
+      <h2>{t("admin.reservations")}</h2>
 
       <div className="reservations-list">
         {reservations.length === 0 && <p>{t("admin.noReservations")}</p>}
