@@ -92,11 +92,6 @@
   },
   "reservation": {
     "reserveAtable": "Reserve a Table",
-    "user": "User:",
-    "guests": "Guests:",
-    "confirmCancel": "Are you sure you want to cancel this reservation?",
-    "confirmCancelBtn": "Cancel",
-    "delete": "Delete",
     "dateAndTime": "Date & Time",
     "numberOfPeople": "Number of People",
     "duration": "Duration",

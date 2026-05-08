@@ -117,8 +117,6 @@
     "availableOptions": "Vapaat vaihtoehdot",
     "notAvailable": "Ei saatavilla",
     "close": "Sulje",
-    "guests": "Vieraita:",
-    "user": "Käyttäjä:",
     "confirmCancel": "Haluatko varmasti peruuttaa tämän varauksen?",
     "confirmCancelBtn": "Peruuta",
     "delete": "Poista"
