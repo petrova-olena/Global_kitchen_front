@@ -31,7 +31,30 @@
     "customers": "Customers",
     "experience": "Experience",
     "featuredDishes": "Featured Dishes This Week:",
-    "dish": "Dish"
+    "dish": "Dish",
+    "loadingMenu": "Loading menu...",
+    "menuNotAvailable": "Menu not available",
+    "heroWeek": "Week",
+    "heroFinnishTitle": "Finnish Week",
+    "heroFinnishSubtitle": "Discover the wholesome flavors of Nordic cuisine",
+    "heroFinnishDescription": "Experience the purity and seasonality of Finnish cuisine. From fresh salmon to hearty reindeer stew, our Finnish week celebrates the best of Nordic traditions.",
+    "heroFinnishStory": "Finnish cuisine is deeply connected to nature and seasons. Fresh ingredients, sustainable practices, and simple yet elegant preparation are at the heart of this culinary tradition.",
+    "heroIraqiTitle": "Iraqi Week",
+    "heroIraqiSubtitle": "Journey through rich and aromatic Middle Eastern flavors",
+    "heroIraqiDescription": "Immerse yourself in the rich culinary heritage of Iraq. Bold spices, aromatic herbs, and centuries-old recipes create an unforgettable dining experience.",
+    "heroIraqiStory": "Iraqi cuisine is one of the oldest in the world, with recipes passed down through generations. Each dish tells a story of tradition, family, and cultural pride.",
+    "heroTurkishTitle": "Turkish Week",
+    "heroTurkishSubtitle": "Savor bold and flavorful Turkish delights",
+    "heroTurkishDescription": "Turkish cuisine bridges East and West with its bold flavors and diverse influences. From succulent kebabs to delicate mezze, taste the essence of Turkish hospitality.",
+    "heroTurkishStory": "Turkish food is celebrated worldwide for its quality ingredients and masterful preparation. Every dish is crafted with passion and served with pride.",
+    "heroRussianTitle": "Russian Week",
+    "heroRussianSubtitle": "Experience hearty and traditional Russian comfort food",
+    "heroRussianDescription": "Russian cuisine reflects the soul of a vast nation. Hearty, warming, and deeply satisfying, every meal is a celebration of tradition and community.",
+    "heroRussianStory": "Russian food is born from harsh winters and abundant harvests. Simple yet nourishing, these dishes warm both body and heart.",
+    "heroUkrainianTitle": "Ukrainian Week",
+    "heroUkrainianSubtitle": "Taste the vibrant and rich traditions of Ukraine",
+    "heroUkrainianDescription": "Ukrainian cuisine is a vibrant tapestry of flavors, colors, and warmth. From traditional varenyky to soul-warming borsch, experience authentic Ukrainian hospitality.",
+    "heroUkrainianStory": "Ukrainian food represents centuries of agricultural tradition and cultural pride. Each recipe carries stories of family gatherings and festive celebrations."
   },
   "auth": {
     "signIn": "Sign In",
@@ -253,7 +276,32 @@
     "deleteConfirm": "Are you sure you want to delete this event?",
     "createEventSuccessMessage": "Reservation created successfully!",
     "updateEventSuccessMessage": "Reservation updated!",
-    "deleteEventSuccessMessage": "Reservation deleted!"
+    "deleteEventSuccessMessage": "Reservation deleted!",
+    "editEvent": "Edit Event",
+    "editReservation": "Edit reservation",
+    "table": "Table",
+    "startTime": "Start time",
+    "duration": "Duration",
+    "guests": "Guests",
+    "notes": "Notes",
+    "enterNotes": "Enter notes for this reservation",
+    "tableAvailable": "Table is available",
+    "tableNotAvailable": "Table is not available",
+    "cancel": "Cancel",
+    "checkAvailability": "Check availability",
+    "saveChanges": "Save changes",
+    "tableBusy": "Table is busy",
+    "availableIntervals": "Available intervals:",
+    "close": "Close",
+    "confirmChanges": "Confirm changes",
+    "start": "Start",
+    "min": "min",
+    "confirm": "Confirm",
+    "title": "Title",
+    "description": "Description",
+    "from": "From",
+    "to": "To",
+    "save": "Save"
   },
   "calendar_real": {
     "weekdayMo": "Mo",
@@ -396,5 +444,417 @@
   "dishDetails": {
     "currency": "€",
     "price": "Price"
+  },
+  "dishes": {
+    "finnish": {
+      "1": {
+        "name": "Lohikeitto",
+        "description": "Traditional Finnish salmon soup made with fresh salmon, potatoes, carrots, and cream. A comforting and hearty dish that warms you from the inside out."
+      },
+      "2": {
+        "name": "Poronkäristys",
+        "description": "Tender reindeer meat slowly cooked with potatoes and onions. A classic Finnish dish showcasing the rich flavors of Nordic game meat."
+      },
+      "3": {
+        "name": "Karjalanpaisti",
+        "description": "Karelian stew made with beef, pork, and potatoes, slow-cooked to perfection. A traditional Finnish comfort food with deep, rich flavors."
+      },
+      "4": {
+        "name": "Kalakukko",
+        "description": "Traditional Finnish fish pie baked in rye bread dough. A unique combination of fresh fish, pork, and onions wrapped in crispy bread."
+      },
+      "5": {
+        "name": "Leipäjuusto",
+        "description": "Finnish squeaky cheese, traditionally served with cloudberry jam. A unique cheese that makes a squeaking sound when you bite into it."
+      },
+      "6": {
+        "name": "Mustikkapiirakka",
+        "description": "Finnish blueberry pie with a buttery crust and fresh blueberry filling. A classic Finnish dessert celebrating the bounty of Nordic berries."
+      },
+      "7": {
+        "name": "Salmiakki",
+        "description": "Finnish salty licorice, a uniquely Nordic treat with a distinctive salty-sweet flavor that divides opinions worldwide."
+      },
+      "8": {
+        "name": "Kaalilaatikko",
+        "description": "Finnish cabbage casserole made with cabbage, ground meat, and rice. A comforting baked dish that's perfect for cold winter days."
+      },
+      "9": {
+        "name": "Hernekeitto",
+        "description": "Finnish pea soup traditionally served with ham and mustard. A thick, hearty soup that's a staple of Finnish cuisine."
+      },
+      "10": {
+        "name": "Lihapullat",
+        "description": "Finnish meatballs served with cream sauce and potatoes. Tender meatballs in a rich, creamy gravy - comfort food at its finest."
+      },
+      "11": {
+        "name": "Silli",
+        "description": "Pickled herring, a traditional Finnish appetizer. Fresh herring fillets marinated in vinegar with onions and spices."
+      },
+      "12": {
+        "name": "Graavilohi",
+        "description": "Gravadlax - cured salmon with dill and mustard sauce. Fresh salmon cured in salt, sugar, and dill, served with a tangy mustard cream sauce."
+      },
+      "13": {
+        "name": "Kermaperunat",
+        "description": "Creamed potatoes, a classic Finnish side dish. Mashed potatoes enriched with cream and butter for ultimate comfort."
+      },
+      "14": {
+        "name": "Puolukkahillo",
+        "description": "Lingonberry jam, the perfect accompaniment to Finnish dishes. Tart and sweet berries cooked down into a versatile jam."
+      },
+      "15": {
+        "name": "Kaurapuuro",
+        "description": "Finnish oatmeal porridge, often served with milk and berries. A simple, nourishing breakfast that's been sustaining Finns for generations."
+      },
+      "16": {
+        "name": "Ruisleipä",
+        "description": "Dark rye bread, the cornerstone of Finnish cuisine. Dense, flavorful bread that's perfect for sandwiches or as an accompaniment to meals."
+      },
+      "17": {
+        "name": "Simppu",
+        "description": "Finnish cinnamon buns, soft and fluffy with cinnamon sugar filling. A beloved pastry that's perfect with coffee."
+      },
+      "18": {
+        "name": "Mämmi",
+        "description": "Traditional Finnish Easter pudding made from malt and rye flour. A unique, sweet pudding that's a Finnish Easter tradition."
+      },
+      "19": {
+        "name": "Vispipuuro",
+        "description": "Finnish semolina pudding topped with berry sauce. A creamy, comforting dessert that's perfect for chilly evenings."
+      },
+      "20": {
+        "name": "Lohisoppa",
+        "description": "Creamy salmon soup with potatoes and vegetables. A lighter version of the traditional lohikeitto, perfect for lunch or dinner."
+      }
+    },
+    "russian": {
+      "21": {
+        "name": "Borscht",
+        "description": "Traditional Russian beet soup with cabbage, potatoes, and beef. A vibrant, hearty soup that's both nourishing and flavorful."
+      },
+      "22": {
+        "name": "Pelmeni",
+        "description": "Russian dumplings filled with meat, served with sour cream. Handmade dumplings that are a staple of Russian home cooking."
+      },
+      "23": {
+        "name": "Beef Stroganoff",
+        "description": "Tender beef strips in creamy mushroom sauce served over noodles. A classic Russian dish that's elegant yet comforting."
+      },
+      "24": {
+        "name": "Blini",
+        "description": "Russian pancakes served with caviar, sour cream, or jam. Thin, delicate pancakes that can be sweet or savory."
+      },
+      "25": {
+        "name": "Shorpo",
+        "description": "Traditional Kyrgyz/Russian meat soup with potatoes and onions. A hearty broth-based soup perfect for cold days."
+      },
+      "26": {
+        "name": "Plov",
+        "description": "Central Asian rice dish with lamb, carrots, and onions. Fragrant rice cooked with tender meat and spices."
+      },
+      "27": {
+        "name": "Lagman",
+        "description": "Hand-pulled noodles with meat and vegetables in rich broth. A substantial noodle dish that's perfect for sharing."
+      },
+      "28": {
+        "name": "Beshbarmak",
+        "description": "Boiled meat (usually lamb) served with flat noodles. A traditional Tatar dish representing hospitality and celebration."
+      },
+      "29": {
+        "name": "Achichuk",
+        "description": "Cold soup made with tomato paste, onions, and bread. A refreshing summer soup that's surprisingly satisfying."
+      },
+      "30": {
+        "name": "Dograma",
+        "description": "Cold soup with bread, onions, and herbs. A traditional Kyrgyz soup that's perfect for hot summer days."
+      },
+      "31": {
+        "name": "Kuurdak",
+        "description": "Fried meat (lamb or beef) with onions. A simple yet flavorful dish cooked over an open fire."
+      },
+      "32": {
+        "name": "Lepeshki",
+        "description": "Central Asian flatbread, perfect with any meal. Soft, fluffy bread that's essential for scooping up sauces and stews."
+      },
+      "33": {
+        "name": "Non",
+        "description": "Central Asian flatbread baked in a clay oven. Crispy on the outside, soft on the inside - perfect with any dish."
+      },
+      "34": {
+        "name": "Halva",
+        "description": "Sweet confection made from sunflower seeds. A dense, sweet treat that's popular throughout Central Asia."
+      },
+      "35": {
+        "name": " Chak-Chak",
+        "description": "Fried dough with honey, a Tatar dessert. Crispy fried dough coated in honey - a sweet celebration of Tatar cuisine."
+      },
+      "36": {
+        "name": "Pahlava",
+        "description": "Layered pastry with nuts and honey syrup. A rich, decadent dessert that's perfect for special occasions."
+      },
+      "37": {
+        "name": "Katyk",
+        "description": "Fermented milk drink, similar to yogurt. A refreshing, probiotic-rich drink that's both healthy and delicious."
+      },
+      "38": {
+        "name": "Kumiz",
+        "description": "Fermented mare's milk, a traditional Kyrgyz drink. An acquired taste with health benefits, traditional among nomadic peoples."
+      },
+      "39": {
+        "name": "Mastava",
+        "description": "Thick soup with meat, potatoes, and herbs. A hearty Kyrgyz soup that's perfect for cold weather."
+      },
+      "40": {
+        "name": "Samsa",
+        "description": "Pastries filled with meat and onions. Flaky pastries that are perfect as appetizers or snacks."
+      }
+    },
+    "ukrainian": {
+      "41": {
+        "name": "Borshch",
+        "description": "Ukrainian beet soup with cabbage, beans, and pork. A vibrant, flavorful soup that's the heart of Ukrainian cuisine."
+      },
+      "42": {
+        "name": "Varenyky",
+        "description": "Ukrainian dumplings filled with potatoes, cheese, or fruit. Versatile dumplings that can be sweet or savory."
+      },
+      "43": {
+        "name": "Holubtsi",
+        "description": "Cabbage rolls filled with meat and rice in tomato sauce. Tender cabbage leaves stuffed with a flavorful meat mixture."
+      },
+      "44": {
+        "name": "Syrnyky",
+        "description": "Ukrainian cheese pancakes served with sour cream. Sweet, cheesy pancakes that make a perfect breakfast or dessert."
+      },
+      "45": {
+        "name": "Deruny",
+        "description": "Ukrainian potato pancakes, crispy and golden. Grated potatoes fried until crispy - a beloved comfort food."
+      },
+      "46": {
+        "name": "Kachorovka",
+        "description": "Ukrainian potato casserole with meat and onions. A layered casserole that's hearty and satisfying."
+      },
+      "47": {
+        "name": "Zrazy",
+        "description": "Ukrainian meat rolls filled with vegetables or mushrooms. Thin meat cutlets rolled around a savory filling."
+      },
+      "48": {
+        "name": "Mlyntsi",
+        "description": "Ukrainian crepes that can be sweet or savory. Thin, delicate pancakes perfect for any filling."
+      },
+      "49": {
+        "name": "Kotlety",
+        "description": "Ukrainian meat patties, juicy and flavorful. Classic meat patties that are tender and full of flavor."
+      },
+      "50": {
+        "name": "Kholodets",
+        "description": "Ukrainian meat jelly, a festive dish. A traditional aspic that's served during celebrations."
+      },
+      "51": {
+        "name": "Tvorizhna Pasca",
+        "description": "Ukrainian Easter cheese bread. A sweet, symbolic bread that's essential for Easter celebrations."
+      },
+      "52": {
+        "name": "Makivnyk",
+        "description": "Ukrainian poppy seed roll, a sweet pastry. Rich pastry filled with poppy seeds and honey."
+      },
+      "53": {
+        "name": "Uzvar",
+        "description": "Ukrainian dried fruit compote. A refreshing drink made from dried fruits, perfect for any meal."
+      },
+      "54": {
+        "name": "Kvas",
+        "description": "Traditional Ukrainian fermented bread drink. A slightly sour, refreshing beverage with ancient roots."
+      },
+      "55": {
+        "name": "Salad Olivie",
+        "description": "Ukrainian potato salad with vegetables and meat. A creamy salad that's a staple at celebrations."
+      },
+      "56": {
+        "name": "Vinaigrette",
+        "description": "Ukrainian beet salad with vegetables. A colorful, healthy salad that's both nutritious and delicious."
+      },
+      "57": {
+        "name": "Baked Milk",
+        "description": "Ukrainian slow-baked milk, rich and caramelized. A unique dairy product with a distinctive flavor."
+      },
+      "58": {
+        "name": "Goroshek",
+        "description": "Ukrainian green pea snack. A simple, addictive snack that's perfect for munching."
+      },
+      "59": {
+        "name": "Kefir",
+        "description": "Ukrainian fermented milk drink. A probiotic-rich drink that's both healthy and refreshing."
+      },
+      "60": {
+        "name": "Ryazhenka",
+        "description": "Ukrainian baked fermented milk. A thick, creamy yogurt-like drink with a caramelized flavor."
+      }
+    },
+    "turkish": {
+      "61": {
+        "name": "Mercimek Corbasi",
+        "description": "Turkish red lentil soup with spices and lemon. A comforting, nutritious soup that's perfect for any season."
+      },
+      "62": {
+        "name": "Iskender Kebab",
+        "description": "Döner kebab with tomato sauce and yogurt. Thinly sliced meat served over bread with rich tomato sauce."
+      },
+      "63": {
+        "name": "Baklava",
+        "description": "Layered pastry with nuts and honey syrup. A rich, sweet pastry that's the epitome of Turkish dessert."
+      },
+      "64": {
+        "name": "Doner Kebab",
+        "description": "Turkish rotating spit kebab with vegetables. Juicy, seasoned meat that's been slowly roasted."
+      },
+      "65": {
+        "name": "Kofte",
+        "description": "Turkish meatballs with spices and herbs. Flavorful meatballs that are juicy and aromatic."
+      },
+      "66": {
+        "name": "Lahmacun",
+        "description": "Turkish pizza with minced meat and vegetables. Thin, crispy dough topped with spiced meat and onions."
+      },
+      "67": {
+        "name": "Pide",
+        "description": "Turkish boat-shaped bread with various toppings. Similar to pizza but with a unique Turkish twist."
+      },
+      "68": {
+        "name": "Menemen",
+        "description": "Turkish scrambled eggs with tomatoes and peppers. A flavorful breakfast dish that's spicy and satisfying."
+      },
+      "69": {
+        "name": "Simit",
+        "description": "Turkish sesame bread rings. Crispy on the outside, soft on the inside - perfect for breakfast."
+      },
+      "70": {
+        "name": "Pogaca",
+        "description": "Turkish savory pastries filled with cheese or meat. Flaky pastries that are perfect for snacking."
+      },
+      "71": {
+        "name": "Borek",
+        "description": "Turkish pastry with spinach and cheese filling. Layers of thin pastry filled with savory ingredients."
+      },
+      "72": {
+        "name": "Kumpir",
+        "description": "Turkish baked potato with various toppings. A loaded baked potato that's a street food favorite."
+      },
+      "73": {
+        "name": "Midye Dolma",
+        "description": "Stuffed mussels with rice and spices. Fresh mussels filled with a flavorful rice mixture."
+      },
+      "74": {
+        "name": "Hamsi",
+        "description": "Turkish anchovies, often fried or grilled. Small, flavorful fish that are a Black Sea specialty."
+      },
+      "75": {
+        "name": "Kisir",
+        "description": "Turkish bulgur salad with tomatoes and herbs. A fresh, zesty salad that's perfect for summer."
+      },
+      "76": {
+        "name": "Cacik",
+        "description": "Turkish yogurt with cucumber and herbs. A refreshing dip or side dish that's cool and creamy."
+      },
+      "77": {
+        "name": "Haydari",
+        "description": "Turkish strained yogurt dip with herbs. A creamy, garlicky dip that's perfect with bread."
+      },
+      "78": {
+        "name": "Humus",
+        "description": "Turkish chickpea dip with tahini and lemon. Creamy, flavorful dip that's a staple in Turkish cuisine."
+      },
+      "79": {
+        "name": "Patates Kizartmasi",
+        "description": "Turkish french fries with various seasonings. Crispy fries that are a popular street food."
+      },
+      "80": {
+        "name": "Kunefe",
+        "description": "Turkish dessert with cheese and syrup. A warm, gooey dessert that's sweet and satisfying."
+      }
+    },
+    "iraqi": {
+      "81": {
+        "name": "Jaajek",
+        "description": "Iraqi chickpea stew with meat and spices. A hearty, flavorful stew that's perfect for sharing."
+      },
+      "82": {
+        "name": "Zabiib",
+        "description": "Iraqi rice pudding with raisins and nuts. A sweet, comforting dessert that's popular across the Middle East."
+      },
+      "83": {
+        "name": "Fasolia",
+        "description": "Iraqi green bean stew with meat and tomatoes. A simple, nourishing stew that's a Iraqi home cooking staple."
+      },
+      "84": {
+        "name": "Kubba",
+        "description": "Iraqi dumplings filled with meat and onions. Crispy on the outside, tender on the inside - a labor of love."
+      },
+      "85": {
+        "name": "Tashrib",
+        "description": "Iraqi bread soup with meat and vegetables. A comforting soup made with flatbread and rich broth."
+      },
+      "86": {
+        "name": "Dolma",
+        "description": "Iraqi stuffed vegetables with rice and meat. Vegetables stuffed with a flavorful rice and meat mixture."
+      },
+      "87": {
+        "name": "Bamia",
+        "description": "Iraqi okra stew with meat and tomatoes. Tender okra in a rich, spiced tomato sauce."
+      },
+      "88": {
+        "name": "Makhlouta",
+        "description": "Iraqi mixed bean stew with meat. A hearty stew with various beans and tender meat."
+      },
+      "89": {
+        "name": "Margat Bamia",
+        "description": "Iraqi okra and meat stew. A variation of bamia with a unique Iraqi twist."
+      },
+      "90": {
+        "name": "Kubba Halab",
+        "description": "Aleppo-style kubba with cheese filling. A special variation of kubba with cheese instead of meat."
+      },
+      "91": {
+        "name": "Kubba Mosul",
+        "description": "Mosul-style kubba with meat filling. The classic kubba that's beloved in Mosul."
+      },
+      "92": {
+        "name": "Kubba Bil Sanabel",
+        "description": "Pumpkin kubba, a sweet variation. A dessert kubba filled with sweetened pumpkin."
+      },
+      "93": {
+        "name": "Harisa",
+        "description": "Iraqi wheat porridge with meat. A thick, hearty dish that's perfect for cold weather."
+      },
+      "94": {
+        "name": "Timman Bagilla",
+        "description": "Iraqi eggplant with meat and tomatoes. Eggplant stewed with meat in a rich tomato sauce."
+      },
+      "95": {
+        "name": "Timman Bandora",
+        "description": "Iraqi tomato stew with meat. A simple tomato-based stew with tender meat."
+      },
+      "96": {
+        "name": "Timman Khudra",
+        "description": "Iraqi vegetable stew with meat. Mixed vegetables cooked with meat in a flavorful broth."
+      },
+      "97": {
+        "name": "Timman Fasolia",
+        "description": "Iraqi bean stew with meat. White beans cooked with meat and spices."
+      },
+      "98": {
+        "name": "Timman Burghul",
+        "description": "Iraqi bulgur stew with meat. Bulgur wheat cooked with meat and vegetables."
+      },
+      "99": {
+        "name": "Timman Ruzz",
+        "description": "Iraqi rice stew with meat. Rice cooked with meat and spices in a rich broth."
+      },
+      "100": {
+        "name": "Timman Shamam",
+        "description": "Iraqi fish stew. Fresh fish cooked in a flavorful tomato-based sauce."
+      }
+    }
   }
 }

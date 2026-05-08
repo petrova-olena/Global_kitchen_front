@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../context/ThemeContext";
 import { getImageUrl } from "../../utils/getImageUrl";
+import { localizeDish } from "../../utils/dishTranslation";
 
 const MenuCard = ({ dish, onDetails }) => {
   const { t } = useTranslation();
-
+  const { currentCuisine } = useTheme();
   if (!dish) return null;
+
+  const localizedDish = localizeDish(dish, currentCuisine, t);
 
   const handleDetailsClick = (e) => {
     if (onDetails) {
@@ -16,18 +20,18 @@ const MenuCard = ({ dish, onDetails }) => {
 
   return (
     <div className="menu-card">
-      {dish.image ? (
+      {localizedDish.image ? (
         <img
-          src={getImageUrl(dish.image)}
-          alt={dish.name}
+          src={getImageUrl(localizedDish.image)}
+          alt={localizedDish.name}
           className="menu-img"
         />
       ) : (
         <div className="img-placeholder" />
       )}
 
-      <h3>{dish.name}</h3>
-      <p className="price">{dish.price}€</p>
+      <h3>{localizedDish.name}</h3>
+      <p className="price">{localizedDish.price}€</p>
 
       <div className="card-actions">
         {onDetails && (
