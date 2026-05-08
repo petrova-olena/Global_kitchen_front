@@ -31,7 +31,30 @@
     "customers": "Asiakkaat",
     "experience": "Kokemus",
     "featuredDishes": "Tämän viikon korostetut ruoat:",
-    "dish": "Ruoka"
+    "dish": "Ruoka",
+    "loadingMenu": "Ladataan menu...",
+    "menuNotAvailable": "Menu ei ole saatavilla",
+    "heroWeek": "Viikko",
+    "heroFinnishTitle": "Suomalainen Viikko",
+    "heroFinnishSubtitle": "Tutustu pohjoismaisen keittiön terveellisiin makuihin",
+    "heroFinnishDescription": "Koe suomalaisen keittiön puhtaus ja kausiluonteisuus. Tuoreesta lohesta sydämelliseen poronkäristykseen, suomalainen viikkomme juhlistaa pohjoismaisia perinteitä parhaimmillaan.",
+    "heroFinnishStory": "Suomalainen keittiö on syvästi yhteydessä luontoon ja vuodenaikoihin. Tuoreet ainesosat, kestävät käytännöt ja yksinkertainen mutta elegantti valmistus ovat tämän kulinaarisen perinteen sydämessä.",
+    "heroIraqiTitle": "Irakilainen Viikko",
+    "heroIraqiSubtitle": "Matka rikkaiden ja aromaattisten Lähi-idän makujen läpi",
+    "heroIraqiDescription": "Sukella Irakin rikkaaseen kulinaariseen perintöön. Rohkeat mausteet, aromaattiset yrtit ja vuosisatoja vanhat reseptit luovat unohtumattoman ruokailukokemuksen.",
+    "heroIraqiStory": "Irakin keittiö on yksi maailman vanhimmista, ja reseptit on välitetty sukupolvelta toiselle. Jokainen ruoka kertoo tarinan perinteestä, perheestä ja kulttuurisesta ylpeydestä.",
+    "heroTurkishTitle": "Turkkilainen Viikko",
+    "heroTurkishSubtitle": "Nauti rohkeista ja maukkaista turkkilaisista herkuista",
+    "heroTurkishDescription": "Turkkilainen keittiö yhdistää itää ja länttä rohkeilla mauilla ja monipuolisilla vaikutteilla. Maukkaista kebabeista herkkiin mezeihin, maista turkkilaisen vieraanvaraisuuden olemus.",
+    "heroTurkishStory": "Turkkilaista ruokaa juhlitaan maailmanlaajuisesti laadukkaiden ainesosien ja taitavan valmistuksen vuoksi. Jokainen ruoka valmistetaan intohimolla ja tarjoillaan ylpeydellä.",
+    "heroRussianTitle": "Venäläinen Viikko",
+    "heroRussianSubtitle": "Koe sydämellistä ja perinteistä venäläistä lohturuokaa",
+    "heroRussianDescription": "Venäläinen keittiö heijastaa laajan kansakunnan sielua. Sydämellinen, lämmittävä ja syvästi tyydyttävä, jokainen ateria on perinteen ja yhteisön juhla.",
+    "heroRussianStory": "Venäläinen ruoka syntyy ankarista talvista ja runsaista sadosta. Yksinkertainen mutta ravitseva, nämä ruoat lämmittävät sekä kehoa että sydäntä.",
+    "heroUkrainianTitle": "Ukrainalainen Viikko",
+    "heroUkrainianSubtitle": "Maista Ukrainan eloisia ja rikkaita perinteitä",
+    "heroUkrainianDescription": "Ukrainalainen keittiö on eloisa makujen, värien ja lämmön kudonta. Perinteisistä varenykyistä sielua lämmittävään borshchiin, koe aitoa ukrainalaista vieraanvaraisuutta.",
+    "heroUkrainianStory": "Ukrainalainen ruoka edustaa vuosisatoja vanhaa maatalousperinnettä ja kulttuurista ylpeyttä. Jokainen resepti kantaa mukanaan tarinoita perheen kokoontumisista ja juhlallisista juhlista."
   },
   "auth": {
     "signIn": "Kirjaudu sisään",
@@ -248,7 +271,32 @@
     "deleteConfirm": "Oletko varma, että haluat poistaa tämän tapahtuman?",
     "createEventSuccessMessage": "Varaus luotiin onnistuneesti!",
     "updateEventSuccessMessage": "Varaus päivitetty!",
-    "deleteEventSuccessMessage": "Varaus poistettu!"
+    "deleteEventSuccessMessage": "Varaus poistettu!",
+    "editEvent": "Muokkaa tapahtumaa",
+    "editReservation": "Muokkaa varausta",
+    "table": "Pöytä",
+    "startTime": "Aloitusaika",
+    "duration": "Kesto",
+    "guests": "Vieraat",
+    "notes": "Muistiinpanot",
+    "enterNotes": "Kirjoita muistiinpanot tälle varaukselle",
+    "tableAvailable": "Pöytä on vapaa",
+    "tableNotAvailable": "Pöytä ei ole vapaa",
+    "cancel": "Peruuta",
+    "checkAvailability": "Tarkista saatavuus",
+    "saveChanges": "Tallenna muutokset",
+    "tableBusy": "Pöytä on varattu",
+    "availableIntervals": "Vapaat ajat:",
+    "close": "Sulje",
+    "confirmChanges": "Vahvista muutokset",
+    "start": "Alkaa",
+    "min": "min",
+    "confirm": "Vahvista",
+    "title": "Otsikko",
+    "description": "Kuvaus",
+    "from": "Alkaa",
+    "to": "Päättyy",
+    "save": "Tallenna"
   },
   "calendar_real": {
     "weekdayMo": "Ma",
@@ -396,5 +444,417 @@
   "dishDetails": {
     "currency": "€",
     "price": "Hinta"
+  },
+  "dishes": {
+    "finnish": {
+      "1": {
+        "name": "Lohikeitto",
+        "description": "Perinteinen suomalainen lohikeitto tuoreella lohella, perunoilla, porkkanoilla ja kermalla. Lohtua tuova ja täyttävä ruoka, joka lämmittää sisältä päin."
+      },
+      "2": {
+        "name": "Poronkäristys",
+        "description": "Herkkä poronliha hitaasti kypsennettynä perunoiden ja sipulien kanssa. Klassinen suomalainen ruoka, joka esittelee pohjoisen riistan rikkaat maut."
+      },
+      "3": {
+        "name": "Karjalanpaisti",
+        "description": "Karjalanpaisti naudalla, porsalla ja perunoilla, hitaasti kypsennettynä täydelliseksi. Perinteinen suomalainen lohturuoka syvillä, rikkailla mauilla."
+      },
+      "4": {
+        "name": "Kalakukko",
+        "description": "Perinteinen suomalainen kalapiirakka paistettuna ruisleivän taikinassa. Ainutlaatuinen yhdistelmä tuoretta kalaa, porsasta ja sipulia rapeassa leivässä."
+      },
+      "5": {
+        "name": "Leipäjuusto",
+        "description": "Suomalainen vinkuva juusto, perinteisesti tarjottuna puolukkahillon kanssa. Ainutlaatuinen juusto, joka tekee vinkuvan äänen purettaessa."
+      },
+      "6": {
+        "name": "Mustikkapiirakka",
+        "description": "Suomalainen mustikkapiirakka voitaikinakuorella ja tuoreella mustikkatäytteellä. Klassinen suomalainen jälkiruoka, joka juhlistaa pohjoisten marjojen runsautta."
+      },
+      "7": {
+        "name": "Salmiakki",
+        "description": "Suomalainen suolainen lakritsi, ainutlaatuinen pohjoismainen herkku suolaisen-makealla maulla, joka jakaa mielipiteitä maailmanlaajuisesti."
+      },
+      "8": {
+        "name": "Kaalilaatikko",
+        "description": "Suomalainen kaalilaatikko kaalilla, jauhelihalla ja riisillä. Lohtua tuova paistettu ruoka, joka on täydellinen kylmiin talvipäiviin."
+      },
+      "9": {
+        "name": "Hernekeitto",
+        "description": "Suomalainen hernekeitto perinteisesti tarjottuna kinkun ja sinapin kanssa. Paksu, täyttävä keitto, joka on suomalaisen keittiön kulmakivi."
+      },
+      "10": {
+        "name": "Lihapullat",
+        "description": "Suomalaiset lihapullat kermakastikkeen ja perunoiden kanssa. Hienovaraiset lihapullat rikkaassa, kermaisessa kastikkeessa - lohturuoka parhaimmillaan."
+      },
+      "11": {
+        "name": "Silli",
+        "description": "Suolattu silli, perinteinen suomalainen alkuruoka. Tuoreita sillifileitä marinoituna etikassa sipulien ja mausteiden kanssa."
+      },
+      "12": {
+        "name": "Graavilohi",
+        "description": "Graavilohi - tillillä ja sinappikastikkeella maustettu lohi. Tuore lohi suolattuna suolassa, sokerissa ja tillissä, tarjottuna tangy sinappikermakastikkeella."
+      },
+      "13": {
+        "name": "Kermaperunat",
+        "description": "Kermaperunat, klassinen suomalainen lisuke. Perunasose rikastettuna kermalla ja voilla äärimmäistä lohtua varten."
+      },
+      "14": {
+        "name": "Puolukkahillo",
+        "description": "Puolukkahillo, täydellinen lisä suomalaisiin ruokiin. Hapan-makeat marjat keitetyinä monipuoliseksi hilloksi."
+      },
+      "15": {
+        "name": "Kaurapuuro",
+        "description": "Suomalainen kaurapuuro, usein tarjottuna maidon ja marjojen kanssa. Yksinkertainen, ravitseva aamiainen, joka on ylläpitänyt suomalaisia sukupolvien ajan."
+      },
+      "16": {
+        "name": "Ruisleipä",
+        "description": "Tumma ruisleipä, suomalaisen keittiön kulmakivi. Tiheä, maukas leipä, joka on täydellinen voileipiin tai aterioiden lisukkeeksi."
+      },
+      "17": {
+        "name": "Simppu",
+        "description": "Suomalaiset kanelipullat, pehmeät ja pörröiset kanelisokeritäytteellä. Rakastettu leivonnainen, joka on täydellinen kahvin kanssa."
+      },
+      "18": {
+        "name": "Mämmi",
+        "description": "Perinteinen suomalainen pääsiäisvanukas mallastuksesta ja ruisjauhosta. Ainutlaatuinen, makea vanukas, joka on suomalainen pääsiäisperinne."
+      },
+      "19": {
+        "name": "Vispipuuro",
+        "description": "Suomalainen mannapuuro marjakastikkeella. Kermainen, lohtua tuova jälkiruoka, joka on täydellinen kylmiin iltoihin."
+      },
+      "20": {
+        "name": "Lohisoppa",
+        "description": "Kermainen lohisoppa perunoilla ja vihanneksilla. Kevyempi versio perinteisestä lohikeitosta, täydellinen lounaaksi tai päivälliseksi."
+      }
+    },
+    "russian": {
+      "21": {
+        "name": "Borscht",
+        "description": "Perinteinen venäläinen punajuurikeitto kaalin, perunoiden ja naudan kanssa. Elävä, täyttävä keitto, joka on sekä ravitseva että maukas."
+      },
+      "22": {
+        "name": "Pelmeni",
+        "description": "Venäläiset nyytit lihalla täytettynä, tarjottuna smetanaan. Käsityönä tehdyt nyytit, jotka ovat venäläisen kotikeittiön kulmakivi."
+      },
+      "23": {
+        "name": "Beef Stroganoff",
+        "description": "Hienovaraiset naudanlihasuikaleet kermaisessa sienikastikkeessa tarjottuna nuudelien päällä. Klassinen venäläinen ruoka, joka on elegantti mutta lohtua tuova."
+      },
+      "24": {
+        "name": "Blini",
+        "description": "Venäläiset pannukakut tarjottuna kaviaarin, smetanan tai hillon kanssa. Ohuet, herkulliset pannukakut, jotka voivat olla makeita tai suolaisia."
+      },
+      "25": {
+        "name": "Shorpo",
+        "description": "Perinteinen kirgiisinen/venäläinen lihakeitto perunoilla ja sipuleilla. Täyttävä liemipohjainen keitto täydellinen kylmiin päiviin."
+      },
+      "26": {
+        "name": "Plov",
+        "description": "Keski-aasialainen riisiruoka lampaan, porkkanoiden ja sipulien kanssa. Tuoksuvat riisit kypsennettyinä herkän lihan ja mausteiden kanssa."
+      },
+      "27": {
+        "name": "Lagman",
+        "description": "Käsin vedetyt nuudelit lihalla ja vihanneksilla rikkaassa liemessä. Täyteläinen nuudeliruoka, joka on täydellinen jaettavaksi."
+      },
+      "28": {
+        "name": "Beshbarmak",
+        "description": "Keitetty liha (yleensä lammas) tarjottuna litteiden nuudelien kanssa. Perinteinen tataarien ruoka, joka edustaa vieraanvaraisuutta ja juhlaa."
+      },
+      "29": {
+        "name": "Achichuk",
+        "description": "Kylmä keitto tomaattipyreellä, sipuleilla ja leivällä. Virkistävä kesäkeitto, joka on yllättäen tyydyttävä."
+      },
+      "30": {
+        "name": "Dograma",
+        "description": "Kylmä keitto leivällä, sipuleilla ja yrteillä. Perinteinen kirgiisinen keitto, joka on täydellinen kuumiin kesäpäiviin."
+      },
+      "31": {
+        "name": "Kuurdak",
+        "description": "Paistettu liha (lammas tai naudanliha) sipulien kanssa. Yksinkertainen mutta maukas ruoka kypsennettynä avotulella."
+      },
+      "32": {
+        "name": "Lepeshki",
+        "description": "Keski-aasialainen litteä leipä, täydellinen minkä tahansa aterian kanssa. Pehmeä, pörröinen leipä, joka on välttämätön kastikkeiden ja patojen lusikoimiseen."
+      },
+      "33": {
+        "name": "Non",
+        "description": "Keski-aasialainen litteä leipä paistettuna saviuunissa. Rapea ulkopuolelta, pehmeä sisältä - täydellinen minkä tahansa ruoan kanssa."
+      },
+      "34": {
+        "name": "Halva",
+        "description": "Makea konvehti auringonkukansiemenistä. Tiheä, makea herkku, joka on suosittu koko Keski-Aasiassa."
+      },
+      "35": {
+        "name": " Chak-Chak",
+        "description": "Paistettu taikina hunajan kanssa, tataarien jälkiruoka. Rapea paistettu taikina päällystettynä hunajalla - makea tataarien keittiön juhla."
+      },
+      "36": {
+        "name": "Pahlava",
+        "description": "Kerroksellinen leivonnainen pähkinöillä ja hunajasiirapilla. Rikas, dekadentti jälkiruoka, joka on täydellinen erityisiin tilaisuuksiin."
+      },
+      "37": {
+        "name": "Katyk",
+        "description": "Fermentoitu maitojuoma, samanlainen kuin jugurtti. Virkistävä, probiootteja sisältävä juoma, joka on sekä terveellinen että herkullinen."
+      },
+      "38": {
+        "name": "Kumiz",
+        "description": "Fermentoitu tamman maito, perinteinen kirgiisinen juoma. Hankittu maku terveyshyödyillä, perinteinen nomadien keskuudessa."
+      },
+      "39": {
+        "name": "Mastava",
+        "description": "Paksu keitto lihalla, perunoilla ja yrteillä. Täyttävä kirgiisinen keitto, joka on täydellinen kylmään säähän."
+      },
+      "40": {
+        "name": "Samsa",
+        "description": "Leivonnaiset täytettyinä lihalla ja sipuleilla. Rapeat leivonnaiset, jotka ovat täydellisiä alkuruokina tai välipaloina."
+      }
+    },
+    "ukrainian": {
+      "41": {
+        "name": "Borshch",
+        "description": "Ukrainalainen punajuurikeitto kaalin, papujen ja porsaan kanssa. Elävä, maukas keitto, joka on ukrainalaisen keittiön sydän."
+      },
+      "42": {
+        "name": "Varenyky",
+        "description": "Ukrainalaiset nyytit täytettyinä perunoilla, juustolla tai hedelmillä. Monipuoliset nyytit, jotka voivat olla makeita tai suolaisia."
+      },
+      "43": {
+        "name": "Holubtsi",
+        "description": "Kaali-rullat täytettyinä lihalla ja riisillä tomaattikastikkeessa. Hienovaraiset kaalinlehdet täytettyinä maukkaalla lihaseoksella."
+      },
+      "44": {
+        "name": "Syrnyky",
+        "description": "Ukrainalaiset juustopannukakut tarjottuna smetanaan. Makeat, juustoiset pannukakut, jotka ovat täydellinen aamiainen tai jälkiruoka."
+      },
+      "45": {
+        "name": "Deruny",
+        "description": "Ukrainalaiset perunapannukakut, rapeat ja kullanväriset. Raastetut perunat paistettuina rapeiksi - rakastettu lohturuoka."
+      },
+      "46": {
+        "name": "Kachorovka",
+        "description": "Ukrainalainen perunalaatikko lihalla ja sipuleilla. Kerroksellinen laatikko, joka on täyttävä ja tyydyttävä."
+      },
+      "47": {
+        "name": "Zrazy",
+        "description": "Ukrainalaiset liharullat täytettyinä vihanneksilla tai sienillä. Ohuet lihanleikkeet rullattuina suolaisen täytteen ympärille."
+      },
+      "48": {
+        "name": "Mlyntsi",
+        "description": "Ukrainalaiset kreppit, jotka voivat olla makeita tai suolaisia. Ohuet, herkulliset pannukakut täydellisiä minkä tahansa täytteen kanssa."
+      },
+      "49": {
+        "name": "Kotlety",
+        "description": "Ukrainalaiset lihapihvit, meheviä ja maukkaita. Klassiset lihapihvit, jotka ovat hienovaraisia ja täynnä makua."
+      },
+      "50": {
+        "name": "Kholodets",
+        "description": "Ukrainalainen lihan hyytelö, juhlallinen ruoka. Perinteinen aspik, joka tarjotaan juhlien aikana."
+      },
+      "51": {
+        "name": "Tvorizhna Pasca",
+        "description": "Ukrainalainen pääsiäisjuustoleipä. Makea, symbolinen leipä, joka on välttämätön pääsiäisjuhliin."
+      },
+      "52": {
+        "name": "Makivnyk",
+        "description": "Ukrainalainen unikonsiemenrulla, makea leivonnainen. Rikas leivonnainen täytettynä unikonsiemenillä ja hunajalla."
+      },
+      "53": {
+        "name": "Uzvar",
+        "description": "Ukrainalainen kuivattujen hedelmien kompot. Virkistävä juoma kuivatuista hedelmistä, täydellinen minkä tahansa aterian kanssa."
+      },
+      "54": {
+        "name": "Kvas",
+        "description": "Perinteinen ukrainalainen fermentoitu leipäjuoma. Hieman hapan, virkistävä juoma muinaisilla juurilla."
+      },
+      "55": {
+        "name": "Salad Olivie",
+        "description": "Ukrainalainen perunasalaatti vihanneksilla ja lihalla. Kermainen salaatti, joka on kulmakivi juhlien aikana."
+      },
+      "56": {
+        "name": "Vinaigrette",
+        "description": "Ukrainalainen punajuurisalaatti vihanneksilla. Värikäs, terveellinen salaatti, joka on sekä ravitseva että herkullinen."
+      },
+      "57": {
+        "name": "Baked Milk",
+        "description": "Ukrainalainen hitaasti paistettu maito, rikas ja karamellisoitunut. Ainutlaatuinen maitotuote ainutlaatuisella maulla."
+      },
+      "58": {
+        "name": "Goroshek",
+        "description": "Ukrainalainen vihreä herne välipala. Yksinkertainen, addiktoiva välipala, joka on täydellinen naposteltavaksi."
+      },
+      "59": {
+        "name": "Kefir",
+        "description": "Ukrainalainen fermentoitu maitojuoma. Probiootteja sisältävä juoma, joka on sekä terveellinen että virkistävä."
+      },
+      "60": {
+        "name": "Ryazhenka",
+        "description": "Ukrainalainen paistettu fermentoitu maito. Paksu, kermainen jugurttimainen juoma karamellisoituneella maulla."
+      }
+    },
+    "turkish": {
+      "61": {
+        "name": "Mercimek Corbasi",
+        "description": "Turkkilainen punainen linssikeitto mausteilla ja sitruunalla. Lohtua tuova, ravitseva keitto, joka on täydellinen mihin tahansa vuodenaikaan."
+      },
+      "62": {
+        "name": "Iskender Kebab",
+        "description": "Döner kebab tomaattikastikkeella ja jugurtilla. Ohuesti viipaloitu liha tarjottuna leivän päällä rikkaalla tomaattikastikkeella."
+      },
+      "63": {
+        "name": "Baklava",
+        "description": "Kerroksellinen leivonnainen pähkinöillä ja hunajasiirapilla. Rikas, makea leivonnainen, joka on turkkilaisen jälkiruoan ruumiillistuma."
+      },
+      "64": {
+        "name": "Doner Kebab",
+        "description": "Turkkilainen pyörivä varras kebab vihanneksilla. Mehevä, maustettu liha, joka on hitaasti paahdettu."
+      },
+      "65": {
+        "name": "Kofte",
+        "description": "Turkkilaiset lihapullat mausteilla ja yrteillä. Maukkaita lihapullia, jotka ovat meheviä ja aromaattisia."
+      },
+      "66": {
+        "name": "Lahmacun",
+        "description": "Turkkilainen pizza jauhelihalla ja vihanneksilla. Ohut, rapea taikina päällystettynä maustetulla lihalla ja sipuleilla."
+      },
+      "67": {
+        "name": "Pide",
+        "description": "Turkkilainen veneenmuotoinen leipä erilaisilla päällyksillä. Samanlainen kuin pizza mutta ainutlaatuisella turkkilaisella twistillä."
+      },
+      "68": {
+        "name": "Menemen",
+        "description": "Turkkilaiset munakas tomaattien ja paprikoiden kanssa. Maukas aamiaisruoka, joka on tulinen ja tyydyttävä."
+      },
+      "69": {
+        "name": "Simit",
+        "description": "Turkkilaiset seesaminsiemenleipärenkaat. Rapeat ulkopuolelta, pehmeät sisältä - täydelliset aamiaiseksi."
+      },
+      "70": {
+        "name": "Pogaca",
+        "description": "Turkkilaiset suolaiset leivonnaiset täytettyinä juustolla tai lihalla. Rapeat leivonnaiset, jotka ovat täydelliset välipaloiksi."
+      },
+      "71": {
+        "name": "Borek",
+        "description": "Turkkilainen leivonnainen pinaatin ja juuston täytteellä. Ohuiden taikinakerrosten kerrokset täytettyinä suolaisilla ainesosilla."
+      },
+      "72": {
+        "name": "Kumpir",
+        "description": "Turkkilainen paistettu peruna erilaisilla päällyksillä. Kuormitettu paistettu peruna, joka on katukeittiön suosikki."
+      },
+      "73": {
+        "name": "Midye Dolma",
+        "description": "Täytetyt simpukat riisillä ja mausteilla. Tuoreita simpukoita täytettyinä maukkaalla riisiseoksella."
+      },
+      "74": {
+        "name": "Hamsi",
+        "description": "Turkkilaiset anjovikset, usein paistettuja tai grillattuja. Pieniä, maukkaita kaloja, jotka ovat Mustanmeren erikoisuus."
+      },
+      "75": {
+        "name": "Kisir",
+        "description": "Turkkilainen bulgurisalaatti tomaattien ja yrttien kanssa. Tuore, kirpeä salaatti, joka on täydellinen kesäksi."
+      },
+      "76": {
+        "name": "Cacik",
+        "description": "Turkkilainen jugurtti kurkun ja yrttien kanssa. Virkistävä dippi tai lisuke, joka on viileä ja kermainen."
+      },
+      "77": {
+        "name": "Haydari",
+        "description": "Turkkilainen kirnuettu jugurttidippi yrteillä. Kermainen, valkosipulinen dippi, joka on täydellinen leivän kanssa."
+      },
+      "78": {
+        "name": "Humus",
+        "description": "Turkkilainen kikhernedippi tahinin ja sitruunan kanssa. Kermainen, maukas dippi, joka on kulmakivi turkkilaisessa keittiössä."
+      },
+      "79": {
+        "name": "Patates Kizartmasi",
+        "description": "Turkkilaiset ranskalaiset erilaisilla mausteilla. Rapeat ranskalaiset, jotka ovat suosittu katukeittiö."
+      },
+      "80": {
+        "name": "Kunefe",
+        "description": "Turkkilainen jälkiruoka juustolla ja siirapilla. Lämmin, tahmea jälkiruoka, joka on makea ja tyydyttävä."
+      }
+    },
+    "iraqi": {
+      "81": {
+        "name": "Jaajek",
+        "description": "Irakilainen kikhernepataruoka lihalla ja mausteilla. Täyttävä, maukas pataruoka, joka on täydellinen jaettavaksi."
+      },
+      "82": {
+        "name": "Zabiib",
+        "description": "Irakilainen riisivanukas rusinoilla ja pähkinöillä. Makea, lohtua tuova jälkiruoka, joka on suosittu koko Lähi-idässä."
+      },
+      "83": {
+        "name": "Fasolia",
+        "description": "Irakilainen vihreäpapupataruoka lihalla ja tomaateilla. Yksinkertainen, ravitseva pataruoka, joka on irakilaisen kotikeittiön kulmakivi."
+      },
+      "84": {
+        "name": "Kubba",
+        "description": "Irakilaiset nyytit täytettyinä lihalla ja sipuleilla. Rapeat ulkopuolelta, hienovaraiset sisältä - rakkaustyö."
+      },
+      "85": {
+        "name": "Tashrib",
+        "description": "Irakilainen leipäkeitto lihalla ja vihanneksilla. Lohtua tuova keitto tehtynä litteästä leivästä ja rikkaasta liemestä."
+      },
+      "86": {
+        "name": "Dolma",
+        "description": "Irakilaiset täytetyt vihannekset riisillä ja lihalla. Vihannekset täytettyinä maukkaalla riisi- ja lihaseoksella."
+      },
+      "87": {
+        "name": "Bamia",
+        "description": "Irakilainen okrapataruoka lihalla ja tomaateilla. Hienovarainen okra rikkaassa, maustetussa tomaattikastikkeessa."
+      },
+      "88": {
+        "name": "Makhlouta",
+        "description": "Irakilainen sekoitettu papupataruoka lihalla. Täyttävä pataruoka erilaisilla pavuilla ja hienovaraisella lihalla."
+      },
+      "89": {
+        "name": "Margat Bamia",
+        "description": "Irakilainen okra- ja lihapataruoka. Bamia-variation ainutlaatuisella irakilaisella twistillä."
+      },
+      "90": {
+        "name": "Kubba Halab",
+        "description": "Aleppo-tyylinen kubba juustotäytteellä. Erityinen kubba-variation juustolla lihan sijasta."
+      },
+      "91": {
+        "name": "Kubba Mosul",
+        "description": "Mosul-tyylinen kubba lihalla täytettynä. Klassinen kubba, joka on rakastettu Mosulissa."
+      },
+      "92": {
+        "name": "Kubba Bil Sanabel",
+        "description": "Kurpitsakubba, makea variation. Jälkiruokakubba täytettynä makealla kurpitsalla."
+      },
+      "93": {
+        "name": "Harisa",
+        "description": "Irakilainen vehnäpuuro lihalla. Paksu, täyttävä ruoka, joka on täydellinen kylmään säähän."
+      },
+      "94": {
+        "name": "Timman Bagilla",
+        "description": "Irakilainen munakoiso lihalla ja tomaateilla. Munakoiso haudutettuna lihan kanssa rikkaassa tomaattikastikkeessa."
+      },
+      "95": {
+        "name": "Timman Bandora",
+        "description": "Irakilainen tomaattipataruoka lihalla. Yksinkertainen tomaattipohjainen pataruoka hienovaraisen lihan kanssa."
+      },
+      "96": {
+        "name": "Timman Khudra",
+        "description": "Irakilainen vihannespataruoka lihalla. Sekaviiannekset kypsennettyinä lihan kanssa maukkaassa liemessä."
+      },
+      "97": {
+        "name": "Timman Fasolia",
+        "description": "Irakilainen papupataruoka lihalla. Valkoiset pavut kypsennettyinä lihan ja mausteiden kanssa."
+      },
+      "98": {
+        "name": "Timman Burghul",
+        "description": "Irakilainen bulgurpataruoka lihalla. Bulgurvehnä kypsennettynä lihan ja vihanneksien kanssa."
+      },
+      "99": {
+        "name": "Timman Ruzz",
+        "description": "Irakilainen riisipataruoka lihalla. Riisi kypsennettynä lihan ja mausteiden kanssa rikkaassa liemessä."
+      },
+      "100": {
+        "name": "Timman Shamam",
+        "description": "Irakilainen kalapataruoka. Tuore kala kypsennettynä maukkaassa tomaattipohjaisessa kastikkeessa."
+      }
+    }
   }
 }

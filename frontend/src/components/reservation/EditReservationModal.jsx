@@ -1,6 +1,7 @@
 import "./editReservations.css";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { findAvailabilityForTable } from "../../utils/reservationAvailability";
 
 export default function EditReservationModal({
@@ -11,6 +12,7 @@ export default function EditReservationModal({
   onCancel,
   isAdmin = false,
 }) {
+  const { t } = useTranslation();
   // -----------------------------
   // Helpers
   // -----------------------------
@@ -94,11 +96,11 @@ export default function EditReservationModal({
   return (
     <div className="modal-overlay">
       <div className="modal-window">
-        <h3 className="modal-title">Edit reservation</h3>
+        <h3 className="modal-title">{t("modals.editReservation")}</h3>
 
         <div className="modal-form">
           <label className="modal-label">
-            Table
+            {t("modals.table")}
             <select
               className="modal-select"
               value={tableId}
@@ -106,14 +108,14 @@ export default function EditReservationModal({
             >
               {tables.map((t) => (
                 <option key={t.id} value={t.id}>
-                  Table #{t.id}
+                  {t("reservationForm.tableNumber")} {t.id}
                 </option>
               ))}
             </select>
           </label>
 
           <label className="modal-label">
-            Start time
+            {t("modals.startTime")}
             <input
               type="datetime-local"
               className="modal-input"
@@ -123,22 +125,22 @@ export default function EditReservationModal({
           </label>
 
           <label className="modal-label">
-            Duration
+            {t("modals.duration")}
             <select
               className="modal-select"
               value={duration}
               onChange={(e) => setDuration(Number(e.target.value))}
             >
-              <option value={60}>1 hour</option>
-              <option value={90}>1.5 hours</option>
-              <option value={120}>2 hours</option>
-              <option value={150}>2.5 hours</option>
-              <option value={180}>3 hours</option>
+              <option value={60}>{t("reservationForm.oneHour")}</option>
+              <option value={90}>{t("reservationForm.oneHalfHours")}</option>
+              <option value={120}>{t("reservationForm.twoHours")}</option>
+              <option value={150}>{t("reservationForm.twoHalfHours")}</option>
+              <option value={180}>{t("reservationForm.threeHours")}</option>
             </select>
           </label>
 
           <label className="modal-label">
-            Guests
+            {t("modals.guests")}
             <input
               type="number"
               className="modal-input"
@@ -149,32 +151,32 @@ export default function EditReservationModal({
 
           {isAdmin && (
             <label className="modal-label">
-              Notes
+              {t("modals.notes")}
               <textarea
                 className="modal-textarea"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                placeholder="Enter notes for this reservation"
+                placeholder={t("modals.enterNotes")}
                 rows={3}
               />
             </label>
           )}
 
           {checkResult === "free" && (
-            <p style={{ color: "green" }}>Table is available</p>
+            <p style={{ color: "green" }}>{t("modals.tableAvailable")}</p>
           )}
 
           {checkResult === "busy" && (
-            <p style={{ color: "red" }}>Table is not available</p>
+            <p style={{ color: "red" }}>{t("modals.tableNotAvailable")}</p>
           )}
 
           <div className="modal-buttons">
             <button className="modal-btn modal-btn-cancel" onClick={onCancel}>
-              Cancel
+              {t("modals.cancel")}
             </button>
 
             <button className="modal-btn modal-btn-save" onClick={handleCheck}>
-              Check availability
+              {t("modals.checkAvailability")}
             </button>
 
             {checkResult === "free" && (
@@ -182,7 +184,7 @@ export default function EditReservationModal({
                 className="modal-btn modal-btn-save"
                 onClick={() => setShowConfirmModal(true)}
               >
-                Save changes
+                {t("modals.saveChanges")}
               </button>
             )}
           </div>
@@ -192,9 +194,9 @@ export default function EditReservationModal({
         {showBusyModal && (
           <div className="modal-overlay">
             <div className="modal-window">
-              <h3 className="modal-title">Table is busy</h3>
+              <h3 className="modal-title">{t("modals.tableBusy")}</h3>
 
-              <p>Available intervals:</p>
+              <p>{t("modals.availableIntervals")}</p>
 
               {busyIntervals.map((i, idx) => (
                 <div key={idx}>
@@ -215,7 +217,7 @@ export default function EditReservationModal({
                   className="modal-btn modal-btn-cancel"
                   onClick={() => setShowBusyModal(false)}
                 >
-                  Close
+                  {t("modals.close")}
                 </button>
               </div>
             </div>
@@ -226,26 +228,26 @@ export default function EditReservationModal({
         {showConfirmModal && (
           <div className="modal-overlay">
             <div className="modal-window">
-              <h3 className="modal-title">Confirm changes</h3>
+              <h3 className="modal-title">{t("modals.confirmChanges")}</h3>
 
-              <p>Table: {tableId}</p>
-              <p>Start: {from.replace("T", " ")}</p>
-              <p>Duration: {duration} min</p>
-              <p>Guests: {guests}</p>
+              <p>{t("modals.table")}: {tableId}</p>
+              <p>{t("modals.start")}: {from.replace("T", " ")}</p>
+              <p>{t("modals.duration")}: {duration} {t("modals.min")}</p>
+              <p>{t("modals.guests")}: {guests}</p>
 
               <div className="modal-buttons">
                 <button
                   className="modal-btn modal-btn-cancel"
                   onClick={() => setShowConfirmModal(false)}
                 >
-                  Cancel
+                  {t("modals.cancel")}
                 </button>
 
                 <button
                   className="modal-btn modal-btn-save"
                   onClick={handleSave}
                 >
-                  Confirm
+                  {t("modals.confirm")}
                 </button>
               </div>
             </div>

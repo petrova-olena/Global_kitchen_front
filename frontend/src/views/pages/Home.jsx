@@ -38,7 +38,7 @@ const Home = () => {
         >
           <div className="hero-text">
             <h1>
-              {currentCuisine} Week
+              {currentCuisine} {t("home.heroWeek")}
             </h1>
             <p className="hero-description">
               {heroContent.description}
@@ -146,7 +146,7 @@ const Home = () => {
             </Link>
           </>
         ) : (
-          <p className="loading">{menuLoading ? 'Loading menu...' : 'Menu not available'}</p>
+          <p className="loading">{menuLoading ? t('home.loadingMenu') : t('home.menuNotAvailable')}</p>
         )}
       </section>
     </>
