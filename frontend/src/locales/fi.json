@@ -70,6 +70,8 @@
 
   "reservation": {
     "reserveAtable": "Varaa pöytä",
+    "user": "Käyttäjä:",
+    "guests": "Vieraita:",
     "dateAndTime": "Päivä & aika",
     "numberOfPeople": "Henkilömäärä",
     "duration": "Kesto",
@@ -85,13 +87,18 @@
     "loading": "Ladataan…",
     "error": "Virhe",
     "guestMessage": "Pöydän varaamiseksi kirjaudu sisään tai soita ylläpitäjälle.",
-    "allTablesBusy": "Valitettavasti kaikki pöydät ovat varattuja tähän aikaan. Haluatko nähdä vapaat vaihtoehdot?",
+    "allTablesBusy": "Haluatko nähdä vapaat vaihtoehdot?",
     "successReservation": "Pöytäsi on varattu onnistuneesti!",
     "rangeErrorFrom": "Tämä pöytä on saatavilla alkaen klo {time}",
     "rangeErrorUntil": "Tämä pöytä on saatavilla vain klo {time} asti",
     "availableOptions": "Vapaat vaihtoehdot",
     "notAvailable": "Ei saatavilla",
-    "close": "Sulje"
+    "close": "Sulje",
+    "guests": "Vieraita:",
+    "user": "Käyttäjä:",
+    "confirmCancel": "Haluatko varmasti peruuttaa tämän varauksen?",
+    "confirmCancelBtn": "Peruuta",
+    "delete": "Poista"
   },
   "reservationCard": {
     "title": "Pöytävaraus",
@@ -365,15 +372,6 @@
   "confirmModal": {
     "confirm": "Vahvista",
     "cancel": "Peruuta"
-  },
-  "reservation": {
-    "table": "Pöytä:",
-    "guests": "Vieraita:",
-    "notes": "Muistiinpanot:",
-    "user": "Käyttäjä:",
-    "confirmCancel": "Haluatko varmasti peruuttaa tämän varauksen?",
-    "confirmCancelBtn": "Peruuta",
-    "delete": "Poista"
   },
   "reservationForm": {
     "title": "Varaa pöytä",

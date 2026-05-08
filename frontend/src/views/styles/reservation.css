@@ -240,6 +240,17 @@
   font-size: 13px;
 }
 
+.show-options-btn {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #452209;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
 /* =========================
    SUCCESS MODAL (EVENT + RESERVATION)
 ========================= */
