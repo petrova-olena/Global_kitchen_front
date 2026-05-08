@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function EditEventModal({ event, onSave, onCancel }) {
+  const { t } = useTranslation();
   const [title, setTitle] = useState(event.title);
   const [description, setDescription] = useState(event.description);
 
@@ -10,15 +12,15 @@ export default function EditEventModal({ event, onSave, onCancel }) {
   return (
     <div className="edit-modal-overlay">
       <div className="edit-modal-window">
-        <h3>Edit Event</h3>
+        <h3>{t("modals.editEvent")}</h3>
 
         <label>
-          Title
+          {t("modals.title")}
           <input value={title} onChange={(e) => setTitle(e.target.value)} />
         </label>
 
         <label>
-          Description
+          {t("modals.description")}
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -26,7 +28,7 @@ export default function EditEventModal({ event, onSave, onCancel }) {
         </label>
 
         <label>
-          From
+          {t("modals.from")}
           <input
             type="datetime-local"
             value={from}
@@ -35,7 +37,7 @@ export default function EditEventModal({ event, onSave, onCancel }) {
         </label>
 
         <label>
-          To
+          {t("modals.to")}
           <input
             type="datetime-local"
             value={to}
@@ -45,9 +47,9 @@ export default function EditEventModal({ event, onSave, onCancel }) {
 
         <div className="buttons">
           <button onClick={() => onSave({ title, description, from, to })}>
-            Save
+            {t("modals.save")}
           </button>
-          <button onClick={onCancel}>Cancel</button>
+          <button onClick={onCancel}>{t("modals.cancel")}</button>
         </div>
       </div>
     </div>

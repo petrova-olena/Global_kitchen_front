@@ -1,9 +1,9 @@
 import { useState } from "react";
 import useAdminReservations from "./useAdminReservations";
-import ReservationForm from "./../../Reservation/ReservationForm";
+import ReservationForm from "../../Reservation/ReservationForm";
 import ReservationCard from "./../../Events/ReservationCard";
-import EditReservationModal from "./../../Reservation/EditReservationModal";
-import SuccessModal from "./../../Reservation/SuccessModal";
+import EditReservationModal from "../../Reservation/EditReservationModal";
+import SuccessModal from "../../Reservation/SuccessModal";
 import { useTranslation } from "react-i18next";
 
 export default function ReservationsTab({
