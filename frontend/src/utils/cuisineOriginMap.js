@@ -5,7 +5,7 @@
 export const CUISINE_TO_ORIGIN = {
   Finnish: 'finnland',
   Iraqi: 'Iraq',
-  Turkish: 'turkish',
+  Turkish: 'turkye',
   Russian: 'russia',
   Ukrainian: 'ukraine',
 };
