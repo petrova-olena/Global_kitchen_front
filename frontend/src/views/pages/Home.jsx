@@ -63,9 +63,9 @@ const Home = () => {
       <section className="cuisine-story container">
         <div className="story-content">
           <h2 style={{ color: cuisineDetails.color }}>
-            {heroContent.title}
+            {t(heroContent.title)}
           </h2>
-          <p>{heroContent.cuisineStory}</p>
+          <p>{t(heroContent.cuisineStory)}</p>
           
           {mainDishes.length > 0 && (
             <div className="highlighted-dishes">

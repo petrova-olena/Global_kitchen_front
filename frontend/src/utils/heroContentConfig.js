@@ -13,7 +13,6 @@ export const HERO_CONTENT_CONFIG = {
     backgroundGradient: 'linear-gradient(135deg, #003580 0%, #002851 100%)',
     descriptionKey: 'home.heroFinnishDescription',
     cuisineStoryKey: 'home.heroFinnishStory',
-    // Dynamic dish placeholders - will be replaced with actual dish names
     highlightedDishes: ['dishes.finnish.1.name', 'dishes.finnish.4.name', 'dishes.finnish.2.name'],
   },
 
