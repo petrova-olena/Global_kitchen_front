@@ -57,6 +57,19 @@ frontend/
 
 ## ⚙️ Installation & Running
 
+### Data for accessing website:
+- ip for the backend 10.120.32.59
+- ip for the frountend 10.120.32.58
+- password : Asdfghjkl1234
+### How to turn the back and the frontend on and access production version 
+- we start by opening the terminal
+- then we should type  ssh abdulhy@10.120.32.59 or ssh abdulhy@10.120.32.58 for the frontend
+- for the backend we should chose SchoolProjectExpress by writing cd SchoolProjectExpress
+- and after that npm run dev to start the back end
+
+- for the front end we chose directory  Global_kitchen_front by “cd Global_kitchen_front”
+- and then we chose frontend by writing “cd frontend” then npm run dev to start the frontend
+
 1. **Install dependencies:**
    ```bash
    cd frontend
@@ -70,6 +83,11 @@ frontend/
    [Read Backend Instructions](https://github.com/Abdulhadi-lab01/SchoolProjectExpress)
 
    [Frontend](http://10.120.32.59:8000)
+
+
+
+
+
 
 > Note: The API server must be running. See `vite.config.js` for proxy settings.
 
