@@ -67,8 +67,9 @@ frontend/
    npm run dev
    ```
 3. **Open the app:**
-   [http://localhost:5173](http://localhost:5173)
-   [http://10.120.32.59:8000](http://10.120.32.59:8000)
+   [Read Backend Instructions](https://github.com/Abdulhadi-lab01/SchoolProjectExpress)
+
+   [Frontend](http://10.120.32.59:8000)
 
 > Note: The API server must be running. See `vite.config.js` for proxy settings.
 
